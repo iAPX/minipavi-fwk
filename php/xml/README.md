@@ -1,0 +1,29 @@
+Short explanation : 
+These XML files use the XMLint format
+[XMLint documentation](https://raw.githubusercontent.com/ludosevilla/minipaviCli/master/XMLint/XMLint-doc.pdf)
+
+
+How to setup:
+set the DEFAULT_XML_FILE on config.php file, without .xml extension.
+```
+const DEFAULT_XML_FILE = 'demo';
+```
+
+
+What was added:
+- Usage of locally stored page when their URL begin with the config.php XML_PAGES_URL parameter to avoid http/https queries
+- Usage of locally stored page when not with http/https scheme (ie: "sommaire.vdt" instead full URL)
+- If a service controller is named as a page, it will be called instead XmlController, with its xml_file and xml_pagename set on its context
+- Consequently you could extends XmlController for any page to expand capabilities, without rewriting all the existing XmlController behaviour
+- You might also jump to any controller extending VideotexController (thus outside of the XML file scope)
+- From a VideotexController you might jump back to the XML and XmlController through \helpers\PageAction()
+- When you go back to XML through \helpers\PageAction() the overriding is also supported transparently
+
+
+What is not supported yet:
+- multiline input
+- multiline input being sent by email
+- some elements unfinished on <ecran>
+- <ecran><date>
+- <ecran><time>
+- <ecran><rectangle>

@@ -1,0 +1,87 @@
+<service>
+  <interpreteur url="http://www.minipavi.fr/XMLint/?xurl=" />
+  <debut nom="accueil" />
+
+  <page nom="accueil">
+    <ecran>
+      <affiche url="accueil.vdt" />
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="23" col="40" longueur="1" curseur="invisible" />
+      <validation touche="repetition" />
+      <validation touche="sommaire" />
+      <validation touche="guide" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="repetition" suivant="accueil" />
+      <saisie touche="sommaire" suivant="sommaire" />
+      <saisie touche="guide" suivant="infos" />
+    </action>
+  </page>
+
+  <page nom="infos">
+    <ecran>
+      <affiche url="infos.vdt" />
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="24" col="1" longueur="1" curseur="invisible" />
+      <validation touche="repetition" />
+      <validation touche="sommaire" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="repetition" suivant="infos" />
+      <saisie touche="sommaire" suivant="sommaire" />
+    </action>
+  </page>
+
+  <page nom="stats">
+    <ecran>
+      <affiche url="https://minitelbidouille.pvigier.com/pages/stats.vdt" />
+
+<position ligne="3" col="1" /><ecrit texte="Visites : " /><couleur texte="cyan" /><ecrit texte=" 1190" /><position ligne="4" col="1" /><ecrit texte="24H : " /><couleur texte="cyan" /><ecrit texte=" 4" /><position ligne="5" col="1" /><ecrit texte="Semaine : " /><couleur texte="cyan" /><ecrit texte=" 26" /><position ligne="6" col="1" /><ecrit texte="Mois : " /><couleur texte="cyan" /><ecrit texte=" 246" /><position ligne="7" col="1" /><ecrit texte="Articles : " /><couleur texte="cyan" /><ecrit texte=" 334" /><position ligne="8" col="1" /><ecrit texte="Articles finis : " /><couleur texte="cyan" /><ecrit texte=" 85" /><position ligne="9" col="1" /><ecrit texte="Pages lues : " /><couleur texte="cyan" /><ecrit texte=" 660" /><position ligne="10" col="1" /><ecrit texte="Session ID : " /><couleur texte="cyan" /><ecrit texte=" {user-id}" /><affiche url="https://minitelbidouille.pvigier.com/pages/stats-graph.vdt" />
+
+    </ecran>
+    <entree>
+      <zonesaisie ligne="24" col="1" longueur="1" curseur="invisible" />
+      <validation touche="sommaire" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="sommaire" suivant="sommaire" />
+    </action>
+  </page>
+
+  <page nom="sommaire">
+    <ecran>
+      <affiche url="sommaire.vdt" />
+      <affiche url="https://minitelbidouille.pvigier.com/pages/logo-drcs.vdt" />
+
+
+<position ligne="4" col="1" /><inversion mode="actif" /><couleur texte="jaune" /><ecrit texte=" 1 " /><inversion mode="inactif" /><couleur texte="cyan" /><ecrit texte=" Une vidéo vieille de 42 ans du          contre-amiral Grace Hopper enfin        disponible!" /><position ligne="7" col="1" /><inversion mode="actif" /><couleur texte="jaune" /><ecrit texte=" 2 " /><inversion mode="inactif" /><couleur texte="cyan" /><ecrit texte=" [Sponsorisé] Pourquoi utiliser          Surfshark - le VPN de première          qualité à tout petit prix" /><position ligne="10" col="1" /><inversion mode="actif" /><couleur texte="jaune" /><ecrit texte=" 3 " /><inversion mode="inactif" /><couleur texte="cyan" /><ecrit texte=" Apple présentera l&#039;iPhone 16 le 9       septembre à 19h" /><position ligne="13" col="1" /><inversion mode="actif" /><couleur texte="jaune" /><ecrit texte=" 4 " /><inversion mode="inactif" /><couleur texte="cyan" /><ecrit texte=" [MàJ] Pavel Durov fondateur de          Telegram arrêté au Bourget" />
+
+
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="24" col="30" longueur="1" curseur="visible" />
+      <validation touche="repetition" />
+      <validation touche="guide" />
+      <validation touche="envoi" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="repetition" suivant="articles" />
+      <saisie touche="guide" suivant="infos" />
+      <saisie touche="envoi" choix="0" suivant="stats" />
+
+      <saisie choix="1" touche="envoi" suivant="resume1" /><saisie choix="2" touche="envoi" suivant="resume2" /><saisie choix="3" touche="envoi" suivant="resume3" /><saisie choix="4" touche="envoi" suivant="resume4" />
+
+    </action>
+  </page>
+
+
+</service>
