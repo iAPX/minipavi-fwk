@@ -4,7 +4,7 @@
  * Controller for deconnected people, overriding behaviours!
  */
 
- namespace helpers;
+ namespace helpers\controllers;
 
 class DeconnexionController extends VideotexController
 {
@@ -15,9 +15,9 @@ class DeconnexionController extends VideotexController
         return "\e9g";
     }
 
-    public function getAction(string $saisie, string $touche): ?\helpers\ActionInterface
+    public function getAction(string $saisie, string $touche): ?\helpers\actions\Action
     {
         DEBUG && error_log("Deconnexion controller : NONE CHOICE");
-        return new \helpers\DeconnexionAction();
+        return new \helpers\actions\DeconnexionAction();
     }
 }

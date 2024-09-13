@@ -4,7 +4,7 @@
  * Provides basic Videotex method and functions
  */
 
-namespace helpers;
+namespace helpers\controllers;
 
 class VideotexController
 {
@@ -45,14 +45,14 @@ class VideotexController
         return new \helpers\Validation($this);
     }
 
-    public function toucheRepetition(string $saisie): ?\helpers\ActionInterface
+    public function toucheRepetition(string $saisie): ?\helpers\actions\Action
     {
         // Default overridable in sub-classes
-        return new \helpers\RepetitionAction($this);
+        return new \helpers\actions\RepetitionAction($this);
     }
 
 
-    public function getAction(string $saisie, string $touche): ?\helpers\ActionInterface
+    public function getAction(string $saisie, string $touche): ?\helpers\actions\Action
     {
         // Keywords are prioritary, if present
         DEBUG && trigger_error("get-Action : appel keywordHanlder->choix()");
@@ -64,11 +64,11 @@ class VideotexController
         $methods = [];
         if ($saisie !== '') {
             // * becomes ETOILE, # becomes DIESE. French word for "star" or * used in Minitel culture.
-            $formatted_saisie = str_replace(['*', '#'], ['ETOILE', 'DIESE'], ucfirst(strtolower($saisie)));
-            $formatted_touche = ucfirst(strtolower($touche));
+            $formatted_saisie = str_replace(['*', '#'], ['ETOILE', 'DIESE'], \helpers\mb_ucfirst(mb_strtolower($saisie)));
+            $formatted_touche = \helpers\mb_ucfirst(mb_strtolower($touche));
             $methods[] = ['choix' . $formatted_saisie . $formatted_touche, []];
         }
-        $methods[] = ['touche' . ucfirst(strtolower($touche)), [$saisie]];
+        $methods[] = ['touche' . \helpers\mb_ucfirst(mb_strtolower($touche)), [$saisie]];
         $methods[] = ['choix', [$touche, $saisie]];
         $methods[] = ['nonPropose', [$touche, $saisie]];
 
@@ -88,25 +88,25 @@ class VideotexController
         if (is_null($action)) {
             // @TODO make it a configurable string
             DEBUG && trigger_error("Aucun choix n'a été trouvé");
-            $action = new \helpers\Ligne00Action($this, "Commande inconnue.");
+            $action = new \helpers\actions\Ligne00Action($this, "Commande inconnue.");
         }
 
         return $action;
     }
 
 
-    public function choix(string $touche, string $saisie): ?\helpers\ActionInterface
+    public function choix(string $touche, string $saisie): ?\helpers\actions\Action
     {
         // Default : error (nonPropose)
         return null;
     }
 
-    public function nonPropose(string $touche, string $saisie): ?\helpers\ActionInterface
+    public function nonPropose(string $touche, string $saisie): ?\helpers\actions\Action
     {
-        return new \helpers\Ligne00Action($this, "Choix invalide.");
+        return new \helpers\actions\Ligne00Action($this, "Choix invalide.");
     }
 
-    public function keywords(string $touche, string $saisie): ?\helpers\ActionInterface
+    public function keywords(string $touche, string $saisie): ?\helpers\actions\Action
     {
         return $this->keywordHandler->choix($touche, $saisie);
     }

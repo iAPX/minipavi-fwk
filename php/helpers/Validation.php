@@ -30,7 +30,7 @@ class Validation
         'ENVOI' => self::ENVOI,
     ];
 
-    public function __construct(\helpers\VideotexController $controller)
+    public function __construct(\helpers\controllers\VideotexController $controller)
     {
         DEBUG && trigger_error("Validation Touche __construct() : " . print_r($keys, true));
 
@@ -39,18 +39,18 @@ class Validation
 
         foreach ($methods as $method) {
             DEBUG && trigger_error("Validation method : $method");
-            if (substr($method, 0, 6) === 'touche') {
+            if (mb_substr($method, 0, 6) === 'touche') {
                 // touche{Touchname}()
-                $touche = strtoupper(substr($method, 6));
+                $touche = mb_strtoupper(mb_substr($method, 6));
                 if (array_key_exists($touche, self::KEY_VALUES)) {
                     DEBUG && trigger_error("Validation method touche : $touche - $method");
                     $this->keyMask |= self::KEY_VALUES[$touche];
                 }
-            } elseif (substr($method, 0, 5) === 'choix') {
+            } elseif (mb_substr($method, 0, 5) === 'choix') {
                 // choix{Saisie}{Touchname}()
-                $choix = strtoupper($method);
+                $choix = mb_strtoupper($method);
                 foreach (self::KEY_VALUES as $touche => $value) {
-                    if (substr($choix, -strlen($touche)) === $touche) {
+                    if (mb_substr($choix, -strlen($touche)) === $touche) {
                         DEBUG && trigger_error("Validation method touche : $touche - $method");
                         $this->keyMask |= $value;
                         break;
@@ -85,7 +85,7 @@ class Validation
         foreach ($keys as $key) {
             if (is_string($key)) {
                 // We autorise to use Key names, case independent
-                $key_mask |= self::KEY_VALUES[strtoupper($key)];
+                $key_mask |= self::KEY_VALUES[mb_strtoupper($key)];
             } else {
                 $key_mask |= $key;
             }

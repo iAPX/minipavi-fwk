@@ -8,7 +8,7 @@
 
 namespace service;
 
-class SommaireController extends \helpers\XmlController
+class SommaireController extends \helpers\controllers\XmlController
 {
     public function __construct(array $context, array $params = [])
     {
@@ -29,15 +29,15 @@ class SommaireController extends \helpers\XmlController
     }
 
 
-    public function toucheRetour(string $saisie): ?\helpers\ActionInterface
+    public function toucheRetour(string $saisie): ?\helpers\actions\Action
     {
         // Add a behaviour: on [RETOUR] go to the this XML default Accueil page
-        return new \helpers\PageAction($this->context, "", $this->context['xml_filename']);
+        return new \helpers\actions\PageAction($this->context, "", $this->context['xml_filename']);
     }
 
-    public function choixETOILESuite(): ?\helpers\ActionInterface
+    public function choixETOILESuite(): ?\helpers\actions\Action
     {
         // Go back to another Xml
-        return new \helpers\PageAction($this->context, "", "macbidouille");
+        return new \helpers\actions\PageAction($this->context, "", "macbidouille");
     }
 }

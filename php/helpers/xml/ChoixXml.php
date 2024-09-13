@@ -9,21 +9,21 @@ class ChoixXml
         string $touche,
         string $saisie,
         array $context
-    ): ?\helpers\ActionInterface {
+    ): ?\helpers\actions\Action {
         DEBUG && trigger_error("ChoixXml : " . $saisie . " + " . $touche);
 
-        if (strtolower($saisie) == "d" && strtoupper($touche) == "ENVOI") {
-            return new \helpers\DeconnexionAction("xxx!");
+        if (mb_strtolower($saisie) == "d" && mb_strtoupper($touche) == "ENVOI") {
+            return new \helpers\actions\DeconnexionAction();
         }
 
         foreach ($page->action->saisie as $option) {
-            $option_touche = strtoupper((string) $option['touche']);
-            $option_saisie = strtolower((string) $option['choix']);
+            $option_touche = mb_strtoupper((string) $option['touche']);
+            $option_saisie = mb_strtolower((string) $option['choix']);
             DEBUG && trigger_error("Option : " . $option_touche . " + " . $option_saisie);
-            if ($option_touche === $touche && $option_saisie === strtolower($saisie)) {
+            if ($option_touche === $touche && $option_saisie === mb_strtolower($saisie)) {
                 $pagename = (string) $option['suivant'];
                 DEBUG && trigger_error("ChoixXml : Page " . $pagename);
-                return new \helpers\PageAction($context, $pagename);
+                return new \helpers\actions\PageAction($context, $pagename);
             }
         }
 

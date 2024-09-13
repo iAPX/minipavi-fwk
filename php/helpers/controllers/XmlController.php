@@ -7,7 +7,7 @@
  * Notice that this Controller might be directly used, as it could call itself with xml file and page parameters!
  */
 
-namespace helpers;
+namespace helpers\controllers;
 
 class XmlController extends VideotexController
 {
@@ -54,7 +54,7 @@ class XmlController extends VideotexController
         return \helpers\xml\ZoneSaisieXml::zonesaisie($this->pageXml);
     }
 
-    public function choix(string $touche, string $saisie): ?\helpers\ActionInterface
+    public function choix(string $touche, string $saisie): ?\helpers\actions\Action
     {
         DEBUG && trigger_error("XmlController : choix()");
         return \helpers\xml\ChoixXml::choix($this->pageXml, $touche, $saisie, $this->context);

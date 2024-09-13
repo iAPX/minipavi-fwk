@@ -7,25 +7,31 @@ require_once "../../minipaviCli/MiniPaviCli.php";   // A modifier
 // Must-read!
 require_once "config.php";
 
+// String support functions
+require_once "helpers/strings.php";
+
 // Multiples classes on each file
-require_once "helpers/Actions.php";
+// require_once "helpers/Actions.php";
+/*
 require_once "helpers/ZoneSaisies.php";
 require_once "helpers/Keywords.php";
 require_once "helpers/Validation.php";
-require_once "helpers/VideotexController.php";
+require_once "helpers/videotex/Videotex.php";
+//// require_once "helpers/VideotexController.php";
+*/
 
+/*
 require_once 'helpers/xml/ChoixXml.php';
 require_once 'helpers/xml/EcranXml.php';
 require_once 'helpers/xml/ZoneSaisieXml.php';
 require_once 'helpers/xml/ValidationXml.php';
+*/
 
-require_once "helpers/XmlController.php";
-require_once "helpers/KeywordsController.php";
-require_once "helpers/DeconnexionController.php";
+//// require_once "helpers/XmlController.php";
+//// require_once "helpers/DeconnexionController.php";
 
 
 // Autoload
-/*
 spl_autoload_register(function ($class) {
     $file = str_replace('\\', DIRECTORY_SEPARATOR, $class).'.php';
     DEBUG && trigger_error("autoload : class $class on file $file");
@@ -35,7 +41,6 @@ spl_autoload_register(function ($class) {
     }
     return false;
 });
-*/
 
 
 // Loads user defined classes, to be able to check their existence
@@ -43,7 +48,6 @@ spl_autoload_register(function ($class) {
 foreach (glob('service/*.php') as $filename) {
     require_once $filename;
 }
-
 
 
 
@@ -81,7 +85,7 @@ try {
         // Page d'accueil
         DEBUG && trigger_error("Accueil du service");
         $vdt = \MiniPavi\MiniPaviCli::clearScreen() . PRO_MIN . PRO_LOCALECHO_OFF;
-        $action = new \helpers\AccueilAction(DEFAULT_CONTROLLER, DEFAULT_XML_FILE, $context);
+        $action = new \helpers\actions\AccueilAction(DEFAULT_CONTROLLER, DEFAULT_XML_FILE, $context);
     } else {
         DEBUG && trigger_error("CMD : " . \MiniPavi\MiniPaviCli::$fctn . " - " . \MiniPavi\MiniPaviCli::$content[0]);
 
@@ -102,8 +106,8 @@ try {
     $zonesaisie = $controller->zonesaisie();
     $validation = $controller->validation();
     $vdt .= $action->getOutput();
-    ;
 
+    // @TODO zonesaisie should build it, and handle both InputText and InputMultiline gracefully
     $cmd = MiniPavi\MiniPaviCli::createInputTxtCmd(
         $zonesaisie->col,
         $zonesaisie->ligne,

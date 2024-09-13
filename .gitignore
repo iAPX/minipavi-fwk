@@ -1,4 +1,6 @@
 .DS_Store
+MiniPaviCli.php
 private/
+vendors/
 _*/
 

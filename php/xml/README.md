@@ -16,8 +16,8 @@ What was added:
 - If a service controller is named as a page, it will be called instead XmlController, with its xml_file and xml_pagename set on its context
 - Consequently you could extends XmlController for any page to expand capabilities, without rewriting all the existing XmlController behaviour
 - You might also jump to any controller extending VideotexController (thus outside of the XML file scope)
-- From a VideotexController you might jump back to the XML and XmlController through \helpers\PageAction()
-- When you go back to XML through \helpers\PageAction() the overriding is also supported transparently
+- From a VideotexController you might jump back to the XML and XmlController through \helpers\actions\PageAction()
+- When you go back to XML through \helpers\actions\PageAction() the overriding is also supported transparently
 
 
 What is not supported yet:
