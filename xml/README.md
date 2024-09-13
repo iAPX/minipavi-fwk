@@ -3,18 +3,6 @@ These XML files use the XMLint format
 [XMLint documentation](https://raw.githubusercontent.com/ludosevilla/minipaviCli/master/XMLint/XMLint-doc.pdf)
 
 
-How to setup:
-set the DEFAULT_XML_FILE on config.php file, without .xml extension.
-```
-const DEFAULT_XML_FILE = 'demo';
-```
-
-Install dependencies (minipavicli) through composer:
-```
-composer install
-```
-
-
 What was added:
 - Usage of locally stored page when their URL begin with the config.php XML_PAGES_URL parameter to avoid http/https queries
 - Usage of locally stored page when not with http/https scheme (ie: "sommaire.vdt" instead full URL)
