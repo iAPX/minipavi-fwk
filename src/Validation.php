@@ -60,15 +60,15 @@ class Validation
         }
 
         // Handle keywords validation keys
-        $this->addValideKeys($controller->keywordHandler->validationKeys());
+        $this->addValidKeys($controller->keywordHandler->validationKeys());
 
         DEBUG && trigger_error("Validation Touche __construct() value : " . $this->keyMask);
     }
 
 
-    public function addValideKeys(array $keys)
+    public function addValidKeys(array $keys)
     {
-        DEBUG && trigger_error("Validation Touche addValideKeys() : " . print_r($keys, true));
+        DEBUG && trigger_error("Validation Touche addValidKeys() : " . print_r($keys, true));
         $this->keyMask |= $this->createKeyMask($keys);
     }
 

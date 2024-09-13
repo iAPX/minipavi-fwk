@@ -40,7 +40,7 @@ class EcranXml
         // Local file if it exists
         DEBUG && trigger_error("page url _element_affiche: " . $url);
         if (! empty(XML_PAGES_URL) && substr($url, 0, strlen(XML_PAGES_URL)) === XML_PAGES_URL) {
-            $filename = "vdt/" . mb_substr($url, strlen(XML_PAGES_URL));
+            $filename = "service/vdt/" . mb_substr($url, strlen(XML_PAGES_URL));
             DEBUG && trigger_error("page filename from url: " . $filename);
             if (file_exists($filename)) {
                 $videotex->ecritVideotex(file_get_contents($filename));
@@ -49,7 +49,7 @@ class EcranXml
         }
 
         if (mb_substr($url, 0, 4) !== "http") {
-            $filename = "vdt/" . $url;
+            $filename = "service/vdt/" . $url;
             DEBUG && trigger_error("page filename from path: " . $filename);
             if (file_exists($filename)) {
                 $videotex->ecritVideotex(file_get_contents($filename));

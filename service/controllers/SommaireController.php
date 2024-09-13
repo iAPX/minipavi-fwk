@@ -6,7 +6,7 @@
  * Exemple utilisant les Touche*() et Choix() ainsi que la page affichée par Videotex
  */
 
-namespace service;
+namespace service\controllers;
 
 class SommaireController extends \MiniPaviFwk\controllers\XmlController
 {
@@ -15,7 +15,7 @@ class SommaireController extends \MiniPaviFwk\controllers\XmlController
         parent::__construct($context, $params);
 
         // Now keywords are handled for this controller!
-        $this->keywordHandler = new \service\Keywords();
+        $this->keywordHandler = new \service\keywords\Keywords();
     }
 
     public function ecran(): string

@@ -1,9 +1,10 @@
 <?php
+
 /**
  * Adds a jump to the demo.xml file
  */
 
-namespace service;
+namespace service\controllers;
 
 class ArticlesController extends \MiniPaviFwk\controllers\XmlController
 {
@@ -15,7 +16,7 @@ class ArticlesController extends \MiniPaviFwk\controllers\XmlController
         // This is an example of easy Vidéotex output on controllers
         $videotex = new \MiniPaviFwk\videotex\Videotex();
         $vdt .= $videotex
-        ->position(22,1)
+        ->position(22, 1)
         ->inversionDebut()
         ->ecritUnicode(" * ENVOI ")
         ->inversionFin()

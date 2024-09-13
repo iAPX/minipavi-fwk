@@ -44,7 +44,7 @@ class Videotex
 
     public function page($pagename): \MiniPaviFwk\videotex\Videotex
     {
-        $filename = "vdt/" . $pagename . ".vdt";
+        $filename = "service/vdt/" . $pagename . ".vdt";
         if (file_exists($filename)) {
             $this->output .= file_get_contents($filename);
         }

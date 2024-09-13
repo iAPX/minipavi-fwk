@@ -2,9 +2,18 @@
 
 use PHPUnit\Framework\TestCase;
 use MiniPaviFwk\Validation;
-use Tests\Mocks\Mock\MockController;
+use Tests\Mocks\MockValidationController;
+
+define('DEBUG', false);
 
 class ValidationTest extends TestCase
 {
-    // @TODO
+    public function test (): void
+    {
+        $controller = new MockValidationController([]);
+        $validation = new Validation($controller);
+        $validation->addValidKeys(['RETOUR']);
+
+        $this->assertEquals(204, $validation->getKeyMask());
+    }
 }

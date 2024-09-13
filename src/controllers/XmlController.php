@@ -20,7 +20,7 @@ class XmlController extends VideotexController
         // Load the XML file
         $xml_filename = empty($context['xml_filename']) ? DEFAULT_XML_FILE : $context['xml_filename'];
         DEBUG && trigger_error("XML file: $xml_filename");
-        $simpleXml = simplexml_load_file('xml/' . $xml_filename . '.xml');
+        $simpleXml = simplexml_load_file('service/xml/' . $xml_filename . '.xml');
 
         if (empty($this->context['xml_page'])) {
             DEBUG && trigger_error("No XML page, searching in <debut/>");
@@ -48,7 +48,7 @@ class XmlController extends VideotexController
         DEBUG && trigger_error("XmlController : validation()");
         $validation = parent::validation();
         DEBUG && trigger_error("XmlController : validation() - add Xml validation keys");
-        $validation->addValideKeys(\MiniPaviFwk\xml\ValidationXml::validationKeys($this->pageXml));
+        $validation->addValidKeys(\MiniPaviFwk\xml\ValidationXml::validationKeys($this->pageXml));
         return $validation;
     }
 
