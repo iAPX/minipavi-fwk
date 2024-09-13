@@ -4,7 +4,7 @@
  * Provides validation for Minitel Function Keys
  */
 
-namespace helpers;
+namespace MiniPaviFwk;
 
 class Validation
 {
@@ -30,7 +30,7 @@ class Validation
         'ENVOI' => self::ENVOI,
     ];
 
-    public function __construct(\helpers\controllers\VideotexController $controller)
+    public function __construct(\MiniPaviFwk\controllers\VideotexController $controller)
     {
         DEBUG && trigger_error("Validation Touche __construct() : " . print_r($keys, true));
 

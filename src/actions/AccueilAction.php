@@ -4,7 +4,7 @@
  * Action to send back to the homepage of the service
  */
 
-namespace helpers\actions;
+namespace MiniPaviFwk\actions;
 
 class AccueilAction extends Action
 {
@@ -15,7 +15,7 @@ class AccueilAction extends Action
             // XML default file
             $context['xml_filename'] = $defaultXMLfilename;
             $context['xml_page'] = false;
-            $this->controller = new \helpers\controllers\XmlController($context);
+            $this->controller = new \MiniPaviFwk\controllers\XmlController($context);
         } else {
             // Default service controller
             $this->controller = new $defaultControllerName($context);

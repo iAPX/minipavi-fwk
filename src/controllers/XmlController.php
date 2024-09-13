@@ -7,7 +7,7 @@
  * Notice that this Controller might be directly used, as it could call itself with xml file and page parameters!
  */
 
-namespace helpers\controllers;
+namespace MiniPaviFwk\controllers;
 
 class XmlController extends VideotexController
 {
@@ -40,27 +40,27 @@ class XmlController extends VideotexController
     public function ecran(): string
     {
         DEBUG && trigger_error("XmlController : ecran()");
-        return \helpers\xml\EcranXml::ecran($this->pageXml);
+        return \MiniPaviFwk\xml\EcranXml::ecran($this->pageXml);
     }
 
-    public function validation(): \helpers\Validation
+    public function validation(): \MiniPaviFwk\Validation
     {
         DEBUG && trigger_error("XmlController : validation()");
         $validation = parent::validation();
         DEBUG && trigger_error("XmlController : validation() - add Xml validation keys");
-        $validation->addValideKeys(\helpers\xml\ValidationXml::validationKeys($this->pageXml));
+        $validation->addValideKeys(\MiniPaviFwk\xml\ValidationXml::validationKeys($this->pageXml));
         return $validation;
     }
 
-    public function zonesaisie(): \helpers\ZoneSaisie
+    public function zonesaisie(): \MiniPaviFwk\ZoneSaisie
     {
         DEBUG && trigger_error("XmlController : zonesaisie()");
-        return \helpers\xml\ZoneSaisieXml::zonesaisie($this->pageXml);
+        return \MiniPaviFwk\xml\ZoneSaisieXml::zonesaisie($this->pageXml);
     }
 
-    public function choix(string $touche, string $saisie): ?\helpers\actions\Action
+    public function choix(string $touche, string $saisie): ?\MiniPaviFwk\actions\Action
     {
         DEBUG && trigger_error("XmlController : choix()");
-        return \helpers\xml\ChoixXml::choix($this->pageXml, $touche, $saisie, $this->context);
+        return \MiniPaviFwk\xml\ChoixXml::choix($this->pageXml, $touche, $saisie, $this->context);
     }
 }

@@ -4,11 +4,11 @@
  * Action to output a Videotex string (as-is)
  */
 
-namespace helpers\actions;
+namespace MiniPaviFwk\actions;
 
 class VideotexOutputAction extends Action
 {
-    public function __construct(\helpers\controllers\VideotexController $thisController, string $videotexOutput)
+    public function __construct(\MiniPaviFwk\controllers\VideotexController $thisController, string $videotexOutput)
     {
         DEBUG && trigger_error("Action: Sortie de chaine - " . strlen($videotexOutput) . " octets vidéotex.");
         $this->controller = $thisController;

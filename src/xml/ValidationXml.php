@@ -1,6 +1,6 @@
 <?php
 
-namespace helpers\xml;
+namespace MiniPaviFwk\xml;
 
 class ValidationXml
 {

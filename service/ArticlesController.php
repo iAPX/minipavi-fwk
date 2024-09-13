@@ -5,7 +5,7 @@
 
 namespace service;
 
-class ArticlesController extends \helpers\controllers\XmlController
+class ArticlesController extends \MiniPaviFwk\controllers\XmlController
 {
     public function ecran(): string
     {
@@ -13,7 +13,7 @@ class ArticlesController extends \helpers\controllers\XmlController
         $vdt = parent::ecran();
 
         // This is an example of easy Vidéotex output on controllers
-        $videotex = new \helpers\videotex\Videotex();
+        $videotex = new \MiniPaviFwk\videotex\Videotex();
         $vdt .= $videotex
         ->position(22,1)
         ->inversionDebut()
@@ -26,10 +26,10 @@ class ArticlesController extends \helpers\controllers\XmlController
         return $vdt;
     }
 
-    public function choixETOILEEnvoi(): ?\helpers\actions\Action
+    public function choixETOILEEnvoi(): ?\MiniPaviFwk\actions\Action
     {
         // Easy behaviour coding!
         // Go back to another Xml, demo.xml on page "accueil"
-        return new \helpers\actions\PageAction($this->context, "accueil", "demo");
+        return new \MiniPaviFwk\actions\PageAction($this->context, "accueil", "demo");
     }
 }

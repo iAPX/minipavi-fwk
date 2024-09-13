@@ -1,6 +1,6 @@
 <?php
 
-namespace helpers\xml;
+namespace MiniPaviFwk\xml;
 
 class ChoixXml
 {
@@ -9,11 +9,11 @@ class ChoixXml
         string $touche,
         string $saisie,
         array $context
-    ): ?\helpers\actions\Action {
+    ): ?\MiniPaviFwk\actions\Action {
         DEBUG && trigger_error("ChoixXml : " . $saisie . " + " . $touche);
 
         if (mb_strtolower($saisie) == "d" && mb_strtoupper($touche) == "ENVOI") {
-            return new \helpers\actions\DeconnexionAction();
+            return new \MiniPaviFwk\actions\DeconnexionAction();
         }
 
         foreach ($page->action->saisie as $option) {
@@ -23,7 +23,7 @@ class ChoixXml
             if ($option_touche === $touche && $option_saisie === mb_strtolower($saisie)) {
                 $pagename = (string) $option['suivant'];
                 DEBUG && trigger_error("ChoixXml : Page " . $pagename);
-                return new \helpers\actions\PageAction($context, $pagename);
+                return new \MiniPaviFwk\actions\PageAction($context, $pagename);
             }
         }
 

@@ -5,7 +5,7 @@
  *
  */
 
-namespace helpers\actions;
+namespace MiniPaviFwk\actions;
 
 class PageAction extends Action
 {
@@ -17,8 +17,8 @@ class PageAction extends Action
         !empty($xmlfilename) && $context['xml_filename'] = $xmlfilename;
 
         // Enable Overriding by \service\{Pagename}Controlle. XmlController or a VideotexController
-        $overriderControllerName = "\service\\" . \helpers\strings\mb_ucfirst(mb_strtolower($pagename)) . 'Controller';
-        $overriderFileName = "service/" . \helpers\strings\mb_ucfirst(mb_strtolower($pagename)) . 'Controller.php';
+        $overriderControllerName = "\service\\" . \MiniPaviFwk\strings\mb_ucfirst(mb_strtolower($pagename)) . 'Controller';
+        $overriderFileName = "service/" . \MiniPaviFwk\strings\mb_ucfirst(mb_strtolower($pagename)) . 'Controller.php';
         if (file_exists($overriderFileName)) {
             // Loads the overrider file, but still check if the class itself exists!
             require_once $overriderFileName;
@@ -27,7 +27,7 @@ class PageAction extends Action
             DEBUG && trigger_error("Action: Controleur surcharge - " . $overriderControllerName);
             $this->controller = new $overriderControllerName($context);
         } else {
-            $this->controller = new \helpers\controllers\XmlController($context);
+            $this->controller = new \MiniPaviFwk\controllers\XmlController($context);
         }
         $this->output = $this->controller->ecran();
     }

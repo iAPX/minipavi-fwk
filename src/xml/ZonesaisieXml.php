@@ -1,6 +1,6 @@
 <?php
 
-namespace helpers\xml;
+namespace MiniPaviFwk\xml;
 
 class ZonesaisieXml
 {
@@ -8,7 +8,7 @@ class ZonesaisieXml
      * Extracts and interprets zonesaisie from XML <zonesaisie> element
     */
 
-    public static function zonesaisie(\SimpleXMLElement $page): \helpers\zonesaisie
+    public static function zonesaisie(\SimpleXMLElement $page): \MiniPaviFwk\zonesaisie
     {
         $zonesaisie = $page->entree->zonesaisie;
         $ligne = (int) $zonesaisie['ligne'];
@@ -16,6 +16,6 @@ class ZonesaisieXml
         $longueur = (int) $zonesaisie['longueur'];
         $curseur = ((string) $zonesaisie['curseur']) === 'visible';
 
-        return new \helpers\ZoneSaisie($ligne, $col, $longueur, $curseur);
+        return new \MiniPaviFwk\ZoneSaisie($ligne, $col, $longueur, $curseur);
     }
 }

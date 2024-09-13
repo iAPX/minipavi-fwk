@@ -4,7 +4,7 @@
  * Action to change controller
  */
 
-namespace helpers\actions;
+namespace MiniPaviFwk\actions;
 
 class ControllerAction extends Action
 {

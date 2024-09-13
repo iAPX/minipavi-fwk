@@ -4,14 +4,14 @@
  * Abstract class for actions
  */
 
-namespace helpers\actions;
+namespace MiniPaviFwk\actions;
 
 abstract class Action
 {
-    protected \helpers\controllers\VideotexController $controller;
+    protected \MiniPaviFwk\controllers\VideotexController $controller;
     protected string $output = '';
 
-    public function getController(): \helpers\controllers\VideotexController
+    public function getController(): \MiniPaviFwk\controllers\VideotexController
     {
         return $this->controller;
     }

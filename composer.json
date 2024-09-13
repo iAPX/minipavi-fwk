@@ -9,7 +9,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "helpers\\": "src/helpers/",
+      "MiniPaviFwk\\": "src/",
       "MiniPavi\\": ""
     }
   },

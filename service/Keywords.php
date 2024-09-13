@@ -8,15 +8,15 @@
 
 namespace service;
 
-class Keywords extends \helpers\Keywords
+class Keywords extends \MiniPaviFwk\Keywords
 {
-    public function choix(string $touche, string $saisie): ?\helpers\actions\Action
+    public function choix(string $touche, string $saisie): ?\MiniPaviFwk\actions\Action
     {
         DEBUG && trigger_error("\service\Keywords::choix(\"$touche\", \"$saisie\")");
         // * [SOMMAIRE] return to the Accueil page
         if ($touche === 'SOMMAIRE' and $saisie === '*') {
             DEBUG && trigger_error("\service\Keywords::choix() : * [SOMMAIRE]");
-            return new \helpers\actions\AccueilAction(DEFAULT_CONTROLLER, DEFAULT_XML_FILE, $context);
+            return new \MiniPaviFwk\actions\AccueilAction(DEFAULT_CONTROLLER, DEFAULT_XML_FILE, $context);
         }
 
         return null;

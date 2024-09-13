@@ -6,7 +6,7 @@
 
 require_once "vendor/autoload.php";
 require_once "config.php";
-require_once "src/helpers/strings/mb_ucfirst.php";
+require_once "src/strings/mb_ucfirst.php";
 
 // Autoload
 spl_autoload_register(function ($class) {
@@ -52,7 +52,7 @@ try {
         // Page d'accueil
         DEBUG && trigger_error("Accueil du service");
         $vdt = \MiniPavi\MiniPaviCli::clearScreen() . PRO_MIN . PRO_LOCALECHO_OFF;
-        $action = new \helpers\actions\AccueilAction(DEFAULT_CONTROLLER, DEFAULT_XML_FILE, $context);
+        $action = new \MiniPaviFwk\actions\AccueilAction(DEFAULT_CONTROLLER, DEFAULT_XML_FILE, $context);
     } else {
         DEBUG && trigger_error("CMD : " . \MiniPavi\MiniPaviCli::$fctn . " - " . \MiniPavi\MiniPaviCli::$content[0]);
 

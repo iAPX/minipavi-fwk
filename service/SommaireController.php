@@ -8,7 +8,7 @@
 
 namespace service;
 
-class SommaireController extends \helpers\controllers\XmlController
+class SommaireController extends \MiniPaviFwk\controllers\XmlController
 {
     public function __construct(array $context, array $params = [])
     {
@@ -29,15 +29,15 @@ class SommaireController extends \helpers\controllers\XmlController
     }
 
 
-    public function toucheRetour(string $saisie): ?\helpers\actions\Action
+    public function toucheRetour(string $saisie): ?\MiniPaviFwk\actions\Action
     {
         // Add a behaviour: on [RETOUR] go to the this XML default Accueil page
-        return new \helpers\actions\PageAction($this->context, "", $this->context['xml_filename']);
+        return new \MiniPaviFwk\actions\PageAction($this->context, "", $this->context['xml_filename']);
     }
 
-    public function choixETOILESuite(): ?\helpers\actions\Action
+    public function choixETOILESuite(): ?\MiniPaviFwk\actions\Action
     {
         // Go back to another Xml
-        return new \helpers\actions\PageAction($this->context, "", "macbidouille");
+        return new \MiniPaviFwk\actions\PageAction($this->context, "", "macbidouille");
     }
 }

@@ -4,7 +4,7 @@
  * Handles the Zone saisie parameters
  */
 
-namespace helpers;
+namespace MiniPaviFwk;
 
 class ZoneSaisie
 {
