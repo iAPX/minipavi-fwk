@@ -17,7 +17,8 @@ class PageAction extends Action
         !empty($xmlfilename) && $context['xml_filename'] = $xmlfilename;
 
         // Enable Overriding by \service\{Pagename}Controlle. XmlController or a VideotexController
-        $overriderControllerName = "\service\\" . \MiniPaviFwk\strings\mb_ucfirst(mb_strtolower($pagename)) . 'Controller';
+        $formatted_pagename = \MiniPaviFwk\strings\mb_ucfirst(mb_strtolower($pagename));
+        $overriderControllerName = "\service\\" . $formatted_pagename . 'Controller';
         $overriderFileName = "service/" . \MiniPaviFwk\strings\mb_ucfirst(mb_strtolower($pagename)) . 'Controller.php';
         if (file_exists($overriderFileName)) {
             // Loads the overrider file, but still check if the class itself exists!

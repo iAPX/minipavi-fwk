@@ -9,6 +9,7 @@ class Ligne00ActionTest extends TestCase
     public function test()
     {
         $mockController = new MockController([]);
+        $mockController->setEcranTest('Test ecran');
 
         $action = new Ligne00Action($mockController, 'Accentué');
 

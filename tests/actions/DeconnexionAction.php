@@ -1,0 +1,22 @@
+<?php
+
+use PHPUnit\Framework\TestCase;
+use MiniPaviFwk\actions\DeconnexionAction;
+use MiniPaviFwk\controllers\DeconnexionController;
+
+class DeconnnexionActionTest extends TestCase
+{
+    public function testDefault()
+    {
+        $action = new DeconnexionAction();
+        $this->assertInstanceOf(DeconnexionAction::class, $action->getController());
+        $this->assertEquals(\MiniPavi\MiniPaviCli::writeLine0('Déconnexion service.') . "\e9g", $action->getOutput());
+    }
+
+    public function testCustomLigne00()
+    {
+        $action = new DeconnexionAction('Test ligne 00');
+        $this->assertInstanceOf(DeconnexionAction::class, $action->getController());
+        $this->assertEquals(\MiniPavi\MiniPaviCli::writeLine0('Test ligne 00') . "\e9g", $action->getOutput());
+    }
+}

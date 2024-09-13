@@ -24,11 +24,10 @@ Local phpUnit tests:
 ./vendor/bin/phpunit --bootstrap vendor/autoload.php tests/
 ```
 
-Note that you should it from a publicly exposed port.
-Alternatively if you have a server with ssh access, after allowing a port through ufw or iptable, you might want do something like that:
-ssh -R 8000:localhost:8000 -N -f {username}@{serveur}
-and then use http://{serveur}:8000
+Note that you should run it from a publicly exposed port.
+Alternatively if you have a server with ssh access, after allowing a port through ufw or iptable on this server, you might want do something like that:
+ssh -R 8000:localhost:8000 -N -f {username}@{server}
+and then use http://{server}:8000
 
 That enable you to test locally through your browser, without opening any port on your dev computer nor on your router.
 Works anywhere, anytime.
-You could also filter out any other IP than yours on ufw or iptable.
