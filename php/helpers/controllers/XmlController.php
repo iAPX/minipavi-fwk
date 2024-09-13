@@ -28,7 +28,13 @@ class XmlController extends VideotexController
             DEBUG && trigger_error("XML <debut> : " . $page_debut);
             $this->context['xml_page'] = $page_debut;
         }
-        $this->pageXml = $simpleXml->xpath('//page[@nom="' . $this->context['xml_page'] . '"]')[0];
+
+        $pageXml = $simpleXml->xpath('//page[@nom="' . $this->context['xml_page'] . '"]')[0];
+        if (is_null($pageXml)) {
+            error_log("No XML page found: " . $this->context['xml_page']);
+        } else {
+            $this->pageXml = $pageXml;
+        }
     }
 
     public function ecran(): string

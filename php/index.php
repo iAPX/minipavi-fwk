@@ -19,20 +19,11 @@ spl_autoload_register(function ($class) {
     return false;
 });
 
-// Loads user defined classes, to be able to check their existence
-// @TODO change it to file check instead class check
-foreach (glob('service/*.php') as $filename) {
-    require_once $filename;
-}
-
-
-
-// Disable session cookies
+// Disable session cookies, session is identified through minipavi's uniqueId
 ini_set('session.use_cookies', '0');
 ini_set('session.use_only_cookies', '0');
 
 error_reporting(E_USER_NOTICE | E_USER_WARNING);
-// error_reporting(E_ERROR);
 ini_set('display_errors', 0);
 
 try {

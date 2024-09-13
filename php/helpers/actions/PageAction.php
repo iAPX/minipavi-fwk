@@ -18,6 +18,11 @@ class PageAction extends Action
 
         // Enable Overriding by \service\{Pagename}Controlle. XmlController or a VideotexController
         $overriderControllerName = "\service\\" . \helpers\strings\mb_ucfirst(mb_strtolower($pagename)) . 'Controller';
+        $overriderFileName = "service/" . \helpers\strings\mb_ucfirst(mb_strtolower($pagename)) . 'Controller.php';
+        if (file_exists($overriderFileName)) {
+            // Loads the overrider file, but still check if the class itself exists!
+            require_once $overriderFileName;
+        }
         if (class_exists($overriderControllerName)) {
             DEBUG && trigger_error("Action: Controleur surcharge - " . $overriderControllerName);
             $this->controller = new $overriderControllerName($context);
