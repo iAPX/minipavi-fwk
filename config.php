@@ -16,4 +16,3 @@ const DEBUG = false;
 // The default controller & Sommaire controller
 const DEFAULT_CONTROLLER = false;  // If false, use xml/{DEFAULT_XML_FILE}.xml
 const DEFAULT_XML_FILE = 'macbidouille';  // If starting from XML, use xml/{this file}.xml
-// const DEFAULT_XML_FILE = 'demo';  // If starting from XML, use xml/{this file}.xml

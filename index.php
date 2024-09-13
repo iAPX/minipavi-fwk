@@ -6,7 +6,7 @@
 
 require_once "vendor/autoload.php";
 require_once "config.php";
-require_once "helpers/strings/mb_ucfirst.php";
+require_once "src/helpers/strings/mb_ucfirst.php";
 
 // Autoload
 spl_autoload_register(function ($class) {
