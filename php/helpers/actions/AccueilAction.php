@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Action to send back to the homepage of the service
  */

@@ -1,7 +1,10 @@
 <?php
+
 /**
  * Action to output a Unicode string, converting it to Vidéotex
  */
+
+namespace helpers\actions;
 
 class UnicodeOutputAction extends VideotexOutputAction
 {

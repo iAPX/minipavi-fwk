@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Action to output a unicode string in Ligne 0 of the Minitel
  */

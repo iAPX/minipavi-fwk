@@ -1,10 +1,10 @@
 <?php
+
 /**
  * Videotex helpers to output Videotex code
  */
 
 namespace helpers\videotex;
-
 
 class Videotex
 {
@@ -111,102 +111,107 @@ class Videotex
         return $this;
     }
 
-    public function ecritVideotex(string $videotexTexte) : \helpers\videotex\Videotex
+    public function ecritVideotex(string $videotexTexte): \helpers\videotex\Videotex
     {
         $this->output .= $videotexTexte;
         return $this;
     }
 
 
-    public function couleurTexte(string $couleur) : \helpers\videotex\Videotex
+    public function couleurTexte(string $couleur): \helpers\videotex\Videotex
     {
         $this->output .= "\x1B" . chr(64 + self::COULEURS_VALUES[mb_strtolower($couleur)]);
         return $this;
     }
 
-    public function couleurFond(string $couleur) : \helpers\videotex\Videotex
+    public function couleurFond(string $couleur): \helpers\videotex\Videotex
     {
         $this->output .= "\x1B" . chr(80 + self::COULEURS_VALUES[mb_strtolower($couleur)]);
         return $this;
     }
 
-    public function elementDoublehauteur(): \helpers\videotex\Videotex
+    public function tailleDoubleHauteur(): \helpers\videotex\Videotex
     {
         $this->output .= VDT_SZDBLH;
         return $this;
     }
 
-    public function elementDoublelargeur(): \helpers\videotex\Videotex
+    public function tailleDoubleLargeur(): \helpers\videotex\Videotex
     {
         $this->output .= VDT_SZDBLW;
         return $this;
     }
 
-    public function elementDoubletaille(): \helpers\videotex\Videotex
+    public function tailleDouble(): \helpers\videotex\Videotex
     {
         $this->output .= VDT_SZDBLHW;
         return $this;
     }
 
-    public function elementTaillenormale(): \helpers\videotex\Videotex
+    public function tailleNormale(): \helpers\videotex\Videotex
     {
         $this->output .= VDT_SZNORM;
         return $this;
     }
 
-    public function elementEffacefindeligne(): \helpers\videotex\Videotex
+    public function effaceFinDeLigne(): \helpers\videotex\Videotex
     {
         $this->output .= VDT_CLRLN;
         return $this;
     }
 
-    public function elementGraphique(): \helpers\videotex\Videotex
+    public function modeGraphique(): \helpers\videotex\Videotex
     {
         $this->output .= VDT_G0;
         return $this;
     }
 
-    public function elementTexte(): \helpers\videotex\Videotex
+    public function modeTexte(): \helpers\videotex\Videotex
     {
         $this->output .= VDT_G1;
         return $this;
     }
 
-    public function elementEfface(): \helpers\videotex\Videotex
+    public function effaceEcran(): \helpers\videotex\Videotex
     {
         $this->output .= VDT_CLR;
         return $this;
     }
 
-    public function elementDate(): \helpers\videotex\Videotex
+    public function afficheDateParis(): \helpers\videotex\Videotex
     {
-        // @TODO use Paris timezone
-        $this->output .= "";
+        $parisTime = new DateTime('now', new DateTimeZone('Europe/Paris'));
+        $this->output .= $parisTime->format('d-m-Y');
         return $this;
     }
 
-    public function elementHeure(): \helpers\videotex\Videotex
+    public function afficheHeureParis(): \helpers\videotex\Videotex
     {
-        // @TODO use Paris timezone
-        $this->output .= "";
+        $parisTime = new DateTime('now', new DateTimeZone('Europe/Paris'));
+        $this->output .= $parisTime->format('H:i');
         return $this;
     }
 
-    public function elementRepete(string $caractere, string $nombre): \helpers\videotex\Videotex
+    public function repeteCaractere(string $caractere, int $nombre): \helpers\videotex\Videotex
     {
-        $this->output .= \MiniPavi\MiniPaviCli::repeatChar($caractere, (int) $nombre);
+        $this->output .= \MiniPavi\MiniPaviCli::repeatChar($caractere, $nombre);
         return $this;
     }
 
-    public function elementRectangle(
+    public function afficheRectangleInverse(
         int $ligne,
         int $col,
         int $largeur,
         int $hauteur,
         string $couleur
     ): \helpers\Videotex\Videotex {
-        // @TODO use other functions
-        $this->output .= "";
+        for ($dy = 0; $dy < $hauteur; $dy++) {
+            $this
+            ->position($ligne + dy, $col)
+            ->couleurTexte($couleur)
+            ->inversionDebut()
+            ->repeteCaractere(' ', $largeur);
+        }
         return $this;
     }
 }

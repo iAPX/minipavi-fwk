@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Action to close the access to the service
  */

@@ -1,9 +1,11 @@
 <?php
+
 /**
  * Repeat the output of the current controller.
  * Could be corrupt by instantiating a new controller and putting it on parameters, for tricky effects ;)
  */
 
+namespace helpers\actions;
 
 class RepetitionAction extends Action
 {

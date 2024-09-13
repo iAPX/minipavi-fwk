@@ -1,7 +1,10 @@
 <?php
+
 /**
  * Action to output a Videotex string (as-is)
  */
+
+namespace helpers\actions;
 
 class VideotexOutputAction extends Action
 {

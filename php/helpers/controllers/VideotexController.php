@@ -64,11 +64,12 @@ class VideotexController
         $methods = [];
         if ($saisie !== '') {
             // * becomes ETOILE, # becomes DIESE. French word for "star" or * used in Minitel culture.
-            $formatted_saisie = str_replace(['*', '#'], ['ETOILE', 'DIESE'], \helpers\mb_ucfirst(mb_strtolower($saisie)));
-            $formatted_touche = \helpers\mb_ucfirst(mb_strtolower($touche));
-            $methods[] = ['choix' . $formatted_saisie . $formatted_touche, []];
+            $formatted_saisie = \helpers\strings\mb_ucfirst(mb_strtolower($saisie));
+            $cleaned_saisie = str_replace(['*', '#'], ['ETOILE', 'DIESE'], $formatted_saisie);
+            $formatted_touche = \helpers\strings\mb_ucfirst(mb_strtolower($touche));
+            $methods[] = ['choix' . $cleaned_saisie . $formatted_touche, []];
         }
-        $methods[] = ['touche' . \helpers\mb_ucfirst(mb_strtolower($touche)), [$saisie]];
+        $methods[] = ['touche' . \helpers\strings\mb_ucfirst(mb_strtolower($touche)), [$saisie]];
         $methods[] = ['choix', [$touche, $saisie]];
         $methods[] = ['nonPropose', [$touche, $saisie]];
 

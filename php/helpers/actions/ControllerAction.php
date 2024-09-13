@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Action to change controller
  */

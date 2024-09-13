@@ -8,8 +8,6 @@ namespace helpers\xml;
 
 class EcranXml
 {
-
-
     public static function ecran(\SimpleXMLElement $page): string
     {
         //// DEBUG && trigger_error("page: " . print_r($page, true));
@@ -26,7 +24,7 @@ class EcranXml
             $attributes = $element->attributes();
             DEBUG && trigger_error("element attribute: " . print_r($attributes, true));
 
-            $private_function_name = "element" . \helpers\mb_ucfirst($name);
+            $private_function_name = "element" . \helpers\strings\mb_ucfirst($name);
             if (method_exists(self::class, $private_function_name)) {
                 // @TODO rewrite
                 self::$private_function_name($videotex, ...$attributes);
@@ -34,7 +32,6 @@ class EcranXml
                 DEBUG && trigger_error("Unhandled element: " . $name);
                 $vdt = "Unhandled element: " . $name;
             }
-
         }
 
         return $videotex->getOutput();
@@ -68,34 +65,36 @@ class EcranXml
         DEBUG && trigger_error("Page downloaded from url: " . $url);
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $videotex->ecritVideotex(curl_exec($ch)); 
+        $videotex->ecritVideotex(curl_exec($ch));
         curl_close($ch);
-
     }
 
-    private static function elementPosition(\helpers\Videotex\Videotex $videotex, string $ligne, string $col = "1"): void
-    {
+    private static function elementPosition(
+        \helpers\Videotex\Videotex $videotex,
+        string $ligne,
+        string $col = "1"
+    ): void {
         $videotex->position((int) $ligne, (int) $col);
     }
 
-    private static function elementCurseur(\helpers\Videotex\Videotex $videotex, string $mode): string
+    private static function elementCurseur(\helpers\Videotex\Videotex $videotex, string $mode): void
     {
         // @TODO validation
-        return $mode === "visible" ? VDT_CURON : VDT_CUROFF;
+        $mode === "visible" ? $videotex->curseurVisible() : $videotex->curseurInvisible();
     }
 
-    private static function elementClignote(\helpers\Videotex\Videotex $videotex, string $mode): string
+    private static function elementClignote(\helpers\Videotex\Videotex $videotex, string $mode): void
     {
-        return $mode === "actif" ? VDT_BLINK : VDT_FIXED;
+        $mode === "actif" ? $videotex->curseurClignote() : $videotex->curseurFixe();
     }
 
-    private static function elementSouligne(\helpers\Videotex\Videotex $videotex, string $mode): string
+    private static function elementSouligne(\helpers\Videotex\Videotex $videotex, string $mode): void
     {
-        return $mode === "actif" ? VDT_STARTUNDERLINE : VDT_STOPUNDERLINE;
+        $mode === "actif" ? $videotex->souligneDebut() : $videotex->souligneFin();
     }
 
     private static function elementInversion(\helpers\Videotex\Videotex $videotex, string $mode): void
-    {        
+    {
         $mode === "actif" ? $videotex->inversionDebut() : $videotex->inversionFin();
     }
 
@@ -106,71 +105,69 @@ class EcranXml
 
     private static function elementCouleur(
         \helpers\Videotex\Videotex $videotex,
-        string $texte = "", string
-        $fond = ""
+        string $texte = "",
+        string $fond = ""
     ): void {
         !empty($texte) && $videotex->couleurTexte($texte);
         !empty($fond) && $videotex->couleurFond($fond);
     }
 
-    private static function elementDoublehauteur(\helpers\Videotex\Videotex $videotex): string
+    private static function elementDoublehauteur(\helpers\Videotex\Videotex $videotex): void
     {
-        return VDT_SZDBLH;
+        $videotex->tailleDoubleHauteur();
     }
 
-    private static function elementDoublelargeur(\helpers\Videotex\Videotex $videotex): string
+    private static function elementDoublelargeur(\helpers\Videotex\Videotex $videotex): void
     {
-        return VDT_SZDBLW;
+        $videotex->tailleDoubleLargeur();
     }
 
-    private static function elementDoubletaille(\helpers\Videotex\Videotex $videotex): string
+    private static function elementDoubletaille(\helpers\Videotex\Videotex $videotex): void
     {
-        return VDT_SZDBLHW;
+        $videotex->tailleDouble();
     }
 
-    private static function elementTaillenormale(\helpers\Videotex\Videotex $videotex): string
+    private static function elementTaillenormale(\helpers\Videotex\Videotex $videotex): void
     {
-        return VDT_SZNORM;
+        $videotex->tailleNormale();
     }
 
-    private static function elementEffacefindeligne(\helpers\Videotex\Videotex $videotex): string
+    private static function elementEffacefindeligne(\helpers\Videotex\Videotex $videotex): void
     {
-        return VDT_CLRLN;
+        $videotex->effaceFinDeLigne();
     }
 
-    private static function elementGraphique(\helpers\Videotex\Videotex $videotex): string
+    private static function elementGraphique(\helpers\Videotex\Videotex $videotex): void
     {
-        return VDT_G0;
+        $videotex->modeGraphique();
     }
 
-    private static function elementTexte(\helpers\Videotex\Videotex $videotex): string
+    private static function elementTexte(\helpers\Videotex\Videotex $videotex): void
     {
-        return VDT_G1;
+        $videotex->modeTexte();
     }
 
-    private static function elementEfface(\helpers\Videotex\Videotex $videotex): string
+    private static function elementEfface(\helpers\Videotex\Videotex $videotex): void
     {
-        return VDT_CLR;
+        $videotex->effaceEcran();
     }
 
-    private static function elementDate(\helpers\Videotex\Videotex $videotex): string
+    private static function elementDate(\helpers\Videotex\Videotex $videotex): void
     {
-        // @TODO use Paris timezone
-        return "";
+        $videotex->afficheDateParis();
     }
 
-    private static function elementHeure(\helpers\Videotex\Videotex $videotex): string
+    private static function elementHeure(\helpers\Videotex\Videotex $videotex): void
     {
-        // @TODO use Paris timezone
-        return "";
+        $videotex->afficheHeureParis();
     }
 
     private static function elementRepete(
         \helpers\Videotex\Videotex $videotex,
         string $caractere,
         string $nombre
-    ): string {
-        return \MiniPavi\MiniPaviCli::repeatChar($caractere, (int) $nombre);
+    ): void {
+        $videotex->repeteCaractere($caractere, (int) $nombre);
     }
 
     private static function elementRectangle(
@@ -179,8 +176,7 @@ class EcranXml
         string $largeur,
         string $hauteur,
         string $couleur
-    ): string {
-        // @TODO use _element_ functions
-        return "";
+    ): void {
+        $videotex->afficheRectangleInverse((int) $ligne, (int) $col, (int) $largeur, (int) $hauteur, $couleur);
     }
 }

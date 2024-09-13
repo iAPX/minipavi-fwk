@@ -8,32 +8,11 @@ require_once "../../minipaviCli/MiniPaviCli.php";   // A modifier
 require_once "config.php";
 
 // String support functions
-require_once "helpers/strings.php";
-
-// Multiples classes on each file
-// require_once "helpers/Actions.php";
-/*
-require_once "helpers/ZoneSaisies.php";
-require_once "helpers/Keywords.php";
-require_once "helpers/Validation.php";
-require_once "helpers/videotex/Videotex.php";
-//// require_once "helpers/VideotexController.php";
-*/
-
-/*
-require_once 'helpers/xml/ChoixXml.php';
-require_once 'helpers/xml/EcranXml.php';
-require_once 'helpers/xml/ZoneSaisieXml.php';
-require_once 'helpers/xml/ValidationXml.php';
-*/
-
-//// require_once "helpers/XmlController.php";
-//// require_once "helpers/DeconnexionController.php";
-
+require_once "helpers/strings/mb_ucfirst.php";
 
 // Autoload
 spl_autoload_register(function ($class) {
-    $file = str_replace('\\', DIRECTORY_SEPARATOR, $class).'.php';
+    $file = str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php';
     DEBUG && trigger_error("autoload : class $class on file $file");
     if (file_exists($file)) {
         require $file;

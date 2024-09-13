@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Static class to provide Videotex codes directly
  * - to Videotex objects
@@ -9,7 +10,4 @@ namespace helpers\videotex;
 
 class VideotexCodes
 {
-
-
-    
 }

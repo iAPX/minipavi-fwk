@@ -23,7 +23,3 @@ What was added:
 What is not supported yet:
 - multiline input
 - multiline input being sent by email
-- some elements unfinished on <ecran>
-- <ecran><date>
-- <ecran><time>
-- <ecran><rectangle>
