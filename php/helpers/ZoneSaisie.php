@@ -21,7 +21,7 @@ class ZoneSaisie
         int $col = 40,
         int $longueur = 1,
         bool $curseur = true,
-        string $spaceChar = "\x00",     // @TODO find a way for multicar input...
+        string $spaceChar = " ",
         string $replacementChar = '',
         string $prefill = ''
     ) {

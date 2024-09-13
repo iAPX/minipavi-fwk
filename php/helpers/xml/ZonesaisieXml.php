@@ -10,7 +10,6 @@ class ZonesaisieXml
 
     public static function zonesaisie(\SimpleXMLElement $page): \helpers\zonesaisie
     {
-        // @TODO extract and interpret zonesaisie
         $zonesaisie = $page->entree->zonesaisie;
         $ligne = (int) $zonesaisie['ligne'];
         $col = (int) $zonesaisie['col'];

@@ -10,8 +10,6 @@ class EcranXml
 {
     public static function ecran(\SimpleXMLElement $page): string
     {
-        //// DEBUG && trigger_error("page: " . print_r($page, true));
-
         $ecran = $page->ecran;
         // DEBUG && trigger_error("ecran: " . print_r($ecran, true));
 
@@ -26,7 +24,6 @@ class EcranXml
 
             $private_function_name = "element" . \helpers\strings\mb_ucfirst($name);
             if (method_exists(self::class, $private_function_name)) {
-                // @TODO rewrite
                 self::$private_function_name($videotex, ...$attributes);
             } else {
                 DEBUG && trigger_error("Unhandled element: " . $name);
@@ -79,7 +76,6 @@ class EcranXml
 
     private static function elementCurseur(\helpers\Videotex\Videotex $videotex, string $mode): void
     {
-        // @TODO validation
         $mode === "visible" ? $videotex->curseurVisible() : $videotex->curseurInvisible();
     }
 

@@ -10,7 +10,6 @@ class ValidationXml
 
     public static function validationKeys(\SimpleXMLElement $page): array
     {
-        // @TODO extract and interpret validations
         $validations = $page->entree->validation;
         DEBUG && trigger_error("Validation XmL : " . print_r($validations, true));
         $keys = [];

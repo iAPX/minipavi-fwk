@@ -1,0 +1,36 @@
+{
+  "name": "iapx/minipavi-fwk",
+  "keywords": ["minitel"],
+  "authors": [
+    {
+      "name": "Philippe iAPX Vigier",
+      "email": "pvigier@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "MiniPavi\\": ""
+    }
+  },
+  "repositories": [
+    {
+      "type": "package",
+      "package": {
+        "name": "ludosevilla/minipavicli",
+        "version": "1.0.3",
+        "source": {
+          "url": "https://github.com/ludosevilla/minipaviCli.git",
+          "type": "git",
+          "reference": "1.0.3"
+        },
+        "autoload": {
+          "files": ["MiniPaviCli.php"]
+        }
+      }
+    }
+  ],
+  "require": {
+    "ludosevilla/minipavicli": "1.0.3",
+    "php": ">=8.1"
+  }
+}

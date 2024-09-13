@@ -21,7 +21,6 @@ class XmlController extends VideotexController
         $xml_filename = empty($context['xml_filename']) ? DEFAULT_XML_FILE : $context['xml_filename'];
         DEBUG && trigger_error("XML file: $xml_filename");
         $simpleXml = simplexml_load_file('xml/' . $xml_filename . '.xml');
-        //// DEBUG && trigger_error(print_r($simpleXml, true));
 
         if (empty($this->context['xml_page'])) {
             DEBUG && trigger_error("No XML page, searching in <debut/>");
@@ -30,7 +29,6 @@ class XmlController extends VideotexController
             $this->context['xml_page'] = $page_debut;
         }
         $this->pageXml = $simpleXml->xpath('//page[@nom="' . $this->context['xml_page'] . '"]')[0];
-        //// DEBUG && trigger_error(print_r($this->pageXml, true));
     }
 
     public function ecran(): string

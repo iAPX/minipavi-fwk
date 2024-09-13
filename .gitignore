@@ -2,6 +2,6 @@
 PHP_CodeSniffer
 MiniPaviCli.php
 private/
-vendors/
+vendor/
 _*/
 

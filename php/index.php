@@ -1,13 +1,11 @@
 <?php
 
-// @TODO revoir et simplifier! Déplacer aussi
+/**
+ * Entry point for the MiniPavi Web Server
+ */
 
-require_once "../../minipaviCli/MiniPaviCli.php";   // A modifier
-
-// Must-read!
+require_once "vendor/autoload.php";
 require_once "config.php";
-
-// String support functions
 require_once "helpers/strings/mb_ucfirst.php";
 
 // Autoload
@@ -20,7 +18,6 @@ spl_autoload_register(function ($class) {
     }
     return false;
 });
-
 
 // Loads user defined classes, to be able to check their existence
 // @TODO change it to file check instead class check
@@ -123,5 +120,5 @@ try {
 } catch (Exception $e) {
     throw new Exception('Erreur MiniPavi ' . $e->getMessage());
 }
-//// exit;
+
 trigger_error("fin");

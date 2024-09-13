@@ -73,7 +73,6 @@ class VideotexController
         $methods[] = ['choix', [$touche, $saisie]];
         $methods[] = ['nonPropose', [$touche, $saisie]];
 
-        //// DEBUG && print_r("getAction : " . $methods);
         foreach ($methods as $method) {
             DEBUG && trigger_error("getAction - try method : " . $method[0] . "()");
             if (method_exists($this, $method[0])) {
