@@ -6,5 +6,8 @@ use MiniPaviFwk\xml\ValidationXml;
 
 class ValidationXmlTest extends TestCase
 {
-    // @TODO
+    public function test()
+    {
+        // @TODO
+    }
 }

@@ -6,5 +6,8 @@ use MiniPaviFwk\xml\ZonesaisieXml;
 
 class ZonesaisieXmlTest extends TestCase
 {
-    // @TODO
+    public function test()
+    {
+        // @TODO
+    }
 }

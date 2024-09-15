@@ -4,8 +4,6 @@ use PHPUnit\Framework\TestCase;
 use MiniPaviFwk\Validation;
 use Tests\Mocks\MockValidationController;
 
-define('DEBUG', false);
-
 class ValidationTest extends TestCase
 {
     public function test (): void

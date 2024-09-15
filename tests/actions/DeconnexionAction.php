@@ -2,7 +2,6 @@
 
 use PHPUnit\Framework\TestCase;
 use MiniPaviFwk\actions\DeconnexionAction;
-use MiniPaviFwk\controllers\DeconnexionController;
 
 class DeconnnexionActionTest extends TestCase
 {
@@ -18,5 +17,10 @@ class DeconnnexionActionTest extends TestCase
         $action = new DeconnexionAction('Test ligne 00');
         $this->assertInstanceOf(DeconnexionAction::class, $action->getController());
         $this->assertEquals(\MiniPavi\MiniPaviCli::writeLine0('Test ligne 00') . "\e9g", $action->getOutput());
+    }
+
+    public function testOverridenController()
+    {
+        
     }
 }

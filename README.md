@@ -21,13 +21,22 @@ php -S localhost:8000
 
 Local phpUnit tests:
 ```
-./vendor/bin/phpunit --bootstrap vendor/autoload.php tests/
+./vendor/bin/phpunit
 ```
 
-Note that you should run it from a publicly exposed port.
+Note that you should run it from a publicly exposed port as minipavi will callback it through Internet.
 Alternatively if you have a server with ssh access, after allowing a port through ufw or iptable on this server, you might want do something like that:
 ssh -R 8000:localhost:8000 -N -f {username}@{server}
 and then use http://{server}:8000
 
 That enable you to test locally through your browser, without opening any port on your dev computer nor on your router.
 Works anywhere, anytime.
+
+
+Your service files:
+service/xml : your xml files (.xml extension)
+service/vdt : your videotex page as files (.vdt extension)
+service/controllers: your videotex and xml controllers
+service/actions : your actions if needed
+service/helpers : your helpers
+service/keywords : your keyword handlers

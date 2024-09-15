@@ -130,6 +130,12 @@ class Videotex
         return $this;
     }
 
+    public function tailleDouble(): \MiniPaviFwk\videotex\Videotex
+    {
+        $this->output .= VDT_SZDBLHW;
+        return $this;
+    }
+
     public function tailleDoubleHauteur(): \MiniPaviFwk\videotex\Videotex
     {
         $this->output .= VDT_SZDBLH;
@@ -139,12 +145,6 @@ class Videotex
     public function tailleDoubleLargeur(): \MiniPaviFwk\videotex\Videotex
     {
         $this->output .= VDT_SZDBLW;
-        return $this;
-    }
-
-    public function tailleDouble(): \MiniPaviFwk\videotex\Videotex
-    {
-        $this->output .= VDT_SZDBLHW;
         return $this;
     }
 
@@ -180,14 +180,14 @@ class Videotex
 
     public function afficheDateParis(): \MiniPaviFwk\videotex\Videotex
     {
-        $parisTime = new DateTime('now', new DateTimeZone('Europe/Paris'));
+        $parisTime = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
         $this->output .= $parisTime->format('d-m-Y');
         return $this;
     }
 
     public function afficheHeureParis(): \MiniPaviFwk\videotex\Videotex
     {
-        $parisTime = new DateTime('now', new DateTimeZone('Europe/Paris'));
+        $parisTime = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
         $this->output .= $parisTime->format('H:i');
         return $this;
     }
@@ -207,10 +207,16 @@ class Videotex
     ): \MiniPaviFwk\Videotex\Videotex {
         for ($dy = 0; $dy < $hauteur; $dy++) {
             $this
-            ->position($ligne + dy, $col)
+            ->position($ligne + $dy, $col)
             ->couleurTexte($couleur)
-            ->inversionDebut()
-            ->repeteCaractere(' ', $largeur);
+            ->inversionDebut();
+            if($dy == 0) {
+                // First line print the space and repeat it
+                $this->repeteCaractere(' ', $largeur);
+            } else {
+                // Next lines only repeat the preceding space
+                $this->repeteCaractere('', $largeur+1);
+            }
         }
         return $this;
     }

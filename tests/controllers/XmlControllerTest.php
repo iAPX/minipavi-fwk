@@ -6,5 +6,7 @@ use MiniPaviFwk\actions\Action;
 
 class XmlControllerTest extends TestCase
 {
-    // @TODO
+    public function test() {
+        // @TODO
+    }
 }

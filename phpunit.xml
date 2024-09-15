@@ -1,0 +1,10 @@
+<phpunit bootstrap="vendor/autoload.php">
+    <php>
+        <const name="DEBUG" value="false"/>
+    </php>
+    <testsuites>
+        <testsuite name="Regular tests">
+            <directory>./tests</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

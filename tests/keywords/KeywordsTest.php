@@ -7,7 +7,6 @@ class KeywordsTest extends TestCase
 {
     public function testGetKeyword(): void
     {
-        define('DEBUG', false);
         $keywords = new Keywords();
 
         $choix = $keywords->choix('*', 'ENVOI');

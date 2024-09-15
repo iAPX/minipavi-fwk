@@ -6,5 +6,8 @@ use MiniPaviFwk\xml\ChoixXml;
 
 class ChoixXmlTest extends TestCase
 {
-    // @TODO
+    public function test()
+    {
+        // @TODO
+    }
 }

@@ -8,6 +8,7 @@ require_once "vendor/autoload.php";
 require_once "service/config.php";
 require_once "src/strings/mb_ucfirst.php";
 
+/*
 // Autoload
 spl_autoload_register(function ($class) {
     $file = str_replace('\\', DIRECTORY_SEPARATOR, $class) . '.php';
@@ -18,6 +19,7 @@ spl_autoload_register(function ($class) {
     }
     return false;
 });
+*/
 
 // Disable session cookies, session is identified through minipavi's uniqueId
 ini_set('session.use_cookies', '0');

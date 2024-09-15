@@ -6,5 +6,9 @@ use Tests\Mocks\MockController;
 
 class ControllerActionTest extends TestCase
 {
-    // @TODO
+    public function test()
+    {
+        $action = new ControllerAction('\\Tests\\Mocks\\MockController', []);
+        $this->assertInstanceOf(MockController::class, $action->getController());
+    }
 }
