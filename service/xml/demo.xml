@@ -130,4 +130,58 @@
     </action>
   </page>
 
+
+  <page nom="demoxml-zonesaisie">
+    <ecran>
+      <affiche url="demoxml-page.vdt" />
+      <affiche url="demoxml-choix-xml.vdt" />
+
+      <position ligne="12" col="23"/><ecrit texte="Saisie ici: ."/>
+
+      <!-- where the implementation is -->
+      <position ligne="23" col="1"/><inversion mode="actif"/><ecrit texte="&lt;page nom='demoxml-zonesaisie'/&gt;"/>
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="12" col="35" longueur="1" curseur="visible" />
+      <validation touche="repetition" />
+      <validation touche="sommaire" />
+      <validation touche="suite" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="repetition" suivant="demoxml-zonesaisie" />
+      <saisie touche="sommaire" suivant="demoxml-sommaire" />
+      <saisie touche="suite" suivant="demoxml-zonesaisie-code" />
+    </action>
+  </page>
+
+  <page nom="demoxml-zonesaisie-code">
+    <ecran>
+      <affiche url="demoxml-controller-page.vdt" />
+      <affiche url="demoxml-choix-code.vdt" />
+
+      <position ligne="8" col="1"/><ecrit texte="Saisie forcée ici par zonesaisie() : ."/>
+      <position ligne="12" col="18"/><ecrit texte="Saisie XML ici: ."/>
+
+      <!-- where the implementation is -->
+      <position ligne="23" col="1"/><inversion mode="actif"/><ecrit texte="&lt;page nom='demoxml-zonesaisie-code'/&gt;"/>
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="12" col="35" longueur="1" curseur="visible" />
+      <validation touche="repetition" />
+      <validation touche="sommaire" />
+      <validation touche="retour" />
+      <validation touche="suite" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="repetition" suivant="demoxml-zonesaisie-code" />
+      <saisie touche="sommaire" suivant="demoxml-sommaire" />
+      <saisie touche="retour" suivant="demoxml-zonesaisie" />
+      <saisie touche="suite" suivant="demo-zonesaisie-code" />
+    </action>
+  </page>
+
 </service>
