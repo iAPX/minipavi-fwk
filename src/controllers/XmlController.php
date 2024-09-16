@@ -77,5 +77,4 @@ class XmlController extends VideotexController
             return new \MiniPaviFwk\actions\Ligne00Action($this, "Invalide: $saisie + [$touche]");
         }
     }
-
 }

@@ -8,6 +8,14 @@ namespace service\controllers;
 
 class ArticlesController extends \MiniPaviFwk\controllers\XmlController
 {
+    public function __construct(array $context, array $params = [])
+    {
+        parent::__construct($context, $params);
+
+        // Now keywords are handled for this controller!
+        $this->keywordHandler = new \service\keywords\Keywords();
+    }
+
     public function ecran(): string
     {
         // Demo: overload ecran(), adding to it or replacing it, works as well for XmlController and VideotexController
@@ -18,7 +26,7 @@ class ArticlesController extends \MiniPaviFwk\controllers\XmlController
         $vdt .= $videotex
         ->position(22, 1)
         ->inversionDebut()
-        ->ecritUnicode(" * ENVOI ")
+        ->ecritUnicode(" * SUITE ")
         ->inversionFin()
         ->couleurTexte("jaune")
         ->ecritUnicode(" Aller sur la démo XML")
@@ -27,10 +35,10 @@ class ArticlesController extends \MiniPaviFwk\controllers\XmlController
         return $vdt;
     }
 
-    public function choixETOILEEnvoi(): ?\MiniPaviFwk\actions\Action
+    public function choixETOILESuite(): ?\MiniPaviFwk\actions\Action
     {
         // Easy behaviour coding!
         // Go back to another Xml, demo.xml on page "accueil"
-        return new \MiniPaviFwk\actions\PageAction($this->context, "accueil", "demo");
+        return new \MiniPaviFwk\actions\PageAction($this->context, "demoxml-sommaire", "demo");
     }
 }

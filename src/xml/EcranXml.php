@@ -81,7 +81,7 @@ class EcranXml
 
     private static function elementClignote(\MiniPaviFwk\Videotex\Videotex $videotex, string $mode): void
     {
-        $mode === "actif" ? $videotex->curseurClignote() : $videotex->curseurFixe();
+        $mode === "actif" ? $videotex->texteClignote() : $videotex->texteFixe();
     }
 
     private static function elementSouligne(\MiniPaviFwk\Videotex\Videotex $videotex, string $mode): void
@@ -110,17 +110,17 @@ class EcranXml
 
     private static function elementDoublehauteur(\MiniPaviFwk\Videotex\Videotex $videotex): void
     {
-        $videotex->tailleDoubleHauteur();
+        $videotex->doubleHauteur();
     }
 
     private static function elementDoublelargeur(\MiniPaviFwk\Videotex\Videotex $videotex): void
     {
-        $videotex->tailleDoubleLargeur();
+        $videotex->doubleLargeur();
     }
 
     private static function elementDoubletaille(\MiniPaviFwk\Videotex\Videotex $videotex): void
     {
-        $videotex->tailleDouble();
+        $videotex->doubleTaille();
     }
 
     private static function elementTaillenormale(\MiniPaviFwk\Videotex\Videotex $videotex): void
@@ -167,6 +167,7 @@ class EcranXml
     }
 
     private static function elementRectangle(
+        \MiniPaviFwk\Videotex\Videotex $videotex,
         string $ligne,
         string $col,
         string $largeur,

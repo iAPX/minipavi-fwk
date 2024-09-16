@@ -13,8 +13,8 @@ class VideotexTest extends TestCase
         $this->assertEquals($videotex, $videotex->position(1, 2));
         $this->assertEquals($videotex, $videotex->curseurVisible());
         $this->assertEquals($videotex, $videotex->curseurInvisible());
-        $this->assertEquals($videotex, $videotex->curseurClignote());
-        $this->assertEquals($videotex, $videotex->curseurFixe());
+        $this->assertEquals($videotex, $videotex->texteClignote());
+        $this->assertEquals($videotex, $videotex->texteFixe());
         $this->assertEquals($videotex, $videotex->souligneDebut());
         $this->assertEquals($videotex, $videotex->souligneFin());
         $this->assertEquals($videotex, $videotex->inversionDebut());
@@ -23,9 +23,9 @@ class VideotexTest extends TestCase
         $this->assertEquals($videotex, $videotex->ecritVideotex('Videotex'));
         $this->assertEquals($videotex, $videotex->couleurTexte('rouge'));
         $this->assertEquals($videotex, $videotex->couleurFond('bleu'));
-        $this->assertEquals($videotex, $videotex->tailleDouble());
-        $this->assertEquals($videotex, $videotex->tailleDoubleHauteur());
-        $this->assertEquals($videotex, $videotex->tailleDoubleLargeur());
+        $this->assertEquals($videotex, $videotex->doubleTaille());
+        $this->assertEquals($videotex, $videotex->doubleHauteur());
+        $this->assertEquals($videotex, $videotex->doubleLargeur());
         $this->assertEquals($videotex, $videotex->tailleNormale());
         $this->assertEquals($videotex, $videotex->effaceFinDeLigne());
         $this->assertEquals($videotex, $videotex->modeGraphique());

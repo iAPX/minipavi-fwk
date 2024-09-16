@@ -69,13 +69,13 @@ class Videotex
         return $this;
     }
 
-    public function curseurClignote(): \MiniPaviFwk\videotex\Videotex
+    public function texteClignote(): \MiniPaviFwk\videotex\Videotex
     {
         $this->output .= VDT_BLINK;
         return $this;
     }
 
-    public function curseurFixe(): \MiniPaviFwk\videotex\Videotex
+    public function texteFixe(): \MiniPaviFwk\videotex\Videotex
     {
         $this->output .= VDT_FIXED;
         return $this;
@@ -130,19 +130,19 @@ class Videotex
         return $this;
     }
 
-    public function tailleDouble(): \MiniPaviFwk\videotex\Videotex
+    public function doubleTaille(): \MiniPaviFwk\videotex\Videotex
     {
         $this->output .= VDT_SZDBLHW;
         return $this;
     }
 
-    public function tailleDoubleHauteur(): \MiniPaviFwk\videotex\Videotex
+    public function doubleHauteur(): \MiniPaviFwk\videotex\Videotex
     {
         $this->output .= VDT_SZDBLH;
         return $this;
     }
 
-    public function tailleDoubleLargeur(): \MiniPaviFwk\videotex\Videotex
+    public function doubleLargeur(): \MiniPaviFwk\videotex\Videotex
     {
         $this->output .= VDT_SZDBLW;
         return $this;
@@ -162,13 +162,13 @@ class Videotex
 
     public function modeGraphique(): \MiniPaviFwk\videotex\Videotex
     {
-        $this->output .= VDT_G0;
+        $this->output .= VDT_G1;
         return $this;
     }
 
     public function modeTexte(): \MiniPaviFwk\videotex\Videotex
     {
-        $this->output .= VDT_G1;
+        $this->output .= VDT_G0;
         return $this;
     }
 
@@ -210,12 +210,12 @@ class Videotex
             ->position($ligne + $dy, $col)
             ->couleurTexte($couleur)
             ->inversionDebut();
-            if($dy == 0) {
+            if ($dy == 0) {
                 // First line print the space and repeat it
                 $this->repeteCaractere(' ', $largeur);
             } else {
                 // Next lines only repeat the preceding space
-                $this->repeteCaractere('', $largeur+1);
+                $this->repeteCaractere('', $largeur + 1);
             }
         }
         return $this;
