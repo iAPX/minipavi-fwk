@@ -13,7 +13,7 @@ const XML_PAGES_URL = "https://minitelbidouille.pvigier.com/pages/";
 // const XML_PAGES_URL = false;  // Doesn't try to use pages from vdt folder when a http/https scheme is used
 
 // Set to true to enable Debug informations on-screen, and DEBUG actions through displayed PIN.
-const DEBUG = false;
+const DEBUG = true;
 
 // The default controller & Sommaire controller
 const DEFAULT_CONTROLLER = false;  // If false, use xml/{DEFAULT_XML_FILE}.xml

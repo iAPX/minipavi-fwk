@@ -19,7 +19,7 @@ class ChoixXml
         foreach ($page->action->saisie as $option) {
             $option_touche = mb_strtoupper((string) $option['touche']);
             $option_saisie = mb_strtolower((string) $option['choix']);
-            DEBUG && trigger_error("Option : " . $option_touche . " + " . $option_saisie);
+            DEBUG && trigger_error("Option : " . $option_saisie . " + " . $option_touche);
             if ($option_touche === $touche && $option_saisie === mb_strtolower($saisie)) {
                 $pagename = (string) $option['suivant'];
                 DEBUG && trigger_error("ChoixXml : Page " . $pagename);
@@ -27,6 +27,7 @@ class ChoixXml
             }
         }
 
+        DEBUG && trigger_error("ChoixXml : aucun choix correspondant");
         return null;
     }
 }

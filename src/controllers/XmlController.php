@@ -63,4 +63,19 @@ class XmlController extends VideotexController
         DEBUG && trigger_error("XmlController : choix()");
         return \MiniPaviFwk\xml\ChoixXml::choix($this->pageXml, $touche, $saisie, $this->context);
     }
+
+    public function nonPropose(string $touche, string $saisie): ?\MiniPaviFwk\actions\Action
+    {
+        DEBUG && trigger_error("XmlController : nonPropose()");
+        $action_xml = $this->pageXml->action;
+        $defaut = (string) $action_xml->attributes()['defaut'];
+        if (!empty($defaut)) {
+            DEBUG && trigger_error("XmlController : nonPropose() - defaut: $defaut");
+            return new \MiniPaviFwk\actions\Ligne00Action($this, $defaut);
+        } else {
+            DEBUG && trigger_error("XmlController : nonPropose() - defaut vide - Choix invalide");
+            return new \MiniPaviFwk\actions\Ligne00Action($this, "Invalide: $saisie + [$touche]");
+        }
+    }
+
 }

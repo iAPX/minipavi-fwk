@@ -62,7 +62,8 @@ class VideotexController
         }
 
         $methods = [];
-        if ($saisie !== '') {
+        if (preg_match('/^[A-Za-z0-9*#]+$/u', $saisie) == 1) {
+            // Non-empty unicode string with AZaz09*# characters (specifically no ::, \\) to avoid security issues
             // * becomes ETOILE, # becomes DIESE. French word for "star" or * used in Minitel culture.
             $formatted_saisie = \MiniPaviFwk\strings\mb_ucfirst(mb_strtolower($saisie));
             $cleaned_saisie = str_replace(['*', '#'], ['ETOILE', 'DIESE'], $formatted_saisie);
@@ -80,13 +81,16 @@ class VideotexController
                 $method_params = $method[1];
                 DEBUG && trigger_error("getAction - CHOIX : " . $this::class . " -> " . $method_name . "()");
                 $action = $this->$method_name(...$method_params);
-                break;
+                if (!is_null($action)) {
+                    // Found an action!
+                    break;
+                }
             } else {
                 DEBUG && trigger_error("getAction - PAS DE CHOIX : " . $this::class . " -> " . $method_name . "()");
             }
         }
         if (is_null($action)) {
-            // @TODO make it a configurable string
+            // Fallback : nonPropose(0 should always return an Action)
             DEBUG && trigger_error("Aucun choix n'a été trouvé");
             $action = new \MiniPaviFwk\actions\Ligne00Action($this, "Commande inconnue.");
         }
@@ -103,6 +107,7 @@ class VideotexController
 
     public function nonPropose(string $touche, string $saisie): ?\MiniPaviFwk\actions\Action
     {
+        DEBUG && trigger_error("VideotexController : nonPropose()");
         return new \MiniPaviFwk\actions\Ligne00Action($this, "Choix invalide.");
     }
 

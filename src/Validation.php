@@ -48,6 +48,9 @@ class Validation
                 }
             } elseif (mb_substr($method, 0, 5) === 'choix') {
                 // choix{Saisie}{Touchname}()
+
+                // @TODO check $saisie is AZaz09*# to avoid errors!!!
+
                 $choix = mb_strtoupper($method);
                 foreach (self::KEY_VALUES as $touche => $value) {
                     if (mb_substr($choix, -strlen($touche)) === $touche) {

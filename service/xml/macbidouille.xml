@@ -14,7 +14,7 @@
       <validation touche="guide" />
     </entree>
 
-    <action defaut="Choix non proposé">
+    <action defaut="MB - Choix non proposé">
       <saisie touche="repetition" suivant="accueil" />
       <saisie touche="sommaire" suivant="articles" />
       <saisie touche="guide" suivant="infos" />
@@ -32,7 +32,7 @@
       <validation touche="sommaire" />
     </entree>
 
-    <action defaut="Choix non proposé">
+    <action defaut="MB - Choix non proposé">
       <saisie touche="repetition" suivant="infos" />
       <saisie touche="sommaire" suivant="articles" />
     </action>
@@ -73,7 +73,7 @@
       <validation touche="envoi" />
     </entree>
 
-    <action defaut="Choix non proposé">
+    <action>
       <saisie touche="repetition" suivant="articles" />
       <saisie touche="guide" suivant="infos" />
       <saisie touche="envoi" choix="0" suivant="stats" />
