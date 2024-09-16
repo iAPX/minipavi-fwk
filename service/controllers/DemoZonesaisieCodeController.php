@@ -24,7 +24,7 @@ class DemoZonesaisieCodeController extends \MiniPaviFwk\controllers\VideotexCont
         // Display the message for zonesaisie
         ->position(8, 1)->ecritUnicode("Saisie forcée ici par zonesaisie() : .")
         // Name of the Controller
-        ->position(23, 1)->effaceFinDeLigne()->inversionDebut()->ecritUnicode("Controller: DemoZonesaisieCodeController")->inversionFin()
+        ->position(23, 1)->effaceFinDeLigne()->inversionDebut()->ecritUnicode(" DemoZonesaisieCodeController ")->inversionFin()
 
         ->getOutput();
         return $vdt;

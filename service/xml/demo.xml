@@ -130,7 +130,6 @@
     </action>
   </page>
 
-
   <page nom="demoxml-zonesaisie">
     <ecran>
       <affiche url="demoxml-page.vdt" />
@@ -184,4 +183,59 @@
     </action>
   </page>
 
+  <page nom="demoxml-validation">
+    <ecran>
+      <affiche url="demoxml-page.vdt" />
+      <affiche url="demoxml-choix-xml.vdt" />
+
+      <position ligne="4" col="1"/><ecrit texte="Le XML autorise [SUITE][SOMMAIRE][REPETITION]"/>
+      <position ligne="8" col="1"/><ecrit texte="Toute autre touche de fonction sera ignorée car filtrée par minipavi, telle que [ENVOI][ANNULATION] etc."/>
+      <ecrit texte="[RETOUR] est aussi utilisé mais pas géré pour sortir un message d'erreur depuis le XML ."/>
+
+      <!-- where the implementation is -->
+      <position ligne="23" col="1"/><inversion mode="actif"/><ecrit texte="&lt;page nom='demoxml-validation'/&gt;"/>
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="24" col="40" longueur="1" curseur="invisible" />
+      <validation touche="repetition" />
+      <validation touche="sommaire" />
+      <validation touche="suite" />
+      <validation touche="retour"/>
+    </entree>
+
+    <action defaut="Message erreur XML.">
+      <saisie touche="repetition" suivant="demoxml-validation" />
+      <saisie touche="sommaire" suivant="demoxml-sommaire" />
+      <saisie touche="suite" suivant="demoxml-validation-code" />
+    </action>
+  </page>
+
+  <page nom="demoxml-validation-code">
+    <ecran>
+      <affiche url="demoxml-controller-page.vdt" />
+      <affiche url="demoxml-choix-code.vdt" />
+
+      <position ligne="4" col="1"/><ecrit texte="Le XML autorise [SUITE][SOMMAIRE][REPETITION]"/>
+
+      <position ligne="12" col="1"/><ecrit texte="Toute autre touche de fonction sera ignorée car filtrée par minipavi, telle que [ENVOI] etc."/>
+
+      <!-- where the implementation is -->
+      <position ligne="23" col="1"/><inversion mode="actif"/><ecrit texte="&lt;page nom='demoxml-validation-code'/&gt;"/>
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="24" col="40" longueur="1" curseur="invisible" />
+      <validation touche="repetition" />
+      <validation touche="sommaire" />
+      <validation touche="suite" />
+    </entree>
+
+    <action defaut="Message erreur XML">
+      <saisie touche="repetition" suivant="demoxml-validation-code" />
+      <saisie touche="sommaire" suivant="demoxml-sommaire" />
+      <saisie touche="retour" suivant="demoxml-validation" />
+      <saisie touche="suite" suivant="demo-validation-code" />
+    </action>
+  </page>
 </service>
