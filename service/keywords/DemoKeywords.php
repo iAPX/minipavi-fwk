@@ -12,6 +12,12 @@ namespace service\keywords;
 
 class DemoKeywords extends \MiniPaviFwk\Keywords
 {
+    public function validationKeys(): array
+    {
+        DEBUG && trigger_error("\service\keywords\DemoKeywords::validationKeys()");
+        return ['SOMMAIRE', 'ENVOI'];
+    }
+
     public function choix(string $touche, string $saisie): ?\MiniPaviFwk\actions\Action
     {
         DEBUG && trigger_error("\service\keywords\DemoKeywords::choix(\"$touche\", \"$saisie\")");
@@ -26,11 +32,5 @@ class DemoKeywords extends \MiniPaviFwk\Keywords
             return new \MiniPaviFwk\actions\PageAction([], "", "macbidouille");
         }
         return null;
-    }
-
-    public function validationKeys(): array
-    {
-        DEBUG && trigger_error("\service\keywords\DemoKeywords::validationKeys()");
-        return ['SOMMAIRE', 'ENVOI'];
     }
 }
