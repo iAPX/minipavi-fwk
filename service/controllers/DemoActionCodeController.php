@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Démo des Actions contrôleurs
+ * Demonstrate Actions from a Videotex controller or a XML controller
  */
 
 namespace service\controllers;

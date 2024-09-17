@@ -16,23 +16,15 @@ class PageAction extends Action
         // Enjoy ;)
         !empty($xmlfilename) && $context['xml_filename'] = $xmlfilename;
 
-        // Enable Overriding by \service\{Pagename}Controlle. XmlController or a VideotexController
+        // Enable Overriding by \service\{Pagename}Controller. XmlController or a VideotexController
         // xxxx becomes XxxxController; xxxx-yyyy becomes XxxxYyyyController; and so on
-        $overriderControllerName = '';
+        $cleanControllerName = '';
         foreach (explode('-', $pagename) as $pagename_part) {
-            $overriderControllerName .= \MiniPaviFwk\strings\mb_ucfirst(mb_strtolower($pagename_part));
+            $cleanControllerName .= \MiniPaviFwk\strings\mb_ucfirst(mb_strtolower($pagename_part));
         }
-
-        DEBUG && trigger_error("Action: try controller - " . $overriderControllerName);
-        $overriderFileName = "service/controllers/" . $overriderControllerName . 'Controller.php';
-        if (file_exists($overriderFileName)) {
-            // Loads the overrider file, but still check if the class itself exists!
-            DEBUG && trigger_error("Action: file found - " . $overriderFileName);
-            require_once $overriderFileName;
-        }
-
-        $overriderControllerName = "\\service\\controllers\\" . $overriderControllerName . 'Controller';
+        $overriderControllerName = "\\service\\controllers\\" . $cleanControllerName . 'Controller';
         if (class_exists($overriderControllerName)) {
+            // We rely on the Composer Autoloaders - don't forget to install and update them: composer dump-autoload
             DEBUG && trigger_error("Action: Controleur surcharge - " . $overriderControllerName);
             $this->controller = new $overriderControllerName($context);
         } else {

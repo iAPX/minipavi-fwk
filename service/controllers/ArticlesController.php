@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Adds a jump to the demo.xml file
+ * Adds a jump to the demo.xml file from the MacBidouille.xml demo
  */
 
 namespace service\controllers;

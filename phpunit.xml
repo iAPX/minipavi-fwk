@@ -1,4 +1,8 @@
-<phpunit bootstrap="vendor/autoload.php">
+<phpunit 
+    bootstrap="vendor/autoload.php"
+    displayDetailsOnTestsThatTriggerWarnings="true"
+    colors="true"
+>
     <php>
         <const name="DEBUG" value="false"/>
     </php>

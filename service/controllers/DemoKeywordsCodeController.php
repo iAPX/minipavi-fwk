@@ -11,6 +11,8 @@ class DemoKeywordsCodeController extends \MiniPaviFwk\controllers\VideotexContro
 
     public function __construct($context, $params = [])
     {
+        // This all you need to add Keyword handling to your VideotexController or XMLController
+        // Keywords are handled through a MiniPaviFwk\keywords\Keywords derived instantiated class.
         parent::__construct($context, $params);
         $this->keywordHandler = new \service\keywords\DemoKeywords();
     }

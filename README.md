@@ -14,6 +14,13 @@ Install dependencies (minipavicli) through composer:
 composer install
 ```
 
+When updating, don't forget to update composer and autoloaders
+```
+composer update
+composer dump-autoload
+```
+
+
 Local execution:
 ```
 php -S localhost:8000

@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 use MiniPaviFwk\controllers\VideotexController;
-use MiniPaviFwk\actions\Action;
+use MiniPaviFwk\actions\RepetitionAction;
 use Tests\Mocks\MockController;
 
 class VideotexControllerTest extends TestCase
@@ -21,10 +21,8 @@ class VideotexControllerTest extends TestCase
     public function testGetAction()
     {
         // Isolated tests as getAction() is complex and not easily testable
-
-        // - Keyword handler
-        // - choix{Saisie}{Touche}(), including ETOILE and DIESE
-        // - touche{Touche}()
-        // - choix()
+        $controller = new VideotexController([]);
+        $action = $controller->getAction("", "REPETITION");
+        $this->assertEquals(RepetitionAction::class, get_class($action));
     }
 }
