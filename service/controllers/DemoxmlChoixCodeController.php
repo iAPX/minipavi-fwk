@@ -1,9 +1,7 @@
 <?php
 
 /**
- * Sommaire de la démo du service
- *
- * Exemple utilisant les Touche*() et Choix() ainsi que la page affichée par Videotex
+ * Demo of the different ways to handle user's input
  */
 
 namespace service\controllers;

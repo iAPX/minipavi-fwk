@@ -1,9 +1,7 @@
 <?php
 
 /**
- * Sommaire de la démo du service
- *
- * Exemple utilisant les Touche*() et Choix() ainsi que la page affichée par Videotex
+ * Demo Sommaire (main menu) using XmlController to add the * [SUITE] option and display it on screen
  */
 
 namespace service\controllers;
@@ -12,7 +10,7 @@ class DemoxmlSommaireController extends \MiniPaviFwk\controllers\XmlController
 {
     public function ecran(): string
     {
-        // Display the option * ENVOI on screen
+        // Display the option * [SUITE] on screen
         $vdt = parent::ecran();
 
         $videotex = new \MiniPaviFwk\videotex\Videotex();

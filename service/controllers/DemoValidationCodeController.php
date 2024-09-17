@@ -1,9 +1,7 @@
 <?php
 
 /**
- * Sommaire de la démo du service
- *
- * Exemple utilisant les Touche*() et Choix() ainsi que la page affichée par Videotex
+ * Demo for validation() of function keys in a Videotex Controller
  */
 
 namespace service\controllers;
@@ -13,11 +11,7 @@ class DemoValidationCodeController extends \MiniPaviFwk\controllers\VideotexCont
     public function ecran(): string
     {
         $videotex = new \MiniPaviFwk\videotex\Videotex();
-
-        // Redo the same demo as in demoxml-ecran page in demo.xml
         $vdt = $videotex
-
-        // Simulate Videotex page loading as in <affiche><url>
         ->effaceLigne00()
         ->ecritVideotex(file_get_contents("service/vdt/demo-controller-page.vdt"))
         ->ecritVideotex(file_get_contents("service/vdt/demo-choix-code.vdt"))
@@ -32,6 +26,9 @@ class DemoValidationCodeController extends \MiniPaviFwk\controllers\VideotexCont
 
     public function validation(): \MiniPaviFwk\Validation
     {
+        // Allow [SUITE], [RETOUR], [SOMMAIRE], [ENVOI] keys
+        // Others could be added by VideotexController through introspection, 
+        // such as discovering touche*() or choix**() methods
         $validation = parent::validation();
         $validation->addValidKeys(['suite', 'retour', 'sommaire', 'envoi']);
         return $validation;

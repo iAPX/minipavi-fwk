@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Exemple utilisant les Touche*() et Choix() ainsi que la page affichée par Videotex
+ * Demonstrate usage of touche*(), choix**() and choix() to handle user's input
  */
 
 namespace service\controllers;

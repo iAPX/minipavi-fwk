@@ -1,9 +1,8 @@
 <?php
 
 /**
- * Sommaire de la démo du service
- *
- * Exemple utilisant les Touche*() et Choix() ainsi que la page affichée par Videotex
+ * Demo the zonesaisie to parametrize the input area,
+ * in this case overload the zone defined in the XML and display it's own zone
  */
 
 namespace service\controllers;
@@ -24,7 +23,6 @@ class DemoxmlZonesaisieCodeController extends \MiniPaviFwk\controllers\XmlContro
 
     public function zonesaisie(): \MiniPaviFwk\ZoneSaisie
     {
-        // Overload 
         return new \MiniPaviFwk\ZoneSaisie(8, 38, 1, true);
     }
     

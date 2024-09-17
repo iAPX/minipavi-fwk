@@ -1,9 +1,7 @@
 <?php
 
 /**
- * Sommaire de la démo du service
- *
- * Exemple utilisant les Touche*() et Choix() ainsi que la page affichée par Videotex
+ * Demo ecran() adding output to the demo.xml XmlController
  */
 
 namespace service\controllers;

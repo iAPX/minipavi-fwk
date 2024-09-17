@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Démo des Actions contrôleurs
+ * Demo for the Keywords handling, work the same on a VideotexController or XMLController
  */
 
 namespace service\controllers;
