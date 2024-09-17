@@ -16,7 +16,7 @@ class DemoxmlZonesaisieCodeController extends \MiniPaviFwk\controllers\XmlContro
 
         $videotex = new \MiniPaviFwk\videotex\Videotex();
         $vdt .= $videotex
-        ->position(22, 1)->effaceFinDeLigne()->inversionDebut()->ecritUnicode(" DemoxmlZonesaisieCodeController")->inversionFin()
+        ->position(23, 1)->effaceFinDeLigne()->couleurFond("vert")->couleurTexte('noir')->ecritUnicode(" " . end(explode('\\', $this::class)))
         ->getOutput();
 
         return $vdt;

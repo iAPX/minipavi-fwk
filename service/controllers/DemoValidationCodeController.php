@@ -16,14 +16,15 @@ class DemoValidationCodeController extends \MiniPaviFwk\controllers\VideotexCont
 
         // Redo the same demo as in demoxml-ecran page in demo.xml
         $vdt = $videotex
-        ->position(0,1)->effaceFinDeLigne()
 
         // Simulate Videotex page loading as in <affiche><url>
+        ->effaceLigne00()
         ->ecritVideotex(file_get_contents("service/vdt/demo-controller-page.vdt"))
         ->ecritVideotex(file_get_contents("service/vdt/demo-choix-code.vdt"))
 
         ->position(7, 1)->ecritUnicode("Le contrôleur autorise [SUITE] et [ENVOI] qui génèreront une erreur via nonProppose(), en sus de [RETOUR] et [SOMMAIRE]")
-        ->position(22, 1)->effaceFinDeLigne()->inversionDebut()->ecritUnicode(" DemoValidationCodeController ")->inversionFin()
+        
+        ->position(23, 1)->effaceFinDeLigne()->couleurFond("vert")->couleurTexte('noir')->ecritUnicode(" " . end(explode('\\', $this::class)))
 
         ->getOutput();
         return $vdt;

@@ -32,18 +32,16 @@ class DemoxmlEcranCodeController extends \MiniPaviFwk\controllers\XmlController
         ->position(15, 1)->ecritUnicode("effaceFinDeLigne()oihfeoihfihfiuw")
         ->position(16, 1)->couleurTexte("noir")->ecritUnicode("feqhfiuhnfiuhbiqhbibhfiqwbhfqwiubfqwibqwfifquwibfqw")
         ->position(16, 1)->couleurTexte("noir")->ecritUnicode("feqhfiuhnfiuhbiqhbibhfiqwbhfqwiubfqwibqwfifquwibfqw")
-        ->position(16, 1)->couleurTexte("noir")->ecritUnicode("feqhfiuhnfiuhbiqhbibhfiqwbhfqwiubfqwibqwfifquwibfqw")
-        ->position(16, 1)->couleurTexte("noir")->ecritUnicode("feqhfiuhnfiuhbiqhbibhfiqwbhfqwiubfqwibqwfifquwibfqw")
         ->position(15, 19)->effacefindeligne()
 
         ->position(16, 1)->ecritUnicode("modeGraphique() ")->modeGraphique()->ecritUnicode("feifwevw")->modeTexte()->ecritUnicode(" modeTexte()")
         ->position(17, 1)->ecritUnicode("afficheDateParis() : ")->afficheDateParis()
         ->position(18, 1)->ecritUnicode("afficheHeureParis() : ")->afficheHeureParis()
-        ->position(19, 1)->ecritUnicode("repeteCaractere()")->repeteCaractere(".", 63)->repeteCaractere("", 63)
-        ->position(18, 21)->ecritUnicode("rectangle() : ")->afficheRectangleInverse(19, 21, 16, 4, "magenta")
+        ->position(19, 1)->ecritUnicode("repeteCaractere()")->repeteCaractere(".", 63)
+        ->position(18, 21)->ecritUnicode("rectangle() : ")->afficheRectangleInverse(19, 21, 16, 3, "magenta")
 
         // Name of the Controller
-        ->position(22, 1)->effaceFinDeLigne()->inversionDebut()->ecritUnicode("Controller: DemoxmlEcranCodeController")->inversionFin()
+        ->position(23, 1)->effaceFinDeLigne()->couleurFond("vert")->couleurTexte('noir')->ecritUnicode(" " . end(explode('\\', $this::class)))
 
         ->getOutput();
         return $vdt;

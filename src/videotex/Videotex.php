@@ -220,4 +220,10 @@ class Videotex
         }
         return $this;
     }
+
+    public function effaceLigne00(): \MiniPaviFwk\videotex\Videotex
+    {
+        $this->output .= \MiniPavi\MiniPaviCli::writeLine0('');
+        return $this;
+    }
 }

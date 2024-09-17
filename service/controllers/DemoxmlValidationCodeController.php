@@ -18,7 +18,7 @@ class DemoxmlValidationCodeController extends \MiniPaviFwk\controllers\XmlContro
         $vdt .= $videotex
         ->position(0,1)->effaceFinDeLigne()
         ->position(7, 1)->ecritUnicode("Le contrôleur autorise [RETOUR] qui est géré par le XML mais pas autorisé par celui-ci! Et [ENVOI] qui génèrera une erreur via nonProppose()")
-        ->position(22, 1)->effaceFinDeLigne()->inversionDebut()->ecritUnicode(" DemoxmlValidationCodeController ")->inversionFin()
+        ->position(23, 1)->effaceFinDeLigne()->couleurFond("vert")->couleurTexte('noir')->ecritUnicode(" " . end(explode('\\', $this::class)))
         ->getOutput();
 
         return $vdt;

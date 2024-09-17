@@ -18,6 +18,7 @@ class DemoEcranCodeController extends \MiniPaviFwk\controllers\VideotexControlle
         $vdt = $videotex
 
         // Simulate Videotex page loading as in <affiche><url>
+        ->effaceLigne00()
         ->ecritVideotex(file_get_contents("service/vdt/demo-controller-page.vdt"))
         ->ecritVideotex(file_get_contents("service/vdt/demo-choix-code.vdt"))
 
@@ -47,7 +48,7 @@ class DemoEcranCodeController extends \MiniPaviFwk\controllers\VideotexControlle
         ->position(18, 21)->ecritUnicode("rectangle() : ")->afficheRectangleInverse(19, 21, 16, 4, "magenta")
 
         // Name of the Controller
-        ->position(23, 1)->effaceFinDeLigne()->inversionDebut()->ecritUnicode("Controller: DemoEcranCodeController")->inversionFin()
+        ->position(23, 1)->effaceFinDeLigne()->couleurFond("vert")->couleurTexte('noir')->ecritUnicode(" " . end(explode('\\', $this::class)))
 
         ->getOutput();
         return $vdt;

@@ -25,7 +25,7 @@ class DemoxmlSommaireController extends \MiniPaviFwk\controllers\XmlController
         ->ecritUnicode(" Démo MacBidouille en pur XML")
 
         // Name of the Controller
-        ->position(22, 1)->effaceFinDeLigne()->inversionDebut()->ecritUnicode("Controller: DemoxmlSommaireController")->inversionFin()
+        ->position(23, 1)->effaceFinDeLigne()->couleurFond("vert")->couleurTexte('noir')->ecritUnicode(" " . end(explode('\\', $this::class)))
 
         ->getOutput();
         return $vdt;

@@ -39,8 +39,10 @@ class XmlController extends VideotexController
 
     public function ecran(): string
     {
+        // Clear Line00 when a new page is displayed
         DEBUG && trigger_error("XmlController : ecran()");
-        return \MiniPaviFwk\xml\EcranXml::ecran($this->pageXml);
+        $output = \MiniPaviFwk\xml\EcranXml::ecran($this->pageXml);
+        return str_replace(chr(12), chr(12) . \MiniPavi\MiniPaviCli::writeLine0(''), $output);
     }
 
     public function validation(): \MiniPaviFwk\Validation
