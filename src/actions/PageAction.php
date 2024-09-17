@@ -3,6 +3,14 @@
 /**
  * Action to go to a page by its name, either by {Pagename}Controller if exists or by XmlController with params
  *
+ * Notice that if the pagename have dash, every part will be capitalized:
+ * "demo" -> DemoController
+ * "demo-ecran" -> DemoEcranController
+ * "demo-ecran-code" -> DemoEcranCodeController
+ *
+ * \service\controllers\*Controller are instantiated directly, using compooser autoloaders.
+ *
+ * A reminder to do "composer install", "composer update" and "composer dump-autoload" when needed!
  */
 
 namespace MiniPaviFwk\actions;

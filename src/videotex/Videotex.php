@@ -1,19 +1,15 @@
 <?php
 
 /**
- * Videotex helpers to output Videotex code
+ * Videotex helpers to output Videotex
+ *
+ * Used both by EcranXml that output from XML and by VideotexControllers
  */
 
 namespace MiniPaviFwk\videotex;
 
 class Videotex
 {
-    /**
-     * Videotex creation used both in EcranXml and VideotexController derived controllers->ecran()
-     * Could also be used with OutputAction (see MiniPaviFwk/Actions.php)
-     */
-
-
     // These colors are meant to make code usable without using magic constants.
     public const NOIR = 'noir';
     public const ROUGE = 'rouge';
@@ -24,6 +20,8 @@ class Videotex
     public const CYAN = 'cyan';
     public const BLANC = 'blanc';
 
+    // Notice that colours are not classed by luminance value!
+    // RGB : Red bit 0, Green bit 1, Blue bit 2
     private const COULEURS_VALUES = [
         'noir' => 0,
         'rouge' => 1,
@@ -211,10 +209,8 @@ class Videotex
             ->couleurTexte($couleur)
             ->inversionDebut();
             if ($dy == 0) {
-                // First line print the space and repeat it
                 $this->repeteCaractere(' ', $largeur);
             } else {
-                // Next lines only repeat the preceding space
                 $this->repeteCaractere('', $largeur + 1);
             }
         }

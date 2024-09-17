@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Action to output a Videotex string (as-is)
+ * Action to output a Videotex string (raw output technically)
  */
 
 namespace MiniPaviFwk\actions;

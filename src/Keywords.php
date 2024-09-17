@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Default keywords handling, that provide none keyword.
+ *
+ * Helps avoid testing if keywords should be supported or not on validation() and getAction() !
+ */
+
 namespace MiniPaviFwk;
 
 class Keywords

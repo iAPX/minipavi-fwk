@@ -1,10 +1,12 @@
 <?php
 
 /**
- * XmL Controller
+ * XML Controller
  *
  * Compatibility with XML files, based on MiniPavi and XMlint
  * Notice that this Controller might be directly used, as it could call itself with xml file and page parameters!
+ *
+ * It could also be overriden totally or partially to extend XML services features.
  */
 
 namespace MiniPaviFwk\controllers;
@@ -39,7 +41,7 @@ class XmlController extends VideotexController
 
     public function ecran(): string
     {
-        // Clear Line00 when a new page is displayed
+        // Clear Line00 when a new page is displayed, to be consistent with minipavi behaviour
         DEBUG && trigger_error("XmlController : ecran()");
         $output = \MiniPaviFwk\xml\EcranXml::ecran($this->pageXml);
         return str_replace(chr(12), chr(12) . \MiniPavi\MiniPaviCli::writeLine0(''), $output);

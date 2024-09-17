@@ -2,7 +2,7 @@
 
 /**
  * Repeat the output of the current controller.
- * Could be corrupt by instantiating a new controller and putting it on parameters, for tricky effects ;)
+ * Could be abused by instantiating a new controller and putting it on parameters, for tricky effects ;)
  */
 
 namespace MiniPaviFwk\actions;

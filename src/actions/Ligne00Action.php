@@ -1,7 +1,10 @@
 <?php
 
 /**
- * Action to output a unicode string in Ligne 0 of the Minitel
+ * Action to output a unicode string in Ligne 0 of the Minitel.
+ *
+ * Curseur come back where it was before,
+ * a specific behavior of Minitel when encountering a "\n" on ligne 0.
  */
 
 namespace MiniPaviFwk\actions;

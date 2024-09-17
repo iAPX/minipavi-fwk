@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Extract keys to be validated from XML page element
+ */
+
 namespace MiniPaviFwk\xml;
 
 class ValidationXml

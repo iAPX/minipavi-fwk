@@ -26,7 +26,6 @@ class VideotexController
         return $this->context;
     }
 
-    // Default behaviours
     public function ecran(): string
     {
         // Overriden in sub-classes
@@ -41,7 +40,7 @@ class VideotexController
 
     public function validation(): \MiniPaviFwk\Validation
     {
-        // Default, overriden in sub-classes
+        // Default, overridable in sub-classes
         return new \MiniPaviFwk\Validation($this);
     }
 
@@ -54,6 +53,8 @@ class VideotexController
 
     public function getAction(string $saisie, string $touche): ?\MiniPaviFwk\actions\Action
     {
+        // Handle user input through keywordhandler, introspection and overridable methods
+
         // Keywords are prioritary, if present
         DEBUG && trigger_error("get-Action : appel keywordHanlder->choix()");
         $action = $this->keywordHandler->choix($touche, $saisie);
@@ -61,6 +62,7 @@ class VideotexController
             return $action;
         }
 
+        // Try all possibilities, in order
         $methods = [];
         if (preg_match('/^[A-Za-z0-9*#]+$/u', $saisie) == 1) {
             // Non-empty unicode string with AZaz09*# characters (specifically no ::, \\) to avoid security issues
@@ -101,23 +103,27 @@ class VideotexController
 
     public function choix(string $touche, string $saisie): ?\MiniPaviFwk\actions\Action
     {
+        // Overridable in sub-classes
         // Default : error (nonPropose)
         return null;
     }
 
     public function nonPropose(string $touche, string $saisie): ?\MiniPaviFwk\actions\Action
     {
+        // Overridable in sub-classes
         DEBUG && trigger_error("VideotexController : nonPropose()");
         return new \MiniPaviFwk\actions\Ligne00Action($this, "Choix invalide.");
     }
 
     public function keywords(string $touche, string $saisie): ?\MiniPaviFwk\actions\Action
     {
+        // Overridable in sub-classes
         return $this->keywordHandler->choix($touche, $saisie);
     }
 
     public function keywordsValidationKeys(): array
     {
+        // Overridable in sub-classes
         return $this->keywordHandler->validationKeys();
     }
 }

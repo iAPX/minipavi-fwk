@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Provides string unicode manipulation functions
+ * Provides string unicode manipulation mb_ucfirst() function
  */
 
 namespace MiniPaviFwk\strings;

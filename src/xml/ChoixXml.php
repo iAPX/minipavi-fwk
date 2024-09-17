@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Handles XML <page><action><saisie> for XmlController
+ */
+
 namespace MiniPaviFwk\xml;
 
 class ChoixXml

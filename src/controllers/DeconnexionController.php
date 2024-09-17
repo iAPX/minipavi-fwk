@@ -1,15 +1,16 @@
 <?php
 
 /**
- * Controller for deconnected people, overriding behaviours!
+ * Controller to disconnect the user, overriding every behaviours!
+ *
+ * Emit a "\e9g" to ask the Minitel or Emulator to disconnect.
+ * Ensure no future actions possible until reconnected.
  */
 
  namespace MiniPaviFwk\controllers;
 
 class DeconnexionController extends VideotexController
 {
-    // Disconnect user from the Service, ensure blocking in case of errors on MiniPavi or Emulator
-
     public function ecran(): string
     {
         return "\e9g";

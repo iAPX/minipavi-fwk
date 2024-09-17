@@ -2,6 +2,8 @@
 
 /**
  * Provides ecran() output by parsing XMl <ecran> element
+ *
+ * Extensively use Videotex object.
  */
 
 namespace MiniPaviFwk\xml;
@@ -11,10 +13,7 @@ class EcranXml
     public static function ecran(\SimpleXMLElement $page): string
     {
         $ecran = $page->ecran;
-        // DEBUG && trigger_error("ecran: " . print_r($ecran, true));
-
         $videotex = new \MiniPaviFwk\videotex\Videotex();
-
         foreach ($ecran->children() as $element) {
             // get element name and attributes
             $name = (string) $element->getName();

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Action to close the access to the service
+ * Action to exit the service, called déconnexion (disconnection) in French.
  */
 
 namespace MiniPaviFwk\actions;

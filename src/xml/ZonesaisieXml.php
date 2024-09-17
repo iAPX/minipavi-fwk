@@ -1,13 +1,13 @@
 <?php
 
+/**
+ * Extracts and interprets zonesaisie from XML <zonesaisie> element
+ */
+
 namespace MiniPaviFwk\xml;
 
 class ZonesaisieXml
 {
-    /**
-     * Extracts and interprets zonesaisie from XML <zonesaisie> element
-    */
-
     public static function zonesaisie(\SimpleXMLElement $page): \MiniPaviFwk\zonesaisie
     {
         $zonesaisie = $page->entree->zonesaisie;
