@@ -30,7 +30,7 @@
       <position ligne="8" col="2" /><inversion mode="actif" /><ecrit texte=" 3 " /><inversion mode="inactif" /><ecrit texte=" Validations : touche autorisées" />
       <position ligne="10" col="2" /><inversion mode="actif" /><ecrit texte=" 4 " /><inversion mode="inactif" /><ecrit texte=" Choix : gestion des saisies" />
       <position ligne="12" col="2" /><inversion mode="actif" /><ecrit texte=" 5 " /><inversion mode="inactif" /><ecrit texte=" Actions " /><couleur texte="noir" fond="vert"/><ecrit texte=" Controller-only "/>
-      <position ligne="14" col="2" /><inversion mode="actif" /><ecrit texte=" * " /><inversion mode="inactif" /><ecrit texte=" Keywords " /><couleur texte="noir" fond="vert"/><ecrit texte=" Controller-only "/>
+      <position ligne="14" col="2" /><inversion mode="actif" /><ecrit texte=" 6 " /><inversion mode="inactif" /><ecrit texte=" Keywords " /><couleur texte="noir" fond="vert"/><ecrit texte=" Controller-only "/>
 
       <position ligne="22" col="1"/><effacefindeligne/><couleur fond="bleu"/><ecrit texte=" &lt;page nom='demoxml-sommaire'/&gt; "/>
       <position ligne="24" col="20" /><ecrit texte="Votre choix . + " /><inversion mode="actif" /><ecrit texte="ENVOI" /><inversion mode="inactif" />
@@ -49,6 +49,7 @@
       <saisie choix="3" touche="envoi" suivant="demoxml-validation" />
       <saisie choix="4" touche="envoi" suivant="demoxml-choix" />
       <saisie choix="5" touche="envoi" suivant="demo-action-code" />
+      <saisie choix="6" touche="envoi" suivant="demo-keywords-code" />
     </action>
   </page>
 
