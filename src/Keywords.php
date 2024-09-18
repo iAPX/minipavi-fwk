@@ -3,7 +3,7 @@
 /**
  * Default keywords handling, that provide none keyword.
  *
- * Helps avoid testing if keywords should be supported or not on validation() and getAction() !
+ * Helps avoid testing if keywords should be supported or not on validation() and getSaisieAction() !
  */
 
 namespace MiniPaviFwk;

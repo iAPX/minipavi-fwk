@@ -52,30 +52,21 @@ try {
         $controller = new ($context['controller'])($context);
 
         $touche = \MiniPavi\MiniPaviCli::$fctn;
-        $saisie = @\MiniPavi\MiniPaviCli::$content[0];
-        DEBUG && trigger_error("Touche & saisie : " . $touche . " / \"" . $saisie . "\"");
+        $message = @\MiniPavi\MiniPaviCli::$content;
+        DEBUG && trigger_error("Touche & saisie/message : " . $touche . " / " . print_r($message, true));
 
-        $action = $controller->getAction($saisie, $touche);
+        if (count($message) == 1) {
+            // We detect multiline saisie usingg a side-effect: minipavi always send one entry per line of the input area
+            $action = $controller->getSaisieAction($message[0], $touche);
+        } else {
+            $action = $controller->getMessageAction($message, $touche);
+        }
     }
 
-    $controller = $action->getController();
-    $zonesaisie = $controller->zonesaisie();
-    $validation = $controller->validation();
     $vdt .= $action->getOutput();
+    $controller = $action->getController();
+    $cmd = $controller->getCmd();
 
-    // @TODO zonesaisie should build it, and handle both InputText and InputMultiline gracefully
-    $cmd = MiniPavi\MiniPaviCli::createInputTxtCmd(
-        $zonesaisie->col,
-        $zonesaisie->ligne,
-        $zonesaisie->longueur,
-        $validation->getKeyMask(),
-        $zonesaisie->curseur,
-        $zonesaisie->spaceChar,
-        $zonesaisie->replacementChar,
-        $zonesaisie->prefill,
-    );
-
-    // Send back the context, it's unsafe!
     $context = $controller->getContext();
     $_SESSION['context'] = $context;
     DEBUG && trigger_error("Save context : " . print_r($context, true));

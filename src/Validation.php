@@ -39,10 +39,17 @@ class Validation
         foreach ($methods as $method) {
             DEBUG && trigger_error("Validation method : $method");
             if (mb_substr($method, 0, 6) === 'touche') {
-                // touche{Touchname}()
+                // touche{Touchname}() on an single line input area
                 $touche = mb_strtoupper(mb_substr($method, 6));
                 if (array_key_exists($touche, self::KEY_VALUES)) {
                     DEBUG && trigger_error("Validation method touche : $touche - $method");
+                    $this->keyMask |= self::KEY_VALUES[$touche];
+                }
+            } elseif (mb_substr($method, 0, 13) === 'messageTouche') {
+                // touche{Touchname}() on an single line input area
+                $touche = mb_strtoupper(mb_substr($method, 13));
+                if (array_key_exists($touche, self::KEY_VALUES)) {
+                    DEBUG && trigger_error("Validation method messageTouche : $touche - $method");
                     $this->keyMask |= self::KEY_VALUES[$touche];
                 }
             } elseif (mb_substr($method, 0, 5) === 'choix') {

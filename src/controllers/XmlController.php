@@ -56,16 +56,22 @@ class XmlController extends VideotexController
         return $validation;
     }
 
-    public function zonesaisie(): \MiniPaviFwk\ZoneSaisie
+    public function getCmd(): array
     {
-        DEBUG && trigger_error("XmlController : zonesaisie()");
-        return \MiniPaviFwk\xml\ZoneSaisieXml::zonesaisie($this->pageXml);
+        DEBUG && trigger_error("XmlController : getCmd()");
+        return \MiniPaviFwk\xml\ZoneSaisieMessageCmdXml::createMiniPaviCmd($this->validation(), $this->pageXml);
     }
 
     public function choix(string $touche, string $saisie): ?\MiniPaviFwk\actions\Action
     {
         DEBUG && trigger_error("XmlController : choix()");
         return \MiniPaviFwk\xml\ChoixXml::choix($this->pageXml, $touche, $saisie, $this->context);
+    }
+
+    public function message(string $touche, array $message): ?\MiniPaviFwk\actions\Action
+    {
+        DEBUG && trigger_error("XmlController : message()");
+        return \MiniPaviFwk\xml\ChoixXml::choix($this->pageXml, $touche, $message[0], $this->context);
     }
 
     public function nonPropose(string $touche, string $saisie): ?\MiniPaviFwk\actions\Action

@@ -14,7 +14,8 @@ class DemoxmlChoixCodeController extends \MiniPaviFwk\controllers\XmlController
 
         $videotex = new \MiniPaviFwk\videotex\Videotex();
         $vdt .= $videotex
-        ->position(23, 1)->effaceFinDeLigne()->couleurFond("vert")->couleurTexte('noir')->ecritUnicode(" " . end(explode('\\', $this::class)))
+        ->position(23, 1)->effaceFinDeLigne()->couleurFond("vert")->couleurTexte('noir')
+        ->ecritUnicode(" " . end(explode('\\', $this::class)))
         ->getOutput();
         return $vdt;
     }
@@ -24,9 +25,9 @@ class DemoxmlChoixCodeController extends \MiniPaviFwk\controllers\XmlController
         return new \MiniPaviFwk\actions\PageAction($this->context, "demoxml-choix", "demo");
     }
 
-    public function toucheEnvoi(string $saisie) : ?\MiniPaviFwk\actions\Action
+    public function toucheEnvoi(string $saisie): ?\MiniPaviFwk\actions\Action
     {
-        if ($saisie=='2') {
+        if ($saisie == '2') {
             return new \MiniPaviFwk\actions\PageAction($this->context, "demoxml-sommaire", "demo");
         }
         return null;
@@ -47,7 +48,7 @@ class DemoxmlChoixCodeController extends \MiniPaviFwk\controllers\XmlController
         if ($touche == 'ENVOI' and $saisie == "3") {
             return new \MiniPaviFwk\actions\PageAction($this->context, "demo-choix-code", "demo");
         }
-        
+
         // Fallback to XML choices through XmlController
         return parent::choix($touche, $saisie);
     }

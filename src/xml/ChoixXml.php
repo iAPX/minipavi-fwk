@@ -15,11 +15,6 @@ class ChoixXml
         array $context
     ): ?\MiniPaviFwk\actions\Action {
         DEBUG && trigger_error("ChoixXml : " . $saisie . " + " . $touche);
-
-        if (mb_strtolower($saisie) == "d" && mb_strtoupper($touche) == "ENVOI") {
-            return new \MiniPaviFwk\actions\DeconnexionAction();
-        }
-
         foreach ($page->action->saisie as $option) {
             $option_touche = mb_strtoupper((string) $option['touche']);
             $option_saisie = mb_strtolower((string) $option['choix']);

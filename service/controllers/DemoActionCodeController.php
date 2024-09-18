@@ -16,18 +16,28 @@ class DemoActionCodeController extends \MiniPaviFwk\controllers\VideotexControll
         ->ecritVideotex(file_get_contents("service/vdt/demo-controller-page.vdt"))
         ->ecritVideotex(file_get_contents("service/vdt/demo-choix-sommaire.vdt"))
 
-        ->position(3, 1)->ecritUnicode("Démo des différentes Actions intégrablesdans les contrôleurs, qu'il soient XML ou Videotex.")
+        ->position(3, 1)
+        ->ecritUnicode("Démo des différentes Actions intégrablesdans les contrôleurs, qu'il soient XML ou Videotex.")
 
-        ->position(7, 1)->inversionDebut()->ecritUnicode('1')->inversionFin()->ecritUnicode(" Accueil / AccueilAction()")
-        ->position(9, 1)->inversionDebut()->ecritUnicode('2')->inversionFin()->ecritUnicode(" Démo Choix Controller / ControllerAction()")
-        ->position(11, 1)->inversionDebut()->ecritUnicode('3')->inversionFin()->ecritUnicode(" Dcx / DeconnexionAction()")
-        ->position(13, 1)->inversionDebut()->ecritUnicode('4')->inversionFin()->ecritUnicode(" Ligne 00 / Ligne00Action()")
-        ->position(15, 1)->inversionDebut()->ecritUnicode('5')->inversionFin()->ecritUnicode(" Sommaire XML / PageAction()")
-        ->position(17, 1)->inversionDebut()->ecritUnicode('6')->inversionFin()->ecritUnicode(" Répète / RepetitionAction()")
-        ->position(19, 1)->inversionDebut()->ecritUnicode('7')->inversionFin()->ecritUnicode(" Texte / UnicodeOutputAction()")
-        ->position(21, 1)->inversionDebut()->ecritUnicode('8')->inversionFin()->ecritUnicode(" code vdt / VideotexOutputAction()")
+        ->position(7, 1)->inversionDebut()->ecritUnicode('1')->inversionFin()
+        ->ecritUnicode(" Accueil / AccueilAction()")
+        ->position(9, 1)->inversionDebut()->ecritUnicode('2')->inversionFin()
+        ->ecritUnicode(" Démo Choix Controller / ControllerAction()")
+        ->position(11, 1)->inversionDebut()->ecritUnicode('3')->inversionFin()
+        ->ecritUnicode(" Dcx / DeconnexionAction()")
+        ->position(13, 1)->inversionDebut()->ecritUnicode('4')->inversionFin()
+        ->ecritUnicode(" Ligne 00 / Ligne00Action()")
+        ->position(15, 1)->inversionDebut()->ecritUnicode('5')->inversionFin()
+        ->ecritUnicode(" Sommaire XML / PageAction()")
+        ->position(17, 1)->inversionDebut()->ecritUnicode('6')->inversionFin()
+        ->ecritUnicode(" Répète / RepetitionAction()")
+        ->position(19, 1)->inversionDebut()->ecritUnicode('7')->inversionFin()
+        ->ecritUnicode(" Texte / UnicodeOutputAction()")
+        ->position(21, 1)->inversionDebut()->ecritUnicode('8')->inversionFin()
+        ->ecritUnicode(" code vdt / VideotexOutputAction()")
 
-        ->position(23, 1)->effaceFinDeLigne()->couleurFond("vert")->couleurTexte('noir')->ecritUnicode(" " . end(explode('\\', $this::class)))
+        ->position(23, 1)->effaceFinDeLigne()->couleurFond("vert")->couleurTexte('noir')
+        ->ecritUnicode(" " . end(explode('\\', $this::class)))
         ->getOutput();
         return $vdt;
     }
@@ -39,7 +49,10 @@ class DemoActionCodeController extends \MiniPaviFwk\controllers\VideotexControll
 
     public function choix2Envoi(): ?\MiniPaviFwk\actions\Action
     {
-        return new \MiniPaviFwk\actions\ControllerAction(\service\controllers\DemoChoixCodeController::class, $this->context);
+        return new \MiniPaviFwk\actions\ControllerAction(
+            \service\controllers\DemoChoixCodeController::class,
+            $this->context
+        );
     }
 
     public function choix3Envoi(): ?\MiniPaviFwk\actions\Action

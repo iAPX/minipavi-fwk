@@ -18,11 +18,20 @@ class VideotexControllerTest extends TestCase
         $this->assertEquals("*** Ecran absent. ***", $controller->ecran());
     }
 
-    public function testGetAction()
+    public function testGetSaisieAction()
     {
-        // Isolated tests as getAction() is complex and not easily testable
+        // Isolated tests as getSaisieAction() is complex and not easily testable
         $controller = new VideotexController([]);
-        $action = $controller->getAction("", "REPETITION");
+        $action = $controller->getSaisieAction("", "REPETITION");
         $this->assertEquals(RepetitionAction::class, get_class($action));
     }
+
+    public function testGetMessageAction()
+    {
+        // Isolated tests as getSaisieAction() is complex and not easily testable
+        $controller = new VideotexController([]);
+        $action = $controller->getMessageAction([""], "REPETITION");
+        $this->assertEquals(RepetitionAction::class, get_class($action));
+    }
+
 }

@@ -13,6 +13,6 @@ class DeconnexionAction extends Action
     {
         DEBUG && trigger_error("Action: Deconnexion");
         $this->controller = new \MiniPaviFwk\controllers\DeconnexionController([]);
-        $this->output = \MiniPavi\MiniPaviCli::writeLine0($ligne00) . "\e9g";     // Escape 9 g = deconnexion
+        $this->output = \MiniPavi\MiniPaviCli::writeLine0($ligne00);     // Escape 9 g = deconnexion
     }
 }

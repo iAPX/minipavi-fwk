@@ -15,15 +15,15 @@ class DemoxmlZonesaisieCodeController extends \MiniPaviFwk\controllers\XmlContro
 
         $videotex = new \MiniPaviFwk\videotex\Videotex();
         $vdt .= $videotex
-        ->position(23, 1)->effaceFinDeLigne()->couleurFond("vert")->couleurTexte('noir')->ecritUnicode(" " . end(explode('\\', $this::class)))
+        ->position(23, 1)->effaceFinDeLigne()->couleurFond("vert")->couleurTexte('noir')
+        ->ecritUnicode(" " . end(explode('\\', $this::class)))
         ->getOutput();
 
         return $vdt;
     }
 
-    public function zonesaisie(): \MiniPaviFwk\ZoneSaisie
+    public function getCmd(): array
     {
-        return new \MiniPaviFwk\ZoneSaisie(8, 38, 1, true);
+        return \MiniPaviFwk\cmd\ZoneSaisieCmd::createMiniPaviCmd($this->validation(), 8, 38, 1, true);
     }
-    
 }

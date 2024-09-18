@@ -21,13 +21,13 @@ A controller provides these basic services, by itself or through its parents:
   XmlController use EcranXml::ecran() to interpret XML service files
   see /src/xml/EcranXml.php
 
-->zonesaisie() : return a \MiniPaviFwk\ZoneSaisie object
-  this object contains the informations about the location of the input area,
+->getCmd() : returns a new MiniPavi Command as an array
+  this array contains the informations about the location of the input area,
   and various optional informations.
-  see /src/ZoneSaisie.php
+  see /src/cmd/ZoneSaisieCmd.php
   @TODO extend it later on to support multiline input
-  XmlController use ZoneSaisieXml to interpret XML service files
-  see /src/xml/ZoneSaisieXml.php
+  XmlController use ZoneSaisieCmdXml to interpret XML service files
+  see /src/xml/ZoneSaisieCmdXml.php
 
 ->validation() : return a \MiniPaviFwk\Validation object
   this object handles the validated function keys for MiniPavi.
@@ -38,7 +38,7 @@ A controller provides these basic services, by itself or through its parents:
   As often XmlController use ValidationXml to interpret XML service files
   see /src/xml/ValidationXml.php
 
-->getAction() : return an \MiniPaviFwk\actions\Action object
+->getSaisieAction() : return an \MiniPaviFwk\actions\Action object when a non-message saisie is recveived.
   This object stores the information about the controller to be instantiated by the next user input.
   Also the videotex code to be output.
   see /src/actions/* and /src/actions/README.md
@@ -77,6 +77,6 @@ A controller provides these basic services, by itself or through its parents:
   Null will trigger call to nonPropose() in cascade.
 
 Optional methods, 
-->touche*() : see ->getAction()
-->choix*() : see ->getAction()
+->touche*() : see ->getSaisieAction()
+->choix*() : see ->getSaisieAction()
 

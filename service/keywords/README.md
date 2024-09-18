@@ -10,4 +10,4 @@ And provides 2 methods:
   example: ['Suite', 'ENVOI']
 
 ->choix() returns a \MiniPaviFwk\actions\Action if choix is recognized, null elsewhere.
-  this is called by VideotexController->getAction() and take precedence over any local action.
+  this is called by VideotexController->getSaisieAction() and take precedence over any local action.

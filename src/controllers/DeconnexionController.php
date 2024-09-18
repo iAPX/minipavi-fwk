@@ -3,7 +3,8 @@
 /**
  * Controller to disconnect the user, overriding every behaviours!
  *
- * Emit a "\e9g" to ask the Minitel or Emulator to disconnect.
+ * Use specific Minipavi cmd to enable graceful disconnection,
+ * displaying list of available service on the minipavi side.
  * Ensure no future actions possible until reconnected.
  */
 
@@ -11,14 +12,8 @@
 
 class DeconnexionController extends VideotexController
 {
-    public function ecran(): string
+    public function getCmd(): array
     {
-        return "\e9g";
-    }
-
-    public function getAction(string $saisie, string $touche): ?\MiniPaviFwk\actions\Action
-    {
-        DEBUG && error_log("Deconnexion controller : NONE CHOICE");
-        return new \MiniPaviFwk\actions\DeconnexionAction();
+        return \MiniPaviFwk\cmd\DeconnexionCmd::createMiniPaviCmd();
     }
 }

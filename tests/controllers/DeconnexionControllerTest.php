@@ -10,7 +10,7 @@ class DeconnexionControllerTest extends TestCase
     {
         $controller = new DeconnexionController([]);
 
-        $this->assertEquals("\e9g", $controller->ecran());
-        $this->assertInstanceOf(DeconnexionAction::class, $controller->getAction("", ""));
+        $this->assertEquals("*** Ecran absent. ***", $controller->ecran());
+        // $this->assertInstanceOf(DeconnexionAction::class, $controller->getSaisieAction([""], ""));
     }
 }

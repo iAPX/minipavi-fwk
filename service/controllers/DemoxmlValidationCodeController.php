@@ -14,14 +14,17 @@ class DemoxmlValidationCodeController extends \MiniPaviFwk\controllers\XmlContro
 
         $videotex = new \MiniPaviFwk\videotex\Videotex();
         $vdt .= $videotex
-        ->position(0,1)->effaceFinDeLigne()
-        ->position(7, 1)->ecritUnicode("Le contrôleur autorise [RETOUR] qui est géré par le XML mais pas autorisé par celui-ci! Et [ENVOI] qui génèrera une erreur via nonProppose()")
-        ->position(23, 1)->effaceFinDeLigne()->couleurFond("vert")->couleurTexte('noir')->ecritUnicode(" " . end(explode('\\', $this::class)))
+        ->position(0, 1)->effaceFinDeLigne()
+        ->position(7, 1)
+        ->ecritUnicode("Le contrôleur autorise [RETOUR] qui est géré par le XML mais pas autorisé par celui-ci!")
+        ->ecritUnicode(", Et [ENVOI] qui génèrera une erreur via nonPropose()")
+        ->position(23, 1)->effaceFinDeLigne()->couleurFond("vert")->couleurTexte('noir')
+        ->ecritUnicode(" " . end(explode('\\', $this::class)))
         ->getOutput();
 
         return $vdt;
     }
-    
+
     public function validation(): \MiniPaviFwk\Validation
     {
         $validation = parent::validation();
@@ -33,5 +36,4 @@ class DemoxmlValidationCodeController extends \MiniPaviFwk\controllers\XmlContro
     {
         return new \MiniPaviFwk\actions\Ligne00Action($this, "Message erreur codé PHP");
     }
-    
 }
