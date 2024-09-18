@@ -222,4 +222,11 @@ class Videotex
         $this->output .= \MiniPavi\MiniPaviCli::writeLine0('');
         return $this;
     }
+
+    public function deconnexionModem(): \MiniPaviFwk\videotex\Videotex
+    {
+        // The weel known ESc 9 g that aask the terminal to hang up!
+        $this->output .= "\x1B9g";
+        return $this;
+    }
 }
