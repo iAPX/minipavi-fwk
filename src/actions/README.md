@@ -22,3 +22,5 @@ The different \MiniPaviFwk\actions\Action
 - UnicodeOutputAction: output unicode text, after conversion to videotex
 
 - VideotexOutputAction: output videotex text
+
+- RedirectAction: redirect to another service through its URL

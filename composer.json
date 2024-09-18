@@ -1,7 +1,7 @@
 {
   "name": "iapx/minipavi-fwk",
   "description": "PHP 8.1+ framework to support minipavi for Minitel and emulators.",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "keywords": ["minitel"],
   "authors": [
     {
