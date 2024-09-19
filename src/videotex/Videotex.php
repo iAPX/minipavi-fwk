@@ -203,16 +203,18 @@ class Videotex
         int $hauteur,
         string $couleur
     ): \MiniPaviFwk\Videotex\Videotex {
-        for ($dy = 0; $dy < $hauteur; $dy++) {
+        // Optimized version.
+        $this
+        ->position($ligne, $col)
+        ->couleurTexte($couleur)
+        ->inversionDebut()
+        ->repeteCaractere(' ', $largeur);;
+        for ($dy = 1; $dy < $hauteur; $dy++) {
             $this
             ->position($ligne + $dy, $col)
             ->couleurTexte($couleur)
-            ->inversionDebut();
-            if ($dy == 0) {
-                $this->repeteCaractere(' ', $largeur);
-            } else {
-                $this->repeteCaractere('', $largeur + 1);
-            }
+            ->inversionDebut()
+            ->repeteCaractere('', $largeur + 1);
         }
         return $this;
     }
