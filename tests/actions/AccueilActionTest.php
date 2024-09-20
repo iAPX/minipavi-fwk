@@ -15,11 +15,7 @@ class AccueilActionTest extends TestCase
 
     public function testXmlController()
     {
-        $default_xml_file = mb_substr(end(explode('/', glob('service/xml/*.xml')[0])), 0, -4);
-        // define("DEFAULT_XML_FILE", $default_xml_file);
-        define("XML_PAGES_URL", false);
-
-        $action = new AccueilAction(false, $default_xml_file, []);
+        $action = new AccueilAction(false, DEFAULT_XML_FILE, []);
         $this->assertInstanceOf(XmlController::class, $action->getController());
         $this->AssertFalse(empty($action->getOutput()));
     }

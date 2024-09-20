@@ -5,7 +5,6 @@
  *
  *  * [SOMMAIRE] : Accueil (homepage)
  *    [SOMMAIRE] : XML Demo Sommaire (main menu)
- *  * [ENVOI] : MacBidouille XML Demo
  */
 
 namespace service\keywords;
@@ -27,9 +26,6 @@ class DemoKeywords extends \MiniPaviFwk\Keywords
         } elseif ($touche === 'SOMMAIRE' && $saisie === '') {
             DEBUG && trigger_error("\service\keywords\DemoKeywords::choix() : [SOMMAIRE]");
             return new \MiniPaviFwk\actions\PageAction([], "demoxml-sommaire", "demo");
-        } elseif ($touche === 'ENVOI' && $saisie === '*') {
-            DEBUG && trigger_error("\service\keywords\DemoKeywords::choix() : * [ENVOI]");
-            return new \MiniPaviFwk\actions\PageAction([], "", "macbidouille");
         }
         return null;
     }

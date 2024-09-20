@@ -12,8 +12,8 @@ class DemoZonesaisieCodeController extends \MiniPaviFwk\controllers\VideotexCont
     {
         $videotex = new \MiniPaviFwk\videotex\Videotex();
         $vdt = $videotex
-        ->ecritVideotex(file_get_contents("service/vdt/demo-controller-page.vdt"))
-        ->ecritVideotex(file_get_contents("service/vdt/demo-choix-code.vdt"))
+        ->ecritVideotex(file_get_contents(SERVICE_DIR . "vdt/demo-controller-page.vdt"))
+        ->ecritVideotex(file_get_contents(SERVICE_DIR . "vdt/demo-choix-code.vdt"))
         ->position(8, 1)->ecritUnicode("Saisie forcée ici par zonesaisie() : .")
 
         ->position(23, 1)->effaceFinDeLigne()->couleurFond("vert")->couleurTexte('noir')

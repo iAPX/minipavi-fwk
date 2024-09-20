@@ -23,7 +23,7 @@
 
   <page nom="demoxml-sommaire">
     <ecran>
-      <affiche url="demoxml-controller-page.vdt" />
+      <affiche url="demoxml-page.vdt" />
 
       <position ligne="4" col="2" /><inversion mode="actif" /><ecrit texte=" 1 " /><inversion mode="inactif" /><ecrit texte=" Ecran : affichage" />
       <position ligne="6" col="2" /><inversion mode="actif" /><ecrit texte=" 2 " /><inversion mode="inactif" /><ecrit texte=" Zonesaisie : zone de saisie" />

@@ -17,8 +17,8 @@ class DemoEcranCodeController extends \MiniPaviFwk\controllers\VideotexControlle
 
         // Simulate Videotex page loading as in <affiche><url>
         ->effaceLigne00()
-        ->ecritVideotex(file_get_contents("service/vdt/demo-controller-page.vdt"))
-        ->ecritVideotex(file_get_contents("service/vdt/demo-choix-code.vdt"))
+        ->ecritVideotex(file_get_contents(SERVICE_DIR . "vdt/demo-controller-page.vdt"))
+        ->ecritVideotex(file_get_contents(SERVICE_DIR . "vdt/demo-choix-code.vdt"))
 
         ->position(3, 1)->ecritUnicode("Affichage par ecran() et ecritUnicode()")
         ->position(4, 1)->curseurVisible()->ecritUnicode("curseurVisible() ")

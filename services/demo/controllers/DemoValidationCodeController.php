@@ -13,8 +13,8 @@ class DemoValidationCodeController extends \MiniPaviFwk\controllers\VideotexCont
         $videotex = new \MiniPaviFwk\videotex\Videotex();
         $vdt = $videotex
         ->effaceLigne00()
-        ->ecritVideotex(file_get_contents("service/vdt/demo-controller-page.vdt"))
-        ->ecritVideotex(file_get_contents("service/vdt/demo-choix-code.vdt"))
+        ->ecritVideotex(file_get_contents(SERVICE_DIR . "vdt/demo-controller-page.vdt"))
+        ->ecritVideotex(file_get_contents(SERVICE_DIR . "vdt/demo-choix-code.vdt"))
 
         ->position(7, 1)
         ->ecritUnicode("Le contrôleur autorise [SUITE] et [ENVOI] qui génèreront une erreur via nonPropose()")

@@ -11,8 +11,8 @@ class DemoMessageCodeController extends \MiniPaviFwk\controllers\VideotexControl
     public function ecran(): string
     {
         $videotex = new \MiniPaviFwk\videotex\Videotex();
-        $videotex->effaceLigne00()->ecritVideotex(file_get_contents("service/vdt/demo-controller-page.vdt"));
-        $videotex->ecritVideotex(file_get_contents("service/vdt/demo-choix-sommaire.vdt"));
+        $videotex->effaceLigne00()->ecritVideotex(file_get_contents(SERVICE_DIR . "vdt/demo-controller-page.vdt"));
+        $videotex->ecritVideotex(file_get_contents(SERVICE_DIR . "vdt/demo-choix-sommaire.vdt"));
 
         $videotex->position(4, 1)->inversionDebut()->ecritUnicode("Message + [ENVOI] : ")->inversionFin();
 

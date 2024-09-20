@@ -42,7 +42,7 @@ class Videotex
 
     public function page($pagename): \MiniPaviFwk\videotex\Videotex
     {
-        $filename = "service/vdt/" . $pagename . ".vdt";
+        $filename = SERVICE_DIR . "vdt/" . $pagename . ".vdt";
         if (file_exists($filename)) {
             $this->output .= file_get_contents($filename);
         }
@@ -208,7 +208,7 @@ class Videotex
         ->position($ligne, $col)
         ->couleurTexte($couleur)
         ->inversionDebut()
-        ->repeteCaractere(' ', $largeur);;
+        ->repeteCaractere(' ', $largeur);
         for ($dy = 1; $dy < $hauteur; $dy++) {
             $this
             ->position($ligne + $dy, $col)

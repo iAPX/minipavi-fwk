@@ -13,8 +13,8 @@ class DemoActionCodeController extends \MiniPaviFwk\controllers\VideotexControll
         $videotex = new \MiniPaviFwk\videotex\Videotex();
         $vdt = $videotex
         ->effaceLigne00()
-        ->ecritVideotex(file_get_contents("service/vdt/demo-controller-page.vdt"))
-        ->ecritVideotex(file_get_contents("service/vdt/demo-choix-sommaire.vdt"))
+        ->ecritVideotex(file_get_contents(SERVICE_DIR . "vdt/demo-controller-page.vdt"))
+        ->ecritVideotex(file_get_contents(SERVICE_DIR . "vdt/demo-choix-sommaire.vdt"))
 
         ->position(3, 1)
         ->ecritUnicode("Démo des différentes Actions intégrablesdans les contrôleurs, qu'il soient XML ou Videotex.")

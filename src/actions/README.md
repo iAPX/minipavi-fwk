@@ -2,9 +2,9 @@
 The different \MiniPaviFwk\actions\Action
 
 - AccueilAction : send back to the Accueil (homepage) of the service
-  Depending on service/config.php,
+  Depending on services/{serviceName}/config.php,
   instantiate the DEFAULT_CONTROLLER is not false or empty.
-  if not, use the DEFAULT_XML_FILE, in service/xml and adding ".xml" extension,
+  if not, use the DEFAULT_XML_FILE, in services/{serviceName}/xml and adding ".xml" extension,
   in this case startup page is provided by the <service><debut nom="xxx" /> of the XML
 
 - ControllerAction : take a controller class name, instantiate it, and execution continues with it

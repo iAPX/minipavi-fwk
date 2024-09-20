@@ -13,8 +13,8 @@ class DemoChoixCodeController extends \MiniPaviFwk\controllers\VideotexControlle
         $videotex = new \MiniPaviFwk\videotex\Videotex();
         $vdt = $videotex
         ->effaceLigne00()
-        ->ecritVideotex(file_get_contents("service/vdt/demo-controller-page.vdt"))
-        ->ecritVideotex(file_get_contents("service/vdt/demo-choix-code.vdt"))
+        ->ecritVideotex(file_get_contents(SERVICE_DIR . "vdt/demo-controller-page.vdt"))
+        ->ecritVideotex(file_get_contents(SERVICE_DIR . "/vdt/demo-choix-code.vdt"))
 
         ->position(4, 1)->ecritUnicode("[RETOUR] : XML+Code / toucheRetour()")
         ->position(5, 1)->ecritUnicode("[SOMMAIRE] : Sommaire / toucheSommaire()")

@@ -40,10 +40,15 @@ That enable you to test locally through your browser, without opening any port o
 Works anywhere, anytime.
 
 
+You could change service, within the services/global-config.php ALLOWED_SERVICES list by putting the service name this way:
+http://{server}[:{portNumber}]/%3Fservice={serviceName}
+Simply add %3Fservice={serviceName}
+
+
 Your service files:
-service/xml : your xml files (.xml extension)
-service/vdt : your videotex page as files (.vdt extension)
-service/controllers: your videotex and xml controllers
-service/actions : your actions if needed
-service/helpers : your helpers
-service/keywords : your keyword handlers
+services/{serviceName}/xml : your xml files (.xml extension)
+services/{serviceName}/vdt : your videotex page as files (.vdt extension)
+services/{serviceName}/controllers: your videotex and xml controllers
+services/{serviceName}/actions : your actions if needed
+services/{serviceName}/helpers : your helpers
+services/{serviceName}/keywords : your keyword handlers

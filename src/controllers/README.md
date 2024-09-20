@@ -1,6 +1,6 @@
 
 The MiniPaviFwk controller.
-See this doc : /service/controllers/README.md
+See this doc : /services/demo/controllers/README.md
 
 - DeconnexionController : ensure user is blocked. And disconnected.
 

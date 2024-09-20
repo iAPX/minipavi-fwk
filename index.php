@@ -4,8 +4,10 @@
  * Entry point for the MiniPavi Web Server
  */
 
+// Global configuration, autoloaders and ou mb_ucfirst() function
+require_once "services/global-config.php";
+require_once "src/service_autoloader.php";
 require_once "vendor/autoload.php";
-require_once "service/config.php";
 require_once "src/strings/mb_ucfirst.php";
 
 // Disable session cookies, session is identified through minipavi's uniqueId
@@ -23,6 +25,27 @@ try {
     MiniPavi\MiniPaviCli::start();
     session_id(MiniPavi\MiniPaviCli::$uniqueId);
     session_start();
+
+    // Select an allowed service or Default if not found
+    if (!isset($_SESSION['service'])) {
+        $parameter = substr($_SERVER['PATH_INFO'], 10);
+        trigger_error("Service Parameter : " . $parameter);
+
+        $service_parameter = empty($parameter) ? DEFAULT_SERVICE : $parameter;
+        trigger_error("Service parameter chosen : " . $service_parameter);
+        $service_name = DEFAULT_SERVICE;
+        if (in_array($service_parameter, ALLOWED_SERVICES, true) && is_dir("services/" . $service_parameter) ) {
+            $service_name = $service_parameter;
+        }
+        $_SESSION['service'] = $service_name;
+    }
+
+    // Get the service-config and set constants for autoloader and code
+    trigger_error("Service : " . $_SESSION['service']);
+    define('SERVICE_NAME', $_SESSION['service']);
+    define('SERVICE_DIR', "services/" . mb_strtolower(SERVICE_NAME) . "/");
+    require_once SERVICE_DIR . "service-config.php";
+    
 
     // Fin du sketch!
     if (MiniPavi\MiniPaviCli::$fctn == 'FIN' || \MiniPavi\MiniPaviCli::$fctn == 'FCTN?') {
