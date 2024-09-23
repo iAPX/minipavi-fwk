@@ -45,7 +45,8 @@ class QueryHandler
     {
         trigger_error("fctn : DCX");
         $sessionHandlerClassName::destroySession();
-        return new \MiniPaviFwk\actions\DeconnexionAction();
+        // Nothing to answer, no further action to take.
+        exit(0);
     }
 
     public static function queryInput(): \MiniPaviFwk\actions\Action
@@ -125,8 +126,6 @@ class QueryHandler
 
     public static function getNextPageUrl(): string
     {
-        // @TODO handle switch local services
-
         // Url à appeller lors de la prochaine saisie utilisateur (ou sans attendre si directCall=true)
         if (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off') {
             $prot = 'https';
@@ -144,6 +143,7 @@ class QueryHandler
         }
 
         $nextPage = $prot . "://" . $_SERVER['HTTP_HOST'] . "" . $_SERVER['PHP_SELF'];
+        DEBUG && trigger_error("Next page URL : " . $nextPage);
         return $nextPage;
     }
 }

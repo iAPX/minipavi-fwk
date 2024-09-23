@@ -7,7 +7,7 @@
  */
 
 // Set to true to enable Debug informations on-screen.
-const DEBUG = true;
+const DEBUG = false;
 
 // Set the default service
 // Included services : demo, macbidouille

@@ -23,4 +23,7 @@ The different \MiniPaviFwk\actions\Action
 
 - VideotexOutputAction: output videotex text
 
-- RedirectAction: redirect to another service through its URL
+- SwitchServiceAction : go to another locally hosted service by its name
+  Accept an output (to indicate the redirection) and a wait time in seconds
+
+- RedirectAction: redirect to another service through its public URL

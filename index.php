@@ -18,6 +18,7 @@ error_reporting(E_USER_NOTICE | E_USER_WARNING);
 ini_set('display_errors', 0);
 
 try {
+    trigger_error("PHP SELF : " . $_SERVER['PHP_SELF']);
     MiniPavi\MiniPaviCli::start();
     \MiniPaviFwk\handlers\SessionHandler::startSession();
     \MiniPaviFwk\handlers\ServiceHandler::startService();

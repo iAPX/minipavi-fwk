@@ -35,6 +35,9 @@ class DemoActionCodeController extends \MiniPaviFwk\controllers\VideotexControll
         ->ecritUnicode(" Texte / UnicodeOutputAction()")
         ->position(21, 1)->inversionDebut()->ecritUnicode('8')->inversionFin()
         ->ecritUnicode(" code vdt / VideotexOutputAction()")
+        ->position(22, 1)->inversionDebut()->ecritUnicode('9')->inversionFin()
+        ->ecritUnicode(" change service/SwitchServiceAction()")
+
 
         ->position(23, 1)->effaceFinDeLigne()->couleurFond("vert")->couleurTexte('noir')
         ->ecritUnicode(" " . end(explode('\\', $this::class)))
@@ -83,6 +86,16 @@ class DemoActionCodeController extends \MiniPaviFwk\controllers\VideotexControll
     public function choix8Envoi(): ?\MiniPaviFwk\actions\Action
     {
         return new \MiniPaviFwk\actions\VideotexOutputAction($this, " \x1bETexte \x1bFvideotex               ");
+    }
+
+    public function choix9Envoi(): ?\MiniPaviFwk\actions\Action
+    {
+        // Switch to MacBidouille, displaying a message and waaiting 3 seconds.
+        return new \MiniPaviFwk\actions\SwitchServiceAction(
+            'macbidouille',
+            "\x0c\x07*** REDIRECTION VERS MACBIDOUILLE ***",
+            3
+        );
     }
 
     public function toucheSommaire(string $saisie): ?\MiniPaviFwk\actions\Action
