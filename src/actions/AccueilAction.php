@@ -18,6 +18,6 @@ class AccueilAction extends Action
         } else {
             $this->controller = new $defaultControllerName($context);
         }
-        $this->output = $this->controller->ecran();
+        $this->output = \MiniPavi\MiniPaviCli::clearScreen() . PRO_MIN . PRO_LOCALECHO_OFF . $this->controller->ecran();
     }
 }
