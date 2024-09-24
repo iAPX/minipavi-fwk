@@ -9,14 +9,14 @@ class DeconnnexionActionTest extends TestCase
     {
         $action = new DeconnexionAction();
         $this->assertInstanceOf(DeconnexionAction::class, $action->getController());
-        $this->assertEquals(\MiniPavi\MiniPaviCli::writeLine0('Déconnexion service.') . "\e9g", $action->getOutput());
+        $this->assertEquals(\MiniPavi\MiniPaviCli::writeLine0('Déconnexion service.'), $action->getOutput());
     }
 
     public function testCustomLigne00()
     {
         $action = new DeconnexionAction('Test ligne 00');
         $this->assertInstanceOf(DeconnexionAction::class, $action->getController());
-        $this->assertEquals(\MiniPavi\MiniPaviCli::writeLine0('Test ligne 00') . "\e9g", $action->getOutput());
+        $this->assertEquals(\MiniPavi\MiniPaviCli::writeLine0('Test ligne 00'), $action->getOutput());
     }
 
     public function testOverridenController()

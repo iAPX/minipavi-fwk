@@ -13,21 +13,21 @@ class QueryHandler
     public static function queryLogic(): array
     {
         if (\MiniPavi\MiniPaviCli::$fctn == 'FIN' || \MiniPavi\MiniPaviCli::$fctn == 'FCTN?') {
-            $action = self::queryDcx(\MiniPaviFwk\handlers\SessionHandler::class);
+            $action = static::queryDcx(\MiniPaviFwk\handlers\SessionHandler::class);
             exit;
         }
 
         if (\MiniPavi\MiniPaviCli::$fctn == 'CNX' || \MiniPavi\MiniPaviCli::$fctn == 'DIRECTCNX') {
-            $action = self::queryCnx();
+            $action = static::queryCnx();
         } else {
-            $action = self::queryInput();
+            $action = static::queryInput();
         }
 
-        $controller = self::getController($action);
-        $cmd = self::getCmd($controller);
-        $context = self::getControllerContext($controller);
-        $output = self::getActionOutput($action);
-        $nextPage = self::getNextPageUrl();
+        $controller = static::getController($action);
+        $cmd = static::getCmd($controller);
+        $context = static::getControllerContext($controller);
+        $output = static::getActionOutput($action);
+        $nextPage = static::getNextPageUrl();
 
         return [$action, $controller, $cmd, $context, $output, $nextPage];
     }
@@ -53,17 +53,17 @@ class QueryHandler
     {
         DEBUG && trigger_error("fctn : " . \MiniPavi\MiniPaviCli::$fctn . " - " . \MiniPavi\MiniPaviCli::$content[0]);
 
-        $context = self::getSessionContext();
+        $context = static::getSessionContext();
 
-        $controller = self::getNewController($context);
+        $controller = static::getNewController($context);
 
-        list($touche, $message) = self::getToucheAndMessage();
+        list($touche, $message) = static::getToucheAndMessage();
 
         if (count($message) > 1) {
             // We detect multiline saisie usingg a side-effect: minipavi always send one entry per line
-            return self::getControllerMessageAction($controller, $message, $touche);
+            return static::getControllerMessageAction($controller, $message, $touche);
         }
-        return self::getControllerSaisieAction($controller, $message[0], $touche);
+        return static::getControllerSaisieAction($controller, $message[0], $touche);
     }
 
     protected static function getSessionContext(): array

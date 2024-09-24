@@ -48,7 +48,7 @@ class ZoneSaisieMessageCmdXml
             );
         }
 
-        trigger_error("XML <zonesaisie> or <zonemessage> not found");
+        DEBUG && trigger_error("XML <zonesaisie> or <zonemessage> not found");
         return null;
     }
 }

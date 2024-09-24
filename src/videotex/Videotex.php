@@ -225,6 +225,12 @@ class Videotex
         return $this;
     }
 
+    public function ecritUnicodeLigne00(string $unicodeTexte): \MiniPaviFwk\videotex\Videotex
+    {
+        $this->output .= \MiniPavi\MiniPaviCli::writeLine0(\MiniPavi\MiniPaviCli::toG2($unicodeTexte));
+        return $this;
+    }
+
     public function deconnexionModem(): \MiniPaviFwk\videotex\Videotex
     {
         // The weel known ESc 9 g that aask the terminal to hang up!

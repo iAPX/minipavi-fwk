@@ -11,14 +11,14 @@ class SessionHandler
     public static function startSession(): void
     {
         DEBUG && trigger_error("Session - Start Session");
-        session_id(self::getSessionId());
+        session_id(static::getSessionId());
         session_start();
     }
 
     public static function destroySession(): void
     {
         DEBUG && trigger_error("Session - Destroy Session");
-        session_id(self::getSessionId());
+        session_id(static::getSessionId());
         session_destroy();
     }
 

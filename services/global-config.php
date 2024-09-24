@@ -14,4 +14,4 @@ const DEBUG = false;
 const DEFAULT_SERVICE = 'demo';
 
 // Set the allowed services
-const ALLOWED_SERVICES = ['demo', 'macbidouille'];
+const ALLOWED_SERVICES = ['demo', 'demochat', 'macbidouille'];

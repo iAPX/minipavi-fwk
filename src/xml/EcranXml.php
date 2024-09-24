@@ -22,8 +22,8 @@ class EcranXml
             DEBUG && trigger_error("element attribute: " . print_r($attributes, true));
 
             $private_function_name = "element" . \MiniPaviFwk\strings\mb_ucfirst($name);
-            if (method_exists(self::class, $private_function_name)) {
-                self::$private_function_name($videotex, ...$attributes);
+            if (method_exists(static::class, $private_function_name)) {
+                static::$private_function_name($videotex, ...$attributes);
             } else {
                 DEBUG && trigger_error("Unhandled element: " . $name);
                 $vdt = "Unhandled element: " . $name;

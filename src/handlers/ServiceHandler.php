@@ -12,7 +12,7 @@ class ServiceHandler
     public static function startService(): void
     {
         // Get the service-config and set constants for autoloader and code
-        $service_name = self::getService();
+        $service_name = static::getService();
         trigger_error("Service : " . $service_name);
         define('SERVICE_NAME', $service_name);
         define('SERVICE_DIR', "services/" . mb_strtolower(\SERVICE_NAME) . "/");
@@ -32,7 +32,9 @@ class ServiceHandler
                 $service_name = $service_parameter;
             }
             $_SESSION['service'] = $service_name;
+            trigger_error("Service trouvé : " . $_SESSION['service']);
         } else {
+            trigger_error("Service en session : " . $_SESSION['service']);
             $service_name = $_SESSION['service'];
         }
         return $service_name;
@@ -40,9 +42,10 @@ class ServiceHandler
 
     public static function getQueryHandler(): string
     {
-        trigger_error("Service Query hadnler file : " . \SERVICE_DIR . "QueryHandler.php");
+        trigger_error("Service Query handler file : " . \SERVICE_DIR . "QueryHandler.php");
         trigger_error("Service query handler class : " . \service\QueryHandler::class);
         if (file_exists(\SERVICE_DIR . "QueryHandler.php")) {
+            trigger_error("Service Query handler overriden");
             return \service\QueryHandler::class;
         }
         return \MiniPaviFwk\handlers\QueryHandler::class;
