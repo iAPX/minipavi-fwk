@@ -17,11 +17,12 @@ try {
     $queryHandler = \MiniPaviFwk\handlers\ServiceHandler::getQueryHandler();
 
     // Execute the query
-    list($action, $controller, $cmd, $context, $output, $nextPage) = $queryHandler::queryLogic();
+    // Many informations returned to enable wrapping by the optional service Query Handler
+    list($action, $controller, $cmd, $context, $output, $nextPage, $directCall) = $queryHandler::queryLogic();
 
     // Ends saving session and returning command
     \MiniPaviFwk\handlers\SessionHandler::setContext($context);
-    \MiniPavi\MiniPaviCli::send($output, $nextPage, "", true, $cmd, false);
+    \MiniPavi\MiniPaviCli::send($output, $nextPage, "", true, $cmd, $directCall);
 } catch (Exception $e) {
     throw new Exception('Erreur MiniPavi ' . $e->getMessage());
 }

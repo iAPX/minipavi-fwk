@@ -12,13 +12,20 @@ class QueryHandler
 {
     public static function queryLogic(): array
     {
+        // @TODO reorganize, including commands returned (see index.php)toto
         if (\MiniPavi\MiniPaviCli::$fctn == 'FIN' || \MiniPavi\MiniPaviCli::$fctn == 'FCTN?') {
-            $action = static::queryDcx(\MiniPaviFwk\handlers\SessionHandler::class);
+            static::queryDcx(\MiniPaviFwk\handlers\SessionHandler::class);
             exit;
         }
 
         if (\MiniPavi\MiniPaviCli::$fctn == 'CNX' || \MiniPavi\MiniPaviCli::$fctn == 'DIRECTCNX') {
             $action = static::queryCnx();
+        } elseif (\MiniPavi\MiniPaviCli::$fctn == 'DIRECT') {
+            trigger_error("QueryLogic : DIRECT !!!");
+            $cmd = static::queryDirect();
+            $nextPage = static::getNextPageUrl();
+            \MiniPavi\MiniPaviCli::send("", $nextPage, "", true, $cmd, false);
+            exit;
         } else {
             $action = static::queryInput();
         }
@@ -28,8 +35,9 @@ class QueryHandler
         $context = static::getControllerContext($controller);
         $output = static::getActionOutput($action);
         $nextPage = static::getNextPageUrl();
+        $directCall = static::getControllerDirectCall($controller);
 
-        return [$action, $controller, $cmd, $context, $output, $nextPage];
+        return [$action, $controller, $cmd, $context, $output, $nextPage, $directCall];
     }
 
     public static function queryCnx(): \MiniPaviFwk\actions\Action
@@ -41,17 +49,24 @@ class QueryHandler
         return new \MiniPaviFwk\actions\AccueilAction(DEFAULT_CONTROLLER, DEFAULT_XML_FILE, []);
     }
 
-    public static function queryDcx(string $sessionHandlerClassName): \MiniPaviFwk\actions\Action
+    public static function queryDcx(string $sessionHandlerClassName): void
     {
         trigger_error("fctn : DCX");
         $sessionHandlerClassName::destroySession();
+    }
+
+    public static function queryDirect(): void
+    {
+        // Meant to be overriden when needed!
+        trigger_error("fctn : DIRECT - Unsupported by default QueryHandler");
         // Nothing to answer, no further action to take.
         exit(0);
     }
 
     public static function queryInput(): \MiniPaviFwk\actions\Action
     {
-        DEBUG && trigger_error("fctn : " . \MiniPavi\MiniPaviCli::$fctn . " - " . \MiniPavi\MiniPaviCli::$content[0]);
+        trigger_error("fctn : " . \MiniPavi\MiniPaviCli::$fctn . " - " . \MiniPavi\MiniPaviCli::$content[0]);
+        trigger_error(print_r(\MiniPavi\MiniPaviCli::$content, true));
 
         $context = static::getSessionContext();
 
@@ -117,6 +132,11 @@ class QueryHandler
     {
         // Here the context, as modified by the new Controller
         return $controller->getContext();
+    }
+
+    public static function getControllerDirectCall(\MiniPaviFwk\controllers\VideotexController $controller): string
+    {
+        return $controller->getDirectCall();
     }
 
     public static function getActionOutput(\MiniPaviFwk\actions\Action $action): string

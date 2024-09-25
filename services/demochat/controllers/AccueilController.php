@@ -8,6 +8,14 @@ namespace service\controllers;
 
 class AccueilController extends \MiniPaviFwk\controllers\VideotexController
 {
+    private \service\helpers\ChatHelper $chatHelper;
+
+    public function __construct(array $context, array $params = [])
+    {
+        parent::__construct($context, $params);
+        $this->chatHelper = new \service\helpers\ChatHelper();
+    }
+
     public function ecran(): string
     {
         $videotex = new \MiniPaviFwk\videotex\Videotex();
@@ -29,6 +37,17 @@ class AccueilController extends \MiniPaviFwk\controllers\VideotexController
         return \MiniPaviFwk\cmd\ZoneSaisieCmd::createMiniPaviCmd($this->validation(), 24, 18, 16, true, '.');
     }
 
+    public function getDirectCall(): string
+    {
+        if (isset($_SESSION['DIRECTCALL'])) {
+            $directCall = $_SESSION['DIRECTCALL'];
+            unset($_SESSION['DIRECTCALL']);
+            return $directCall;
+        }
+
+        return "no";
+    }
+
     public function toucheEnvoi(string $saisie): ?\MiniPaviFwk\actions\Action
     {
         $chatHelper = new \service\helpers\ChatHelper();
@@ -38,6 +57,20 @@ class AccueilController extends \MiniPaviFwk\controllers\VideotexController
         }
 
         $chatHelper->addPseudonyme($saisie);
+
+        // Inform all connectes
+        $connectes = $this->chatHelper->getConnectes();
+        $currentConnecte = $this->chatHelper->getCurrentConnecte();
+        $uniqueIds = [];
+        $messages = [];
+        foreach ($connectes as $connecte) {
+            $uniqueIds[] = $connecte['uniqueId'];
+            $messages[] = \MiniPavi\MiniPaviCli::toG2($currentConnecte['pseudonyme'] . " arrive sur le chat.");
+        }
+
+        $_SESSION['DIRECTCALL'] = 'yes';
+        $_SESSION['DIRECT_QUERY_IDS'] = $uniqueIds;
+        $_SESSION['DIRECT_QUERY_MSG'] = $messages;
 
         return new \MiniPaviFwk\actions\ControllerAction(\service\controllers\ListeController::class, $this->context);
     }

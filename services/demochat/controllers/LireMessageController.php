@@ -40,7 +40,7 @@ class LireMessageController extends \MiniPaviFwk\controllers\VideotexController
         }
 
         // Ancien message
-        $videotex->position(4, 1)->inversionDebut()->ecritUnicode("votre ancien messsage : ");
+        $videotex->position(4, 1)->inversionDebut()->ecritUnicode("votre ancien message : ");
         for ($i = 0; $i < 3; $i++) {
             $videotex->position(5 + $i, 1)->ecritUnicode($this->msg['oldMessage'][$i]);
         }
@@ -88,6 +88,17 @@ class LireMessageController extends \MiniPaviFwk\controllers\VideotexController
         return \MiniPaviFwk\cmd\ZoneMessageCmd::createMiniPaviCmd($this->validation(), 17, 4, true, '.', '-');
     }
 
+    public function getDirectCall(): string
+    {
+        if (isset($_SESSION['DIRECTCALL'])) {
+            $directCall = $_SESSION['DIRECTCALL'];
+            unset($_SESSION['DIRECTCALL']);
+            return $directCall;
+        }
+
+        return "no";
+    }
+
     public function messageToucheEnvoi(array $message): ?\MiniPaviFwk\actions\Action
     {
         if (empty(implode('', $message))) {
@@ -100,6 +111,12 @@ class LireMessageController extends \MiniPaviFwk\controllers\VideotexController
             // Delete message
             $this->chatHelper->deleteMessage($this->msg);
         }
+
+        // Ligne 00 pour le destinataire
+        $_SESSION['DIRECTCALL'] = 'yes';
+        $_SESSION['DIRECT_QUERY_IDS'] = [$this->context['destUniqueId']];
+        $connecte = $this->chatHelper->getCurrentConnecte();
+        $_SESSION['DIRECT_QUERY_MSG'] = [\MiniPavi\MiniPaviCli::toG2("Message de " . $connecte['pseudonyme'])];
 
         // Send to Liste or LireMessage depending on existing incoming message
         if ($this->chatHelper->getNbMessage() > 0) {

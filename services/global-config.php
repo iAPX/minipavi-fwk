@@ -16,7 +16,7 @@ const DEBUG = false;
 
 // Set the default service
 // Included services : demo, macbidouille
-const DEFAULT_SERVICE = 'demo';
+const DEFAULT_SERVICE = 'demochat';
 
 // Set the allowed services
 const ALLOWED_SERVICES = ['demo', 'demochat', 'macbidouille'];

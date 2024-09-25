@@ -76,11 +76,22 @@ class ListeController extends \MiniPaviFwk\controllers\VideotexController
         return \MiniPaviFwk\cmd\ZoneSaisieCmd::createMiniPaviCmd(
             $this->validation(),
             24,
-            36 - $humeurMaxLength,
+            35 - $humeurMaxLength,
             $humeurMaxLength,
             true,
             '.'
         );
+    }
+
+    public function getDirectCall(): string
+    {
+        if (isset($_SESSION['DIRECTCALL'])) {
+            $directCall = $_SESSION['DIRECTCALL'];
+            unset($_SESSION['DIRECTCALL']);
+            return $directCall;
+        }
+
+        return "no";
     }
 
     public function choixETOILEEnvoi(): ?\MiniPaviFwk\actions\Action
@@ -122,6 +133,22 @@ class ListeController extends \MiniPaviFwk\controllers\VideotexController
         }
 
         $this->chatHelper->setHumeur($saisie);
+
+        // Inform the other connectes
+        $connectes = $this->chatHelper->getConnectes();
+        $connecte = $this->chatHelper->getCurrentConnecte();
+        $uniqueIds = [];
+        $messages = [];
+        foreach ($connectes as $connecte) {
+            if ($connecte['uniqueId'] !== \MiniPavi\MiniPaviCli::$uniqueId) {
+                $uniqueIds[] = $connecte['uniqueId'];
+                $messages[] = \MiniPavi\MiniPaviCli::toG2($connecte['pseudonyme'] . " a changé d'humeur.");
+            }
+        }
+
+        $_SESSION['DIRECTCALL'] = 'yes';
+        $_SESSION['DIRECT_QUERY_IDS'] = $uniqueIds;
+        $_SESSION['DIRECT_QUERY_MSG'] = $messages;
 
         return new \MiniPaviFwk\actions\ControllerAction(
             \service\controllers\ListeController::class,
