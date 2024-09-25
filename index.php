@@ -10,13 +10,6 @@ require_once "src/service_autoloader.php";
 require_once "vendor/autoload.php";
 require_once "src/strings/mb_ucfirst.php";
 
-// Disable session cookies, session is identified through minipavi's uniqueId
-ini_set('session.use_cookies', '0');
-ini_set('session.use_only_cookies', '0');
-
-error_reporting(E_USER_NOTICE | E_USER_WARNING);
-ini_set('display_errors', 0);
-
 try {
     MiniPavi\MiniPaviCli::start();
     \MiniPaviFwk\handlers\SessionHandler::startSession();

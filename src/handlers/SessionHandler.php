@@ -10,6 +10,10 @@ class SessionHandler
 {
     public static function startSession(): void
     {
+        // Disable session cookies, session is identified through minipavi's uniqueId
+        ini_set('session.use_cookies', '0');
+        ini_set('session.use_only_cookies', '0');
+
         DEBUG && trigger_error("Session - Start Session");
         session_id(static::getSessionId());
         session_start();

@@ -28,7 +28,7 @@ php -S localhost:8000
 
 Local phpUnit tests:
 ```
-./vendor/bin/phpunit
+./vendor/bin/phpunit tests
 ```
 
 Note that you should run it from a publicly exposed port as minipavi will callback it through Internet.

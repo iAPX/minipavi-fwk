@@ -13,7 +13,7 @@ class ServiceHandler
     {
         // Get the service-config and set constants for autoloader and code
         $service_name = static::getService();
-        trigger_error("Service : " . $service_name);
+        DEBUG && trigger_error("Service : " . $service_name);
         define('SERVICE_NAME', $service_name);
         define('SERVICE_DIR', "services/" . mb_strtolower(\SERVICE_NAME) . "/");
         require_once \SERVICE_DIR . "service-config.php";
@@ -32,9 +32,9 @@ class ServiceHandler
                 $service_name = $service_parameter;
             }
             $_SESSION['service'] = $service_name;
-            trigger_error("Service trouvé : " . $_SESSION['service']);
+            DEBUG && trigger_error("Service trouvé : " . $_SESSION['service']);
         } else {
-            trigger_error("Service en session : " . $_SESSION['service']);
+            DEBUG && trigger_error("Service en session : " . $_SESSION['service']);
             $service_name = $_SESSION['service'];
         }
         return $service_name;
@@ -42,10 +42,10 @@ class ServiceHandler
 
     public static function getQueryHandler(): string
     {
-        trigger_error("Service Query handler file : " . \SERVICE_DIR . "QueryHandler.php");
-        trigger_error("Service query handler class : " . \service\QueryHandler::class);
+        DEBUG && trigger_error("Service Query handler file : " . \SERVICE_DIR . "QueryHandler.php");
+        DEBUG && trigger_error("Service query handler class : " . \service\QueryHandler::class);
         if (file_exists(\SERVICE_DIR . "QueryHandler.php")) {
-            trigger_error("Service Query handler overriden");
+            DEBUG && trigger_error("Service Query handler overriden");
             return \service\QueryHandler::class;
         }
         return \MiniPaviFwk\handlers\QueryHandler::class;

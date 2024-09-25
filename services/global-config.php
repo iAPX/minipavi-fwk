@@ -6,6 +6,11 @@
  * Each service configuration is in services/{serviceName}/service-config.php
  */
 
+// Global error reporting config
+// You might change it the way you want
+error_reporting(E_USER_NOTICE | E_USER_WARNING);
+ini_set('display_errors', 0);
+
 // Set to true to enable Debug informations on-screen.
 const DEBUG = false;
 

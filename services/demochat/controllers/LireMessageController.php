@@ -53,10 +53,10 @@ class LireMessageController extends \MiniPaviFwk\controllers\VideotexController
 
         if (empty($this->dest)) {
             $videotex
-            ->position(24, 2)
+            ->position(24, 7)
             ->ecritUnicode("Destinataire déconnecté : ")
             ->inversionDebut()
-            ->ecritUnicode(" ANNULATION ");
+            ->ecritUnicode(" SUITE ");
             return $videotex->getOutput();
         }
 
@@ -66,12 +66,12 @@ class LireMessageController extends \MiniPaviFwk\controllers\VideotexController
         // Zone de saisie :
         $videotex->position(16, 1)->inversionDebut()->ecritUnicode("Votre réponse + [ENVOI]");
 
-        $videotex->position(23, 10)->ecritUnicode("Ne pas répondre : * [SOMMAIRE]");
+        $videotex->position(23, 11)->ecritUnicode("Ne pas répondre : * [SOMMAIRE]");
 
         $videotex
         ->position(24, 1)->inversionDebut()->ecritUnicode("SOMMAIRE")
-        ->position(24, 18)->ecritUnicode("Votre réponse + ")
-        ->inversionDebut()->ecritUnicode(" ENVOI ");
+        ->position(24, 20)->ecritUnicode("Votre réponse + ")
+        ->inversionDebut()->ecritUnicode("ENVOI");
 
         return $videotex->getOutput();
     }
@@ -101,16 +101,27 @@ class LireMessageController extends \MiniPaviFwk\controllers\VideotexController
             $this->chatHelper->deleteMessage($this->msg);
         }
 
+        // Send to Liste or LireMessage depending on existing incoming message
+        if ($this->chatHelper->getNbMessage() > 0) {
+            return new \MiniPaviFwk\actions\ControllerAction(
+                \service\controllers\LireMessageController::class,
+                $this->context
+            );
+        }
         return new \MiniPaviFwk\actions\ControllerAction(\service\controllers\ListeController::class, $this->context);
     }
-
 
     public function messageToucheSommaire(array $message): ?\MiniPaviFwk\actions\Action
     {
         if (implode('', $message) === '*' && !empty($this->msg)) {
             $this->chatHelper->deleteMessage($this->msg);
+            if ($this->chatHelper->getNbMessage() > 0) {
+                return new \MiniPaviFwk\actions\ControllerAction(
+                    \service\controllers\LireMessageController::class,
+                    $this->context
+                );
+            }
         }
-
         return new \MiniPaviFwk\actions\ControllerAction(\service\controllers\ListeController::class, $this->context);
     }
 
@@ -119,7 +130,7 @@ class LireMessageController extends \MiniPaviFwk\controllers\VideotexController
         return new \MiniPaviFwk\actions\ControllerAction(\service\controllers\ListeController::class, $this->context);
     }
 
-    public function toucheAnnulation(string $saisie): ?\MiniPaviFwk\actions\Action
+    public function toucheSuite(string $saisie): ?\MiniPaviFwk\actions\Action
     {
         // Delete the messsage if exists and quit
         if (!empty($this->msg)) {

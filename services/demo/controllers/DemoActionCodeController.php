@@ -93,7 +93,7 @@ class DemoActionCodeController extends \MiniPaviFwk\controllers\VideotexControll
         // Switch to MacBidouille, displaying a message and waaiting 3 seconds.
         return new \MiniPaviFwk\actions\SwitchServiceAction(
             'macbidouille',
-            "\x0c\x07*** REDIRECTION VERS MACBIDOUILLE ***",
+            "\x0c\x07" . \MiniPavi\MiniPaviCli::toG2("*** REDIRECTION VERS MACBIDOUILLE ***"),
             3
         );
     }

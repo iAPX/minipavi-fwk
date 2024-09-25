@@ -26,7 +26,7 @@ class ArticlesController extends \MiniPaviFwk\controllers\XmlController
         // Switch to demo, displaying a message and waaiting 3 seconds.
         return new \MiniPaviFwk\actions\SwitchServiceAction(
             'demo',
-            "\x0c\x07*** REDIRECTION VERS LE SERVICE DE DEMO ***",
+            "\x0c\x07" . \MiniPavi\MiniPaviCli::toG2("*** REDIRECTION VERS LE SERVICE DE DEMO ***"),
             3
         );
     }

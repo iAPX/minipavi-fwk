@@ -31,9 +31,9 @@ class ChatHelper
 
     public function checkPseudonyme(string $pseudonyme): array
     {
-        // AZ az 09 - space
-        if (mb_strlen($pseudonyme) < 1 || mb_strlen($pseudonyme) > 8) {
-            return [false, "Pseudonyme invalide (1 à 8 caractères)"];
+        // @TODO AZ az 09 - space
+        if (mb_strlen($pseudonyme) < 1 || mb_strlen($pseudonyme) > 16) {
+            return [false, "Pseudonyme invalide (1 à 16 caractères)"];
         }
 
         $connectes = $this->getConnectes();
@@ -60,6 +60,28 @@ class ChatHelper
         ];
         $filename = $this->getConnectesFilename();
         file_put_contents($filename, json_encode($connectes));
+    }
+
+    public function checkHumeur(string $humeur): array
+    {
+        $connecte = $this->getCurrentConnecte();
+        $humeurMaxLength = 35 - mb_strlen($connecte['pseudonyme']);
+        if (mb_strlen($humeur) < 1 || mb_strlen($humeur) > $humeurMaxLength) {
+            return [false, "Humeur invalide (1 à $humeurMaxLength caractères)"];
+        }
+        return [true, null];
+    }
+
+    public function setHumeur(string $humeur): void
+    {
+        $connectes = $this->getConnectes();
+        foreach ($connectes as $key => $connecte) {
+            if ($connecte['uniqueId'] == \MiniPavi\MiniPaviCli::$uniqueId) {
+                $connectes[$key]['humeur'] = $humeur;
+                break;
+            }
+        }
+        $this->setConnectes($connectes);
     }
 
     public function deconnecteCurrentUser(): void
@@ -105,6 +127,11 @@ class ChatHelper
             }
         }
         return [];
+    }
+
+    public function getCurrentConnecte(): array
+    {
+        return $this->getConnecteById(\MiniPavi\MiniPaviCli::$uniqueId);
     }
 
     protected function setConnectes(array $connectes): void

@@ -15,7 +15,6 @@ class ListeController extends \MiniPaviFwk\controllers\VideotexController
         parent::__construct($context, $params);
         $this->chatHelper = new \service\helpers\ChatHelper();
         $this->chatHelper->watchdog();
-        $this->chatHelper->cleanMessages();
     }
 
     public function ecran(): string
@@ -52,14 +51,17 @@ class ListeController extends \MiniPaviFwk\controllers\VideotexController
             }
 
             $videotex
-            ->position(3 + $num, 1)->ecritUniCode(substr('  ' . $num, -2) . ' - ')
+            ->position(3 + $num, 1)->ecritUniCode(substr('  ' . $num, -2) . '-')
             ->couleurTexte($pseudonymeCouleur)->ecritUnicode($connecte['pseudonyme'])
-            ->couleurTexte($humeurCouleur)->ecritUnicode(' ' . mb_substr($connecte['humeur'], 0, 24));
+            ->couleurTexte($humeurCouleur)
+            ->ecritUnicode(' ' . mb_substr($connecte['humeur'], 0, 35 - mb_strlen($connecte['pseudonyme'])));
             $num++;
         }
 
-        $videotex->position(23, 14)->ecritUniCode("Lire un message : * [ENVOI]")
-        ->position(24, 8)->ecritUniCode("Écrire un message : No .. [ENVOI]");
+        $videotex
+        ->position(22, 2)->ecritUnicode("Votre humeur + [SUITE]")
+        ->position(23, 2)->ecritUniCode("Lire: * [ENVOI], Écrire: No [ENVOI]")
+        ->position(24, 36)->inversionDebut()->ecritUniCode("ENVOI");
 
         $vdt = $videotex->getOutput();
         return $vdt;
@@ -67,7 +69,18 @@ class ListeController extends \MiniPaviFwk\controllers\VideotexController
 
     public function getCmd(): array
     {
-        return \MiniPaviFwk\cmd\ZoneSaisieCmd::createMiniPaviCmd($this->validation(), 24, 31, 2, true);
+        // Humeur length limited by pseudonyme!
+        $connecte = $this->chatHelper->getCurrentConnecte();
+        $humeurMaxLength = 35 - mb_strlen($connecte['pseudonyme']);
+
+        return \MiniPaviFwk\cmd\ZoneSaisieCmd::createMiniPaviCmd(
+            $this->validation(),
+            24,
+            36 - $humeurMaxLength,
+            $humeurMaxLength,
+            true,
+            '.'
+        );
     }
 
     public function choixETOILEEnvoi(): ?\MiniPaviFwk\actions\Action
@@ -82,7 +95,7 @@ class ListeController extends \MiniPaviFwk\controllers\VideotexController
         );
     }
 
-    public function toucheEnvoi($saisie): ?\MiniPaviFwk\actions\Action
+    public function toucheEnvoi(string $saisie): ?\MiniPaviFwk\actions\Action
     {
         $num = (int) $saisie;
         if ($num < 1 || $num > count($this->context['connectes'])) {
@@ -97,6 +110,21 @@ class ListeController extends \MiniPaviFwk\controllers\VideotexController
         $this->context['destUniqueId'] = $this->context['connectes'][$num - 1]['uniqueId'];
         return new \MiniPaviFwk\actions\ControllerAction(
             \service\controllers\EcrireMessageController::class,
+            $this->context
+        );
+    }
+
+    public function toucheSuite(string $saisie): ?\MiniPaviFwk\actions\Action
+    {
+        list($humeurOk, $humeurMessage) = $this->chatHelper->checkHumeur($saisie);
+        if (!$humeurOk) {
+            return new \MiniPaviFwk\actions\Ligne00Action($this, $humeurMessage);
+        }
+
+        $this->chatHelper->setHumeur($saisie);
+
+        return new \MiniPaviFwk\actions\ControllerAction(
+            \service\controllers\ListeController::class,
             $this->context
         );
     }

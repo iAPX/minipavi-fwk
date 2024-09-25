@@ -43,8 +43,8 @@ class EcrireMessageController extends \MiniPaviFwk\controllers\VideotexControlle
 
         $videotex
         ->position(24, 1)->inversionDebut()->ecritUnicode("SOMMAIRE")
-        ->position(24, 20)->ecritUnicode("Message + ")
-        ->inversionDebut()->ecritUnicode(" ENVOI ");
+        ->position(24, 26)->ecritUnicode("Message + ")
+        ->inversionDebut()->ecritUnicode("ENVOI");
 
         return $videotex->getOutput();
     }
@@ -66,6 +66,14 @@ class EcrireMessageController extends \MiniPaviFwk\controllers\VideotexControlle
 
         // Envoi du message
         $this->chatHelper->sendMessage($this->context['destUniqueId'], $message);
+
+        // Send to Liste or LireMessage depending on existing incoming message
+        if ($this->chatHelper->getNbMessage() > 0) {
+            return new \MiniPaviFwk\actions\ControllerAction(
+                \service\controllers\LireMessageController::class,
+                $this->context
+            );
+        }
         return new \MiniPaviFwk\actions\ControllerAction(\service\controllers\ListeController::class, $this->context);
     }
 
