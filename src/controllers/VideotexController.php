@@ -26,12 +26,6 @@ class VideotexController
         return $this->context;
     }
 
-    public function getDirectCall(): string
-    {
-        // Overriden in sub-classes when needed
-        return "no";
-    }
-
     public function ecran(): string
     {
         // Overriden in sub-classes

@@ -11,7 +11,7 @@ class PushServiceMsgCmd extends Cmd
     public static function createMiniPaviCmd(array $uniqueIds, array $messages): array
     {
         $cmd = \MiniPavi\MiniPaviCli::createPushServiceMsgCmd($messages, $uniqueIds);
-        trigger_error("createMiniPaviCmd : " . print_r($cmd, true));
+        DEBUG && trigger_error("PushServiceMsgCmd::createMiniPaviCmd : " . print_r($cmd, true));
         return $cmd;
     }
 }

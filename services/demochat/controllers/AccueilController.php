@@ -37,17 +37,6 @@ class AccueilController extends \MiniPaviFwk\controllers\VideotexController
         return \MiniPaviFwk\cmd\ZoneSaisieCmd::createMiniPaviCmd($this->validation(), 24, 18, 16, true, '.');
     }
 
-    public function getDirectCall(): string
-    {
-        if (isset($_SESSION['DIRECTCALL'])) {
-            $directCall = $_SESSION['DIRECTCALL'];
-            unset($_SESSION['DIRECTCALL']);
-            return $directCall;
-        }
-
-        return "no";
-    }
-
     public function toucheEnvoi(string $saisie): ?\MiniPaviFwk\actions\Action
     {
         $chatHelper = new \service\helpers\ChatHelper();
@@ -64,14 +53,20 @@ class AccueilController extends \MiniPaviFwk\controllers\VideotexController
         $uniqueIds = [];
         $messages = [];
         foreach ($connectes as $connecte) {
-            $uniqueIds[] = $connecte['uniqueId'];
-            $messages[] = \MiniPavi\MiniPaviCli::toG2($currentConnecte['pseudonyme'] . " arrive sur le chat.");
+            if ($connecte['uniqueId'] !== \MiniPavi\MiniPaviCli::$uniqueId) {
+                $uniqueIds[] = $connecte['uniqueId'];
+                $messages[] = \MiniPavi\MiniPaviCli::toG2($currentConnecte['pseudonyme'] . " arrive sur le chat.");
+            }
+        }
+        if (count($uniqueIds) > 0) {
+            // No need if alone!
+            $_SESSION["DIRECTCALL_CMD"] = \MiniPaviFwk\cmd\PushServiceMsgCmd::createMiniPaviCmd($uniqueIds, $messages);
+            DEBUG && trigger_error(
+                "AccueilController::toucheEnvoi - DIRECTCALL_CMD : " . print_r($_SESSION["DIRECTCALL_CMD"], true)
+            );
         }
 
-        $_SESSION['DIRECTCALL'] = 'yes';
-        $_SESSION['DIRECT_QUERY_IDS'] = $uniqueIds;
-        $_SESSION['DIRECT_QUERY_MSG'] = $messages;
-
+        // This command will be executed after the DIRECTCALL_CMD!
         return new \MiniPaviFwk\actions\ControllerAction(\service\controllers\ListeController::class, $this->context);
     }
 }
