@@ -22,12 +22,7 @@ class QueryHandler
             exit;
         }
 
-        // DIRECTCNX, DIRECTCALLFAILED, DIRECTCALLENDED, BGCALL, BGCALL-SIMU
-        if (\MiniPavi\MiniPaviCli::$fctn == 'DIRECTCNX') {
-            static::queryDirectCnx();
-            exit;
-        }
-
+        // DIRECTCALLFAILED, DIRECTCALLENDED, BGCALL, BGCALL-SIMU
         if (\MiniPavi\MiniPaviCli::$fctn == 'DIRECTCALLFAILED') {
             static::queryDirectCallFailed();
             exit;
@@ -68,6 +63,35 @@ class QueryHandler
         return [$action, $controller, $cmd, $context, $output, $nextPage];
     }
 
+    public static function directCall(
+        \MiniPaviFwk\actions\Action $action,
+        \MiniPaviFwk\controllers\VideotexController $controller,
+        array $cmd,
+        array $context,
+        string $output,
+        string $nextPage
+    ): array {
+        if (!empty($_SESSION['DIRECTCALL_CMD'])) {
+            DEBUG && trigger_error("DIRECTCALL_CMD : " . print_r($_SESSION['DIRECTCALL_CMD'], true));
+            $_SESSION['DIRECTCALL_RELAY'] = [
+                'output' => $output,
+                'nextPage' => $nextPage,
+                'cmd' => $cmd,
+            ];
+            DEBUG && trigger_error("DIRECTCALL_CMD - Relay créé :" . print_r($_SESSION['DIRECTCALL_RELAY'], true));
+
+            $output = "";
+            $nextPage = "";
+            $cmd = $_SESSION['DIRECTCALL_CMD'];
+            unset($_SESSION['DIRECTCALL_CMD']);
+            $directCall = 'yes';
+        } else {
+            $directCall = false;
+        }
+
+        return [$action, $controller, $cmd, $context, $output, $nextPage, $directCall];
+    }
+
     protected static function queryCnx(): \MiniPaviFwk\actions\Action
     {
         trigger_error("fctn: CNX");
@@ -86,21 +110,14 @@ class QueryHandler
     protected static function queryDirect(): void
     {
         trigger_error("fctn : DIRECT");
+
         // Generic support for Direct calls
         if (!empty($_SESSION['DIRECTCALL_RELAY'])) {
             $relay = $_SESSION['DIRECTCALL_RELAY'];
             unset($_SESSION['DIRECTCALL_RELAY']);
-            trigger_error("fctn : DIRECT - Relay : " . print_r($relay, true));
+            DEBUG && trigger_error("fctn : DIRECT - Relay : " . print_r($relay, true));
             \MiniPavi\MiniPaviCli::send($relay['output'], $relay['nextPage'], "", true, $relay['cmd']);
         }
-        exit(0);
-    }
-
-    protected static function queryDirectCnx(): void
-    {
-        // Meant to be overriden when needed!
-        trigger_error("fctn : DIRECTCNX - Unsupported by default QueryHandler");
-        // Nothing to answer, no further action to take.
         exit(0);
     }
 
