@@ -29,7 +29,7 @@ class DemoxmlSommaireController extends \MiniPaviFwk\controllers\XmlController
         // Switch to demo, displaying a message and waiting 3 seconds.
         return new \MiniPaviFwk\actions\SwitchServiceAction(
             'demochat',
-            \MiniPavi\MiniPaviCli::toG2("*** REDIRECTION VERS LA DÉMO DE CHAT ***"),
+            chr(12) . \MiniPavi\MiniPaviCli::toG2("*** REDIRECTION VERS LA DÉMO DE CHAT ***"),
             3
         );
     }
@@ -39,7 +39,7 @@ class DemoxmlSommaireController extends \MiniPaviFwk\controllers\XmlController
         // Switch to demo, displaying a message and waaiting 3 seconds.
         return new \MiniPaviFwk\actions\SwitchServiceAction(
             'macbidouille',
-            "*** REDIRECTION VERS MACBIDOUILLE ***",
+            chr(12) . \MiniPavi\MiniPaviCli::toG2("*** REDIRECTION VERS MACBIDOUILLE ***"),
             3
         );
     }
