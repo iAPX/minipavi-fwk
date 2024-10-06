@@ -48,16 +48,11 @@ class AccueilController extends \MiniPaviFwk\controllers\VideotexController
         $chatHelper->addPseudonyme($saisie);
 
         // Inform all connectes
-        $connectes = $this->chatHelper->getConnectes();
         $currentConnecte = $this->chatHelper->getCurrentConnecte();
-        $uniqueIds = [];
-        $messages = [];
-        foreach ($connectes as $connecte) {
-            if ($connecte['uniqueId'] !== \MiniPavi\MiniPaviCli::$uniqueId) {
-                $uniqueIds[] = $connecte['uniqueId'];
-                $messages[] = \MiniPavi\MiniPaviCli::toG2($currentConnecte['pseudonyme'] . " arrive sur le chat.");
-            }
-        }
+        list($uniqueIds, $messages) = $chatHelper->createOtherUsersLigne00Msg(
+            $currentConnecte['pseudonyme'] . " arrive sur le chat."
+        );
+
         if (count($uniqueIds) > 0) {
             // No need if alone!
             $_SESSION["DIRECTCALL_CMD"] = \MiniPaviFwk\cmd\PushServiceMsgCmd::createMiniPaviCmd($uniqueIds, $messages);

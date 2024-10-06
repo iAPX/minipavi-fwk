@@ -29,6 +29,21 @@ class ChatHelper
         $this->cleanMessages();
     }
 
+    public function createOtherUsersLigne00Msg(string $message): array
+    {
+        $uniqueIds = [];
+        $messages = [];
+        $connectes = $this->getConnectes();
+        $g2_message = \MiniPavi\MiniPaviCli::toG2($message);
+        foreach ($connectes as $connecte) {
+            if ($connecte['uniqueId'] !== \MiniPavi\MiniPaviCli::$uniqueId) {
+                $uniqueIds[] = $connecte['uniqueId'];
+                $messages[] = $g2_message;
+            }
+        }
+        return [$uniqueIds, $messages];
+    }
+
     public function checkPseudonyme(string $pseudonyme): array
     {
         // @TODO AZ az 09 - space
@@ -41,7 +56,7 @@ class ChatHelper
             if ($connecte['uniqueId'] == \MiniPavi\MiniPaviCli::$uniqueId) {
                 return [false, 'Utilisateur déjà connecté?!?'];
             }
-            if (mb_strtolower($connecte['pseudonyme']) == mb_strtolower($pseudonyme)) {
+            if (trim(mb_strtolower($connecte['pseudonyme'])) == trim(mb_strtolower($pseudonyme))) {
                 return [false, 'Ce pseudonyme est déjà utilisé.'];
             }
         }
