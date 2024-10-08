@@ -10,4 +10,4 @@ $this->controller should be an instantiated controller implementing VideotexCont
 This controler will be reinstantiated on the next user input, to process it.
 
 $this->output should be not null, an empty string is acceptable, and is output directly to the user.
-You might use Videotex class to create it's content, or MiniPaviCcli directly.
+You might use Videotex class to create it's content, or MiniPaviCli directly.

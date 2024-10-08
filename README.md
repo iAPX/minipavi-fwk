@@ -52,3 +52,5 @@ services/{serviceName}/controllers: your videotex and xml controllers
 services/{serviceName}/actions : your actions if needed
 services/{serviceName}/helpers : your helpers
 services/{serviceName}/keywords : your keyword handlers
+
+See all the docs in ./docs directory
