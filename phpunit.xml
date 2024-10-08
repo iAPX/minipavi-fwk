@@ -4,7 +4,6 @@
     colors="true"
 >
     <php>
-        <const name="DEBUG" value="false"/>
         <const name="DEFAULT_XML_FILE" value="demo"/>
         <const name="SERVICE_DIR" value="services/demo/"/>
         <const name="XML_PAGES_URL" value=""/>

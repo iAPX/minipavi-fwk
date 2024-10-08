@@ -13,4 +13,3 @@ Modify the services/global-config.php :
 - Add your own service to the ALLOWED_SERVICES
 - Remove any useless services from ALLOWED_SERVICES
 - Set your own service as DEFAULT_SERVICE
-- Set DEBUG to true during dev, back to false when executing

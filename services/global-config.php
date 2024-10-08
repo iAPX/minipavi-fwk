@@ -11,9 +11,6 @@
 error_reporting(E_ERROR | E_USER_WARNING | E_PARSE);
 ini_set('display_errors', 0);
 
-// Set to true to enable Debug informations on-screen.
-const DEBUG = false;
-
 // Set the default service
 // Included services : demo, macbidouille
 const DEFAULT_SERVICE = 'demo';

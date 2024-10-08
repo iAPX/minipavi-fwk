@@ -6,7 +6,6 @@ Demo*Controllers.php : used by the demo.xml service
 I recommend you start by modifying Demo*Controller.php to try every feature, 
 before writing your own controllers.
 
-You might activate DEBUG=true in /services/global-config.php
 
 Also see /src/controllers/* and /src/controllers/README.md
 
