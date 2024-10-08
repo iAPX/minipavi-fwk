@@ -19,8 +19,12 @@ class DemoxmlSommaireController extends \MiniPaviFwk\controllers\XmlController
 
         ->position(20, 1)->inversionDebut()->ecritUnicode('9')->inversionFin()
         ->ecritUnicode(" Service MacBidouille")
-        ->getOutput();
 
+        // Displays Minitel type and DRCS mode support
+        ->position(21, 1)->ecritUnicode("Minitel type : " . \MiniPavi\MiniPaviCli::$versionMinitel)
+        ->ecritUnicode(" DRCS : " . ($_SESSION['is_drcs'] ? "oui" : "non"))
+
+        ->getOutput();
         return $vdt;
     }
 

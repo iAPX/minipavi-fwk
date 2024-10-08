@@ -12,9 +12,11 @@ class QueryHandler
 {
     public static function queryLogic(): array
     {
-        // @TODO reorganize, including commands returned (see index.php)
-        // @TODO introduce DIRECTCALL_CMD/RELAY here
-        // Maybe use indirection to static::queryHandlingXxxx() for each fctn except fctn keys?
+        // Handles Minitel Type
+        $dcrs_minitel_types_prefixes = ['Cu', 'Bu', 'Cw', 'Cv', 'Bv', 'Cz', 'Bz', 'Ay', 'Em'];
+        if (in_array(substr(\MiniPavi\MiniPaviCli::$versionMinitel, 0, 2), $dcrs_minitel_types_prefixes)) {
+            $_SESSION['is_drcs'] = true;
+        }
 
         DEBUG && trigger_error("QueryLogic fctn = " . \MiniPavi\MiniPaviCli::$fctn);
         if (\MiniPavi\MiniPaviCli::$fctn == 'FIN' || \MiniPavi\MiniPaviCli::$fctn == 'FCTN?') {

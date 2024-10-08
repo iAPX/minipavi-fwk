@@ -17,6 +17,11 @@ class SessionHandler
         DEBUG && trigger_error("Session - Start Session");
         session_id(static::getSessionId());
         session_start();
+
+        // Initalize Session missing or default data
+        if (!isset($_SESSION['is_drcs'])) {
+            $_SESSION['is_drcs'] = false;
+        }
     }
 
     public static function destroySession(): void
