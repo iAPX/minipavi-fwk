@@ -10,7 +10,7 @@ class VideotexOutputAction extends Action
 {
     public function __construct(\MiniPaviFwk\controllers\VideotexController $thisController, string $videotexOutput)
     {
-        DEBUG && trigger_error("Action: Sortie de chaine - " . strlen($videotexOutput) . " octets vidéotex.");
+        trigger_error("Action: Sortie de chaine - " . strlen($videotexOutput) . " octets vidéotex.", E_USER_NOTICE);
         $this->controller = $thisController;
         $this->output = $videotexOutput;
     }

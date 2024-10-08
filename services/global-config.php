@@ -7,8 +7,8 @@
  */
 
 // Global error reporting config
-// You might change it the way you want
-error_reporting(E_USER_NOTICE | E_USER_WARNING);
+// You might change it the way you want, you might also change it service by service
+error_reporting(E_ERROR | E_USER_WARNING | E_PARSE);
 ini_set('display_errors', 0);
 
 // Set to true to enable Debug informations on-screen.

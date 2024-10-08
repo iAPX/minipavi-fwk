@@ -17,15 +17,15 @@ class EcranXml
         foreach ($ecran->children() as $element) {
             // get element name and attributes
             $name = (string) $element->getName();
-            DEBUG && trigger_error("element name: " . print_r($name, true));
+            trigger_error("element name: " . print_r($name, true), E_USER_NOTICE);
             $attributes = $element->attributes();
-            DEBUG && trigger_error("element attribute: " . print_r($attributes, true));
+            trigger_error("element attribute: " . print_r($attributes, true), E_USER_NOTICE);
 
             $private_function_name = "element" . \MiniPaviFwk\strings\mb_ucfirst($name);
             if (method_exists(static::class, $private_function_name)) {
                 static::$private_function_name($videotex, ...$attributes);
             } else {
-                DEBUG && trigger_error("Unhandled element: " . $name);
+                trigger_error("Unhandled element: " . $name, E_USER_WARNING);
                 $vdt = "Unhandled element: " . $name;
             }
         }
@@ -37,10 +37,10 @@ class EcranXml
     private static function elementAffiche(\MiniPaviFwk\Videotex\Videotex $videotex, string $url): void
     {
         // Local file if it exists
-        DEBUG && trigger_error("page url _element_affiche: " . $url);
+        trigger_error("page url _element_affiche: " . $url, E_USER_NOTICE);
         if (! empty(XML_PAGES_URL) && substr($url, 0, strlen(XML_PAGES_URL)) === XML_PAGES_URL) {
             $filename = SERVICE_DIR . "vdt/" . mb_substr($url, strlen(XML_PAGES_URL));
-            DEBUG && trigger_error("page filename from url: " . $filename);
+            trigger_error("page filename from url: " . $filename, E_USER_NOTICE);
             if (file_exists($filename)) {
                 $videotex->ecritVideotex(file_get_contents($filename));
                 return;
@@ -49,7 +49,7 @@ class EcranXml
 
         if (mb_substr($url, 0, 4) !== "http") {
             $filename = SERVICE_DIR . "vdt/" . $url;
-            DEBUG && trigger_error("page filename from path: " . $filename);
+            trigger_error("page filename from path: " . $filename, E_USER_NOTICE);
             if (file_exists($filename)) {
                 $videotex->ecritVideotex(file_get_contents($filename));
                 return;
@@ -58,7 +58,7 @@ class EcranXml
 
         // Fallabck using curl
         // @TODO adds error management
-        DEBUG && trigger_error("Page downloaded from url: " . $url);
+        trigger_error("Page downloaded from url: " . $url, E_USER_NOTICE);
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $videotex->ecritVideotex(curl_exec($ch));

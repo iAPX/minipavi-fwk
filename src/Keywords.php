@@ -15,13 +15,13 @@ class Keywords
      */
     public function validationKeys(): array
     {
-        DEBUG && trigger_error("\MiniPaviFwk\Keywords::validationKeys()");
+        trigger_error("\MiniPaviFwk\Keywords::validationKeys()", E_USER_NOTICE);
         return [];
     }
 
     public function choix(string $touche, string $saisie): ?\MiniPaviFwk\actions\Action
     {
-        DEBUG && trigger_error("\MiniPaviFwk\Keywords::choix(\"$touche\", \"$saisie\")");
+        trigger_error("\MiniPaviFwk\Keywords::choix(\"$touche\", \"$saisie\")", E_USER_NOTICE);
         return null;
     }
 }

@@ -13,7 +13,7 @@ class RedirectAction extends Action
 {
     public function __construct(string $newUrl, string $output = "", int $waitSeconds = 0)
     {
-        DEBUG && trigger_error("Action: Redirect - " . $newUrl);
+        trigger_error("Action: Redirect - " . $newUrl, E_USER_NOTICE);
         $this->controller = null;
         $this->output = "";
 

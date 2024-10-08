@@ -15,10 +15,10 @@ class ValidationXml
     public static function validationKeys(\SimpleXMLElement $page): array
     {
         $validations = $page->entree->validation;
-        DEBUG && trigger_error("Validation XmL : " . print_r($validations, true));
+        trigger_error("Validation XmL : " . print_r($validations, true), E_USER_NOTICE);
         $keys = [];
         foreach ($validations as $validation) {
-            DEBUG && trigger_error("1 Validation XmL : " . print_r($validation, true));
+            trigger_error("1 Validation XmL : " . print_r($validation, true), E_USER_NOTICE);
             $keys[] = (string) $validation["touche"];
         }
         return $keys;

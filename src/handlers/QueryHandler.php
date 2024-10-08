@@ -18,7 +18,7 @@ class QueryHandler
             $_SESSION['is_drcs'] = true;
         }
 
-        DEBUG && trigger_error("QueryLogic fctn = " . \MiniPavi\MiniPaviCli::$fctn);
+        trigger_error("QueryLogic fctn = " . \MiniPavi\MiniPaviCli::$fctn, E_USER_NOTICE);
         if (\MiniPavi\MiniPaviCli::$fctn == 'FIN' || \MiniPavi\MiniPaviCli::$fctn == 'FCTN?') {
             static::queryDcx(\MiniPaviFwk\handlers\SessionHandler::class);
             exit;
@@ -74,13 +74,13 @@ class QueryHandler
         string $nextPage
     ): array {
         if (!empty($_SESSION['DIRECTCALL_CMD'])) {
-            DEBUG && trigger_error("DIRECTCALL_CMD : " . print_r($_SESSION['DIRECTCALL_CMD'], true));
+            trigger_error("DIRECTCALL_CMD : " . print_r($_SESSION['DIRECTCALL_CMD'], true), E_USER_NOTICE);
             $_SESSION['DIRECTCALL_RELAY'] = [
                 'output' => $output,
                 'nextPage' => $nextPage,
                 'cmd' => $cmd,
             ];
-            DEBUG && trigger_error("DIRECTCALL_CMD - Relay créé :" . print_r($_SESSION['DIRECTCALL_RELAY'], true));
+            trigger_error("DIRECTCALL_CMD-Relay créé:" . print_r($_SESSION['DIRECTCALL_RELAY'], true), E_USER_NOTICE);
 
             $output = "";
             $nextPage = "";
@@ -99,7 +99,7 @@ class QueryHandler
         trigger_error("fctn: CNX");
 
         // Page d'accueil
-        DEBUG && trigger_error("Accueil du service");
+        trigger_error("Accueil du service", E_USER_NOTICE);
         return new \MiniPaviFwk\actions\AccueilAction(DEFAULT_CONTROLLER, DEFAULT_XML_FILE, []);
     }
 
@@ -117,7 +117,7 @@ class QueryHandler
         if (!empty($_SESSION['DIRECTCALL_RELAY'])) {
             $relay = $_SESSION['DIRECTCALL_RELAY'];
             unset($_SESSION['DIRECTCALL_RELAY']);
-            DEBUG && trigger_error("fctn : DIRECT - Relay : " . print_r($relay, true));
+            trigger_error("fctn : DIRECT - Relay : " . print_r($relay, true), E_USER_NOTICE);
             \MiniPavi\MiniPaviCli::send($relay['output'], $relay['nextPage'], "", true, $relay['cmd']);
         }
         exit(0);
@@ -126,7 +126,7 @@ class QueryHandler
     protected static function queryDirectCallFailed(): void
     {
         // Meant to be overriden when needed!
-        trigger_error("fctn : DIRECTCALLFAILED - Unsupported by default QueryHandler");
+        trigger_error("fctn : DIRECTCALLFAILED - Unsupported by default QueryHandler", E_USER_WARNING);
         // Nothing to answer, no further action to take.
         exit(0);
     }
@@ -134,7 +134,7 @@ class QueryHandler
     protected static function queryDirectCallEnded(): void
     {
         // Meant to be overriden when needed!
-        trigger_error("fctn : DIRECTCALLENDED - Unsupported by default QueryHandler");
+        trigger_error("fctn : DIRECTCALLENDED - Unsupported by default QueryHandler", E_USER_WARNING);
         // Nothing to answer, no further action to take.
         exit(0);
     }
@@ -142,7 +142,7 @@ class QueryHandler
     protected static function queryBgCall(): void
     {
         // Meant to be overriden when needed!
-        trigger_error("fctn : BGCALL - Unsupported by default QueryHandler");
+        trigger_error("fctn : BGCALL - Unsupported by default QueryHandler", E_USER_WARNING);
         // Nothing to answer, no further action to take.
         exit(0);
     }
@@ -150,7 +150,7 @@ class QueryHandler
     protected static function queryBgCallSimu(): void
     {
         // Meant to be overriden when needed!
-        trigger_error("fctn : BGCALL-SIMU - Unsupported by default QueryHandler");
+        trigger_error("fctn : BGCALL-SIMU - Unsupported by default QueryHandler", E_USER_WARNING);
         // Nothing to answer, no further action to take.
         exit(0);
     }
@@ -172,7 +172,7 @@ class QueryHandler
 
         // Protect in case of an error from my side with DIRECT call.
         if (count($message) == 0) {
-            DEBUG && trigger_error("Empty message ?!?!?");
+            trigger_error("Empty message ?!?!?", E_USER_WARNING);
             $message = [''];
         }
         return static::getControllerSaisieAction($controller, $message[0], $touche);
@@ -180,13 +180,13 @@ class QueryHandler
 
     protected static function getSessionContext(): array
     {
-        DEBUG && trigger_error("Load session context : " . print_r($_SESSION, true));
+        trigger_error("Load session context : " . print_r($_SESSION, true), E_USER_NOTICE);
         return \MiniPaviFwk\handlers\SessionHandler::getContext();
     }
 
     protected static function getNewController(array $context): \MiniPaviFwk\controllers\VideotexController
     {
-        DEBUG && trigger_error("Controller : " . $context['controller']);
+        trigger_error("Controller : " . $context['controller'], E_USER_NOTICE);
         return new ($context['controller'])($context);
     }
 
@@ -194,7 +194,7 @@ class QueryHandler
     {
         $touche = \MiniPavi\MiniPaviCli::$fctn;
         $message = @\MiniPavi\MiniPaviCli::$content;
-        DEBUG && trigger_error("Touche & saisie/message : " . $touche . " / " . print_r($message, true));
+        trigger_error("Touche & saisie/message : " . $touche . " / " . print_r($message, true), E_USER_NOTICE);
         return [$touche, $message];
     }
 
@@ -255,7 +255,7 @@ class QueryHandler
         }
 
         $nextPage = $prot . "://" . $_SERVER['HTTP_HOST'] . "" . $_SERVER['PHP_SELF'];
-        DEBUG && trigger_error("Next page URL : " . $nextPage);
+        trigger_error("Next page URL : " . $nextPage, E_USER_NOTICE);
         return $nextPage;
     }
 }

@@ -11,7 +11,7 @@ class DeconnexionAction extends Action
     // Close the access to the service
     public function __construct(string $ligne00 = 'Déconnexion service.')
     {
-        DEBUG && trigger_error("Action: Deconnexion");
+        trigger_error("Action: Deconnexion", E_USER_NOTICE);
         $this->controller = new \MiniPaviFwk\controllers\DeconnexionController([]);
         $this->output = \MiniPavi\MiniPaviCli::writeLine0($ligne00);
     }

@@ -32,24 +32,24 @@ class Validation
 
     public function __construct(\MiniPaviFwk\controllers\VideotexController $controller)
     {
-        DEBUG && trigger_error("Validation Touche __construct() : " . print_r($keys, true));
+        trigger_error("Validation Touche __construct()", E_USER_NOTICE);
 
         // Identify methods that start with 'choix' or 'touche' to add the key to the key_mask
         $methods = get_class_methods($controller);
         foreach ($methods as $method) {
-            DEBUG && trigger_error("Validation method : $method");
+            trigger_error("Validation method : $method", E_USER_NOTICE);
             if (mb_substr($method, 0, 6) === 'touche') {
                 // touche{Touchname}() on an single line input area
                 $touche = mb_strtoupper(mb_substr($method, 6));
                 if (array_key_exists($touche, self::KEY_VALUES)) {
-                    DEBUG && trigger_error("Validation method touche : $touche - $method");
+                    trigger_error("Validation method touche : $touche - $method", E_USER_NOTICE);
                     $this->keyMask |= self::KEY_VALUES[$touche];
                 }
             } elseif (mb_substr($method, 0, 13) === 'messageTouche') {
                 // touche{Touchname}() on an single line input area
                 $touche = mb_strtoupper(mb_substr($method, 13));
                 if (array_key_exists($touche, self::KEY_VALUES)) {
-                    DEBUG && trigger_error("Validation method messageTouche : $touche - $method");
+                    trigger_error("Validation method messageTouche : $touche - $method", E_USER_NOTICE);
                     $this->keyMask |= self::KEY_VALUES[$touche];
                 }
             } elseif (mb_substr($method, 0, 5) === 'choix') {
@@ -57,7 +57,7 @@ class Validation
                 $choix = mb_strtoupper($method);
                 foreach (self::KEY_VALUES as $touche => $value) {
                     if (mb_substr($choix, -strlen($touche)) === $touche) {
-                        DEBUG && trigger_error("Validation method touche : $touche - $method");
+                        trigger_error("Validation method touche : $touche - $method", E_USER_NOTICE);
                         $this->keyMask |= $value;
                         break;
                     }
@@ -68,20 +68,20 @@ class Validation
         // Handle keywords validation keys
         $this->addValidKeys($controller->keywordHandler->validationKeys());
 
-        DEBUG && trigger_error("Validation Touche __construct() value : " . $this->keyMask);
+        trigger_error("Validation Touche __construct() value : " . $this->keyMask, E_USER_NOTICE);
     }
 
 
     public function addValidKeys(array $keys)
     {
-        DEBUG && trigger_error("Validation Touche addValidKeys() : " . print_r($keys, true));
+        trigger_error("Validation Touche addValidKeys() : " . print_r($keys, true), E_USER_NOTICE);
         $this->keyMask |= $this->createKeyMask($keys);
     }
 
 
     public function getKeyMask(): int
     {
-        DEBUG && trigger_error("Validation value : $this->keyMask");
+        trigger_error("Validation value : $this->keyMask", E_USER_NOTICE);
         return $this->keyMask;
     }
 

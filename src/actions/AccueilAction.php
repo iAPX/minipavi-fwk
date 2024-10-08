@@ -10,7 +10,7 @@ class AccueilAction extends Action
 {
     public function __construct($defaultControllerName, $defaultXMLfilename, $context)
     {
-        DEBUG && trigger_error("Action: Accueil");
+        trigger_error("Action: Accueil", E_USER_NOTICE);
         if (empty($defaultControllerName)) {
             $context['xml_filename'] = $defaultXMLfilename;
             $context['xml_page'] = false;

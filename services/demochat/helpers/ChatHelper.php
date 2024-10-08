@@ -25,8 +25,11 @@ class ChatHelper
     public function __construct()
     {
         // Autoinitialise the chat directory
-        mkdir(\CHAT_DIR, 0755, true);
-        $this->cleanMessages();
+        if (!is_dir(\CHAT_DIR)) {
+            mkdir(\CHAT_DIR, 0755, true);            
+        } else {
+            $this->cleanMessages();
+        }
     }
 
     public function createOtherUsersLigne00Msg(string $message): array

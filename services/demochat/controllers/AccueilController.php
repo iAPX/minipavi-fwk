@@ -56,7 +56,7 @@ class AccueilController extends \MiniPaviFwk\controllers\VideotexController
         if (count($uniqueIds) > 0) {
             // No need if alone!
             $_SESSION["DIRECTCALL_CMD"] = \MiniPaviFwk\cmd\PushServiceMsgCmd::createMiniPaviCmd($uniqueIds, $messages);
-            DEBUG && trigger_error(
+            trigger_error(
                 "AccueilController::toucheEnvoi - DIRECTCALL_CMD : " . print_r($_SESSION["DIRECTCALL_CMD"], true)
             );
         }

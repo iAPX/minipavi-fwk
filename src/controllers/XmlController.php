@@ -21,19 +21,19 @@ class XmlController extends VideotexController
 
         // Load the XML file
         $xml_filename = empty($context['xml_filename']) ? DEFAULT_XML_FILE : $context['xml_filename'];
-        DEBUG && trigger_error("XML file: $xml_filename");
+        trigger_error("XML file: $xml_filename", E_USER_NOTICE);
         $simpleXml = simplexml_load_file(SERVICE_DIR . 'xml/' . $xml_filename . '.xml');
 
         if (empty($this->context['xml_page'])) {
-            DEBUG && trigger_error("No XML page, searching in <debut/>");
+            trigger_error("No XML page, searching in <debut/>", E_USER_NOTICE);
             $page_debut = (string) ($simpleXml->xpath('//debut')[0]->attributes()->nom[0]);
-            DEBUG && trigger_error("XML <debut> : " . $page_debut);
+            trigger_error("XML <debut> : " . $page_debut, E_USER_NOTICE);
             $this->context['xml_page'] = $page_debut;
         }
 
         $pageXml = $simpleXml->xpath('//page[@nom="' . $this->context['xml_page'] . '"]')[0];
         if (is_null($pageXml)) {
-            error_log("No XML page found: " . $this->context['xml_page']);
+            trigger_error("No XML page found: " . $this->context['xml_page'], E_ERROR);
         } else {
             $this->pageXml = $pageXml;
         }
@@ -42,48 +42,48 @@ class XmlController extends VideotexController
     public function ecran(): string
     {
         // Clear Line00 when a new page is displayed, to be consistent with minipavi behaviour
-        DEBUG && trigger_error("XmlController : ecran()");
+        trigger_error("XmlController : ecran()", E_USER_NOTICE);
         $output = \MiniPaviFwk\xml\EcranXml::ecran($this->pageXml);
         return str_replace(chr(12), chr(12) . \MiniPavi\MiniPaviCli::writeLine0(''), $output);
     }
 
     public function validation(): \MiniPaviFwk\Validation
     {
-        DEBUG && trigger_error("XmlController : validation()");
+        trigger_error("XmlController : validation()", E_USER_NOTICE);
         $validation = parent::validation();
-        DEBUG && trigger_error("XmlController : validation() - add Xml validation keys");
+        trigger_error("XmlController : validation() - add Xml validation keys", E_USER_NOTICE);
         $validation->addValidKeys(\MiniPaviFwk\xml\ValidationXml::validationKeys($this->pageXml));
         return $validation;
     }
 
     public function getCmd(): array
     {
-        DEBUG && trigger_error("XmlController : getCmd()");
+        trigger_error("XmlController : getCmd()", E_USER_NOTICE);
         return \MiniPaviFwk\xml\ZoneSaisieMessageCmdXml::createMiniPaviCmd($this->validation(), $this->pageXml);
     }
 
     public function choix(string $touche, string $saisie): ?\MiniPaviFwk\actions\Action
     {
-        DEBUG && trigger_error("XmlController : choix()");
+        trigger_error("XmlController : choix()", E_USER_NOTICE);
         return \MiniPaviFwk\xml\ChoixXml::choix($this->pageXml, $touche, $saisie, $this->context);
     }
 
     public function message(string $touche, array $message): ?\MiniPaviFwk\actions\Action
     {
-        DEBUG && trigger_error("XmlController : message()");
+        trigger_error("XmlController : message()", E_USER_NOTICE);
         return \MiniPaviFwk\xml\ChoixXml::choix($this->pageXml, $touche, $message[0], $this->context);
     }
 
     public function nonPropose(string $touche, string $saisie): ?\MiniPaviFwk\actions\Action
     {
-        DEBUG && trigger_error("XmlController : nonPropose()");
+        trigger_error("XmlController : nonPropose()", E_USER_NOTICE);
         $action_xml = $this->pageXml->action;
         $defaut = (string) $action_xml->attributes()['defaut'];
         if (!empty($defaut)) {
-            DEBUG && trigger_error("XmlController : nonPropose() - defaut: $defaut");
+            trigger_error("XmlController : nonPropose() - defaut: $defaut", E_USER_NOTICE);
             return new \MiniPaviFwk\actions\Ligne00Action($this, $defaut);
         } else {
-            DEBUG && trigger_error("XmlController : nonPropose() - defaut vide - Choix invalide");
+            trigger_error("XmlController : nonPropose() - defaut vide - Choix invalide", E_USER_NOTICE);
             return new \MiniPaviFwk\actions\Ligne00Action($this, "Invalide: $saisie + [$touche]");
         }
     }

@@ -14,7 +14,7 @@ class SessionHandler
         ini_set('session.use_cookies', '0');
         ini_set('session.use_only_cookies', '0');
 
-        DEBUG && trigger_error("Session - Start Session");
+        trigger_error("Session - Start Session", E_USER_NOTICE);
         session_id(static::getSessionId());
         session_start();
 
@@ -26,8 +26,7 @@ class SessionHandler
 
     public static function destroySession(): void
     {
-        DEBUG && trigger_error("Session - Destroy Session");
-        session_id(static::getSessionId());
+        trigger_error("Session - Destroy Session", E_USER_NOTICE);
         session_destroy();
     }
 
@@ -38,7 +37,7 @@ class SessionHandler
 
     public static function setContext(array $context): void
     {
-        DEBUG && trigger_error("Session - Save context : " . print_r($context, true));
+        trigger_error("Session - Save context : " . print_r($context, true), E_USER_NOTICE);
         $_SESSION['context'] = $context;
     }
 

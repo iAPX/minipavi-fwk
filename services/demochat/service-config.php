@@ -22,3 +22,6 @@ const CONNECTES_TIMEOUT = 600;
 
 // Timeout for messages, in seconds
 const MESSAGES_TIMEOUT = 3600;
+
+// Service specific error reporting
+const SERVICE_ERROR_REPORTING = E_ALL;

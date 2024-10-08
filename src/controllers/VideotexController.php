@@ -63,7 +63,7 @@ class VideotexController
         // Handle user input through keywordhandler, introspection and overridable methods
 
         // Keywords are prioritary, if present
-        DEBUG && trigger_error("get-Action : appel keywordHanlder->choix()");
+        trigger_error("get-Action : appel keywordHanlder->choix()", E_USER_NOTICE);
         $action = $this->keywordHandler->choix($touche, $saisie);
         if (!is_null($action)) {
             return $action;
@@ -84,23 +84,23 @@ class VideotexController
         $methods[] = ['nonPropose', [$touche, $saisie]];
 
         foreach ($methods as $method) {
-            DEBUG && trigger_error("getSaisieAction - try method : " . $method[0] . "()");
+            trigger_error("getSaisieAction - try method : " . $method[0] . "()", E_USER_NOTICE);
             if (method_exists($this, $method[0])) {
                 $method_name = $method[0];
                 $method_params = $method[1];
-                DEBUG && trigger_error("getSaisieAction - CHOIX : " . $this::class . " -> " . $method_name . "()");
+                trigger_error("getSaisieAction-CHOIX : " . $this::class . " -> " . $method_name . "()", E_USER_NOTICE);
                 $action = $this->$method_name(...$method_params);
                 if (!is_null($action)) {
                     // Found an action!
                     break;
                 }
             } else {
-                DEBUG && trigger_error("getSaisieAction - NONE : " . $this::class . " -> " . $method_name . "()");
+                trigger_error("getSaisieAction - NONE : " . $this::class . " -> " . $method_name . "()", E_USER_NOTICE);
             }
         }
         if (is_null($action)) {
             // Fallback : nonPropose(should always return an Action)
-            DEBUG && trigger_error("Aucun choix n'a été trouvé");
+            trigger_error("Aucun choix n'a été trouvé", E_USER_WARNING);
             $action = new \MiniPaviFwk\actions\Ligne00Action($this, "Commande inconnue.");
         }
 
@@ -126,23 +126,23 @@ class VideotexController
         $methods[] = ['nonPropose', [$touche, $saisie]];
 
         foreach ($methods as $method) {
-            DEBUG && trigger_error("getMessageAction - try method : " . $method[0] . "()");
+            trigger_error("getMessageAction - try method : " . $method[0] . "()", E_USER_NOTICE);
             if (method_exists($this, $method[0])) {
                 $method_name = $method[0];
                 $method_params = $method[1];
-                DEBUG && trigger_error("getMessageAction - CHOIX : " . $this::class . " -> " . $method_name . "()");
+                trigger_error("getMessageAction-CHOIX : " . $this::class . " -> " . $method_name . "()", E_USER_NOTICE);
                 $action = $this->$method_name(...$method_params);
                 if (!is_null($action)) {
                     // Found an action!
                     break;
                 }
             } else {
-                DEBUG && trigger_error("getMessageAction - NONE : " . $this::class . " -> " . $method_name . "()");
+                trigger_error("getMessageAction-NONE : " . $this::class . " -> " . $method_name . "()", E_USER_NOTICE);
             }
         }
         if (is_null($action)) {
             // Fallback : nonPropose(should always return an Action)
-            DEBUG && trigger_error("Aucun choix n'a été trouvé");
+            trigger_error("Aucun choix n'a été trouvé", E_USER_WARNING);
             $action = new \MiniPaviFwk\actions\Ligne00Action($this, "Message non traité.");
         }
         return $action;
@@ -166,7 +166,7 @@ class VideotexController
     public function nonPropose(string $touche, string $saisie): ?\MiniPaviFwk\actions\Action
     {
         // Overridable in sub-classes
-        DEBUG && trigger_error("VideotexController : nonPropose()");
+        trigger_error("VideotexController : nonPropose()", E_USER_NOTICE);
         return new \MiniPaviFwk\actions\Ligne00Action($this, "Choix invalide.");
     }
 

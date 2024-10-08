@@ -14,19 +14,19 @@ class ChoixXml
         string $saisie,
         array $context
     ): ?\MiniPaviFwk\actions\Action {
-        DEBUG && trigger_error("ChoixXml : " . $saisie . " + " . $touche);
+        trigger_error("ChoixXml : " . $saisie . " + " . $touche, E_USER_NOTICE);
         foreach ($page->action->saisie as $option) {
             $option_touche = mb_strtoupper((string) $option['touche']);
             $option_saisie = mb_strtolower((string) $option['choix']);
-            DEBUG && trigger_error("Option : " . $option_saisie . " + " . $option_touche);
+            trigger_error("Option : " . $option_saisie . " + " . $option_touche, E_USER_NOTICE);
             if ($option_touche === $touche && $option_saisie === mb_strtolower($saisie)) {
                 $pagename = (string) $option['suivant'];
-                DEBUG && trigger_error("ChoixXml : Page " . $pagename);
+                trigger_error("ChoixXml : Page " . $pagename, E_USER_NOTICE);
                 return new \MiniPaviFwk\actions\PageAction($context, $pagename);
             }
         }
 
-        DEBUG && trigger_error("ChoixXml : aucun choix correspondant");
+        trigger_error("ChoixXml : aucun choix correspondant", E_USER_NOTICE);
         return null;
     }
 }

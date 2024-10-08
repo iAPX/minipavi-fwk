@@ -10,7 +10,7 @@ class QueryHandler extends \MiniPaviFwk\handlers\QueryHandler
 {
     public static function queryDcx(string $sessionHandlerClassName): void
     {
-        DEBUG && trigger_error("Deconnecte user - overloaded by DemoChat QueryHandler");
+        trigger_error("Deconnecte user - overloaded by DemoChat QueryHandler");
 
         // Cleanup
         $chatHelper = new \service\helpers\ChatHelper();
@@ -26,11 +26,11 @@ class QueryHandler extends \MiniPaviFwk\handlers\QueryHandler
         // C'est votre dernier mot jean-Pierre? Yes my comments are sometimes useless. Sorry!
         parent::queryDcx($sessionHandlerClassName);
         if (count($uniqueIds) > 0) {
-            DEBUG && trigger_error("queryDcx overloading for DemoChat - message pour " . print_r($uniqueIds, true));
+            trigger_error("queryDcx overloading for DemoChat - message pour " . print_r($uniqueIds, true));
             $cmd = \MiniPaviFwk\cmd\PushServiceMsgCmd::createMiniPaviCmd($uniqueIds, $messages);
             \MiniPavi\MiniPaviCli::send("", "", "", true, $cmd, false);
         }
 
-        DEBUG && trigger_error("queryDcx overloading for DemoChat - end");
+        trigger_error("queryDcx overloading for DemoChat - end");
     }
 }

@@ -16,7 +16,7 @@ class SwitchServiceAction extends Action
         string $output = "",
         int $waitSeconds = 0
     ) {
-        DEBUG && trigger_error("Action: Switch to service - " . $newServiceName);
+        trigger_error("Action: Switch to service - " . $newServiceName, E_USER_NOTICE);
 
         // Wait time in seconds translated to \00 output!
         $waitOutput = !empty($output) ? str_repeat("\00", $waitSeconds * 120) : '';

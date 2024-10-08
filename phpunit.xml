@@ -1,5 +1,5 @@
-<phpunit 
-    bootstrap="vendor/autoload.php"
+<phpunit
+    bootstrap="tests/bootstrap.php"
     displayDetailsOnTestsThatTriggerWarnings="true"
     colors="true"
 >

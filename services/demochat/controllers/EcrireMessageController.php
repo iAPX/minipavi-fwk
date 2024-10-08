@@ -73,7 +73,7 @@ class EcrireMessageController extends \MiniPaviFwk\controllers\VideotexControlle
             [$this->context['destUniqueId']],
             [\MiniPavi\MiniPaviCli::toG2("Message de " . $connecte['pseudonyme'])]
         );
-        DEBUG && trigger_error(
+        trigger_error(
             "EcrireController::nouveau message - DIRECTCALL_CMD : " . print_r($_SESSION["DIRECTCALL_CMD"], true)
         );
 

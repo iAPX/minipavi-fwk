@@ -19,7 +19,7 @@ class PageAction extends Action
 {
     public function __construct(array $context, string $pagename, string $xmlfilename = '')
     {
-        DEBUG && trigger_error("Action: Changement de page - " . $pagename);
+        trigger_error("Action: Changement de page - " . $pagename, E_USER_NOTICE);
         $context['xml_page'] = $pagename;
         // Enjoy ;)
         !empty($xmlfilename) && $context['xml_filename'] = $xmlfilename;
@@ -33,10 +33,10 @@ class PageAction extends Action
         $overriderControllerName = "\\service\\controllers\\" . $cleanControllerName . 'Controller';
         if (class_exists($overriderControllerName)) {
             // We rely on the Composer Autoloaders - don't forget to install and update them: composer dump-autoload
-            DEBUG && trigger_error("Action: Controleur surcharge - " . $overriderControllerName);
+            trigger_error("Action: Controleur surcharge - " . $overriderControllerName, E_USER_NOTICE);
             $this->controller = new $overriderControllerName($context);
         } else {
-            DEBUG && trigger_error("Action: Controleur XmlController par defaut");
+            trigger_error("Action: Controleur XmlController par defaut", E_USER_NOTICE);
             $this->controller = new \MiniPaviFwk\controllers\XmlController($context);
         }
         $this->output = $this->controller->ecran();
