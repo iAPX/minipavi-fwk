@@ -261,9 +261,6 @@ class ChatHelper
 
     public function cleanMessages(): void
     {
-        return;
-        // @TODO
-
         $messages = glob(\CHAT_DIR . "msg-*-*-*.json");
         foreach ($messages as $message) {
             $timestamp = 0; /// basename($message, ".json");

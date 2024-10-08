@@ -23,7 +23,7 @@ A controller provides these basic services, by itself or through its parents:
   this array contains the informations about the location of the input area,
   and various optional informations.
   see /src/cmd/ZoneSaisieCmd.php
-  @TODO extend it later on to support multiline input
+
   XmlController use ZoneSaisieCmdXml to interpret XML service files
   see /src/xml/ZoneSaisieCmdXml.php
 
