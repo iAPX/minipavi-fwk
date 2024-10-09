@@ -16,6 +16,15 @@
 
 - [Minitel services configuration](./Configurations.md)
 
+- [XML Services](./XML-services.md)
+
+- [XML Files](./XML-files.md)
+
+- [Service MacBidouille](./Service-macbidouille.md)
+
+- [XML Controllers](./XML-controllers.md) as a folow-up
+
+
 
 ## If you want to develop from scratch instead
 
@@ -23,7 +32,27 @@
 
 - [Minitel services configuration](./Configurations.md)
 
+- [Controllers](./Controllers.md)
 
+- [Videotex Helper](./Videotex-helper.md)
+
+- [Validation](./Validation.md)
+
+- [Actions](./Actions.md)
+
+- [Commands](./Cmds.md)
+
+- [Handlers](./Handlers.md)
+
+- [Keywords](./Keywords.md)
+
+- [Query Handler](./Query-handler.md)
+
+- [Validation](./Validation.md)
+
+- [Service Handler](./Service-handler.md)
+
+- [Session Handler](./Session-handler.md)
 
 
 ## And optionnally in every case

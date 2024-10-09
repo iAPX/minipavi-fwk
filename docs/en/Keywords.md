@@ -1,5 +1,7 @@
 # Keywords
 
+Responsability: handle services keyword handling.
+
 Here you could put your keywords handlers
 
 It should extends \MiniPaviFwk\Keywords, see /src/Keywords.php

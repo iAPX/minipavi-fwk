@@ -1,6 +1,6 @@
 # Cmds : Commands
 
-Cmds create and expose MiniPaviCli commands.
+Responsability : build MiniPaviCli commands.
 
 Essentially an input area or a multiline input area.
 Could also be used to throw away an user, or to create Push Service Messages

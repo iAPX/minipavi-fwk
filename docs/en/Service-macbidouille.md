@@ -1,5 +1,7 @@
 # MacBidouille Service
 
+Responsability : Showcase an existing XMLInt Minitel Service running on minipavi-fwk
+
 Located in ./services/macbidouille
 This is Minitel service actually online here [Macbidouille Minitel service](https://www.minipavi.fr/emulminitel/index.php?url=https://minitelbidouille.pvigier.com/minitelbidouille.xml&color=false).
 
