@@ -5,14 +5,12 @@
 
 - [Schedule of improvements](./Schedule.md)
 
-- [Vidéotex codes summary](https://www.minipavi.fr/videotex-codes.pdf)
-
 - [How to run minipavifwk locally with its demo Minitel services](./Local-execution.md)
 
 
-## Then if you have an XML managed service those
+## Then for a XML managed service, read those
 
-- [XMLint documentation](https://raw.githubusercontent.com/ludosevilla/minipaviCli/master/XMLint/XMLint-doc.pdf)
+- [XMLint documentation](https://raw.githubusercontent.com/ludosevilla/minipaviCli/master/XMLint/XMLint-doc.pdf) (French PDF)
 
 - [Minitel services configuration](./Configurations.md)
 
@@ -26,7 +24,7 @@
 
 
 
-## If you want to develop from scratch instead
+## If you want to develop Service andControllers from scratch instead, there are your ressources
 
 - [Service files organization](./Service-files-organization.md)
 
@@ -41,6 +39,8 @@
 - [Actions](./Actions.md)
 
 - [Commands](./Cmds.md)
+
+- [Push Service Message Command](./PushServiceMsg.md)
 
 - [Handlers](./Handlers.md)
 
@@ -57,16 +57,18 @@
 
 ## And optionnally in every case
 
-- [STUM 1b, Minitel dev documentation](https://www.minipavi.fr/stum1b.pdf)
+- [Vidéotex codes summary](https://www.minipavi.fr/videotex-codes.pdf) (French PDF)
 
-- [MiniPaviCli documentation](https://github.com/ludosevilla/minipaviCli/blob/main/MiniPaviCli-doc.pdf)
+- [STUM 1b, Minitel dev documentation](https://www.minipavi.fr/stum1b.pdf) Fench PDF
+
+- [MiniPaviCli documentation](https://github.com/ludosevilla/minipaviCli/blob/main/MiniPaviCli-doc.pdf) (French PDF)
 
 
 
 ## External Minitel ressources
 
-- [MiEdit - Minitel Page Editor](https://minitel.cquest.org/)
+- [MiEdit - Minitel Page Editor](https://minitel.cquest.org/) (in French)
 
-- [Free Minitel Emulator](https://www.minipavi.fr/emulminitel/indexws.php)
+- [Free Minitel Emulator](https://www.minipavi.fr/emulminitel/indexws.php) (in French)
 
-- [MiniPavi, PAVI & Minitel integrated emulator](https://www.minipavi.fr/)
+- [MiniPavi, PAVI & Minitel integrated emulator](https://www.minipavi.fr/) (in French)

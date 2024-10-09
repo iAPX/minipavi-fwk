@@ -3,7 +3,7 @@
 ## v0.8 - mid October, 2024
 - [ ] Documentation
 - [ ] Better Unit Tests coverage
-- [ ] Adds more dynamism to Demochat
+- [x] Adds more dynamism to Demochat
 
 ## v1.0 - November, 2024
 - [ ] Full Unit Tests converage (be courageous!)
