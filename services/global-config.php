@@ -7,13 +7,12 @@
  */
 
 // Global error reporting config
-// You might change it the way you want, you might also change it service by service
+// You might change it globallly or by service in their services/{serviceName}/service-config.php
 error_reporting(E_ERROR | E_USER_WARNING | E_PARSE);
 ini_set('display_errors', 0);
 
-// Set the default service
-// Included services : demo, macbidouille
-const DEFAULT_SERVICE = 'demo';
-
-// Set the allowed services
+// Sets the allowed services.
 const ALLOWED_SERVICES = ['demo', 'demochat', 'macbidouille'];
+
+// Sets the default service, should be in the ALLOWED_SERVICES array.
+const DEFAULT_SERVICE = 'demo';

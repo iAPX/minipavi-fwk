@@ -34,6 +34,17 @@ class AccueilController extends \MiniPaviFwk\controllers\VideotexController
 
     public function getCmd(): array
     {
+        // Connection, we inform the other users
+        list($uniqueIds, $messages) = $this->chatHelper->createOtherUsersLigne00Msg(
+            "Un nouvel utilisateur se connecte."
+        );
+        if (count($uniqueIds) > 0) {
+            // No need if alone!
+            $_SESSION["DIRECTCALL_CMD"] = \MiniPaviFwk\cmd\PushServiceMsgCmd::createMiniPaviCmd($uniqueIds, $messages);
+            trigger_error(
+                "AccueilController::getCmd - DIRECTCALL_CMD : " . print_r($_SESSION["DIRECTCALL_CMD"], true)
+            );
+        }
         return \MiniPaviFwk\cmd\ZoneSaisieCmd::createMiniPaviCmd($this->validation(), 24, 18, 16, true, '.');
     }
 

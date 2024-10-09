@@ -108,6 +108,17 @@ class ListeController extends \MiniPaviFwk\controllers\VideotexController
         }
 
         $this->context['destUniqueId'] = $this->context['connectes'][$num - 1]['uniqueId'];
+
+        // Inform the user that this one is writing a message
+        $connecte = $this->chatHelper->getCurrentConnecte();
+        $_SESSION["DIRECTCALL_CMD"] = \MiniPaviFwk\cmd\PushServiceMsgCmd::createMiniPaviCmd(
+            [$this->context['destUniqueId']],
+            [\MiniPavi\MiniPaviCli::toG2($connecte['pseudonyme'] . " vous écrit.")]
+        );
+        trigger_error(
+            "EcrireController::Ecriture - DIRECTCALL_CMD : " . print_r($_SESSION["DIRECTCALL_CMD"], true)
+        );
+
         return new \MiniPaviFwk\actions\ControllerAction(
             \service\controllers\EcrireMessageController::class,
             $this->context
@@ -124,21 +135,15 @@ class ListeController extends \MiniPaviFwk\controllers\VideotexController
         $this->chatHelper->setHumeur($saisie);
 
         // Inform the other connectes
-        $connectes = $this->chatHelper->getConnectes();
         $currentConnecte = $this->chatHelper->getCurrentConnecte();
-        $uniqueIds = [];
-        $messages = [];
-        foreach ($connectes as $connecte) {
-            if ($connecte['uniqueId'] !== \MiniPavi\MiniPaviCli::$uniqueId) {
-                $uniqueIds[] = $connecte['uniqueId'];
-                $messages[] = \MiniPavi\MiniPaviCli::toG2($currentConnecte['pseudonyme'] . " a changé d'humeur.");
-            }
-        }
+        list($uniqueIds, $messages) = $this->chatHelper->createOtherUsersLigne00Msg(
+            $currentConnecte['pseudonyme'] . " a changé d'humeur."
+        );
         if (count($uniqueIds) > 0) {
-            // No need if alone!
             $_SESSION["DIRECTCALL_CMD"] = \MiniPaviFwk\cmd\PushServiceMsgCmd::createMiniPaviCmd($uniqueIds, $messages);
             trigger_error(
-                "ListeController::toucheSuite - DIRECTCALL_CMD : " . print_r($_SESSION["DIRECTCALL_CMD"], true)
+                "ListeController::toucheSuite - DIRECTCALL_CMD : " . print_r($_SESSION["DIRECTCALL_CMD"], true),
+                E_USER_NOTICE
             );
         }
 

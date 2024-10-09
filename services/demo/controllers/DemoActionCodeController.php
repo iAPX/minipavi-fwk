@@ -36,7 +36,7 @@ class DemoActionCodeController extends \MiniPaviFwk\controllers\VideotexControll
         ->position(21, 1)->inversionDebut()->ecritUnicode('8')->inversionFin()
         ->ecritUnicode(" code vdt / VideotexOutputAction()")
         ->position(22, 1)->inversionDebut()->ecritUnicode('9')->inversionFin()
-        ->ecritUnicode(" change service/SwitchServiceAction()")
+        ->ecritUnicode(" switch service/SwitchServiceAction()")
 
 
         ->position(23, 1)->effaceFinDeLigne()->couleurFond("vert")->couleurTexte('noir')

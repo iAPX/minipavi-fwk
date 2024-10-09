@@ -26,7 +26,7 @@ class ChatHelper
     {
         // Autoinitialise the chat directory
         if (!is_dir(\CHAT_DIR)) {
-            mkdir(\CHAT_DIR, 0755, true);            
+            mkdir(\CHAT_DIR, 0755, true);
         } else {
             $this->cleanMessages();
         }
@@ -119,7 +119,7 @@ class ChatHelper
         $uniqueId = \MiniPavi\MiniPaviCli::$uniqueId;
         $messageFilenames = glob(\CHAT_DIR . "msg-*-*-$uniqueId.json");
         foreach ($messageFilenames as $messageFilename) {
-            unlink(\CHAT_DIR . $messageFilename);
+            unlink($messageFilename);
         }
     }
 
@@ -263,8 +263,11 @@ class ChatHelper
     {
         $messages = glob(\CHAT_DIR . "msg-*-*-*.json");
         foreach ($messages as $message) {
-            $timestamp = 0; /// basename($message, ".json");
+            preg_match('/msg-(\d+)-.*?\.json/', $message, $matches);
+            $timestamp = $matches[1];
+            trigger_error("message $message timestamp: $timestamp", E_USER_NOTICE);
             if (time() - $timestamp > \MESSAGES_TIMEOUT) {
+                trigger_error("message $message delete!", E_USER_NOTICE);
                 unlink($message);
             }
         }

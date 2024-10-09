@@ -1,3 +1,5 @@
+# XML Files
+
 Short explanation : 
 These XML files use the XMLint format
 [XMLint documentation](https://raw.githubusercontent.com/ludosevilla/minipaviCli/master/XMLint/XMLint-doc.pdf)

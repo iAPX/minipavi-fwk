@@ -1,7 +1,10 @@
-# MacBidouille service
+# MacBidouille Service
 
 Located in ./services/macbidouille
-This is Minitel service actually online here [Macbidouille Minitel service](https://www.minipavi.fr/emulminitel/index.php?url=https://minitelbidouille.pvigier.com/minitelbidouille.xml&color=false)
+This is Minitel service actually online here [Macbidouille Minitel service](https://www.minipavi.fr/emulminitel/index.php?url=https://minitelbidouille.pvigier.com/minitelbidouille.xml&color=false).
+
+The real Macbidouille is also available here [Macbidouille.com](https://macbidouille.com)
+Notice that it is a French service in plain French.
 
 This service run using a periodically generated XML file and Vidéotex .vdt files
 There is also Mistral AI generated résumé of the articles to ease readings.

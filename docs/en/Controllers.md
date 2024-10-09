@@ -1,4 +1,72 @@
+# Controllers
 
+Controllers provide the Vidéotex output stream, generate the input area information or MiniPaviCli commands, give the validated keys, and handle user input returning [Actions](./Actions.md).
+
+
+## Controller's `__construct( ... )`
+
+
+## Controller's `public function getContext(): array`
+Returns the Controller's Context, as an array.
+
+Used to store the Controller's context into the Session to reinstantiate the same controller when receiving this Session's next query.
+
+It's provided by [VideotexController](../../../src/controllers/VideotexController.php) and will rarely need to get overriden.
+
+
+## Controller's Vidéotex Output Stream
+
+
+## Controller's Commands including input areas
+
+
+## Controller's Validated keys
+
+
+## Controller's Single Line User Input Handling
+
+### touche{Touchename}() methods
+
+### choix{Saisie}{Touchename} methods
+
+### saisie() method
+
+### nonPropose() method
+
+
+## Controller's Multiline User Input handling
+
+### messageTouche{Touchename}() methods
+
+### messageChoix{Firstline}{Touchename} methods
+
+### message() methods
+
+### nonPropose() method
+
+
+## Provided Controllers
+
+### VideotexController
+
+### XmlController
+
+### DeconnexionController
+This controller is instantiated by the [DeconnexionAction](../../../src/actions/DeconnexionAction.php) (see [Actions documentation](./Actions.md) ).
+It's sole purpose is to return a disconnection command to MiniPaviCli whatever query is received, in case MiniPaviCli kept the user online.
+
+
+The MiniPaviFwk controller.
+See this doc : /services/demo/controllers/README.md
+
+- DeconnexionController : ensure user is blocked. And disconnected.
+
+- VideotexController : Basic controller to be overriden
+  You might extends it to have pure code controllers.
+
+- XmlController : implements XML file handling to emulate MiniPavi 
+  You might want to implement it with your controller to override or extend its behaviours.
+  the easiest if you have an existing XML service file for Minipavi.
 
 
 Demo*Controllers.php : used by the demo.xml service

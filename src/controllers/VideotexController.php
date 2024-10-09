@@ -21,7 +21,7 @@ class VideotexController
         $this->keywordHandler = new \MiniPaviFwk\Keywords();
     }
 
-    public function getContext()
+    public function getContext(): array
     {
         return $this->context;
     }
@@ -127,8 +127,8 @@ class VideotexController
 
         foreach ($methods as $method) {
             trigger_error("getMessageAction - try method : " . $method[0] . "()", E_USER_NOTICE);
-            if (method_exists($this, $method[0])) {
-                $method_name = $method[0];
+            $method_name = $method[0];
+            if (method_exists($this, $method_name)) {
                 $method_params = $method[1];
                 trigger_error("getMessageAction-CHOIX : " . $this::class . " -> " . $method_name . "()", E_USER_NOTICE);
                 $action = $this->$method_name(...$method_params);
