@@ -17,8 +17,14 @@ class DemoxmlSommaireController extends \MiniPaviFwk\controllers\XmlController
         ->position(18, 1)->inversionDebut()->ecritUnicode('8')->inversionFin()
         ->ecritUnicode(" Service démo de chat")
 
-        ->position(20, 1)->inversionDebut()->ecritUnicode('9')->inversionFin()
+        ->position(19, 1)->inversionDebut()->ecritUnicode('9')->inversionFin()
         ->ecritUnicode(" Service MacBidouille")
+
+        ->position(20, 1)->inversionDebut()->ecritUnicode('10')->inversionFin()
+        ->ecritUnicode(
+            // @TODO check it!
+            file_exists("./services/myservice/xml/default.xml") ? " MY SERVICE !!!!" : " not available"
+        )
 
         // Displays Minitel type and DRCS mode support
         ->position(21, 1)->ecritUnicode("Minitel type : " . \MiniPavi\MiniPaviCli::$versionMinitel)
@@ -44,6 +50,16 @@ class DemoxmlSommaireController extends \MiniPaviFwk\controllers\XmlController
         return new \MiniPaviFwk\actions\SwitchServiceAction(
             'macbidouille',
             chr(12) . \MiniPavi\MiniPaviCli::toG2("*** REDIRECTION VERS MACBIDOUILLE ***"),
+            2
+        );
+    }
+
+    public function choix10Envoi(): ?\MiniPaviFwk\actions\Action
+    {
+        // Switch to myservice
+        return new \MiniPaviFwk\actions\SwitchServiceAction(
+            'myservice',
+            chr(12) . \MiniPavi\MiniPaviCli::toG2("*** REDIRECTION VERS 'myservice' ***"),
             2
         );
     }

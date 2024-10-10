@@ -38,10 +38,11 @@ class EcranXml
 
     private static function elementAffiche(VideotexHelper $videotex, string $url): void
     {
-        // Local file if it exists
+        // Local file if it exists, from an URL
         trigger_error("page url _element_affiche: " . $url, E_USER_NOTICE);
         if (
-            !empty(\service\XML_PAGES_URL)
+            defined("\\service\\XML_PAGES_URL")
+            && !empty(\service\XML_PAGES_URL)
             && substr($url, 0, strlen(\service\XML_PAGES_URL)) === \service\XML_PAGES_URL
         ) {
             $filename = SERVICE_DIR . "vdt/" . mb_substr($url, strlen(\service\XML_PAGES_URL));
@@ -52,7 +53,8 @@ class EcranXml
             }
         }
 
-        if (mb_substr($url, 0, 4) !== "http") {
+        // Not an http or https scheme, don't name your file beginning as an URL scheme! Lol!
+        if (mb_substr($url, 0, 7) !== "http://" && mb_substr($url, 0, 8) !== "https://") {
             $filename = SERVICE_DIR . "vdt/" . $url;
             trigger_error("page filename from path: " . $filename, E_USER_NOTICE);
             if (file_exists($filename)) {
