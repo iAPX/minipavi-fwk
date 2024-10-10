@@ -8,12 +8,14 @@
  * Ensure no future actions possible until reconnected.
  */
 
- namespace MiniPaviFwk\controllers;
+namespace MiniPaviFwk\controllers;
+
+use MiniPaviFwk\cmd\DeconnexionCmd;
 
 class DeconnexionController extends VideotexController
 {
     public function getCmd(): array
     {
-        return \MiniPaviFwk\cmd\DeconnexionCmd::createMiniPaviCmd();
+        return DeconnexionCmd::createMiniPaviCmd();
     }
 }

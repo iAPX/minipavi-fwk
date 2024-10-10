@@ -9,6 +9,8 @@
 
 - [Configuration](./Configurations.md)
 
+- [Glossary](./Glossary.md) : this explains a lot, including my mix of French and English terms
+
 
 ## Then for a XML managed service, read those
 

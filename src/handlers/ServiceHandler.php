@@ -7,6 +7,9 @@
 
 namespace MiniPaviFwk\handlers;
 
+use MiniPaviFwk\handlers\QueryHandler;
+use MiniPaviFwk\helpers\ConstantHelper;
+
 class ServiceHandler
 {
     public static function startService(): void
@@ -19,8 +22,8 @@ class ServiceHandler
         require_once \SERVICE_DIR . "service-config.php";
 
         // change the error reporting level if specified
-        if (defined('SERVICE_ERROR_REPORTING')) {
-            error_reporting(SERVICE_ERROR_REPORTING);
+        if (defined('\\service\\SERVICE_ERROR_REPORTING')) {
+            error_reporting(\service\SERVICE_ERROR_REPORTING);
         }
     }
 
@@ -34,7 +37,7 @@ class ServiceHandler
             $service_name = empty($parameter) ? \DEFAULT_SERVICE : $parameter;
             trigger_error("Service name : " . $service_name, E_USER_NOTICE);
 
-            self::setServiceName($service_name);
+            static::setServiceName($service_name);
         } else {
             trigger_error("Service en session : " . $_SESSION['service'], E_USER_NOTICE);
             $service_name = $_SESSION['service'];
@@ -54,13 +57,9 @@ class ServiceHandler
 
     public static function getQueryHandler(): string
     {
-        // @TODO should be generic override, have to think about it! Might be in service-config.php
-        trigger_error("Service Query handler file : " . \SERVICE_DIR . "QueryHandler.php", E_USER_NOTICE);
-        trigger_error("Service query handler class : " . \service\QueryHandler::class, E_USER_NOTICE);
-        if (file_exists(\SERVICE_DIR . "QueryHandler.php")) {
-            trigger_error("Service Query handler overriden", E_USER_NOTICE);
-            return \service\QueryHandler::class;
-        }
-        return \MiniPaviFwk\handlers\QueryHandler::class;
+        return ConstantHelper::getConstValueByName(
+            'QUERY_HANDLER_CLASSNAME',
+            QueryHandler::class
+        );
     }
 }

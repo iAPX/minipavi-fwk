@@ -8,20 +8,36 @@
 require_once "services/global-config.php";
 require_once "src/service_autoloader.php";
 require_once "vendor/autoload.php";
-require_once "src/strings/mb_ucfirst.php";
+require_once "src/helpers/mb_ucfirst.php";
+
+use MiniPavi\MiniPaviCli;
+use \MiniPaviFwk\helpers\ConstantHelper;
+use \MiniPaviFwk\handlers\ServiceHandler;
 
 try {
-    \MiniPavi\MiniPaviCli::start();
-    (\SESSION_HANDLER_CLASSNAME)::startSession();
-    (\SERVICE_HANDLER_CLASSNAME)::startService();
-    $queryHandler = (SERVICE_HANDLER_CLASSNAME)::getQueryHandler();
+    MiniPaviCli::start();
+
+    // Start Session
+    $session_handler = ConstantHelper::getConstValueByName(
+        'SESSION_HANDLER_CLASSNAME',
+        \MiniPaviFwk\handlers\SessionHandler::class
+    );
+    $session_handler::startSession();
+
+    // Start Service
+    $service_handler = ConstantHelper::getConstValueByName(
+        'SERVICE_HANDLER_CLASSNAME',
+        ServiceHandler::class
+    );
+    $service_handler::startService();
 
     // Execute the query
     // Many informations returned to enable wrapping by the Service optional Query Handler
-    list($action, $controller, $cmd, $context, $output, $nextPage) = $queryHandler::queryLogic();
+    $query_handler = $service_handler::getQueryHandler();
+    list($action, $controller, $cmd, $context, $output, $nextPage) = $query_handler::queryLogic();
 
     // Support Direct Call the right way
-    list($action, $controller, $cmd, $context, $output, $nextPage, $directCall) = $queryHandler::directCall(
+    list($action, $controller, $cmd, $context, $output, $nextPage, $directCall) = $query_handler::directCall(
         $action,
         $controller,
         $cmd,
@@ -31,8 +47,8 @@ try {
     );
 
     // Ends saving session and returning command
-    (\SESSION_HANDLER_CLASSNAME)::setContext($context);
-    \MiniPavi\MiniPaviCli::send($output, $nextPage, "", true, $cmd, $directCall);
+    $session_handler::setContext($context);
+    MiniPaviCli::send($output, $nextPage, "", true, $cmd, $directCall);
 } catch (Exception $e) {
     throw new Exception('Erreur MiniPavi ' . $e->getMessage());
 }

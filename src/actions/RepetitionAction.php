@@ -7,9 +7,11 @@
 
 namespace MiniPaviFwk\actions;
 
+use MiniPaviFwk\controllers\VideotexController;
+
 class RepetitionAction extends Action
 {
-    public function __construct(\MiniPaviFwk\controllers\VideotexController $thisController)
+    public function __construct(VideotexController $thisController)
     {
         trigger_error("Action: Repetition", E_USER_NOTICE);
         $this->controller = $thisController;

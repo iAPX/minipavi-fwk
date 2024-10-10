@@ -9,6 +9,12 @@
 
 namespace MiniPaviFwk\actions;
 
+use MiniPavi\MiniPaviCli;
+use MiniPaviFwk\helpers\ConstantHelper;
+use MiniPaviFwk\handlers\QueryHandler;
+use MiniPaviFwk\handlers\ServiceHandler;
+use MiniPaviFwk\handlers\SessionHandler;
+
 class SwitchServiceAction extends Action
 {
     public function __construct(
@@ -22,16 +28,26 @@ class SwitchServiceAction extends Action
         $waitOutput = !empty($output) ? str_repeat("\00", $waitSeconds * 120) : '';
 
         // Reinit the Session, protect against data leakage
-        (\SESSION_HANDLER_CLASSNAME)::destroySession();
-        (\SESSION_HANDLER_CLASSNAME)::startSession();
-
-        (\SERVICE_HANDLER_CLASSNAME)::setServiceName($newServiceName);
+        $session_handler = ConstantHelper::getConstValueByName(
+            'SESSION_HANDLER_CLASSNAME',
+            SessionHandler::class
+        );
+        $session_handler::destroySession();
+        $session_handler::startSession();
         $_SESSION['context'] = [];
 
-        // Act now and quit directly!
-        $newUrl = \MiniPaviFwk\handlers\QueryHandler::getNextPageUrl();
+        // Switch service
+        $service_handler = ConstantHelper::getConstValueByName(
+            'SERVICE_HANDLER_CLASSNAME',
+            ServiceHandler::class
+        );
+        $service_handler::setServiceName($newServiceName);
 
-        \MiniPavi\MiniPaviCli::send($output . $waitOutput, $newUrl, '', true, null, 'yes-cnx');
+        // Act now and quit directly!
+        $query_handler = $service_handler::getQueryHandler();
+        $newUrl = $query_handler::getNextPageUrl();
+
+        MiniPaviCli::send($output . $waitOutput, $newUrl, '', true, null, 'yes-cnx');
         exit(0);
     }
 }

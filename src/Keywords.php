@@ -8,6 +8,8 @@
 
 namespace MiniPaviFwk;
 
+use MiniPaviFwk\actions\Action;
+
 class Keywords
 {
     /**
@@ -19,7 +21,7 @@ class Keywords
         return [];
     }
 
-    public function choix(string $touche, string $saisie): ?\MiniPaviFwk\actions\Action
+    public function choix(string $touche, string $saisie): ?Action
     {
         trigger_error("\MiniPaviFwk\Keywords::choix(\"$touche\", \"$saisie\")", E_USER_NOTICE);
         return null;

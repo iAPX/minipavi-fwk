@@ -22,7 +22,11 @@ class DemoKeywords extends \MiniPaviFwk\Keywords
         trigger_error("\service\keywords\DemoKeywords::choix(\"$touche\", \"$saisie\")");
         if ($touche === 'SOMMAIRE' && $saisie === '*') {
             trigger_error("\service\keywords\DemoKeywords::choix() : * [SOMMAIRE]");
-            return new \MiniPaviFwk\actions\AccueilAction(DEFAULT_CONTROLLER, DEFAULT_XML_FILE, $context);
+            return new \MiniPaviFwk\actions\AccueilAction(
+                \service\DEFAULT_CONTROLLER,
+                \service\DEFAULT_XML_FILE,
+                $context
+            );
         } elseif ($touche === 'SOMMAIRE' && $saisie === '') {
             trigger_error("\service\keywords\DemoKeywords::choix() : [SOMMAIRE]");
             return new \MiniPaviFwk\actions\PageAction([], "demoxml-sommaire", "demo");

@@ -4,7 +4,7 @@
  * Provides string unicode manipulation mb_ucfirst() function
  */
 
-namespace MiniPaviFwk\strings;
+namespace MiniPaviFwk\helpers;
 
 function mb_ucfirst($string)
 {

@@ -266,7 +266,7 @@ class ChatHelper
             preg_match('/msg-(\d+)-.*?\.json/', $message, $matches);
             $timestamp = $matches[1];
             trigger_error("message $message timestamp: $timestamp", E_USER_NOTICE);
-            if (time() - $timestamp > \MESSAGES_TIMEOUT) {
+            if (time() - $timestamp > \service\MESSAGES_TIMEOUT) {
                 trigger_error("message $message delete!", E_USER_NOTICE);
                 unlink($message);
             }
@@ -277,7 +277,7 @@ class ChatHelper
     {
         $activeConnectes = [];
         foreach ($connectes as $connecte) {
-            if (time() - $connecte['timestamp'] < \CONNECTES_TIMEOUT) {
+            if (time() - $connecte['timestamp'] < \service\CONNECTES_TIMEOUT) {
                 $activeConnectes[] = $connecte;
             }
         }

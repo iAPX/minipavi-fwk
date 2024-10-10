@@ -4,6 +4,8 @@
  * Configuration for the Macbidouille service
  */
 
+namespace service;
+
 // The URL for XML local Videotex Pages, replaced by services/{serviceName}/vdt/{pagename} when interpreting XML
 // Elsewhere pages will be fetched through a http/https query to keep compatiblity with existing XML (TEST only)
 const XML_PAGES_URL = "https://minitelbidouille.pvigier.com/pages/";

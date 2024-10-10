@@ -6,20 +6,39 @@ There are 2 levels of configuration, beside php.ini and your web server configur
 [Global configuration file](../../services/global-config.php)
 This file contains the first executed statements.
 
-- `error_reporting(E_ERROR | E_USER_WARNING | E_PARSE)` : default error reporting, preferably modified for development or debug through the service-config.php
+
+> [!NOTICE]
+> The global constants in services/global-config.php are at the root namespace ( \\ ).
+> You should always refer to them using `\{ConstantName}`
+
+
+### Global Configuration mandatory entries
 
 - `const ALLOWED_SERVICES` : array of allowed services names, that should be the services/{serviceName}
 
 - `const DEFAULT_SERVICE` : name of default service, selected by default
 
+
+### Global Configuration optional entries
+
+- `error_reporting(E_ERROR | E_USER_WARNING | E_PARSE)` : default error reporting, preferably modified for development or debug through the service-config.php
+
 - `const SESSION_HANDLER_CLASSNAME` : full name of the Session handler Classname
 
 - `const SERVICE_HANDLER_CLASSNAME` : full name of the Service Handler Classname
+
+- `const QUERY_HANDLER_CLASSNAME` : contains the class name of the service Query Handler as a string, it is overridable in the service-config.php of a specific service
 
 
 ## Service Configuration
 Service configuration is named `service-config.php` on the services/{serviceName} directory.
 It is executed after Session is started and Service is identified and validated.
+
+
+> [!IMPORTANT]
+> `namespace service;` should be put at the beginning of your service-config.php file
+> Service configuration constants are all in the `\service` namespace while global configuration is at the \\ root
+> You should always refer to them using `\service\{ConstantName}`
 
 
 ### Service Configuration mandatory entries
@@ -30,6 +49,10 @@ It is executed after Session is started and Service is identified and validated.
 
 - `const DEFAULT_CONTROLLER` : might contain the full name of a Videotex or XML Controller, or false if none. If false, AccueilAction fallback to the DEFAULT_XML_FILE xml file handled by the [default XmlController](../../src/controllers/XmlController.php).
 
+
+### Service optional entries
+
+- `const QUERY_HANDLER_CLASSNAME` : contains the class name of the service Query Handler as a string, override the same constant on the global configuration if present
 
 #### XML_PAGES_URL mechanism
 

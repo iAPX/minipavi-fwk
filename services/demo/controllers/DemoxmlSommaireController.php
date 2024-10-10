@@ -12,7 +12,7 @@ class DemoxmlSommaireController extends \MiniPaviFwk\controllers\XmlController
     {
         $vdt = parent::ecran();
 
-        $videotex = new \MiniPaviFwk\videotex\Videotex();
+        $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
         $vdt .= $videotex
         ->position(18, 1)->inversionDebut()->ecritUnicode('8')->inversionFin()
         ->ecritUnicode(" Service démo de chat")
@@ -30,21 +30,21 @@ class DemoxmlSommaireController extends \MiniPaviFwk\controllers\XmlController
 
     public function choix8Envoi(): ?\MiniPaviFwk\actions\Action
     {
-        // Switch to demo, displaying a message and waiting 3 seconds.
+        // Switch to demo, displaying a message and waiting 2 seconds.
         return new \MiniPaviFwk\actions\SwitchServiceAction(
             'demochat',
             chr(12) . \MiniPavi\MiniPaviCli::toG2("*** REDIRECTION VERS LA DÉMO DE CHAT ***"),
-            3
+            2
         );
     }
 
     public function choix9Envoi(): ?\MiniPaviFwk\actions\Action
     {
-        // Switch to demo, displaying a message and waaiting 3 seconds.
+        // Switch to demo, displaying a message and waiting 2 seconds.
         return new \MiniPaviFwk\actions\SwitchServiceAction(
             'macbidouille',
             chr(12) . \MiniPavi\MiniPaviCli::toG2("*** REDIRECTION VERS MACBIDOUILLE ***"),
-            3
+            2
         );
     }
 }

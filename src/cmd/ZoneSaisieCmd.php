@@ -6,10 +6,13 @@
 
 namespace MiniPaviFwk\cmd;
 
+use MiniPavi\MiniPaviCli;
+use MiniPaviFwk\Validation;
+
 class ZoneSaisieCmd extends Cmd
 {
     public static function createMiniPaviCmd(
-        \MiniPaviFwk\Validation $validation,
+        Validation $validation,
         int $ligne = 24,
         int $col = 40,
         int $longueur = 1,
@@ -18,7 +21,7 @@ class ZoneSaisieCmd extends Cmd
         string $replacementChar = '',
         string $prefill = ''
     ) {
-        return \MiniPavi\MiniPaviCli::createInputTxtCmd(
+        return MiniPaviCli::createInputTxtCmd(
             $col,
             $ligne,
             $longueur,

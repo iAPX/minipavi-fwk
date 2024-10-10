@@ -1,14 +1,14 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use MiniPaviFwk\videotex\Videotex;
+use MiniPaviFwk\helpers\VideotexHelper;
 
 
-class VideotexTest extends TestCase
+class VideotexHelperTest extends TestCase
 {
     public function test()
     {
-        $videotex = new Videotex();
+        $videotex = new VideotexHelper();
 
         $this->assertEquals($videotex, $videotex->position(1, 2));
         $this->assertEquals($videotex, $videotex->curseurVisible());

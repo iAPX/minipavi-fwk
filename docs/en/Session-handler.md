@@ -12,7 +12,7 @@ It's used through [index.php](../../index.php) to initialize, retrieve Session i
 
 ## Your own session handler
 
-Change the `SESSION_HANDLER_CLASSNAME` with the full name of your own Class on ./services/global-config.php
+Change the `\SESSION_HANDLER_CLASSNAME` with the full name of your own Class on ./services/global-config.php
 
 Your class should implement these static functions:
 

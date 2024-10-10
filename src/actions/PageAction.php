@@ -15,6 +15,8 @@
 
 namespace MiniPaviFwk\actions;
 
+use MiniPaviFwk\controllers\XmlController;
+
 class PageAction extends Action
 {
     public function __construct(array $context, string $pagename, string $xmlfilename = '')
@@ -28,7 +30,7 @@ class PageAction extends Action
         // xxxx becomes XxxxController; xxxx-yyyy becomes XxxxYyyyController; and so on
         $cleanControllerName = '';
         foreach (explode('-', $pagename) as $pagename_part) {
-            $cleanControllerName .= \MiniPaviFwk\strings\mb_ucfirst(mb_strtolower($pagename_part));
+            $cleanControllerName .= \MiniPaviFwk\helpers\mb_ucfirst(mb_strtolower($pagename_part));
         }
         $overriderControllerName = "\\service\\controllers\\" . $cleanControllerName . 'Controller';
         if (class_exists($overriderControllerName)) {
@@ -37,7 +39,7 @@ class PageAction extends Action
             $this->controller = new $overriderControllerName($context);
         } else {
             trigger_error("Action: Controleur XmlController par defaut", E_USER_NOTICE);
-            $this->controller = new \MiniPaviFwk\controllers\XmlController($context);
+            $this->controller = new XmlController($context);
         }
         $this->output = $this->controller->ecran();
     }

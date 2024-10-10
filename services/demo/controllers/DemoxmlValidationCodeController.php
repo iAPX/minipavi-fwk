@@ -12,7 +12,7 @@ class DemoxmlValidationCodeController extends \MiniPaviFwk\controllers\XmlContro
     {
         $vdt = parent::ecran();
 
-        $videotex = new \MiniPaviFwk\videotex\Videotex();
+        $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
         $vdt .= $videotex
         ->position(0, 1)->effaceFinDeLigne()
         ->position(7, 1)

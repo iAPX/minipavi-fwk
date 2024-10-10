@@ -8,49 +8,56 @@
 
 namespace MiniPaviFwk\handlers;
 
+use MiniPavi\MiniPaviCli;
+use MiniPaviFwk\actions\Action;
+use MiniPaviFwk\actions\AccueilAction;
+use MiniPaviFwk\controllers\VideotexController;
+use MiniPaviFwk\handlers\SessionHandler;
+use MiniPaviFwk\helpers\ConstantHelper;
+
 class QueryHandler
 {
     public static function queryLogic(): array
     {
         // Handles Minitel Type
         $dcrs_minitel_types_prefixes = ['Cu', 'Bu', 'Cw', 'Cv', 'Bv', 'Cz', 'Bz', 'Ay', 'Em'];
-        if (in_array(substr(\MiniPavi\MiniPaviCli::$versionMinitel, 0, 2), $dcrs_minitel_types_prefixes)) {
+        if (in_array(substr(MiniPaviCli::$versionMinitel, 0, 2), $dcrs_minitel_types_prefixes)) {
             $_SESSION['is_drcs'] = true;
         }
 
-        trigger_error("QueryLogic fctn = " . \MiniPavi\MiniPaviCli::$fctn, E_USER_NOTICE);
-        if (\MiniPavi\MiniPaviCli::$fctn == 'FIN' || \MiniPavi\MiniPaviCli::$fctn == 'FCTN?') {
+        trigger_error("QueryLogic fctn = " . MiniPaviCli::$fctn, E_USER_NOTICE);
+        if (MiniPaviCli::$fctn == 'FIN' || MiniPaviCli::$fctn == 'FCTN?') {
             static::queryDcx();
             exit;
         }
 
         // DIRECTCALLFAILED, DIRECTCALLENDED, BGCALL, BGCALL-SIMU
-        if (\MiniPavi\MiniPaviCli::$fctn == 'DIRECTCALLFAILED') {
+        if (MiniPaviCli::$fctn == 'DIRECTCALLFAILED') {
             static::queryDirectCallFailed();
             exit;
         }
 
-        if (\MiniPavi\MiniPaviCli::$fctn == 'DIRECTCALLENDED') {
+        if (MiniPaviCli::$fctn == 'DIRECTCALLENDED') {
             static::queryDirectCallEnded();
             exit;
         }
 
-        if (\MiniPavi\MiniPaviCli::$fctn == 'BGCALL') {
+        if (MiniPaviCli::$fctn == 'BGCALL') {
             static::queryBgCall();
             exit;
         }
 
-        if (\MiniPavi\MiniPaviCli::$fctn == 'BGCALL-SIMU') {
+        if (MiniPaviCli::$fctn == 'BGCALL-SIMU') {
             static::queryBgCallSimu();
             exit;
         }
 
-        if (\MiniPavi\MiniPaviCli::$fctn == 'CNX' || \MiniPavi\MiniPaviCli::$fctn == 'DIRECTCNX') {
+        if (MiniPaviCli::$fctn == 'CNX' || MiniPaviCli::$fctn == 'DIRECTCNX') {
             $action = static::queryCnx();
-        } elseif (\MiniPavi\MiniPaviCli::$fctn == 'DIRECT') {
+        } elseif (MiniPaviCli::$fctn == 'DIRECT') {
             $cmd = static::queryDirect();
             $nextPage = static::getNextPageUrl();
-            \MiniPavi\MiniPaviCli::send("", $nextPage, "", true, $cmd, false);
+            MiniPaviCli::send("", $nextPage, "", true, $cmd, false);
             exit;
         } else {
             $action = static::queryInput();
@@ -66,8 +73,8 @@ class QueryHandler
     }
 
     public static function directCall(
-        \MiniPaviFwk\actions\Action $action,
-        \MiniPaviFwk\controllers\VideotexController $controller,
+        Action $action,
+        VideotexController $controller,
         array $cmd,
         array $context,
         string $output,
@@ -94,19 +101,23 @@ class QueryHandler
         return [$action, $controller, $cmd, $context, $output, $nextPage, $directCall];
     }
 
-    protected static function queryCnx(): \MiniPaviFwk\actions\Action
+    protected static function queryCnx(): Action
     {
         trigger_error("fctn: CNX");
 
         // Page d'accueil
         trigger_error("Accueil du service", E_USER_NOTICE);
-        return new \MiniPaviFwk\actions\AccueilAction(DEFAULT_CONTROLLER, DEFAULT_XML_FILE, []);
+        return new AccueilAction(\service\DEFAULT_CONTROLLER, \service\DEFAULT_XML_FILE, []);
     }
 
     protected static function queryDcx(): void
     {
         trigger_error("fctn : DCX");
-        (\SESSION_HANDLER_CLASSNAME)::destroySession();
+        $session_handler = ConstantHelper::getConstValueByName(
+            'SESSION_HANDLER_CLASSNAME',
+            SessionHandler::class
+        );
+        $session_handler::destroySession();
     }
 
     protected static function queryDirect(): void
@@ -118,7 +129,7 @@ class QueryHandler
             $relay = $_SESSION['DIRECTCALL_RELAY'];
             unset($_SESSION['DIRECTCALL_RELAY']);
             trigger_error("fctn : DIRECT - Relay : " . print_r($relay, true), E_USER_NOTICE);
-            \MiniPavi\MiniPaviCli::send($relay['output'], $relay['nextPage'], "", true, $relay['cmd']);
+            MiniPaviCli::send($relay['output'], $relay['nextPage'], "", true, $relay['cmd']);
         }
         exit(0);
     }
@@ -155,9 +166,9 @@ class QueryHandler
         exit(0);
     }
 
-    protected static function queryInput(): \MiniPaviFwk\actions\Action
+    protected static function queryInput(): Action
     {
-        trigger_error("fctn : " . \MiniPavi\MiniPaviCli::$fctn . " - " . \MiniPavi\MiniPaviCli::$content[0]);
+        trigger_error("fctn : " . MiniPaviCli::$fctn . " - " . MiniPaviCli::$content[0]);
 
         $context = static::getSessionContext();
 
@@ -181,10 +192,14 @@ class QueryHandler
     protected static function getSessionContext(): array
     {
         trigger_error("Load session context : " . print_r($_SESSION, true), E_USER_NOTICE);
-        return (\SESSION_HANDLER_CLASSNAME)::getContext();
+        $session_handler = ConstantHelper::getConstValueByName(
+            'SESSION_HANDLER_CLASSNAME',
+            SessionHandler::class
+        );
+        return $session_handler::getContext();
     }
 
-    protected static function getNewController(array $context): \MiniPaviFwk\controllers\VideotexController
+    protected static function getNewController(array $context): VideotexController
     {
         trigger_error("Controller : " . $context['controller'], E_USER_NOTICE);
         return new ($context['controller'])($context);
@@ -192,46 +207,46 @@ class QueryHandler
 
     protected static function getToucheAndMessage()
     {
-        $touche = \MiniPavi\MiniPaviCli::$fctn;
-        $message = @\MiniPavi\MiniPaviCli::$content;
+        $touche = MiniPaviCli::$fctn;
+        $message = @MiniPaviCli::$content;
         trigger_error("Touche & saisie/message : " . $touche . " / " . print_r($message, true), E_USER_NOTICE);
         return [$touche, $message];
     }
 
     protected static function getControllerMessageAction(
-        \MiniPaviFwk\controllers\VideotexController $controller,
+        VideotexController $controller,
         array $message,
         string $touche
-    ): \MiniPaviFwk\actions\Action {
+    ): Action {
         return $controller->getMessageAction($message, $touche);
     }
 
     protected static function getControllerSaisieAction(
-        \MiniPaviFwk\controllers\VideotexController $controller,
+        VideotexController $controller,
         string $saisie,
         string $touche
-    ): \MiniPaviFwk\actions\Action {
+    ): Action {
         return $controller->getSaisieAction($saisie, $touche);
     }
 
     public static function getController(
-        \MiniPaviFwk\actions\Action $action
-    ): \MiniPaviFwk\controllers\VideotexController {
+        Action $action
+    ): VideotexController {
         return $action->getController();
     }
 
-    public static function getCmd(\MiniPaviFwk\controllers\VideotexController $controller): array
+    public static function getCmd(VideotexController $controller): array
     {
         return $controller->getCmd();
     }
 
-    public static function getControllerContext(\MiniPaviFwk\controllers\VideotexController $controller): array
+    public static function getControllerContext(VideotexController $controller): array
     {
         // Here the context, as modified by the new Controller
         return $controller->getContext();
     }
 
-    public static function getActionOutput(\MiniPaviFwk\actions\Action $action): string
+    public static function getActionOutput(Action $action): string
     {
         return $action->getOutput();
     }

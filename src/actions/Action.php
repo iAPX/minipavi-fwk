@@ -6,12 +6,14 @@
 
 namespace MiniPaviFwk\actions;
 
+use MiniPaviFwk\controllers\VideotexController;
+
 abstract class Action
 {
-    protected \MiniPaviFwk\controllers\VideotexController $controller;
+    protected VideotexController $controller;
     protected string $output = '';
 
-    public function getController(): \MiniPaviFwk\controllers\VideotexController
+    public function getController(): VideotexController
     {
         return $this->controller;
     }

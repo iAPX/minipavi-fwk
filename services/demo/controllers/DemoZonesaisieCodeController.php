@@ -10,7 +10,7 @@ class DemoZonesaisieCodeController extends \MiniPaviFwk\controllers\VideotexCont
 {
     public function ecran(): string
     {
-        $videotex = new \MiniPaviFwk\videotex\Videotex();
+        $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
         $vdt = $videotex
         ->ecritVideotex(file_get_contents(SERVICE_DIR . "vdt/demo-controller-page.vdt"))
         ->ecritVideotex(file_get_contents(SERVICE_DIR . "vdt/demo-choix-code.vdt"))

@@ -22,7 +22,7 @@ class EcrireMessageController extends \MiniPaviFwk\controllers\VideotexControlle
 
     public function ecran(): string
     {
-        $videotex = new \MiniPaviFwk\videotex\Videotex();
+        $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
         $videotex->effaceLigne00();
         $videotex->ecritVideotex(file_get_contents(SERVICE_DIR . "vdt/demochat-page.vdt"));
 

@@ -12,7 +12,7 @@ class ArticlesController extends \MiniPaviFwk\controllers\XmlController
     {
         $vdt = parent::ecran();
 
-        $videotex = new \MiniPaviFwk\videotex\Videotex();
+        $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
         $vdt .= $videotex
         ->position(22, 1)->inversionDebut()->ecritUnicode('9')->inversionFin()
         ->ecritUnicode(" change service/SwitchServiceAction()")
@@ -23,11 +23,11 @@ class ArticlesController extends \MiniPaviFwk\controllers\XmlController
 
     public function choix9Envoi(): ?\MiniPaviFwk\actions\Action
     {
-        // Switch to demo, displaying a message and waaiting 3 seconds.
+        // Switch to demo, displaying a message and waiting 2 seconds.
         return new \MiniPaviFwk\actions\SwitchServiceAction(
             'demo',
-            \MiniPavi\MiniPaviCli::toG2("*** REDIRECTION VERS LE SERVICE DE DEMO ***"),
-            3
+            chr(12) . \MiniPavi\MiniPaviCli::toG2("*** REDIRECTION VERS LE SERVICE DE DÉMO ***"),
+            2
         );
     }
 }

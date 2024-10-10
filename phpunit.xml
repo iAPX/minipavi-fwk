@@ -4,9 +4,9 @@
     colors="true"
 >
     <php>
-        <const name="DEFAULT_XML_FILE" value="demo"/>
         <const name="SERVICE_DIR" value="services/demo/"/>
-        <const name="XML_PAGES_URL" value=""/>
+        <const name="service\DEFAULT_XML_FILE" value="demo"/>
+        <const name="service\XML_PAGES_URL" value=""/>
     </php>
     <testsuites>
         <testsuite name="Regular tests">

@@ -6,10 +6,14 @@
 
 namespace MiniPaviFwk\xml;
 
+use MiniPaviFwk\cmd\ZoneMessageCmd;
+use MiniPaviFwk\cmd\ZoneSaisieCmd;
+use MiniPaviFwk\Validation;
+
 class ZoneSaisieMessageCmdXml
 {
     public static function createMiniPaviCmd(
-        \MiniPaviFwk\Validation $validation,
+        Validation $validation,
         \SimpleXMLElement $page
     ): array {
         $zonesaisie = $page->entree->zonesaisie;
@@ -19,7 +23,7 @@ class ZoneSaisieMessageCmdXml
             $longueur = (int) $zonesaisie['longueur'];
             $curseur = ((string) $zonesaisie['curseur']) === 'visible';
 
-            return \MiniPaviFwk\cmd\ZoneSaisieCmd::createMiniPaviCmd(
+            return ZoneSaisieCmd::createMiniPaviCmd(
                 $validation,
                 $ligne,
                 $col,
@@ -36,7 +40,7 @@ class ZoneSaisieMessageCmdXml
             $hauteur = (int) $zonemessage['hauteur'];
             $curseur = ((string) $zonemessage['curseur']) === 'visible';
 
-            return \MiniPaviFwk\cmd\ZoneMessageCmd::createMiniPaviCmd(
+            return ZoneMessageCmd::createMiniPaviCmd(
                 $validation,
                 $ligne,
                 $hauteur,

@@ -9,6 +9,8 @@
 
 namespace MiniPaviFwk\actions;
 
+use MiniPavi\MiniPaviCli;
+
 class RedirectAction extends Action
 {
     public function __construct(string $newUrl, string $output = "", int $waitSeconds = 0)
@@ -21,6 +23,6 @@ class RedirectAction extends Action
         $waitOutput = !empty($output) ? str_repeat("\00", $waitSeconds * 120) : '';
 
         // Act now and quit directly!
-        \MiniPavi\MiniPaviCli::send($output . $waitOutput, $newUrl, '', true, null, 'yes-cnx');
+        MiniPaviCli::send($output . $waitOutput, $newUrl, '', true, null, 'yes-cnx');
     }
 }

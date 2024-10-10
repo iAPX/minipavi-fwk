@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Handles dcx
+ * Handles dcx by overriding \MiniPaviFwk\handlers\QueryHandler
  */
 
-namespace service;
+namespace service\handlers;
 
 class QueryHandler extends \MiniPaviFwk\handlers\QueryHandler
 {

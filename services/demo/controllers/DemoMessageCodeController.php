@@ -10,7 +10,7 @@ class DemoMessageCodeController extends \MiniPaviFwk\controllers\VideotexControl
 {
     public function ecran(): string
     {
-        $videotex = new \MiniPaviFwk\videotex\Videotex();
+        $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
         $videotex->effaceLigne00()->ecritVideotex(file_get_contents(SERVICE_DIR . "vdt/demo-controller-page.vdt"));
         $videotex->ecritVideotex(file_get_contents(SERVICE_DIR . "vdt/demo-choix-sommaire.vdt"));
 
@@ -51,7 +51,7 @@ class DemoMessageCodeController extends \MiniPaviFwk\controllers\VideotexControl
 
     private function displayPrecedentMessage(array $message): string
     {
-        $videotex = new \MiniPaviFwk\videotex\Videotex();
+        $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
         $videotex->effaceLigne00();
         foreach ($message as $messageLigne => $messageSaisie) {
             $videotex->position($messageLigne + 13, 1)->effaceFinDeLigne()->ecritUnicode($messageSaisie);

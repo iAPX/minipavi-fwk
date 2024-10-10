@@ -6,10 +6,12 @@
 
 namespace MiniPaviFwk\cmd;
 
+use MiniPavi\MiniPaviCli;
+
 class DeconnexionCmd extends Cmd
 {
     public static function createMiniPaviCmd(): array
     {
-        return \MiniPavi\MiniPaviCli::createLibCnxCmd();
+        return MiniPaviCli::createLibCnxCmd();
     }
 }

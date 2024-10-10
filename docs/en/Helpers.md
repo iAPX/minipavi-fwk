@@ -1,4 +1,12 @@
 # Helpers
 
-Put here the helpers for your service
-One example in services/demochat/helpers/ChatHelper.php
+Responsability : give a hand!
+
+
+## ConstantHelper
+Simple helper enabling to retrieve service, global or default value for a named constant.
+
+
+
+## VideotexHelper
+see [Videotex Helper](./Videotex-helper.md)

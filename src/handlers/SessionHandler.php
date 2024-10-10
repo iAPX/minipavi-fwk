@@ -6,6 +6,8 @@
 
 namespace MiniPaviFwk\handlers;
 
+use MiniPavi\MiniPaviCli;
+
 class SessionHandler
 {
     public static function startSession(): void
@@ -15,7 +17,7 @@ class SessionHandler
         ini_set('session.use_only_cookies', '0');
 
         trigger_error("Session - Start Session", E_USER_NOTICE);
-        session_id(\MiniPavi\MiniPaviCli::$uniqueId);
+        session_id(MiniPaviCli::$uniqueId);
         session_start();
 
         // Initalize Session missing or default data, @TODO should be elsewhere

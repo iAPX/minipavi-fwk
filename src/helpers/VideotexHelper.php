@@ -6,9 +6,11 @@
  * Used both by EcranXml that output from XML and by VideotexControllers
  */
 
-namespace MiniPaviFwk\videotex;
+namespace MiniPaviFwk\helpers;
 
-class Videotex
+use MiniPavi\MiniPaviCli;
+
+class VideotexHelper
 {
     // These colors are meant to make code usable without using magic constants.
     public const NOIR = 'noir';
@@ -40,7 +42,7 @@ class Videotex
         return $this->output;
     }
 
-    public function page($pagename): \MiniPaviFwk\videotex\Videotex
+    public function page($pagename): VideotexHelper
     {
         $filename = SERVICE_DIR . "vdt/" . $pagename . ".vdt";
         if (file_exists($filename)) {
@@ -49,150 +51,150 @@ class Videotex
         return $this;
     }
 
-    public function position(int $ligne, int $col = 1): \MiniPaviFwk\videotex\Videotex
+    public function position(int $ligne, int $col = 1): VideotexHelper
     {
-        $this->output .= \MiniPavi\MiniPaviCli::setPos($col, $ligne);
+        $this->output .= MiniPaviCli::setPos($col, $ligne);
         return $this;
     }
 
-    public function curseurVisible(): \MiniPaviFwk\videotex\Videotex
+    public function curseurVisible(): VideotexHelper
     {
         $this->output .= VDT_CURON;
         return $this;
     }
 
-    public function curseurInvisible(): \MiniPaviFwk\videotex\Videotex
+    public function curseurInvisible(): VideotexHelper
     {
         $this->output .= VDT_CUROFF;
         return $this;
     }
 
-    public function texteClignote(): \MiniPaviFwk\videotex\Videotex
+    public function texteClignote(): VideotexHelper
     {
         $this->output .= VDT_BLINK;
         return $this;
     }
 
-    public function texteFixe(): \MiniPaviFwk\videotex\Videotex
+    public function texteFixe(): VideotexHelper
     {
         $this->output .= VDT_FIXED;
         return $this;
     }
 
-    public function souligneDebut(): \MiniPaviFwk\videotex\Videotex
+    public function souligneDebut(): VideotexHelper
     {
         $this->output .= VDT_STARTUNDERLINE;
         return $this;
     }
 
-    public function souligneFin(): \MiniPaviFwk\videotex\Videotex
+    public function souligneFin(): VideotexHelper
     {
         $this->output .= VDT_STOPUNDERLINE;
         return $this;
     }
 
-    public function inversionDebut(): \MiniPaviFwk\videotex\Videotex
+    public function inversionDebut(): VideotexHelper
     {
         $this->output .= VDT_FDINV;
         return $this;
     }
 
-    public function inversionFin(): \MiniPaviFwk\videotex\Videotex
+    public function inversionFin(): VideotexHelper
     {
         $this->output .= VDT_FDNORM;
         return $this;
     }
 
-    public function ecritUnicode(string $unicodeTexte): \MiniPaviFwk\videotex\Videotex
+    public function ecritUnicode(string $unicodeTexte): VideotexHelper
     {
-        $this->output .= \minipavi\MiniPaviCli::toG2($unicodeTexte);
+        $this->output .= MiniPaviCli::toG2($unicodeTexte);
         return $this;
     }
 
-    public function ecritVideotex(string $videotexTexte): \MiniPaviFwk\videotex\Videotex
+    public function ecritVideotex(string $videotexTexte): VideotexHelper
     {
         $this->output .= $videotexTexte;
         return $this;
     }
 
 
-    public function couleurTexte(string $couleur): \MiniPaviFwk\videotex\Videotex
+    public function couleurTexte(string $couleur): VideotexHelper
     {
         $this->output .= "\x1B" . chr(64 + self::COULEURS_VALUES[mb_strtolower($couleur)]);
         return $this;
     }
 
-    public function couleurFond(string $couleur): \MiniPaviFwk\videotex\Videotex
+    public function couleurFond(string $couleur): VideotexHelper
     {
         $this->output .= "\x1B" . chr(80 + self::COULEURS_VALUES[mb_strtolower($couleur)]);
         return $this;
     }
 
-    public function doubleTaille(): \MiniPaviFwk\videotex\Videotex
+    public function doubleTaille(): VideotexHelper
     {
         $this->output .= VDT_SZDBLHW;
         return $this;
     }
 
-    public function doubleHauteur(): \MiniPaviFwk\videotex\Videotex
+    public function doubleHauteur(): VideotexHelper
     {
         $this->output .= VDT_SZDBLH;
         return $this;
     }
 
-    public function doubleLargeur(): \MiniPaviFwk\videotex\Videotex
+    public function doubleLargeur(): VideotexHelper
     {
         $this->output .= VDT_SZDBLW;
         return $this;
     }
 
-    public function tailleNormale(): \MiniPaviFwk\videotex\Videotex
+    public function tailleNormale(): VideotexHelper
     {
         $this->output .= VDT_SZNORM;
         return $this;
     }
 
-    public function effaceFinDeLigne(): \MiniPaviFwk\videotex\Videotex
+    public function effaceFinDeLigne(): VideotexHelper
     {
         $this->output .= VDT_CLRLN;
         return $this;
     }
 
-    public function modeGraphique(): \MiniPaviFwk\videotex\Videotex
+    public function modeGraphique(): VideotexHelper
     {
         $this->output .= VDT_G1;
         return $this;
     }
 
-    public function modeTexte(): \MiniPaviFwk\videotex\Videotex
+    public function modeTexte(): VideotexHelper
     {
         $this->output .= VDT_G0;
         return $this;
     }
 
-    public function effaceEcran(): \MiniPaviFwk\videotex\Videotex
+    public function effaceEcran(): VideotexHelper
     {
         $this->output .= VDT_CLR;
         return $this;
     }
 
-    public function afficheDateParis(): \MiniPaviFwk\videotex\Videotex
+    public function afficheDateParis(): VideotexHelper
     {
         $parisTime = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
         $this->output .= $parisTime->format('d-m-Y');
         return $this;
     }
 
-    public function afficheHeureParis(): \MiniPaviFwk\videotex\Videotex
+    public function afficheHeureParis(): VideotexHelper
     {
         $parisTime = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
         $this->output .= $parisTime->format('H:i');
         return $this;
     }
 
-    public function repeteCaractere(string $caractere, int $nombre): \MiniPaviFwk\videotex\Videotex
+    public function repeteCaractere(string $caractere, int $nombre): VideotexHelper
     {
-        $this->output .= \MiniPavi\MiniPaviCli::repeatChar($caractere, $nombre);
+        $this->output .= MiniPaviCli::repeatChar($caractere, $nombre);
         return $this;
     }
 
@@ -202,7 +204,7 @@ class Videotex
         int $largeur,
         int $hauteur,
         string $couleur
-    ): \MiniPaviFwk\Videotex\Videotex {
+    ): VideotexHelper {
         // Optimized version.
         $this
         ->position($ligne, $col)
@@ -219,19 +221,19 @@ class Videotex
         return $this;
     }
 
-    public function effaceLigne00(): \MiniPaviFwk\videotex\Videotex
+    public function effaceLigne00(): VideotexHelper
     {
-        $this->output .= \MiniPavi\MiniPaviCli::writeLine0('');
+        $this->output .= MiniPaviCli::writeLine0('');
         return $this;
     }
 
-    public function ecritUnicodeLigne00(string $unicodeTexte): \MiniPaviFwk\videotex\Videotex
+    public function ecritUnicodeLigne00(string $unicodeTexte): VideotexHelper
     {
-        $this->output .= \MiniPavi\MiniPaviCli::writeLine0(\MiniPavi\MiniPaviCli::toG2($unicodeTexte));
+        $this->output .= MiniPaviCli::writeLine0(MiniPaviCli::toG2($unicodeTexte));
         return $this;
     }
 
-    public function deconnexionModem(): \MiniPaviFwk\videotex\Videotex
+    public function deconnexionModem(): VideotexHelper
     {
         // The weel known ESc 9 g that aask the terminal to hang up!
         $this->output .= "\x1B9g";

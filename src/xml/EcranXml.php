@@ -8,12 +8,14 @@
 
 namespace MiniPaviFwk\xml;
 
+use MiniPaviFwk\helpers\VideotexHelper;
+
 class EcranXml
 {
     public static function ecran(\SimpleXMLElement $page): string
     {
         $ecran = $page->ecran;
-        $videotex = new \MiniPaviFwk\videotex\Videotex();
+        $videotex = new VideotexHelper();
         foreach ($ecran->children() as $element) {
             // get element name and attributes
             $name = (string) $element->getName();
@@ -21,7 +23,7 @@ class EcranXml
             $attributes = $element->attributes();
             trigger_error("element attribute: " . print_r($attributes, true), E_USER_NOTICE);
 
-            $private_function_name = "element" . \MiniPaviFwk\strings\mb_ucfirst($name);
+            $private_function_name = "element" . \MiniPaviFwk\helpers\mb_ucfirst($name);
             if (method_exists(static::class, $private_function_name)) {
                 static::$private_function_name($videotex, ...$attributes);
             } else {
@@ -34,12 +36,15 @@ class EcranXml
     }
 
 
-    private static function elementAffiche(\MiniPaviFwk\Videotex\Videotex $videotex, string $url): void
+    private static function elementAffiche(VideotexHelper $videotex, string $url): void
     {
         // Local file if it exists
         trigger_error("page url _element_affiche: " . $url, E_USER_NOTICE);
-        if (! empty(XML_PAGES_URL) && substr($url, 0, strlen(XML_PAGES_URL)) === XML_PAGES_URL) {
-            $filename = SERVICE_DIR . "vdt/" . mb_substr($url, strlen(XML_PAGES_URL));
+        if (
+            !empty(\service\XML_PAGES_URL)
+            && substr($url, 0, strlen(\service\XML_PAGES_URL)) === \service\XML_PAGES_URL
+        ) {
+            $filename = SERVICE_DIR . "vdt/" . mb_substr($url, strlen(\service\XML_PAGES_URL));
             trigger_error("page filename from url: " . $filename, E_USER_NOTICE);
             if (file_exists($filename)) {
                 $videotex->ecritVideotex(file_get_contents($filename));
@@ -66,40 +71,40 @@ class EcranXml
     }
 
     private static function elementPosition(
-        \MiniPaviFwk\Videotex\Videotex $videotex,
+        VideotexHelper $videotex,
         string $ligne,
         string $col = "1"
     ): void {
         $videotex->position((int) $ligne, (int) $col);
     }
 
-    private static function elementCurseur(\MiniPaviFwk\Videotex\Videotex $videotex, string $mode): void
+    private static function elementCurseur(VideotexHelper $videotex, string $mode): void
     {
         $mode === "visible" ? $videotex->curseurVisible() : $videotex->curseurInvisible();
     }
 
-    private static function elementClignote(\MiniPaviFwk\Videotex\Videotex $videotex, string $mode): void
+    private static function elementClignote(VideotexHelper $videotex, string $mode): void
     {
         $mode === "actif" ? $videotex->texteClignote() : $videotex->texteFixe();
     }
 
-    private static function elementSouligne(\MiniPaviFwk\Videotex\Videotex $videotex, string $mode): void
+    private static function elementSouligne(VideotexHelper $videotex, string $mode): void
     {
         $mode === "actif" ? $videotex->souligneDebut() : $videotex->souligneFin();
     }
 
-    private static function elementInversion(\MiniPaviFwk\Videotex\Videotex $videotex, string $mode): void
+    private static function elementInversion(VideotexHelper $videotex, string $mode): void
     {
         $mode === "actif" ? $videotex->inversionDebut() : $videotex->inversionFin();
     }
 
-    private static function elementEcrit(\MiniPaviFwk\Videotex\Videotex $videotex, string $texte): void
+    private static function elementEcrit(VideotexHelper $videotex, string $texte): void
     {
         $videotex->ecritUnicode($texte);
     }
 
     private static function elementCouleur(
-        \MiniPaviFwk\Videotex\Videotex $videotex,
+        VideotexHelper $videotex,
         string $texte = "",
         string $fond = ""
     ): void {
@@ -107,58 +112,58 @@ class EcranXml
         !empty($fond) && $videotex->couleurFond($fond);
     }
 
-    private static function elementDoublehauteur(\MiniPaviFwk\Videotex\Videotex $videotex): void
+    private static function elementDoublehauteur(VideotexHelper $videotex): void
     {
         $videotex->doubleHauteur();
     }
 
-    private static function elementDoublelargeur(\MiniPaviFwk\Videotex\Videotex $videotex): void
+    private static function elementDoublelargeur(VideotexHelper $videotex): void
     {
         $videotex->doubleLargeur();
     }
 
-    private static function elementDoubletaille(\MiniPaviFwk\Videotex\Videotex $videotex): void
+    private static function elementDoubletaille(VideotexHelper $videotex): void
     {
         $videotex->doubleTaille();
     }
 
-    private static function elementTaillenormale(\MiniPaviFwk\Videotex\Videotex $videotex): void
+    private static function elementTaillenormale(VideotexHelper $videotex): void
     {
         $videotex->tailleNormale();
     }
 
-    private static function elementEffacefindeligne(\MiniPaviFwk\Videotex\Videotex $videotex): void
+    private static function elementEffacefindeligne(VideotexHelper $videotex): void
     {
         $videotex->effaceFinDeLigne();
     }
 
-    private static function elementGraphique(\MiniPaviFwk\Videotex\Videotex $videotex): void
+    private static function elementGraphique(VideotexHelper $videotex): void
     {
         $videotex->modeGraphique();
     }
 
-    private static function elementTexte(\MiniPaviFwk\Videotex\Videotex $videotex): void
+    private static function elementTexte(VideotexHelper $videotex): void
     {
         $videotex->modeTexte();
     }
 
-    private static function elementEfface(\MiniPaviFwk\Videotex\Videotex $videotex): void
+    private static function elementEfface(VideotexHelper $videotex): void
     {
         $videotex->effaceEcran();
     }
 
-    private static function elementDate(\MiniPaviFwk\Videotex\Videotex $videotex): void
+    private static function elementDate(VideotexHelper $videotex): void
     {
         $videotex->afficheDateParis();
     }
 
-    private static function elementHeure(\MiniPaviFwk\Videotex\Videotex $videotex): void
+    private static function elementHeure(VideotexHelper $videotex): void
     {
         $videotex->afficheHeureParis();
     }
 
     private static function elementRepete(
-        \MiniPaviFwk\Videotex\Videotex $videotex,
+        VideotexHelper $videotex,
         string $caractere,
         string $nombre
     ): void {
@@ -166,7 +171,7 @@ class EcranXml
     }
 
     private static function elementRectangle(
-        \MiniPaviFwk\Videotex\Videotex $videotex,
+        VideotexHelper $videotex,
         string $ligne,
         string $col,
         string $largeur,

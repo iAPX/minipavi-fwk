@@ -15,7 +15,7 @@ class AccueilActionTest extends TestCase
 
     public function testXmlController()
     {
-        $action = new AccueilAction(false, DEFAULT_XML_FILE, []);
+        $action = new AccueilAction(false, \service\DEFAULT_XML_FILE, []);
         $this->assertInstanceOf(XmlController::class, $action->getController());
         $this->AssertFalse(empty($action->getOutput()));
     }

@@ -23,7 +23,7 @@ class ListeController extends \MiniPaviFwk\controllers\VideotexController
         $connectes = $this->chatHelper->getConnectes();
         $this->context['connectes'] = $connectes;
 
-        $videotex = new \MiniPaviFwk\videotex\Videotex();
+        $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
         $videotex
         ->ecritVideotex(file_get_contents(SERVICE_DIR . "vdt/demochat-page.vdt"));
 

@@ -6,6 +6,8 @@
 
 namespace MiniPaviFwk;
 
+use MiniPaviFwk\controllers\VideotexController;
+
 class Validation
 {
     private int $keyMask = 0;
@@ -30,7 +32,7 @@ class Validation
         'ENVOI' => self::ENVOI,
     ];
 
-    public function __construct(\MiniPaviFwk\controllers\VideotexController $controller)
+    public function __construct(VideotexController $controller)
     {
         trigger_error("Validation Touche __construct()", E_USER_NOTICE);
 

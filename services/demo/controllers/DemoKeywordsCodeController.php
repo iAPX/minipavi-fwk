@@ -18,7 +18,7 @@ class DemoKeywordsCodeController extends \MiniPaviFwk\controllers\VideotexContro
 
     public function ecran(): string
     {
-        $videotex = new \MiniPaviFwk\videotex\Videotex();
+        $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
         $vdt = $videotex
         ->effaceLigne00()
         ->ecritVideotex(file_get_contents(SERVICE_DIR . "vdt/demo-controller-page.vdt"))

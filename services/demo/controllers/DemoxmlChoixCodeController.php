@@ -12,7 +12,7 @@ class DemoxmlChoixCodeController extends \MiniPaviFwk\controllers\XmlController
     {
         $vdt = parent::ecran();
 
-        $videotex = new \MiniPaviFwk\videotex\Videotex();
+        $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
         $vdt .= $videotex
         ->position(23, 1)->effaceFinDeLigne()->couleurFond("vert")->couleurTexte('noir')
         ->ecritUnicode(" " . end(explode('\\', $this::class)))

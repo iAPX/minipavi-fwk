@@ -13,7 +13,7 @@ class DemoxmlZonesaisieCodeController extends \MiniPaviFwk\controllers\XmlContro
     {
         $vdt = parent::ecran();
 
-        $videotex = new \MiniPaviFwk\videotex\Videotex();
+        $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
         $vdt .= $videotex
         ->position(23, 1)->effaceFinDeLigne()->couleurFond("vert")->couleurTexte('noir')
         ->ecritUnicode(" " . end(explode('\\', $this::class)))

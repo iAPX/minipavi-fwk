@@ -11,7 +11,7 @@ class DemoxmlMessageCodeController extends \MiniPaviFwk\controllers\XmlControlle
     public function ecran(): string
     {
         $vdt = parent::ecran();
-        $videotex = new \MiniPaviFwk\videotex\Videotex();
+        $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
         $videotex->position(23, 1)->effaceFinDeLigne()->couleurFond("vert")->couleurTexte('noir')
         ->ecritUnicode(" " . end(explode('\\', $this::class)));
         $vdt .= $videotex->getOutput();
@@ -31,7 +31,7 @@ class DemoxmlMessageCodeController extends \MiniPaviFwk\controllers\XmlControlle
 
     private function displayPrecedentMessage(array $message): string
     {
-        $videotex = new \MiniPaviFwk\videotex\Videotex();
+        $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
         $videotex->effaceLigne00();
         foreach ($message as $messageLigne => $messageSaisie) {
             $videotex->position($messageLigne + 13, 1)->effaceFinDeLigne()->ecritUnicode($messageSaisie);

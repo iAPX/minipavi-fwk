@@ -10,7 +10,7 @@ class DemoEcranCodeController extends \MiniPaviFwk\controllers\VideotexControlle
 {
     public function ecran(): string
     {
-        $videotex = new \MiniPaviFwk\videotex\Videotex();
+        $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
 
         // Redo the same demo as in demoxml-ecran page in demo.xml
         $vdt = $videotex

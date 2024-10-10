@@ -6,6 +6,9 @@
 
 namespace MiniPaviFwk\xml;
 
+use MiniPaviFwk\actions\Action;
+use MiniPaviFwk\actions\PageAction;
+
 class ChoixXml
 {
     public static function choix(
@@ -13,7 +16,7 @@ class ChoixXml
         string $touche,
         string $saisie,
         array $context
-    ): ?\MiniPaviFwk\actions\Action {
+    ): ?Action {
         trigger_error("ChoixXml : " . $saisie . " + " . $touche, E_USER_NOTICE);
         foreach ($page->action->saisie as $option) {
             $option_touche = mb_strtoupper((string) $option['touche']);
@@ -22,7 +25,7 @@ class ChoixXml
             if ($option_touche === $touche && $option_saisie === mb_strtolower($saisie)) {
                 $pagename = (string) $option['suivant'];
                 trigger_error("ChoixXml : Page " . $pagename, E_USER_NOTICE);
-                return new \MiniPaviFwk\actions\PageAction($context, $pagename);
+                return new PageAction($context, $pagename);
             }
         }
 

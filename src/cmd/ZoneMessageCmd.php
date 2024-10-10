@@ -6,10 +6,13 @@
 
 namespace MiniPaviFwk\cmd;
 
+use MiniPavi\MiniPaviCli;
+use MiniPaviFwk\Validation;
+
 class ZoneMessageCmd extends Cmd
 {
     public static function createMiniPaviCmd(
-        \MiniPaviFwk\Validation $validation,
+        Validation $validation,
         int $ligne = 24,
         int $hauteur = 1,
         bool $curseur = true,
@@ -18,7 +21,7 @@ class ZoneMessageCmd extends Cmd
         int $col = 1,
         int $longueur = 40
     ): array {
-        return \MiniPavi\MiniPaviCli::createInputMsgCmd(
+        return MiniPaviCli::createInputMsgCmd(
             $col,
             $ligne,
             $longueur,

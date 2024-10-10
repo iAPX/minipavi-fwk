@@ -4,6 +4,8 @@
  * Configuration for the Demo Chat service
  */
 
+namespace service;
+
 const XML_PAGES_URL = false;  // Don't try to use pages from vdt folder when a http/https scheme is present
 
 // The default controller & Sommaire controller
@@ -25,3 +27,6 @@ const MESSAGES_TIMEOUT = 3600;
 
 // Service specific error reporting
 const SERVICE_ERROR_REPORTING = E_ALL;
+
+// Service specific Query Handler
+const QUERY_HANDLER_CLASSNAME = \service\handlers\QueryHandler::class;
