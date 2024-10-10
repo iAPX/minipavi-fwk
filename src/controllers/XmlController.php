@@ -31,7 +31,7 @@ class XmlController extends VideotexController
         // Load the XML file
         $xml_filename = empty($context['xml_filename']) ? \service\DEFAULT_XML_FILE : $context['xml_filename'];
         trigger_error("XML file: $xml_filename", E_USER_NOTICE);
-        $simpleXml = simplexml_load_file(SERVICE_DIR . 'xml/' . $xml_filename . '.xml');
+        $simpleXml = simplexml_load_file(SERVICE_DIR . 'xml/' . $xml_filename);
 
         if (empty($this->context['xml_page'])) {
             trigger_error("No XML page, searching in <debut/>", E_USER_NOTICE);

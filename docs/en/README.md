@@ -14,6 +14,8 @@
 
 ## Then for a XML managed service, read those
 
+- [XMLint transition](./XMLint-transition.md) : how to transition from an XMLint service to MiniPavi-fwk
+
 - [XMLint documentation](https://raw.githubusercontent.com/ludosevilla/minipaviCli/master/XMLint/XMLint-doc.pdf) (French PDF)
 
 - [Minitel services configuration](./Configurations.md)

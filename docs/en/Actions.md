@@ -44,7 +44,7 @@ Usage examples in [services/demo/controllers/DemoActionCodeController.php](../..
 It send back to the Accueil (homepage) of the service
 Depending on services/{serviceName}/config.php,
 instantiate the DEFAULT_CONTROLLER is not false or empty.
-if not, use the DEFAULT_XML_FILE, in services/{serviceName}/xml and adding ".xml" extension,
+if not, use the DEFAULT_XML_FILE, in services/{serviceName}/xml,
 in this case startup page is provided by the `<service><debut nom="xxx" /></service>` of the XML
 
 

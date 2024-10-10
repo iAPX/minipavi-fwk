@@ -64,7 +64,7 @@ const XML_PAGES_URL = false;  // Don't try to use pages from vdt folder when a h
 
 // The default controller & Sommaire controller
 // For a service beginning with a VideotexController or XmlController, put it here
-const DEFAULT_CONTROLLER = false;  // If false, use xml/{DEFAULT_XML_FILE}.xml
+const DEFAULT_CONTROLLER = false;  // If false, use xml/{DEFAULT_XML_FILE}
 
 
 

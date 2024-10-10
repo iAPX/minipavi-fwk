@@ -51,9 +51,11 @@ class DemoActionCodeController extends VideotexController
 
     public function choix1Envoi(): ?Action
     {
+        $default_controller = MiniPaviFwk\helpers\ConstantHelper::getConstValueByName('DEFAULT_CONTROLLER', false);
+        $default_xml_file = MiniPaviFwk\helpers\ConstantHelper::getConstValueByName('DEFAULT_XML_FILE', false);
         return new \MiniPaviFwk\actions\AccueilAction(
-            \service\DEFAULT_CONTROLLER,
-            \service\DEFAULT_XML_FILE,
+            $default_controller,
+            $default_xml_file,
             $this->context
         );
     }
