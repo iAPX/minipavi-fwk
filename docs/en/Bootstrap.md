@@ -2,6 +2,8 @@
 
 Responsability : setting up the environment for Minitel Service Controller execution
 
+Source file : [index.php](../../index.php)
+
 
 ## Query bootstrap order by default
 1. services/global-config.php

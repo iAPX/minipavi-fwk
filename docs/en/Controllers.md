@@ -2,6 +2,9 @@
 
 Responsability: handling user interaction.
 
+Source directory : [src/controllers/](../../src/controllers/)
+
+
 Controllers provide the Vidéotex output stream, generate the input area information or MiniPaviCli commands, give the validated keys, and handle user input returning [Actions](./Actions.md).
 
 

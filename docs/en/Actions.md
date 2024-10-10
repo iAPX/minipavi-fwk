@@ -2,6 +2,9 @@
 
 Responsability : build and provide informations for end-of-query and next-query.
 
+Sources directory : [src/actions/](../../src/actions/)
+
+
 Actions are meant to provide the Queryhandler through queryLogic what will should be displayed and the controller responsible to handle the next input from the user.
 Typically controller answer to an input is built by instantiating an Action.
 

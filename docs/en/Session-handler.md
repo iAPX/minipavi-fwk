@@ -2,6 +2,8 @@
 
 Responsability: Session handling
 
+Source file : [src/handlers/SessionHandler.php](../../src/handlers/SessionHandler.php)
+
 
 ## Usage
 
