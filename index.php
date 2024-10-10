@@ -11,10 +11,10 @@ require_once "vendor/autoload.php";
 require_once "src/strings/mb_ucfirst.php";
 
 try {
-    MiniPavi\MiniPaviCli::start();
-    \MiniPaviFwk\handlers\SessionHandler::startSession();
-    \MiniPaviFwk\handlers\ServiceHandler::startService();
-    $queryHandler = \MiniPaviFwk\handlers\ServiceHandler::getQueryHandler();
+    \MiniPavi\MiniPaviCli::start();
+    (\SESSION_HANDLER_CLASSNAME)::startSession();
+    (\SERVICE_HANDLER_CLASSNAME)::startService();
+    $queryHandler = (SERVICE_HANDLER_CLASSNAME)::getQueryHandler();
 
     // Execute the query
     // Many informations returned to enable wrapping by the Service optional Query Handler
@@ -31,7 +31,7 @@ try {
     );
 
     // Ends saving session and returning command
-    \MiniPaviFwk\handlers\SessionHandler::setContext($context);
+    (\SESSION_HANDLER_CLASSNAME)::setContext($context);
     \MiniPavi\MiniPaviCli::send($output, $nextPage, "", true, $cmd, $directCall);
 } catch (Exception $e) {
     throw new Exception('Erreur MiniPavi ' . $e->getMessage());

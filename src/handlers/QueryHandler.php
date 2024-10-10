@@ -20,7 +20,7 @@ class QueryHandler
 
         trigger_error("QueryLogic fctn = " . \MiniPavi\MiniPaviCli::$fctn, E_USER_NOTICE);
         if (\MiniPavi\MiniPaviCli::$fctn == 'FIN' || \MiniPavi\MiniPaviCli::$fctn == 'FCTN?') {
-            static::queryDcx(\MiniPaviFwk\handlers\SessionHandler::class);
+            static::queryDcx();
             exit;
         }
 
@@ -103,10 +103,10 @@ class QueryHandler
         return new \MiniPaviFwk\actions\AccueilAction(DEFAULT_CONTROLLER, DEFAULT_XML_FILE, []);
     }
 
-    protected static function queryDcx(string $sessionHandlerClassName): void
+    protected static function queryDcx(): void
     {
         trigger_error("fctn : DCX");
-        $sessionHandlerClassName::destroySession();
+        (\SESSION_HANDLER_CLASSNAME)::destroySession();
     }
 
     protected static function queryDirect(): void
@@ -181,7 +181,7 @@ class QueryHandler
     protected static function getSessionContext(): array
     {
         trigger_error("Load session context : " . print_r($_SESSION, true), E_USER_NOTICE);
-        return \MiniPaviFwk\handlers\SessionHandler::getContext();
+        return (\SESSION_HANDLER_CLASSNAME)::getContext();
     }
 
     protected static function getNewController(array $context): \MiniPaviFwk\controllers\VideotexController

@@ -12,6 +12,10 @@ This file contains the first executed statements.
 
 - `const DEFAULT_SERVICE` : name of default service, selected by default
 
+- `const SESSION_HANDLER_CLASSNAME` : full name of the Session handler Classname
+
+- `const SERVICE_HANDLER_CLASSNAME` : full name of the Service Handler Classname
+
 
 ## Service Configuration
 Service configuration is named `service-config.php` on the services/{serviceName} directory.
@@ -49,19 +53,14 @@ You will encounter that on the DemoChat Minitel service, through its [service-co
 You might add whatever entry fit the needs of your service too.
 
 
-## Query bootstrap order
-1. services/global-config.php
-2. Class autoloaders
-3. MiniPavi\MiniPaviCli::start()
-4. \MiniPaviFwk\handlers\SessionHandler::startSession()
-5. \MiniPaviFwk\handlers\ServiceHandler::startService()
-6. services/{serviceName}/service-config.php
-
-There's a chain of dependencies, needing to identify and validate the Service, for that having a Session, thus having access to MiniPaviCli queries results, this one needing autoloaders.
-
-
 ## References
 [Global configuration file](../../services/global-config.php)
+
+[Session Handler](./Session-handler.md)
+
+[Service Handler](./Service-handler.md)
+
+[Bootstrap](./Bootstrap.md)
 
 [default XmlController](../../src/controllers/XmlController.php)
 

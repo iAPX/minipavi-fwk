@@ -22,9 +22,10 @@ class SwitchServiceAction extends Action
         $waitOutput = !empty($output) ? str_repeat("\00", $waitSeconds * 120) : '';
 
         // Reinit the Session, protect against data leakage
-        \MiniPaviFwk\handlers\SessionHandler::destroySession();
-        \MiniPaviFwk\handlers\SessionHandler::startSession();
-        $_SESSION['service'] = $newServiceName;
+        (\SESSION_HANDLER_CLASSNAME)::destroySession();
+        (\SESSION_HANDLER_CLASSNAME)::startSession();
+
+        (\SERVICE_HANDLER_CLASSNAME)::setServiceName($newServiceName);
         $_SESSION['context'] = [];
 
         // Act now and quit directly!

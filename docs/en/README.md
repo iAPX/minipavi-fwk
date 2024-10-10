@@ -7,6 +7,8 @@
 
 - [How to run minipavifwk locally with its demo Minitel services](./Local-execution.md)
 
+- [Configuration](./Configurations.md)
+
 
 ## Then for a XML managed service, read those
 
@@ -63,6 +65,10 @@
 
 - [MiniPaviCli documentation](https://github.com/ludosevilla/minipaviCli/blob/main/MiniPaviCli-doc.pdf) (French PDF)
 
+
+## Last but not least
+
+- [Bootstrap](./Bootstrap.md)
 
 
 ## External Minitel ressources
