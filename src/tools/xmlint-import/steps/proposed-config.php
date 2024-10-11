@@ -30,6 +30,7 @@ const XML_PAGES_URL = "$pages_path";
 EOF;
 if ($report_all_errors) {
     $service_config .= <<<EOF
+
 // Service specific error reporting, for ALL errors
 const SERVICE_ERROR_REPORTING = E_ALL;
 

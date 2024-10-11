@@ -50,7 +50,7 @@ if (count($pages_url) === 0) {
         $common_path = substr($common_path, 0, $common_length);
     }
 
-    $pages_path = substr($common_path, 0, strrpos($common_path, '/'));
+    $pages_path = substr($common_path, 0, strrpos($common_path, '/') + 1);   // Includes the last common slash
     echo "Common Pages path : " . $pages_path . "\n\n";
     if ($pages_path === "") {
         echo "No common path found, so none page will be imported.\n";

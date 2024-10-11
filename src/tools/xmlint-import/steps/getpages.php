@@ -19,7 +19,7 @@ foreach ($pages_url as $url => $nb) {
         if ($page !== false) {
             $pages[$url] = $page;
             echo "Imported, " . strlen($page) . " bytes.\n";
-            echo "Will be stored in services/" . $service_name . "/vdt" . substr($url, strlen($pages_path)) . "\n";
+            echo "Will be stored in services/" . $service_name . "/vdt/" . substr($url, strlen($pages_path)) . "\n";
         } else {
             echo "Error while fetching this page.\n";
             $nb_errors++;
