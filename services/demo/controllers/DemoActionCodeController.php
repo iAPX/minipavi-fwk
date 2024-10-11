@@ -6,15 +6,11 @@
 
 namespace service\controllers;
 
-use MiniPaviFwk\actions\Action;
-use MiniPaviFwk\controllers\VideotexController;
-use MiniPaviFwk\helpers\VideotexHelper;
-
-class DemoActionCodeController extends VideotexController
+class DemoActionCodeController extends MiniPaviFwk\controllers\VideotexController
 {
     public function ecran(): string
     {
-        $videotex = new VideotexHelper();
+        $videotex = new MiniPaviFwk\helpers\VideotexHelper();
         $vdt = $videotex
         ->effaceLigne00()
         ->ecritVideotex(file_get_contents(SERVICE_DIR . "vdt/demo-controller-page.vdt"))
@@ -49,7 +45,7 @@ class DemoActionCodeController extends VideotexController
         return $vdt;
     }
 
-    public function choix1Envoi(): ?Action
+    public function choix1Envoi(): ?MiniPaviFwk\actions\Action
     {
         $default_controller = MiniPaviFwk\helpers\ConstantHelper::getConstValueByName('DEFAULT_CONTROLLER', false);
         $default_xml_file = MiniPaviFwk\helpers\ConstantHelper::getConstValueByName('DEFAULT_XML_FILE', false);
@@ -60,7 +56,7 @@ class DemoActionCodeController extends VideotexController
         );
     }
 
-    public function choix2Envoi(): ?Action
+    public function choix2Envoi(): ?MiniPaviFwk\actions\Action
     {
         return new \MiniPaviFwk\actions\ControllerAction(
             \service\controllers\DemoChoixCodeController::class,
@@ -68,37 +64,37 @@ class DemoActionCodeController extends VideotexController
         );
     }
 
-    public function choix3Envoi(): ?Action
+    public function choix3Envoi(): ?MiniPaviFwk\actions\Action
     {
         return new \MiniPaviFwk\actions\DeconnexionAction();
     }
 
-    public function choix4Envoi(): ?Action
+    public function choix4Envoi(): ?MiniPaviFwk\actions\Action
     {
         return new \MiniPaviFwk\actions\Ligne00Action($this, "Ligne 00 via Ligne00Action()");
     }
 
-    public function choix5Envoi(): ?Action
+    public function choix5Envoi(): ?MiniPaviFwk\actions\Action
     {
         return new \MiniPaviFwk\actions\PageAction($this->context, "demoxml-sommaire", "demo");
     }
 
-    public function choix6Envoi(): ?Action
+    public function choix6Envoi(): ?MiniPaviFwk\actions\Action
     {
         return new \MiniPaviFwk\actions\RepetitionAction($this);
     }
 
-    public function choix7Envoi(): ?Action
+    public function choix7Envoi(): ?MiniPaviFwk\actions\Action
     {
         return new \MiniPaviFwk\actions\UnicodeOutputAction($this, " Texte unicode : çàèéwejfweoij ");
     }
 
-    public function choix8Envoi(): ?Action
+    public function choix8Envoi(): ?MiniPaviFwk\actions\Action
     {
         return new \MiniPaviFwk\actions\VideotexOutputAction($this, " \x1bETexte \x1bFvideotex               ");
     }
 
-    public function choix9Envoi(): ?Action
+    public function choix9Envoi(): ?MiniPaviFwk\actions\Action
     {
         // Switch to MacBidouille, displaying a message and waiting 2 seconds.
         return new \MiniPaviFwk\actions\SwitchServiceAction(
@@ -108,7 +104,7 @@ class DemoActionCodeController extends VideotexController
         );
     }
 
-    public function toucheSommaire(string $saisie): ?Action
+    public function toucheSommaire(string $saisie): ?MiniPaviFwk\actions\Action
     {
         return new \MiniPaviFwk\actions\PageAction($this->context, "demoxml-sommaire", "demo");
     }

@@ -1,9 +1,10 @@
 # TODOs and versions
 
 ## v0.8 - mid October, 2024
+- [x] Adds more dynamism to Demochat
+- [x] Adds a tool to import XMLint online projects
 - [ ] Documentation
 - [ ] Better Unit Tests coverage
-- [x] Adds more dynamism to Demochat
 
 ## v1.0 - November, 2024
 - [ ] Full Unit Tests converage (be courageous!)

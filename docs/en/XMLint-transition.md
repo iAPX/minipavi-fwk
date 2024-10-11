@@ -11,6 +11,21 @@ Source directory : [MacBidouille](https://www.minipavi.fr/emulminitel/index.php?
 It use the XML file and the Vidéotex files (.vdt) of the live Minitel Service, captured at one point in time.
 
 
+## Your first and last stop?
+You could now use the [xmlint-import.php tool](../../src/tools/xmlint-import.php) !!!
+
+No hassle, no long doc to read, no directory to create or files to copy.
+It only needs the current URL of your XML int xml file, the name of your new MinipaviFwkService, if you want your new Minitel Service to be the one proposed by default, and if you want extended logs for debugging.
+
+Go to the MiniPaviFwk root directory [here](../../) .
+Use this command: `php ./src/tools/xmlint-import.php` .
+You could stop at each step, including before modifying your [./services/global-config.php](../../services/global-config.php).
+
+Enjoy!
+
+You could stop reading here, except for the different references below...
+
+
 ## Goal & limitations
 Goal is to be able to easily transfert your XMLint Minitel Service into a MiniPaviFwk, as easily as possible.
 Limitations are:
@@ -129,3 +144,12 @@ The idea was to be able to take the original XMLint work, to put it on a MiniPav
 Then, expand its features using PHP code.
 
 Notice that, basically there's only one step: copy your XML file on [services/myservice/xml](../../services/myservice/xml) under the name "default.xml" and enjoy yourself (excuse my bad English).
+
+
+## References
+
+[XML files](./XML-files.md)
+
+[XML services](./XML-services.md)
+
+[XML controllers](./XML-controllers.md)

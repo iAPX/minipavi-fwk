@@ -1,6 +1,14 @@
 # Documentation for Minitel Services developpers
 
 
+## License
+
+It's on a MIT License, but essentially my take is "I don't care", it's Free Software, Free as in Free Beer.
+No permission to ask for. No question. None obligation. None copyright.
+
+[Read the MIT Licence here](../../LICENSE)
+
+
 ## Firstly you have to read these
 
 - [Schedule of improvements](./Schedule.md)

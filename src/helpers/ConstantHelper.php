@@ -8,7 +8,7 @@ namespace MiniPaviFwk\helpers;
 
 class ConstantHelper
 {
-    public static function getConstValueByName(string $constName, $defaultValue = ""): string
+    public static function getConstValueByName(string $constName, $defaultValue = null): string
     {
         if (defined('\\service\\' . $constName)) {
             return constant('\\service\\' . $constName);

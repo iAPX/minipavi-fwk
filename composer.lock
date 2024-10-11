@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a659988a8e67ef5a5b23bd81fbf50f98",
+    "content-hash": "b3204294e10e9732b084d671bb8cc4dd",
     "packages": [
         {
             "name": "ludosevilla/minipavicli",
