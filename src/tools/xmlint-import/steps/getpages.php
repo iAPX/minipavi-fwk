@@ -11,7 +11,7 @@ foreach ($pages_url as $url => $nb) {
     echo "\n";
     echo "Page URL : " . $url . " , referenced " . $nb . " times.\n";
 
-    if (substr($url, 0, strlen($pages_path)) !== $pages_path || $pages_path === "") {
+    if (substr($url, 0, strlen($pages_path)) !== $pages_path || strlen($pages_path) < 10) {
         echo "Not on the common path, will not be imported.\n";
         $nb_errors++;
     } else {
