@@ -1,3 +1,3 @@
 # MiniPaviCli
 
-Responsability : be the basic fundation for minipavi-fwk
+Responsability : be the basic fundation for MiniPaviFwk

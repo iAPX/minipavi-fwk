@@ -22,7 +22,7 @@ No permission to ask for. No question. None obligation. None copyright.
 
 ## Then for a XML managed service, read those
 
-- [XMLint transition](./XMLint-transition.md) : how to transition from an XMLint service to MiniPavi-fwk
+- [XMLint transition](./XMLint-transition.md) : how to transition from an XMLint service to MiniPaviFwk
 
 - [XMLint documentation](https://raw.githubusercontent.com/ludosevilla/minipaviCli/master/XMLint/XMLint-doc.pdf) (French PDF)
 

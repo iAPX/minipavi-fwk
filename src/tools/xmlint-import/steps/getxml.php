@@ -50,12 +50,25 @@ if (count($pages_url) === 0) {
         $common_path = substr($common_path, 0, $common_length);
     }
 
-    $pages_path = substr($common_path, 0, strrpos($common_path, '/') + 1);   // Includes the last common slash
+    if ($common_path !== "") {
+        $pages_path = substr($common_path, 0, strrpos($common_path, '/') + 1);   // Includes the last slash
+    }
     echo "Common Pages path : " . $pages_path . "\n\n";
-    if (strlen($pages_path) < 10) {
+    if ($pages_path === "" || strpos($pages_path, "//") === false) {
+        // "" : no common path found
+        // "//" missing : there's something weird, maybe a mix of "http://" and "https://", anyway we throw that away
+        // Notice that http:// and https:// are supported, the domain names or IP adresses will become subdirectories!
         $pages_path = "";
         echo "No common path found, so none page will be imported.\n";
     }
 }
 
 YESno() || die("Aborted, no modification done.\n");
+
+// Edge case : pages from multiple services on the same scheme!
+$schemes = ['http://', 'https://', 'ftp://', 'ftps://'];
+if (in_array($pages_path, $schemes)) {
+    echo "You are in an edgy case: your pages are hosted on different websites, with same scheme.\n";
+    echo "I will import them, but will put the domain names or IP adresses in subdirectories.\n";
+    YESno() || die("Aborted, no modification done.\n");
+}

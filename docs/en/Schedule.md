@@ -3,32 +3,25 @@
 ## v0.8 - mid October, 2024
 - [x] Adds more dynamism to Demochat
 - [x] Adds a tool to import XMLint online projects
+- [x] Pages through curl with Error Management, on EcranXml.php
 - [ ] Documentation
-- [ ] Better Unit Tests coverage
+- [ ] Less bad Unit Tests coverage
+
 
 ## v1.0 - November, 2024
-- [ ] Full Unit Tests converage (be courageous!)
+- [ ] Better Unit Tests coverage
 - [ ] Support XML controlled email messages
-- [ ] Adds documentation for newly added features
-- [ ] Adds Unit Tests for newly added features
 
-## v1.1 - December, 2024
-- [ ] Implements Demochat validator for Pseudonym AZaz09-space with explanation
-- [x] Demochat should really delete messages files
-- [ ] Page through curl with Error Management, on EcranXml.php
-- [ ] Adds Unit Tests for curl
-- [ ] French Documentation
 
-## v1.2 - 2025
-- [ ] Upgrade to MiniPaviCli 1.0.4
-- [ ] Support WebMedia
-- [ ] Demo MiniPaviCli 1.0.4 features
-- [ ] Unit Tests MiniPaviCli 1.0.4 features
-- [ ] Document MiniPaviCli 1.0.4 features
+## Futuribles (in no particular order)
 
-## Future devs
-- [ ] Implement Tree Management (Arborescence in french) with ability to transparently return to parent, grand-parent or any ancestor
-- [ ] Adds demos for Tree Management
-- [ ] Unit Tests for Tree Management
-- [ ] Document Tree Management
-
+- MiniPavi WebMedia support
+- MiniPavi Form Command support
+- MiniPaviCli new functions support
+- FormController
+- Code examples referenced by the documentation
+- Stack Handling (being able to return to parents Controllers in their current state)
+- Helpers for dynamic content handling
+- Helpers for dynamic content display
+- Documentation for real-world server usage
+- Tool for Minitel Service switching

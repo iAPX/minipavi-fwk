@@ -1,6 +1,6 @@
 # MacBidouille Service
 
-Responsability : Showcase an existing XMLInt Minitel Service running on minipavi-fwk
+Responsability : Showcase an existing XMLInt Minitel Service running on MiniPaviFwk
 
 Source directory : [services/macbidouille/](../../services/macbidouille/)
 

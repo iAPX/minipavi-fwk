@@ -1,6 +1,6 @@
-# Local execution of minipavi-fwk and its provided services and examples
+# Local execution of MiniPaviFwk and its provided services and examples
 
-minipavi-fwk is a PHP 8.1+ project to support minipavi for Minitel and emulators.
+MiniPaviFwk is a PHP 8.1+ project to support minipavi for Minitel and emulators.
 
 Standard is PSR12.
 

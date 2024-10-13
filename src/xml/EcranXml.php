@@ -53,7 +53,7 @@ class EcranXml
             }
         }
 
-        // Not an http or https scheme, don't name your file beginning as an URL scheme! Lol!
+        // Not an http or https scheme, don't name your file beginning with an URL scheme! Lol!
         if (mb_substr($url, 0, 7) !== "http://" && mb_substr($url, 0, 8) !== "https://") {
             $filename = SERVICE_DIR . "vdt/" . $url;
             trigger_error("page filename from path: " . $filename, E_USER_NOTICE);
@@ -64,11 +64,15 @@ class EcranXml
         }
 
         // Fallabck using curl
-        // @TODO adds error management
         trigger_error("Page downloaded from url: " . $url, E_USER_NOTICE);
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $videotex->ecritVideotex(curl_exec($ch));
+        $curl_response = curl_exec($ch);
+        if ($curl_response !== false) {
+            $videotex->ecritVideotex($curl_response);
+        } else {
+            trigger_error("Error downloading page $url : " . curl_error($ch), E_USER_ERROR);
+        }
         curl_close($ch);
     }
 

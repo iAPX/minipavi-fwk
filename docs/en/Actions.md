@@ -16,7 +16,7 @@ These Actions will provide two informations to the Query Handler: which Controll
 Shortly, this (new) Controller will indicate where is the input area on-screen, the expected format of the input area, the allowed function keys that Minipavi should accept from the user. Some informations are 
 
 
-## Which Actions are provided by minipavi-fwk
+## Which Actions are provided by MiniPaviFwk
 - AccueilAction : startup Action for new user and also when switching service (see SwitchServiceAction), could also serve to switch from a VideotexController to XML managed by XMLController or a derivative, or to come back to the homepage.
 
 - ControllerAction : transfer control to a new Controller by it's full name, outputting what its `public function ecran(): string` returns.

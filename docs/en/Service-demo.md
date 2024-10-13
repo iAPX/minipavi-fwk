@@ -1,6 +1,6 @@
 # Demo Minitel Service
 
-Responsability : demonstrate the main features of minipavi-fwk, and have copy-pastable working code
+Responsability : demonstrate the main features of MiniPaviFwk, and have copy-pastable working code
 
 Source directory : [services/demo/](../../services/demo/)
 
