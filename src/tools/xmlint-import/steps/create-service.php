@@ -37,7 +37,7 @@ foreach ($pages_subdirs as $page_subdir => $dummy) {
 
 // Copy the pages
 foreach ($pages as $url => $page) {
-    $page_path = "{$service_dir}/vdt" . substr($url, strlen($pages_path));
+    $page_path = "{$service_dir}/vdt/" . substr($url, strlen($pages_path));
     echo " - " . $page_path . "\n";
     file_put_contents($page_path, $page);
 }
