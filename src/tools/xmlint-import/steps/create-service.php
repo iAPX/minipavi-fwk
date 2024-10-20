@@ -31,17 +31,18 @@ foreach ($pages_url as $url => $nb) {
     }
 }
 foreach ($pages_subdirs as $page_subdir => $dummy) {
-    mkdir("{$service_dir}/vdt/$page_subdir", 0755, true);
-    echo " - services/$service_name/vdt/$page_subdir   Videotex pages subdirectory has been created\n";
+    $page_dir = "{$service_dir}/vdt/{$page_subdir}";
+    mkdir($page_dir, 0755, true);
+    echo " - $page_dir   Videotex pages subdirectory has been created\n";
 }
 
 // Copy the pages
 foreach ($pages as $url => $page) {
-    $page_path = "{$service_dir}/vdt/" . substr($url, strlen($pages_path));
-    echo " - " . $page_path . "\n";
-    file_put_contents($page_path, $page);
+    $page_filename = "{$service_dir}/vdt/" . substr($url, strlen($pages_path));
+    echo " - " . $page_filename . "\n";
+    file_put_contents($page_filename, $page);
 }
-echo " - " . count($pages_url) . "   pages has been copied\n";
+echo " - " . count($pages_url) . "   pages have been copied\n";
 
 // Create the service config
 file_put_contents("{$service_dir}/service-config.php", $service_config);
