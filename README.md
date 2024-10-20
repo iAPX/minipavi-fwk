@@ -12,7 +12,7 @@ Also as with the idea that you could import an existing XMLint Minitel Service w
 
 [Locally install and launch minipavi-fwk](./docs/en/Local-execution.md)
 
-See [all the docs in ./docs directory](./docs/en/)
+See [all the docs in ./docs directory](./docs/en/README.md)
 
 See [the MIT license](./LICENSE)
 
