@@ -11,7 +11,7 @@ echo "Are you sure? yes/NO? ";
 $saisie = mb_strtolower(trim(readline()));
 echo "\n";
 if ($saisie !== 'y' && $saisie !== 'yes') {
-    die("Aborted,  modification done.\n");
+    die("Aborted, modification done : your $service_name service is created on ./services/$service_name but not activated.\n");
 }
 
 file_put_contents("./services/global-config.php", $global_config);

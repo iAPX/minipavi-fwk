@@ -72,3 +72,28 @@ if (in_array($pages_path, $schemes)) {
     echo "I will import them, but will put the domain names or IP adresses in subdirectories.\n";
     YESno() || die("Aborted, no modification done.\n");
 }
+
+// Edge case : unsupported XML features
+$unsupported_features = [
+    ['Email sent from ZoneMessage through <saisie email="xxx" />', "//saisie[@email]"],
+    ['PIN code display <pin />', "//pin"],
+    ['WebMedia <webmedia />', "//webmedia"],
+];
+$unsupported_messages = [];
+foreach($unsupported_features as $unsupported_feature) {
+    $message = $unsupported_feature[0];
+    $xpath = $unsupported_feature[1];
+    if ($xml_element->xpath($xpath)) {
+        $unsupported_messages[] = $message;
+    }
+}
+
+if (count($unsupported_messages) > 0) {
+    echo "\n";
+    echo "XML contains unsupported features on this version of MiniPaviFwk :\n";
+    foreach ($unsupported_messages as $message) {
+        echo " - $message\n";
+    }
+    YESno() || die("Aborted, no modification done.\n");
+}
+
