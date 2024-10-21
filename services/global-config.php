@@ -12,10 +12,10 @@ error_reporting(E_ERROR | E_USER_WARNING | E_PARSE);
 ini_set('display_errors', 0);
 
 // Sets the allowed services.
-const ALLOWED_SERVICES = ['demo', 'demochat', 'demoxml', 'macbidouille', 'myservice', 'momo'];
+const ALLOWED_SERVICES = ['demo', 'demochat', 'demoxml', 'macbidouille', 'myservice'];
 
 // Sets the default service, should be in the ALLOWED_SERVICES array.
-const DEFAULT_SERVICE = 'momo';
+const DEFAULT_SERVICE = 'demo';
 
 // Sets the Session Handler class name.
 // const SESSION_HANDLER_CLASSNAME = \MiniPaviFwk\handlers\SessionHandler::class;
