@@ -16,9 +16,15 @@ echo " - services/$service_name/xml   directory has been created\n";
 mkdir("{$service_dir}/vdt", 0755, true);
 echo " - services/$service_name/vdt   directory has been created\n";
 
+mkdir("{$service_dir}/controllers", 0755, true);
+echo " - services/$service_name/controllers   directory has been created\n";
+
+mkdir("{$service_dir}/handlers", 0755, true);
+echo " - services/$service_name/handlers   directory has been created\n";
+
 // Copy the XML file
-file_put_contents("{$service_dir}/xml/default.xml", $xml);
-echo " - services/$service_name/xml/default.xm   XML file has been copied\n";
+file_put_contents("{$service_dir}/xml/imported.xml", $xml);
+echo " - services/$service_name/xml/imported.xml   XML file has been copied for future references\n";
 
 // Create the pages subdirectory
 $pages_subdirs = [];
@@ -42,7 +48,15 @@ foreach ($pages as $url => $page) {
     echo " - " . $page_filename . "\n";
     file_put_contents($page_filename, $page);
 }
-echo " - " . count($pages_url) . "   pages have been copied\n";
+echo " - " . count($pages_url) . "   pages have been copied\n\n";
+
+// Store controllers
+foreach ($controllers as $controller_name => $controller) {
+    $controller_code = $controller->buildController();
+    file_put_contents("{$service_dir}/controllers/{$controller_name}.php", $controller_code);
+    echo " - Controller : " . $controller_name . "\n";
+}
+echo " - " . count($controllers) . "   controllers have been created\n\n";
 
 // Create the service config
 file_put_contents("{$service_dir}/service-config.php", $service_config);

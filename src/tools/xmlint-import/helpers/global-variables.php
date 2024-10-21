@@ -20,3 +20,6 @@ $old_allowed_services = "";
 $new_allowed_services = "";
 $old_default_service = "";
 $new_default_service = "";
+
+$default_controller_name = "";
+$controllers = [];

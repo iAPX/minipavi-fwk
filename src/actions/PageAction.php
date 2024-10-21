@@ -30,6 +30,11 @@ class PageAction extends Action
         // xxxx becomes XxxxController; xxxx-yyyy becomes XxxxYyyyController; and so on
         $cleanControllerName = '';
         foreach (explode('-', $pagename) as $pagename_part) {
+            $car = substr($pagename_part, 0, 1);
+            if ($car < 'a' || $car > 'z') {
+                // Not a letter, could not be ucfirsted, we change the dash '-' to underscore '_'
+                $cleanControllerName .= '_';
+            }    
             $cleanControllerName .= \MiniPaviFwk\helpers\mb_ucfirst(mb_strtolower($pagename_part));
         }
         $overriderControllerName = "\\service\\controllers\\" . $cleanControllerName . 'Controller';

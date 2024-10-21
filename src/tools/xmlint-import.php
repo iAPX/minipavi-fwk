@@ -29,6 +29,9 @@ include_once "xmlint-import/steps/service-name.php";
 // 2-Ask for the XML url and import it
 include_once "xmlint-import/steps/getxml.php";
 
+// 2b-Create Controllers
+include_once "xmlint-import/steps/xml-to-controllers.php";
+
 // 3-Import the pages
 include_once "xmlint-import/steps/getpages.php";
 

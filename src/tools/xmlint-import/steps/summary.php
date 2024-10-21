@@ -17,6 +17,8 @@ echo "   from this URL : $xml_url\n";
 echo " - " . count($pages_url) . "   pages will be copied\n";
 echo "   Their common url is : " . $pages_path . "\n";
 
+echo " - " . count($controllers) . "   controllers will be created and populated\n";
+
 echo " - services/$service_name/service-config.php   will be created\n";
 
 echo " - services/global-config.php   global configuration file will be modified";

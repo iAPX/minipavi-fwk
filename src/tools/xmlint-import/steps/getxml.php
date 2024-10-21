@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Asks for the XML url, get it and parse it, populating Pages informations
+ * Asks for the XML url, get it and parse it, populating Pages and Controllers informations
  */
 
 // Asks the XML URL
@@ -73,8 +73,9 @@ if (in_array($pages_path, $schemes)) {
     YESno() || die("Aborted, no modification done.\n");
 }
 
-// Edge case : unsupported XML features
+// Edge case : unsupported features
 $unsupported_features = [
+    ['Zone Message <zone message />', "//zonemessage"],
     ['Email sent from ZoneMessage through <saisie email="xxx" />', "//saisie[@email]"],
     ['PIN code display <pin />', "//pin"],
     ['WebMedia <webmedia />', "//webmedia"],
@@ -94,6 +95,7 @@ if (count($unsupported_messages) > 0) {
     foreach ($unsupported_messages as $message) {
         echo " - $message\n";
     }
+    echo "\n";
     YESno() || die("Aborted, no modification done.\n");
 }
 

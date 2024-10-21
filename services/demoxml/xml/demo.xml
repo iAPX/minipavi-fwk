@@ -29,7 +29,9 @@
       <position ligne="6" col="2" /><inversion mode="actif" /><ecrit texte=" 2 " /><inversion mode="inactif" /><ecrit texte=" Zonesaisie : zone de saisie" />
       <position ligne="8" col="2" /><inversion mode="actif" /><ecrit texte=" 3 " /><inversion mode="inactif" /><ecrit texte=" Validations : touche autorisées" />
       <position ligne="10" col="2" /><inversion mode="actif" /><ecrit texte=" 4 " /><inversion mode="inactif" /><ecrit texte=" Choix : gestion des saisies" />
-      <position ligne="12" col="2" /><inversion mode="actif" /><ecrit texte=" 5 " /><inversion mode="inactif" /><ecrit texte=" Message multiligne " />
+      <position ligne="12" col="2" /><inversion mode="actif" /><ecrit texte=" 5 " /><inversion mode="inactif" /><ecrit texte=" Actions " /><couleur texte="noir" fond="vert"/><ecrit texte=" Controller-only "/>
+      <position ligne="14" col="2" /><inversion mode="actif" /><ecrit texte=" 6 " /><inversion mode="inactif" /><ecrit texte=" Keywords " /><couleur texte="noir" fond="vert"/><ecrit texte=" Controller-only "/>
+      <position ligne="16" col="2" /><inversion mode="actif" /><ecrit texte=" 7 " /><inversion mode="inactif" /><ecrit texte=" Message multiligne " /><couleur texte="noir" fond="vert"/><ecrit texte=" Controller-only "/>
 
       <position ligne="22" col="1"/><effacefindeligne/><couleur fond="bleu"/><ecrit texte=" &lt;page nom='demoxml-sommaire'/&gt; "/>
       <position ligne="24" col="20" /><ecrit texte="Votre choix . + " /><inversion mode="actif" /><ecrit texte="ENVOI" /><inversion mode="inactif" />
@@ -47,7 +49,9 @@
       <saisie choix="2" touche="envoi" suivant="demoxml-zonesaisie" />
       <saisie choix="3" touche="envoi" suivant="demoxml-validation" />
       <saisie choix="4" touche="envoi" suivant="demoxml-choix" />
-      <saisie choix="5" touche="envoi" suivant="demoxml-message" />
+      <saisie choix="5" touche="envoi" suivant="demo-action-code" />
+      <saisie choix="6" touche="envoi" suivant="demo-keywords-code" />
+      <saisie choix="7" touche="envoi" suivant="demoxml-message-code" />
     </action>
   </page>
 
@@ -96,11 +100,38 @@
       <zonesaisie ligne="24" col="40" longueur="1" curseur="invisible" />
       <validation touche="repetition" />
       <validation touche="sommaire" />
+      <validation touche="suite" />
     </entree>
 
     <action defaut="Choix non proposé">
       <saisie touche="repetition" suivant="demoxml-ecran" />
       <saisie touche="sommaire" suivant="demoxml-sommaire" />
+      <saisie touche="suite" suivant="demoxml-ecran-code" />
+    </action>
+  </page>
+
+  <page nom="demoxml-ecran-code">
+    <ecran>
+      <affiche url="demoxml-controller-page.vdt" />
+      <affiche url="demoxml-choix-code.vdt" />
+
+      <!-- where the implementation is -->
+      <position ligne="22" col="1"/><effacefindeligne/><couleur fond="bleu"/><ecrit texte=" &lt;page nom='demoxml-ecran-code'/&gt; "/>
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="24" col="40" longueur="1" curseur="invisible" />
+      <validation touche="repetition" />
+      <validation touche="sommaire" />
+      <validation touche="retour" />
+      <validation touche="suite" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="repetition" suivant="demoxml-ecran-code" />
+      <saisie touche="sommaire" suivant="demoxml-sommaire" />
+      <saisie touche="retour" suivant="demoxml-ecran" />
+      <saisie touche="suite" suivant="demo-ecran-code" />
     </action>
   </page>
 
@@ -119,11 +150,41 @@
       <zonesaisie ligne="12" col="35" longueur="1" curseur="visible" />
       <validation touche="repetition" />
       <validation touche="sommaire" />
+      <validation touche="suite" />
     </entree>
 
     <action defaut="Choix non proposé">
       <saisie touche="repetition" suivant="demoxml-zonesaisie" />
       <saisie touche="sommaire" suivant="demoxml-sommaire" />
+      <saisie touche="suite" suivant="demoxml-zonesaisie-code" />
+    </action>
+  </page>
+
+  <page nom="demoxml-zonesaisie-code">
+    <ecran>
+      <affiche url="demoxml-controller-page.vdt" />
+      <affiche url="demoxml-choix-code.vdt" />
+
+      <position ligne="8" col="1"/><ecrit texte="Saisie forcée ici par zonesaisie() : ."/>
+      <position ligne="12" col="18"/><ecrit texte="Saisie XML ici: ."/>
+
+      <!-- where the implementation is -->
+      <position ligne="22" col="1"/><effacefindeligne/><couleur fond="bleu"/><ecrit texte=" &lt;page nom='demoxml-zonesaisie-code'/&gt; "/>
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="12" col="35" longueur="1" curseur="visible" />
+      <validation touche="repetition" />
+      <validation touche="sommaire" />
+      <validation touche="retour" />
+      <validation touche="suite" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="repetition" suivant="demoxml-zonesaisie-code" />
+      <saisie touche="sommaire" suivant="demoxml-sommaire" />
+      <saisie touche="retour" suivant="demoxml-zonesaisie" />
+      <saisie touche="suite" suivant="demo-zonesaisie-code" />
     </action>
   </page>
 
@@ -144,12 +205,42 @@
       <zonesaisie ligne="24" col="40" longueur="1" curseur="invisible" />
       <validation touche="repetition" />
       <validation touche="sommaire" />
+      <validation touche="suite" />
       <validation touche="retour"/>
     </entree>
 
     <action defaut="Message erreur XML.">
       <saisie touche="repetition" suivant="demoxml-validation" />
       <saisie touche="sommaire" suivant="demoxml-sommaire" />
+      <saisie touche="suite" suivant="demoxml-validation-code" />
+    </action>
+  </page>
+
+  <page nom="demoxml-validation-code">
+    <ecran>
+      <affiche url="demoxml-controller-page.vdt" />
+      <affiche url="demoxml-choix-code.vdt" />
+
+      <position ligne="4" col="1"/><ecrit texte="Le XML autorise [SUITE][SOMMAIRE][REPETITION]"/>
+
+      <position ligne="12" col="1"/><ecrit texte="Toute autre touche de fonction sera ignorée car filtrée par minipavi, telle que [ENVOI] etc."/>
+
+      <!-- where the implementation is -->
+      <position ligne="22" col="1"/><effacefindeligne/><couleur fond="bleu"/><ecrit texte=" &lt;page nom='demoxml-validation-code'/&gt; "/>
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="24" col="40" longueur="1" curseur="invisible" />
+      <validation touche="repetition" />
+      <validation touche="sommaire" />
+      <validation touche="suite" />
+    </entree>
+
+    <action defaut="Message erreur XML">
+      <saisie touche="repetition" suivant="demoxml-validation-code" />
+      <saisie touche="sommaire" suivant="demoxml-sommaire" />
+      <saisie touche="retour" suivant="demoxml-validation" />
+      <saisie touche="suite" suivant="demo-validation-code" />
     </action>
   </page>
 
@@ -163,6 +254,7 @@
       <position ligne="6" col="1"/><ecrit texte="Choix [SOMMAIRE] : Sommaire"/>
 
       <position ligne="10" col="1"/><ecrit texte="Choix 1 + [ENVOI] : Sommaire"/>
+      <position ligne="11" col="1"/><ecrit texte="Choix 2 + [ENVOI] : XML + Contrôleur"/>
       
       <!-- where the implementation is -->
       <position ligne="22" col="1"/><effacefindeligne/><couleur fond="bleu"/><ecrit texte=" &lt;page nom='demoxml-choix'/&gt; "/>
@@ -178,14 +270,48 @@
     </entree>
 
     <action defaut="Message erreur XML.">
-      <saisie touche="repetition" suivant="demoxml-choix" />
+      <saisie touche="repetition" suivant="demoxml-validation" />
       <saisie touche="sommaire" suivant="demoxml-sommaire" />
       <saisie touche="retour" suivant="demoxml-sommaire" />
+      <saisie touche="suite" suivant="demoxml-choix-code" />
       <saisie touche="envoi" choix="1" suivant="demoxml-sommaire" />
+      <saisie touche="envoi" choix="2" suivant="demoxml-choix-code" />
     </action>
   </page>
 
-  <page nom="demoxml-message">
+  <page nom="demoxml-choix-code">
+    <ecran>
+      <affiche url="demoxml-controller-page.vdt" />
+      <affiche url="demoxml-choix-code.vdt" />
+
+      <position ligne="4" col="1"/><ecrit texte="[SUITE] : Contrôleur / toucheSuite()"/>
+      <position ligne="5" col="1"/><ecrit texte="[RETOUR] : XML / toucheRetour()"/>
+      <position ligne="6" col="1"/><ecrit texte="[SOMMAIRE] : Sommaire via XML"/>
+      <position ligne="7" col="1"/><ecrit texte="[REPETITION] : Répétition / XmlController"/>
+
+      <position ligne="10" col="1"/><ecrit texte="1 + [ENVOI] : XML via choix1Envoi()"/>
+      <position ligne="11" col="1"/><ecrit texte="2 + [ENVOI] : Sommaire via toucheEnvoi()"/>
+      <position ligne="12" col="1"/><ecrit texte="3 + [ENVOI] : Contrôleur via choix()"/>
+
+      <!-- where the implementation is -->
+      <position ligne="22" col="1"/><effacefindeligne/><couleur fond="bleu"/><ecrit texte=" &lt;page nom='demoxml-choix-code'/&gt; "/>
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="24" col="40" longueur="1" curseur="invisible" />
+      <validation touche="repetition" />
+      <validation touche="sommaire" />
+      <validation touche="suite" />
+      <validation touche="retour" />
+      <validation touche="envoi" />
+    </entree>
+
+    <action defaut="Message erreur XML">
+      <saisie touche="sommaire" suivant="demoxml-sommaire" />
+    </action>
+  </page>
+
+  <page nom="demoxml-message-code">
     <ecran>
       <affiche url="demoxml-controller-page.vdt" />
 

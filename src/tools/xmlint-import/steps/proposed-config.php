@@ -24,14 +24,14 @@ $service_config = <<<EOF
 
 namespace service;
 
-const DEFAULT_XML_FILE = 'default.xml';
-const XML_PAGES_URL = "$pages_path";
+// The default controller
+const DEFAULT_CONTROLLER = \service\controllers\\{$default_controller_name}::class;
 
 EOF;
 if ($report_all_errors) {
     $service_config .= <<<EOF
 
-// Service specific error reporting, for ALL errors
+// Service specific error reporting, for ALL errors.
 const SERVICE_ERROR_REPORTING = E_ALL;
 
 EOF;
