@@ -26,6 +26,9 @@ class XmlController extends VideotexController
 
     public function __construct(array $context, array $params = [])
     {
+        // Display a warning because it's now obsolete!
+        trigger_error("Controller: XmlController are obsoletes, class : " . $this::class, E_USER_WARNING);
+
         parent::__construct($context, $params);
 
         // Load the XML file
