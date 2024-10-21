@@ -85,10 +85,10 @@ function xml_ecran(ControllerBuilder $controller, \SimpleXMLElement $ecran, stri
                 $inner_code .= "        \$videotex->effaceFinDeLigne();\n";
                 break;
             case "graphique":
-                $inner_code .= "        \$videotex->graphique();\n";
+                $inner_code .= "        \$videotex->modeGraphique();\n";
                 break;
             case "texte":
-                $inner_code .= "        \$videotex->texte();\n";
+                $inner_code .= "        \$videotex->modeTexte();\n";
                 break;
             case "efface":
                 $inner_code .= "        \$videotex->effaceEcran();\n";
@@ -96,7 +96,7 @@ function xml_ecran(ControllerBuilder $controller, \SimpleXMLElement $ecran, stri
             case "date":
                 $inner_code .= "        \$videotex->afficheDateParis();\n";
                 break;
-            case "time":
+            case "heure":
                 $inner_code .= "        \$videotex->afficheHeureParis();\n";
                 break;
             case "repete":

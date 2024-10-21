@@ -42,7 +42,7 @@ class XmlController extends VideotexController
 
         $pageXml = $simpleXml->xpath('//page[@nom="' . $this->context['xml_page'] . '"]')[0];
         if (is_null($pageXml)) {
-            trigger_error("No XML page found: " . $this->context['xml_page'], E_ERROR);
+            trigger_error("No XML page found: " . $this->context['xml_page'], E_USER_ERROR);
         } else {
             $this->pageXml = $pageXml;
         }
