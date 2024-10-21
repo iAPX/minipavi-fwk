@@ -78,7 +78,7 @@ class VideotexController
 
         // Try all possibilities, in order
         $methods = [];
-        if (preg_match('/^[A-Za-z0-9*#]+$/u', $saisie) == 1) {
+        if (preg_match('/^[A-Za-z0-9*#]+$/u', $saisie) == 1 || $saisie === '') {
             // Non-empty unicode string with AZaz09*# characters (specifically no ::, \\) to avoid security issues
             // * becomes ETOILE, # becomes DIESE. French word for "star" or * used in Minitel culture.
             $formatted_saisie = \MiniPaviFwk\helpers\mb_ucfirst(mb_strtolower($saisie));
@@ -120,7 +120,7 @@ class VideotexController
         // Try all possibilities, in order
         $saisie = $message[0];
         $methods = [];
-        if (preg_match('/^[A-Za-z0-9*#]+$/u', $saisie) == 1) {
+        if (preg_match('/^[A-Za-z0-9*#]+$/u', $saisie) == 1 || $saisie === '') {
             // Non-empty unicode string with AZaz09*# characters (specifically no ::, \\) to avoid security issues
             // * becomes ETOILE, # becomes DIESE. French word for "star" or * used in Minitel culture.
             $formatted_saisie = \MiniPaviFwk\helpers\mb_ucfirst(mb_strtolower($saisie));

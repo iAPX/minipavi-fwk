@@ -30,7 +30,7 @@ EOF;
             // Convert to Code
             $code_choix .= <<<EOF
 \n
-    public function $method_name(): ?MiniPaviFwk\actions\Action
+    public function $method_name(): ?\MiniPaviFwk\actions\Action
     {
         // Handle '$choix' + [$formatted_touche]
         return new \MiniPaviFwk\actions\ControllerAction(

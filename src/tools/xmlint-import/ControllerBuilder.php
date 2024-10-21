@@ -51,7 +51,7 @@ class ControllerBuilder
 
 namespace service\controllers;
 
-class $this->classname extends MiniPaviFwk\controllers\VideotexController
+class $this->classname extends \MiniPaviFwk\controllers\VideotexController
 {
 $this->ecran
 $this->validation

@@ -1,0 +1,877 @@
+<service>
+  <interpreteur url="http://www.minipavi.fr/XMLint/?xurl=" />
+  <debut nom="accueil" />
+
+  <page nom="accueil">
+    <ecran>
+      <affiche url="https://minitelbidouille.pvigier.com/pages/9cdc90a41/accueil.vdt" />
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="23" col="40" longueur="1" curseur="invisible" />
+      <validation touche="repetition" />
+      <validation touche="sommaire" />
+      <validation touche="guide" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="repetition" suivant="accueil" />
+      <saisie touche="sommaire" suivant="articles" />
+      <saisie touche="guide" suivant="infos" />
+    </action>
+  </page>
+
+
+  <page nom="test">
+	  <ecran>
+		  <webmedia type="T" infos="I" />
+		<pin />
+	</ecran>
+	<entree>
+		<zonemessage ligne="20" hauteur="4"
+curseur="visible" />
+	</entree>
+	<action>
+		<saisie touche="T" suivant="P"
+			email="E" sujet='S' msgok="M"/>
+	</action>
+  </page>
+
+
+  <page nom="infos">
+    <ecran>
+      <affiche url="https://minitelbidouille.pvigier.com/pages/9cdc90a41/infos.vdt" />
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="24" col="1" longueur="1" curseur="invisible" />
+      <validation touche="repetition" />
+      <validation touche="sommaire" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="repetition" suivant="infos" />
+      <saisie touche="sommaire" suivant="articles" />
+    </action>
+  </page>
+
+  <page nom="stats">
+    <ecran>
+      <affiche url="https://minitelbidouille.pvigier.com/pages/9cdc90a41/stats.vdt" />
+
+<position ligne="3" col="1" /><ecrit texte="Visites : " /><couleur texte="cyan" /><ecrit texte=" 1577" /><position ligne="4" col="1" /><ecrit texte="24H : " /><couleur texte="cyan" /><ecrit texte=" 75" /><position ligne="5" col="1" /><ecrit texte="Semaine : " /><couleur texte="cyan" /><ecrit texte=" 142" /><position ligne="6" col="1" /><ecrit texte="Mois : " /><couleur texte="cyan" /><ecrit texte=" 306" /><position ligne="7" col="1" /><ecrit texte="Articles : " /><couleur texte="cyan" /><ecrit texte=" 449" /><position ligne="8" col="1" /><ecrit texte="Articles finis : " /><couleur texte="cyan" /><ecrit texte=" 138" /><position ligne="9" col="1" /><ecrit texte="Pages lues : " /><couleur texte="cyan" /><ecrit texte=" 936" /><position ligne="10" col="1" /><ecrit texte="Session ID : " /><couleur texte="cyan" /><ecrit texte=" 9cdc90a41" /><affiche url="https://minitelbidouille.pvigier.com/pages.cache/stats-graph.vdt" />
+
+    </ecran>
+    <entree>
+      <zonesaisie ligne="24" col="1" longueur="1" curseur="invisible" />
+      <validation touche="sommaire" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="sommaire" suivant="articles" />
+    </action>
+  </page>
+
+  <page nom="articles">
+    <ecran>
+      <affiche url="https://minitelbidouille.pvigier.com/pages/9cdc90a41/articles.vdt" />
+      <affiche url="https://minitelbidouille.pvigier.com/pages/9cdc90a41/logo-drcs.vdt" />
+
+
+<position ligne="4" col="1" /><inversion mode="actif" /><couleur texte="jaune" /><ecrit texte=" 1 " /><inversion mode="inactif" /><couleur texte="cyan" /><ecrit texte=" Samedi sécurité : les traceurs dans     les apps de vos Mac et iPhone" /><position ligne="7" col="1" /><inversion mode="actif" /><couleur texte="jaune" /><ecrit texte=" 2 " /><inversion mode="inactif" /><couleur texte="cyan" /><ecrit texte=" [MàJ] OK, l&#039;iPad mini a été mis à       jour" /><position ligne="10" col="1" /><inversion mode="actif" /><couleur texte="jaune" /><ecrit texte=" 3 " /><inversion mode="inactif" /><couleur texte="cyan" /><ecrit texte=" Intel et AMD créent le x86 Ecosystem    Advisory Group" /><position ligne="13" col="1" /><inversion mode="actif" /><couleur texte="jaune" /><ecrit texte=" 4 " /><inversion mode="inactif" /><couleur texte="cyan" /><ecrit texte=" [Sponsorisé] Pourquoi utiliser          Surfshark - le VPN de première          qualité à tout petit prix" /><position ligne="16" col="1" /><inversion mode="actif" /><couleur texte="jaune" /><ecrit texte=" 5 " /><inversion mode="inactif" /><couleur texte="cyan" /><ecrit texte=" Samedi Sécurité : Black Mirror,         billet d&#039;humeur" /><position ligne="19" col="1" /><inversion mode="actif" /><couleur texte="jaune" /><ecrit texte=" 6 " /><inversion mode="inactif" /><couleur texte="cyan" /><ecrit texte=" Samedi sécurité : Black Mirror(ing)" />
+
+
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="24" col="30" longueur="1" curseur="visible" />
+      <validation touche="repetition" />
+      <validation touche="guide" />
+      <validation touche="envoi" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="repetition" suivant="articles" />
+      <saisie touche="guide" suivant="infos" />
+      <saisie touche="envoi" choix="0" suivant="stats" />
+
+      <saisie choix="1" touche="envoi" suivant="resume1" /><saisie choix="2" touche="envoi" suivant="resume2" /><saisie choix="3" touche="envoi" suivant="resume3" /><saisie choix="4" touche="envoi" suivant="resume4" /><saisie choix="5" touche="envoi" suivant="resume5" /><saisie choix="6" touche="envoi" suivant="resume6" />
+
+    </action>
+  </page>
+
+
+
+  <page nom="resume1">
+    <ecran>
+      <affiche url="https://minitelbidouille.pvigier.com/pages/9cdc90a41/resume.vdt" />
+
+      <position ligne="3" col="1" /><ecrit texte="Samedi sécurité : les traceurs dans les apps de vos Mac et iPhone" /><position ligne="6" col="1" /><ecrit texte="Par " /><couleur texte="cyan" /><ecrit texte="Philippe" /><position ligne="6" col="26" /><ecrit texte="19 Octobre 2024" /><position ligne="7" col="1" /><inversion mode="actif" /><ecrit texte=" Résumé par Mistral AI (mistral-large)  " /><inversion mode="inactif" />
+
+      <position ligne="8" col="1" /><couleur texte="cyan" /><ecrit texte="L&#039;article révèle que les applications   sur Mac, iPhone, PC et Android          contiennent des traceurs, envoyant      régulièrement des informations à des    tiers comme Sentry.io. Ces données      incluent l&#039;utilisation des logiciels,   les tâches effectuées et les adresses   IP, permettant de suivre les activités  des entreprises, souvent à leur insu, etde revendre ces informations." />
+
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="23" col="40" longueur="1" curseur="invisible" />
+      <validation touche="sommaire" />
+      <validation touche="retour" />
+      <validation touche="suite" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="sommaire" suivant="articles" />
+      <saisie touche="retour" suivant="articles" />
+      
+      <saisie touche="suite" suivant="article1-1" />
+    </action>
+  </page>
+
+  <page nom="article1-1">
+    <ecran>
+      <affiche url="https://minitelbidouille.pvigier.com/pages/9cdc90a41/article.vdt" />
+
+      
+
+      <position ligne="3" col="32" /><ecrit texte=" Page 1/3" />
+
+      <position ligne="4" col="1" /><couleur texte="cyan" /><ecrit texte="Quand on parle de traceurs, on pense    immanquablement au Web et à Google et   consorts.                                                                       Et il est certain qu&#039;ils ne se gênent   pas, Google allant jusqu&#039;à limiter les  fonctionnalités de Chrome pour gêner lesbloqueurs de pubs et les bloqueurs de   traceurs, profitant ainsi de sa positionhégémonique, tant coté navigateur que   coté publicité. Je vais y revenir.                                              Mais savez-vous que nos logiciels sur   Mac, iPhone, PC, Android, etc. intègrenteux-aussi des traceurs?                                                         Généralement c&#039;est indiqué, et mentionnépour avoir des retours d&#039;information en cas d&#039;erreur logicielle, sauf que...    " />
+
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="3" col="1" longueur="1" curseur="invisible" />
+      <validation touche="sommaire" />
+      <validation touche="retour" />
+      <validation touche="suite" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="sommaire" suivant="articles" />
+      <saisie touche="retour" suivant="resume1" />
+      
+      <saisie touche="suite" suivant="article1-2" />
+    </action>
+  </page>
+
+  <page nom="article1-2">
+    <ecran>
+      <affiche url="https://minitelbidouille.pvigier.com/pages/9cdc90a41/article.vdt" />
+
+      
+
+      <position ligne="3" col="32" /><ecrit texte=" Page 2/3" />
+
+      <position ligne="4" col="1" /><couleur texte="cyan" /><ecrit texte="Même quand il n&#039;y a pas d&#039;erreur, des   tonnes d&#039;informations sont régulièrementenvoyées, à Sentry.io par exemple (le   plus connu), à commencer par le logicielutilisé et les fonctions utilisées.                                             Ces compagnies savent quand vous        travaillez et avec quels logiciels, ce  que vous faites comme type de tâche,    depuis quelle adresse IP publique, etc.                                         Ils savent donc qui travaille de chez   lui et quand, ou au bureau, ou si la    personne se déplace pour son travail.   " />
+
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="3" col="1" longueur="1" curseur="invisible" />
+      <validation touche="sommaire" />
+      <validation touche="retour" />
+      <validation touche="suite" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="sommaire" suivant="articles" />
+      <saisie touche="retour" suivant="article1-1" />
+      
+      <saisie touche="suite" suivant="article1-3" />
+    </action>
+  </page>
+
+  <page nom="article1-3">
+    <ecran>
+      <affiche url="https://minitelbidouille.pvigier.com/pages/9cdc90a41/article2.vdt" />
+
+      
+
+      <position ligne="3" col="32" /><ecrit texte=" Page 3/3" />
+
+      <position ligne="4" col="1" /><couleur texte="cyan" /><ecrit texte="Ce ne sont plus les particuliers qui    sont visées mais principalement les     entreprises, dont la plupart ne         comprennent pas qu&#039;elles envoient à des acteurs extérieurs, souvent étrangers,  des informations vitales pour analyser  leurs fonctionnements internes et qui   peuvent être revendues ayant une grande valeur...                               " />
+
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="3" col="1" longueur="1" curseur="invisible" />
+      <validation touche="sommaire" />
+      <validation touche="retour" />
+      <validation touche="suite" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="sommaire" suivant="articles" />
+      <saisie touche="retour" suivant="article1-2" />
+      
+      <saisie touche="suite" suivant="articles" />
+    </action>
+  </page>
+
+  <page nom="resume2">
+    <ecran>
+      <affiche url="https://minitelbidouille.pvigier.com/pages/9cdc90a41/resume.vdt" />
+
+      <position ligne="3" col="1" /><ecrit texte="[MàJ] OK, l&#039;iPad mini a été mis à jour" /><position ligne="6" col="1" /><ecrit texte="Par " /><couleur texte="cyan" /><ecrit texte="Lionel" /><position ligne="6" col="26" /><ecrit texte="17 Octobre 2024" /><position ligne="7" col="1" /><inversion mode="actif" /><ecrit texte=" Résumé par Mistral AI (mistral-large)  " /><inversion mode="inactif" />
+
+      <position ligne="8" col="1" /><couleur texte="cyan" /><ecrit texte="[MàJ] L&#039;iPad mini a été mis à jour avec la puce A17 Pro, mais elle perd un cœur GPU, n&#039;en ayant que 5. Le modèle de basepasse à 128 Go, avec Wi-Fi 6E et        compatibilité Apple Pencil Pro. Le prix de l&#039;entrée de gamme est à 609 euros." />
+
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="23" col="40" longueur="1" curseur="invisible" />
+      <validation touche="sommaire" />
+      <validation touche="retour" />
+      <validation touche="suite" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="sommaire" suivant="articles" />
+      <saisie touche="retour" suivant="articles" />
+      
+      <saisie touche="suite" suivant="article2-1" />
+    </action>
+  </page>
+
+  <page nom="article2-1">
+    <ecran>
+      <affiche url="https://minitelbidouille.pvigier.com/pages/9cdc90a41/article.vdt" />
+
+      
+
+      <position ligne="3" col="32" /><ecrit texte=" Page 1/3" />
+
+      <position ligne="4" col="1" /><couleur texte="cyan" /><ecrit texte="[MàJ] La puce A17 Pro perd dans cet iPadun de ses coeurs GPU. Elle en a         seulement 5 et pas 6, certainement les  puces qui n&#039;avaient pas passé toutes lescertifications lors de la production en masse des iPhone de la génération       précédente.                                                                     Sans tambour ni trompette Apple a mis à jour son iPad mini.                                                             Extérieurement rien ne change, ni le    touch-ID toujours présent, ni la qualitéde la caméra ni celle de l&#039;écran.       " />
+
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="3" col="1" longueur="1" curseur="invisible" />
+      <validation touche="sommaire" />
+      <validation touche="retour" />
+      <validation touche="suite" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="sommaire" suivant="articles" />
+      <saisie touche="retour" suivant="resume2" />
+      
+      <saisie touche="suite" suivant="article2-2" />
+    </action>
+  </page>
+
+  <page nom="article2-2">
+    <ecran>
+      <affiche url="https://minitelbidouille.pvigier.com/pages/9cdc90a41/article.vdt" />
+
+      
+
+      <position ligne="3" col="32" /><ecrit texte=" Page 2/3" />
+
+      <position ligne="4" col="1" /><couleur texte="cyan" /><ecrit texte="En interne le processeur évolue. On     retrouve la puce A17 Pro, enfin 128 Go  de stockage pour le modèle de base, le  Wi-Fi 6E, le Bluetooth 5.3 et enfin la  compatibilité avec l&#039;Apple Pencil Pro.                                          En résumé, il s&#039;agit d&#039;une mise à jour  minimaliste pour relancer autant que    possible les ventes.                                                            Encore une fois, le plus grand intérêt  de cette mise à jour est basé sur une   promesse dont les effets semblent de    plus en plus lointain, l&#039;arrivée réelle des effets d&#039;Apple Intelligence.        " />
+
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="3" col="1" longueur="1" curseur="invisible" />
+      <validation touche="sommaire" />
+      <validation touche="retour" />
+      <validation touche="suite" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="sommaire" suivant="articles" />
+      <saisie touche="retour" suivant="article2-1" />
+      
+      <saisie touche="suite" suivant="article2-3" />
+    </action>
+  </page>
+
+  <page nom="article2-3">
+    <ecran>
+      <affiche url="https://minitelbidouille.pvigier.com/pages/9cdc90a41/article2.vdt" />
+
+      
+
+      <position ligne="3" col="32" /><ecrit texte=" Page 3/3" />
+
+      <position ligne="4" col="1" /><couleur texte="cyan" /><ecrit texte="A ce niveau Apple a certainement raté leplus gros coche de son histoire post    Steve Jobs. Elle a été totalement prise par surprise par la bulle IA. Nous      parlons bien de bulle car cela nous faitpenser à ce que l&#039;on a connu avec       l&#039;arrivée d&#039;internet dans les années    2000.                                                                           Bref, aujourd&#039;hui Apple tente de        rassurer les marchés avec des promesses d&#039;un énorme potentiel futur. Il en va demême avec les clients à qui l&#039;on vend   des produits qui seront un jour         compatibles avec des super              fonctionnalités encore en développement dans le meilleur des cas.                                                       Pour finir, le prix de l&#039;entrée de gammeest à 609 euros.                        " />
+
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="3" col="1" longueur="1" curseur="invisible" />
+      <validation touche="sommaire" />
+      <validation touche="retour" />
+      <validation touche="suite" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="sommaire" suivant="articles" />
+      <saisie touche="retour" suivant="article2-2" />
+      
+      <saisie touche="suite" suivant="articles" />
+    </action>
+  </page>
+
+  <page nom="resume3">
+    <ecran>
+      <affiche url="https://minitelbidouille.pvigier.com/pages/9cdc90a41/resume.vdt" />
+
+      <position ligne="3" col="1" /><ecrit texte="Intel et AMD créent le x86 Ecosystem    Advisory Group" /><position ligne="6" col="1" /><ecrit texte="Par " /><couleur texte="cyan" /><ecrit texte="Lionel" /><position ligne="6" col="26" /><ecrit texte="17 Octobre 2024" /><position ligne="7" col="1" /><inversion mode="actif" /><ecrit texte=" Résumé par Mistral AI (mistral-large)  " /><inversion mode="inactif" />
+
+      <position ligne="8" col="1" /><couleur texte="cyan" /><ecrit texte="Intel et AMD créent le x86 Ecosystem    Advisory Group pour collaborer sur      l&#039;évolution de l&#039;architecture x86 et    faciliter le développement logiciel.    D&#039;autres entreprises comme Broadcom,    Dell et Google Cloud participent à cetteinitiative. Cette collaboration vise à  stabiliser et éventuellement            révolutionner l&#039;architecture x86 face à la montée de l&#039;ARM." />
+
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="23" col="40" longueur="1" curseur="invisible" />
+      <validation touche="sommaire" />
+      <validation touche="retour" />
+      <validation touche="suite" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="sommaire" suivant="articles" />
+      <saisie touche="retour" suivant="articles" />
+      
+      <saisie touche="suite" suivant="article3-1" />
+    </action>
+  </page>
+
+  <page nom="article3-1">
+    <ecran>
+      <affiche url="https://minitelbidouille.pvigier.com/pages/9cdc90a41/article.vdt" />
+
+      
+
+      <position ligne="3" col="32" /><ecrit texte=" Page 1/3" />
+
+      <position ligne="4" col="1" /><couleur texte="cyan" /><ecrit texte="Ennemis de toujours, Intel et AMD ont   fait une annonce commune surprenante, lacréation du x86 Ecosystem Advisory      Group.                                                                          Le but de ce groupe consultatif,        travailler ensemble sur l&#039;architecture  X86, la faire évoluer de concert et     créer ensemble des ressources facilitantle développement et l&#039;optimisation des  logiciels.                                                                      D&#039;autres grands noms comme Broadcom,    Dell et Google Cloud se sont associés à cette initiative.                       " />
+
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="3" col="1" longueur="1" curseur="invisible" />
+      <validation touche="sommaire" />
+      <validation touche="retour" />
+      <validation touche="suite" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="sommaire" suivant="articles" />
+      <saisie touche="retour" suivant="resume3" />
+      
+      <saisie touche="suite" suivant="article3-2" />
+    </action>
+  </page>
+
+  <page nom="article3-2">
+    <ecran>
+      <affiche url="https://minitelbidouille.pvigier.com/pages/9cdc90a41/article.vdt" />
+
+      
+
+      <position ligne="3" col="32" /><ecrit texte=" Page 2/3" />
+
+      <position ligne="4" col="1" /><couleur texte="cyan" /><ecrit texte="Le monde X86 a énormément été boulversé ces dernières années. Il y a déjà       longtemps, AMD a démarré une transition profonde alors que la société était au  bord du gouffre. Elle a même été aidée  financièrement par Intel qui ne pouvait se permettre d&#039;être en monopole.                                                Aujourd&#039;hui c&#039;est Intel qui est dans unesituation préoccupante. Plusieurs       sociétés sont sur les rangs pour lui    acheter des actifs ce qui reviendrait   peu ou prou à démanteler à terme le     groupe.                                 " />
+
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="3" col="1" longueur="1" curseur="invisible" />
+      <validation touche="sommaire" />
+      <validation touche="retour" />
+      <validation touche="suite" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="sommaire" suivant="articles" />
+      <saisie touche="retour" suivant="article3-1" />
+      
+      <saisie touche="suite" suivant="article3-3" />
+    </action>
+  </page>
+
+  <page nom="article3-3">
+    <ecran>
+      <affiche url="https://minitelbidouille.pvigier.com/pages/9cdc90a41/article2.vdt" />
+
+      
+
+      <position ligne="3" col="32" /><ecrit texte=" Page 3/3" />
+
+      <position ligne="4" col="1" /><couleur texte="cyan" /><ecrit texte="L&#039;autre problème est lié à l&#039;explosion  de l&#039;architecture ARM qui prend toujoursplus de place et de parts de marché.    Apple avait ouvert le bal avec ses pucesAx mais surtout Mx, les autres suivent, avec du retard certes mais suivent la   tendance.                                                                       L&#039;association de ces deux géants du X86 pourrait stabiliser les choses dans le  meilleur des cas et dans le pire freinerla perte de vitesse de cette            architecture complexe à moins qu&#039;ils    n&#039;arrivent à la révolutionner.          " />
+
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="3" col="1" longueur="1" curseur="invisible" />
+      <validation touche="sommaire" />
+      <validation touche="retour" />
+      <validation touche="suite" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="sommaire" suivant="articles" />
+      <saisie touche="retour" suivant="article3-2" />
+      
+      <saisie touche="suite" suivant="articles" />
+    </action>
+  </page>
+
+  <page nom="resume4">
+    <ecran>
+      <affiche url="https://minitelbidouille.pvigier.com/pages/9cdc90a41/resume.vdt" />
+
+      <position ligne="3" col="1" /><ecrit texte="[Sponsorisé] Pourquoi utiliser Surfshark- le VPN de première qualité à tout     petit prix" /><position ligne="6" col="1" /><ecrit texte="Par " /><couleur texte="cyan" /><ecrit texte="Lionel" /><position ligne="6" col="26" /><ecrit texte="14 Octobre 2024" /><position ligne="7" col="1" /><inversion mode="actif" /><ecrit texte=" Résumé par Mistral AI (mistral-large)  " /><inversion mode="inactif" />
+
+      <position ligne="8" col="1" /><couleur texte="cyan" /><ecrit texte="Surfshark, un VPN de qualité, offre     anonymat et sécurité en ligne avec des  fonctionnalités avancées comme SurfsharkAlert et Search. La version 3.2 pour    MacOS est disponible, avec des          améliorations significatives. Promotionsen cours : économisez jusqu&#039;à 81% sur unforfait de 2 ans, utilisable sur un     nombre illimité d&#039;appareils." />
+
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="23" col="40" longueur="1" curseur="invisible" />
+      <validation touche="sommaire" />
+      <validation touche="retour" />
+      <validation touche="suite" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="sommaire" suivant="articles" />
+      <saisie touche="retour" suivant="articles" />
+      
+      <saisie touche="suite" suivant="article4-1" />
+    </action>
+  </page>
+
+  <page nom="article4-1">
+    <ecran>
+      <affiche url="https://minitelbidouille.pvigier.com/pages/9cdc90a41/article.vdt" />
+
+      
+
+      <position ligne="3" col="32" /><ecrit texte=" Page 1/5" />
+
+      <position ligne="4" col="1" /><couleur texte="cyan" /><ecrit texte="[MàJ] La société propose des promotions conséquentes sur ses produits dès       aujourd&#039;hui et pendant les prochaines   semaines.                                                                       Retrouvez-les à l&#039;adresse suivante,     https://surfshark.com/fr/deals          " />
+
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="3" col="1" longueur="1" curseur="invisible" />
+      <validation touche="sommaire" />
+      <validation touche="retour" />
+      <validation touche="suite" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="sommaire" suivant="articles" />
+      <saisie touche="retour" suivant="resume4" />
+      
+      <saisie touche="suite" suivant="article4-2" />
+    </action>
+  </page>
+
+  <page nom="article4-2">
+    <ecran>
+      <affiche url="https://minitelbidouille.pvigier.com/pages/9cdc90a41/article.vdt" />
+
+      
+
+      <position ligne="3" col="32" /><ecrit texte=" Page 2/5" />
+
+      <position ligne="4" col="1" /><couleur texte="cyan" /><ecrit texte="Surfshark est un VPN, réseau privé      virtuel, qui permet de se rendre        totalement anonyme et sécurisé en ligne.Le logiciel offre de nombreuses         fonctionnalités pour facilement se      protéger en ligne, même pour les        néophytes. Le produit est en fait encoreplus qu&#039;un VPN, grâce à Surfshark Alert et Search. Si jamais votre numéro de    carte de crédit ou vos identifiants de  connexion se font pirater et diffusés   sur le Dark Web, Surfshark Alert vous eninformera en temps réel. Search est un  moteur de recherche 100% sans pubs ni   trackers, pour garder votre vie privée  en ligne totalement anonyme.            " />
+
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="3" col="1" longueur="1" curseur="invisible" />
+      <validation touche="sommaire" />
+      <validation touche="retour" />
+      <validation touche="suite" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="sommaire" suivant="articles" />
+      <saisie touche="retour" suivant="article4-1" />
+      
+      <saisie touche="suite" suivant="article4-3" />
+    </action>
+  </page>
+
+  <page nom="article4-3">
+    <ecran>
+      <affiche url="https://minitelbidouille.pvigier.com/pages/9cdc90a41/article.vdt" />
+
+      
+
+      <position ligne="3" col="32" /><ecrit texte=" Page 3/5" />
+
+      <position ligne="4" col="1" /><couleur texte="cyan" /><ecrit texte="Au-delà de la confidentialité, Surfsharkpermet aussi de débloquer 15+           bibliothèques de contenu sur Netflix à  travers le monde, ainsi que de          nombreuses chaînes en direct, il est    parfait pour les amateurs de cinéma qui ont déjà fait le tour des catalogues de service streaming français. Vous avez legoût de regarder le Seigneur des        Anneaux? Et hop, une petite connexion auserveur polonais de Surfshark, ouverte  de Netflix, et c&#039;est parti !                                                    Surfshark est maintenant en offre       promotionnelle, vous permettant d&#039;      économiser 81% sur un forfait de 2 ans. Un seul abonnement peut être utilisé surun nombre illimité d&#039;appareils sans     contrôle de débit - Mac, iPhone, et     Apple TV inclus.                        " />
+
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="3" col="1" longueur="1" curseur="invisible" />
+      <validation touche="sommaire" />
+      <validation touche="retour" />
+      <validation touche="suite" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="sommaire" suivant="articles" />
+      <saisie touche="retour" suivant="article4-2" />
+      
+      <saisie touche="suite" suivant="article4-4" />
+    </action>
+  </page>
+
+  <page nom="article4-4">
+    <ecran>
+      <affiche url="https://minitelbidouille.pvigier.com/pages/9cdc90a41/article.vdt" />
+
+      
+
+      <position ligne="3" col="32" /><ecrit texte=" Page 4/5" />
+
+      <position ligne="4" col="1" /><couleur texte="cyan" /><ecrit texte="Offre de 24 mois :                                                              Starter - 2,09 EUR + 4 mois             supplémentaires                                                                 One - 2,59 EUR + 4 mois supplémentaires                                         One+ - 4,09 EUR + 4 mois supplémentaires                                        Offre de 12 mois :                                                              Starter - 2,59 EUR + 4 mois             supplémentaires                                                                 One - 2,89 EUR + 4 mois supplémentaires                                         One+ - 5,69 EUR + 4 mois supplémentaires" />
+
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="3" col="1" longueur="1" curseur="invisible" />
+      <validation touche="sommaire" />
+      <validation touche="retour" />
+      <validation touche="suite" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="sommaire" suivant="articles" />
+      <saisie touche="retour" suivant="article4-3" />
+      
+      <saisie touche="suite" suivant="article4-5" />
+    </action>
+  </page>
+
+  <page nom="article4-5">
+    <ecran>
+      <affiche url="https://minitelbidouille.pvigier.com/pages/9cdc90a41/article2.vdt" />
+
+      
+
+      <position ligne="3" col="32" /><ecrit texte=" Page 5/5" />
+
+      <position ligne="4" col="1" /><couleur texte="cyan" /><ecrit texte="La version 3.2 du logiciel MacOS est    maintenant disponible, une grande mise àjour avec plusieurs améliorations qui   rendent Surfshark le VPN incontournable sur Mac !                               " />
+
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="3" col="1" longueur="1" curseur="invisible" />
+      <validation touche="sommaire" />
+      <validation touche="retour" />
+      <validation touche="suite" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="sommaire" suivant="articles" />
+      <saisie touche="retour" suivant="article4-4" />
+      
+      <saisie touche="suite" suivant="articles" />
+    </action>
+  </page>
+
+  <page nom="resume5">
+    <ecran>
+      <affiche url="https://minitelbidouille.pvigier.com/pages/9cdc90a41/resume.vdt" />
+
+      <position ligne="3" col="1" /><ecrit texte="Samedi Sécurité : Black Mirror, billet  d&#039;humeur" /><position ligne="6" col="1" /><ecrit texte="Par " /><couleur texte="cyan" /><ecrit texte="Philippe" /><position ligne="6" col="26" /><ecrit texte="12 Octobre 2024" /><position ligne="7" col="1" /><inversion mode="actif" /><ecrit texte=" Résumé par Mistral AI (mistral-large)  " /><inversion mode="inactif" />
+
+      <position ligne="8" col="1" /><couleur texte="cyan" /><ecrit texte="L&#039;article &quot;Samedi Sécurité : Black      Mirror&quot; déplore l&#039;érosion quotidienne dela vie privée et de l&#039;intimité, imputée à la technologie, aux entreprises, aux  gouvernements et à nos propres actions. La disparition de la vie privée semble  inévitable, nécessitant une redéfinitionradicale. Que pensez-vous et que        faites-vous pour vous protéger ?" />
+
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="23" col="40" longueur="1" curseur="invisible" />
+      <validation touche="sommaire" />
+      <validation touche="retour" />
+      <validation touche="suite" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="sommaire" suivant="articles" />
+      <saisie touche="retour" suivant="articles" />
+      
+      <saisie touche="suite" suivant="article5-1" />
+    </action>
+  </page>
+
+  <page nom="article5-1">
+    <ecran>
+      <affiche url="https://minitelbidouille.pvigier.com/pages/9cdc90a41/article.vdt" />
+
+      
+
+      <position ligne="3" col="32" /><ecrit texte=" Page 1/3" />
+
+      <position ligne="4" col="1" /><couleur texte="cyan" /><ecrit texte="On est en plein Black Mirror, jour aprèsjour...                                                                         Chaque jour la protection de notre vie  privée et de notre intimité est de plus en plus érodée.                                                                 La technologie est en partie en cause,  ainsi que des entreprises,              multinationales, gouvernements ou       gouvernances qui sont hors de notre     contrôle, souvent étrangers, mais plus  encore nos propres actions et celles de notre entourage.                                                                Nous et les nôtres sommes aussi des     acteurs de ce changement.               " />
+
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="3" col="1" longueur="1" curseur="invisible" />
+      <validation touche="sommaire" />
+      <validation touche="retour" />
+      <validation touche="suite" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="sommaire" suivant="articles" />
+      <saisie touche="retour" suivant="resume5" />
+      
+      <saisie touche="suite" suivant="article5-2" />
+    </action>
+  </page>
+
+  <page nom="article5-2">
+    <ecran>
+      <affiche url="https://minitelbidouille.pvigier.com/pages/9cdc90a41/article.vdt" />
+
+      
+
+      <position ligne="3" col="32" /><ecrit texte=" Page 2/3" />
+
+      <position ligne="4" col="1" /><couleur texte="cyan" /><ecrit texte="Souvent au nom du confort, de la        facilité. Aussi d&#039;un manque de          sensibilisation.                                                                La disparition de la vie privée et de   l&#039;intimité semble inéluctable, ou au    moins une redéfinition radicale de ce   que l&#039;on peut espérer avoir comme       intimité et comme vie privée dans un    pays occidental.                                                                Que ça soit dans l&#039;espace public ou mêmel&#039;espace dit &quot;privé&quot;.                                                           La vie privée et l&#039;intimité? des        Chinoiseries?!?                                                                 Qu&#039;en pensez-vous?                      " />
+
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="3" col="1" longueur="1" curseur="invisible" />
+      <validation touche="sommaire" />
+      <validation touche="retour" />
+      <validation touche="suite" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="sommaire" suivant="articles" />
+      <saisie touche="retour" suivant="article5-1" />
+      
+      <saisie touche="suite" suivant="article5-3" />
+    </action>
+  </page>
+
+  <page nom="article5-3">
+    <ecran>
+      <affiche url="https://minitelbidouille.pvigier.com/pages/9cdc90a41/article2.vdt" />
+
+      
+
+      <position ligne="3" col="32" /><ecrit texte=" Page 3/3" />
+
+      <position ligne="4" col="1" /><couleur texte="cyan" /><ecrit texte="Que faites-vous pour vous protéger      passivement ou activement?                                                      Ou au contraire privilégiez-vous le     confort et la facilité amenés par des   outils de plus en plus connectés et     franchement fantastiques?               " />
+
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="3" col="1" longueur="1" curseur="invisible" />
+      <validation touche="sommaire" />
+      <validation touche="retour" />
+      <validation touche="suite" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="sommaire" suivant="articles" />
+      <saisie touche="retour" suivant="article5-2" />
+      
+      <saisie touche="suite" suivant="articles" />
+    </action>
+  </page>
+
+  <page nom="resume6">
+    <ecran>
+      <affiche url="https://minitelbidouille.pvigier.com/pages/9cdc90a41/resume.vdt" />
+
+      <position ligne="3" col="1" /><ecrit texte="Samedi sécurité : Black Mirror(ing)" /><position ligne="6" col="1" /><ecrit texte="Par " /><couleur texte="cyan" /><ecrit texte="Philippe" /><position ligne="6" col="26" /><ecrit texte="12 Octobre 2024" /><position ligne="7" col="1" /><inversion mode="actif" /><ecrit texte=" Résumé par Mistral AI (mistral-large)  " /><inversion mode="inactif" />
+
+      <position ligne="8" col="1" /><couleur texte="cyan" /><ecrit texte="L&#039;article met en garde contre des       risques de sécurité liés à la fonction  &quot;iPhone Mirroring&quot; sur macOS 15 et iOS  18, qui stocke des métadonnées          d&#039;applications pouvant être exploitées  par des logiciels de sécurité en        entreprise. De plus, il rapporte que la Chine aurait piraté des backdoors de    surveillance téléphonique aux USA, et   que MoneyGram a subi une fuite de       données affectant 50 millions de        comptes, y compris des numéros de       sécurité sociale et des photos          d&#039;identité. Enfin, il souligne que les" />
+
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="23" col="40" longueur="1" curseur="invisible" />
+      <validation touche="sommaire" />
+      <validation touche="retour" />
+      <validation touche="suite" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="sommaire" suivant="articles" />
+      <saisie touche="retour" suivant="articles" />
+      
+      <saisie touche="suite" suivant="article6-1" />
+    </action>
+  </page>
+
+  <page nom="article6-1">
+    <ecran>
+      <affiche url="https://minitelbidouille.pvigier.com/pages/9cdc90a41/article.vdt" />
+
+      
+
+      <position ligne="3" col="32" /><ecrit texte=" Page 1/6" />
+
+      <position ligne="4" col="1" /><couleur texte="cyan" /><ecrit texte="La série Black Mirror était basée sur   l&#039;idée de montrer de quelles façons     notre vie privée et nos informations    personnelles pouvaient être affectées ouexposées via des changements            technologiques, mais aussi par les      changements comportementaux qu&#039;elles    créent ou permettent.                                                           Las, elle est terminée, et les épisodes existants commencent à vieillir, la     réalité vécue rattrapant leurs fictions dystopiques, comme narré ici. Je ne     pense pas qu&#039;il faille s&#039;en réjouir.    " />
+
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="3" col="1" longueur="1" curseur="invisible" />
+      <validation touche="sommaire" />
+      <validation touche="retour" />
+      <validation touche="suite" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="sommaire" suivant="articles" />
+      <saisie touche="retour" suivant="resume6" />
+      
+      <saisie touche="suite" suivant="article6-2" />
+    </action>
+  </page>
+
+  <page nom="article6-2">
+    <ecran>
+      <affiche url="https://minitelbidouille.pvigier.com/pages/9cdc90a41/article.vdt" />
+
+      
+
+      <position ligne="3" col="32" /><ecrit texte=" Page 2/6" />
+
+      <position ligne="4" col="1" /><couleur texte="cyan" /><ecrit texte="Je continue à la recommander chaudement:bons scenarii, bons metteurs en scène,  bons acteurs et de la subtilité. La     majorité des épisodes mérite d&#039;être vue au moins deux fois.                                                             Un petit florilège sur la vie privée ce samedi...                                                                       iPhone &quot;Black Mirroring&quot; sur Mac                                                Lorsqu&#039;on utilise la fonction iPhone    Mirroring arrivée avec macOS 15 Sequoia et iOS 18 &quot;IA plus tard&quot;, le Mac stocke des métadonnées sur les applications    installées sur l&#039;iPhone.                " />
+
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="3" col="1" longueur="1" curseur="invisible" />
+      <validation touche="sommaire" />
+      <validation touche="retour" />
+      <validation touche="suite" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="sommaire" suivant="articles" />
+      <saisie touche="retour" suivant="article6-1" />
+      
+      <saisie touche="suite" suivant="article6-3" />
+    </action>
+  </page>
+
+  <page nom="article6-3">
+    <ecran>
+      <affiche url="https://minitelbidouille.pvigier.com/pages/9cdc90a41/article.vdt" />
+
+      
+
+      <position ligne="3" col="32" /><ecrit texte=" Page 3/6" />
+
+      <position ligne="4" col="1" /><couleur texte="cyan" /><ecrit texte="Avec la conséquence dans le milieu de   l&#039;entreprise que des logiciels dits de  &quot;endpoint security&quot; repèrent ces        informations et les ramènent, créant    nombre de problèmes potentiels.                                                 App de rencontre? De rencontre Gay? De  suivi de problème de santé spécifique?  Usage d&#039;App non-autorisées voire        interdites? Une App de parti ou         mouvement politique? De syndicat?                                               Cela ne se limite évidemment pas aux    entreprises: n&#039;utilisez le iPhone       Mirroring qu&#039;entre deux appareils que   vous contrôlez.                         " />
+
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="3" col="1" longueur="1" curseur="invisible" />
+      <validation touche="sommaire" />
+      <validation touche="retour" />
+      <validation touche="suite" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="sommaire" suivant="articles" />
+      <saisie touche="retour" suivant="article6-2" />
+      
+      <saisie touche="suite" suivant="article6-4" />
+    </action>
+  </page>
+
+  <page nom="article6-4">
+    <ecran>
+      <affiche url="https://minitelbidouille.pvigier.com/pages/9cdc90a41/article.vdt" />
+
+      
+
+      <position ligne="3" col="32" /><ecrit texte=" Page 4/6" />
+
+      <position ligne="4" col="1" /><couleur texte="cyan" /><ecrit texte="De toute façon vous devriez séparer     physiquement ce qui est utilisé pour    votre travail et pour votre vie privée. Par principe.                                                                   Comme pour Microsoft Copilot Recall, la protection de la vie privée est passé   après le fait d&#039;amener une nouvelle     fonctionnalité.                                                                 Certains appellent maintenant cette     fonctionnalité &quot;Black Mirroring&quot;...                                             La Chine aurait piraté les backdoors de surveillance téléphonique aux USA       " />
+
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="3" col="1" longueur="1" curseur="invisible" />
+      <validation touche="sommaire" />
+      <validation touche="retour" />
+      <validation touche="suite" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="sommaire" suivant="articles" />
+      <saisie touche="retour" suivant="article6-3" />
+      
+      <saisie touche="suite" suivant="article6-5" />
+    </action>
+  </page>
+
+  <page nom="article6-5">
+    <ecran>
+      <affiche url="https://minitelbidouille.pvigier.com/pages/9cdc90a41/article.vdt" />
+
+      
+
+      <position ligne="3" col="32" /><ecrit texte=" Page 5/6" />
+
+      <position ligne="4" col="1" /><couleur texte="cyan" /><ecrit texte="Aux USA il y a dans les différents      réseaux des backdoors voire des         dispositifs de surveillance de masse,   tout autant utilisables pour des écoutesou surveillances ciblées sous contrôle  d&#039;un juge qu&#039;en liaison avec la SécuritéNationale ou pour la surveillance de    masse.                                                                          En France aussi d&#039;ailleurs.                                                     Pour les réseaux téléphoniques aux USA, cela date du programme CALEA qui a      démarré en 1994. Trente ans, ça se fête!                                        Des pirates Chinois auraient réussi à   s&#039;y introduire, notamment celles en     liaison avec les opérateurs Verizon et  AT&amp;T.                                   " />
+
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="3" col="1" longueur="1" curseur="invisible" />
+      <validation touche="sommaire" />
+      <validation touche="retour" />
+      <validation touche="suite" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="sommaire" suivant="articles" />
+      <saisie touche="retour" suivant="article6-4" />
+      
+      <saisie touche="suite" suivant="article6-6" />
+    </action>
+  </page>
+
+  <page nom="article6-6">
+    <ecran>
+      <affiche url="https://minitelbidouille.pvigier.com/pages/9cdc90a41/article2.vdt" />
+
+      
+
+      <position ligne="3" col="32" /><ecrit texte=" Page 6/6" />
+
+      <position ligne="4" col="1" /><couleur texte="cyan" /><ecrit texte="Le Ministère de la Sécurité d&#039;État      Chinois pourrait être impliqué dans     cette attaque d&#039;après certains rapports.                                        On ne sait quelles données ont été      capturées, ni si des écoutes ont été    effectuées ou lesquelles et les cibles  de celles-ci.                                                                   Le gouvernement Américain et les        entreprises concernées refusent de      communiquer là-dessus, indiquant sans   risque de se tromper que l&#039;impact en estmassif.                                                                         Toutes les backdoors se retournent      contre ceux y étant exposés. Toujours...                                        MoneyGram a été piraté, 50 millions de  comptes ont fuité dont SSN et photos    " />
+
+    </ecran>
+
+    <entree>
+      <zonesaisie ligne="3" col="1" longueur="1" curseur="invisible" />
+      <validation touche="sommaire" />
+      <validation touche="retour" />
+      <validation touche="suite" />
+    </entree>
+
+    <action defaut="Choix non proposé">
+      <saisie touche="sommaire" suivant="articles" />
+      <saisie touche="retour" suivant="article6-5" />
+      
+      <saisie touche="suite" suivant="articles" />
+    </action>
+  </page>
+
+
+</service>

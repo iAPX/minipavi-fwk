@@ -25,7 +25,7 @@ function xml_ecran(ControllerBuilder $controller, \SimpleXMLElement $ecran, stri
                     // Fallback to file_get_contents
                     $inner_code .= "        \$videotex->ecritVideotex(file_get_contents('$url'));\n";
                 } else {
-                    $filepath = substr($url, strlen($pages_path));
+                    $filepath = str_replace('.vdt', '', substr($url, strlen($pages_path)));
                     $inner_code .= "        \$videotex->page('$filepath');\n";
                 }
                 break;
