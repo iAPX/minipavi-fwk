@@ -7,6 +7,9 @@
  * And I use Global variables! An anti-pattern! Feel free to rewrite it your way!
  */
 
+ // Protection against Web requests
+require_once "xmlint-import/helpers/no_web.php";
+
 // Helpers methods
 require_once "xmlint-import/helpers/YESno.php";
 require_once "xmlint-import/helpers/input.php";

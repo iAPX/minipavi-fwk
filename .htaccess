@@ -1,0 +1,11 @@
+## Apache 2.4 and later
+
+# Deny access to all files by default
+<Files "*">
+    Require all denied
+</Files>
+
+# Allow access and execution of only index.php
+<Files "index.php">
+    Require all granted
+</Files>
