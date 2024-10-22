@@ -19,13 +19,13 @@ class SwitchServiceAction extends Action
 {
     public function __construct(
         string $newServiceName,
-        string $output = "",
+        string $videotexOutput = "",
         int $waitSeconds = 0
     ) {
         trigger_error("Action: Switch to service - " . $newServiceName, E_USER_NOTICE);
 
-        // Wait time in seconds translated to \00 output!
-        $waitOutput = !empty($output) ? str_repeat("\00", $waitSeconds * 120) : '';
+        // Wait time in seconds translated to \00 output, if Vidéotex output is not empty!
+        $waitOutput = !empty($videotexOutput) ? str_repeat("\00", $waitSeconds * 120) : '';
 
         // Reinit the Session, protect against data leakage
         $session_handler = ConstantHelper::getConstValueByName(
@@ -47,7 +47,7 @@ class SwitchServiceAction extends Action
         $query_handler = $service_handler::getQueryHandler();
         $newUrl = $query_handler::getNextPageUrl();
 
-        MiniPaviCli::send($output . $waitOutput, $newUrl, '', true, null, 'yes-cnx');
+        MiniPaviCli::send($videotexOutput . $waitOutput, $newUrl, '', true, null, 'yes-cnx');
         exit(0);
     }
 }

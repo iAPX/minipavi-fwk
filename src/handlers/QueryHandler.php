@@ -107,13 +107,7 @@ class QueryHandler
 
         // Page d'accueil
         trigger_error("Accueil du service", E_USER_NOTICE);
-        $default_controller = ConstantHelper::getConstValueByName('DEFAULT_CONTROLLER', false);
-        $default_xml_file = ConstantHelper::getConstValueByName('DEFAULT_XML_FILE', false);
-        return new \MiniPaviFwk\actions\AccueilAction(
-            $default_controller,
-            $default_xml_file,
-            []
-        );
+        return new \MiniPaviFwk\actions\AccueilAction([]);
     }
 
     protected static function queryDcx(): void

@@ -1,16 +1,14 @@
-# Keywords
+# Gestionnaires de Mots-clés
 
-Responsability: handle services keyword handling.
+Gestionnaires des mots-clés de votre service.
 
-Here you could put your keywords handlers
+Vous pouvez intégrer des mots-clés globaux dans n'importe quel contrôleur, via un objet étendant \MiniPaviFwk\Keywords.
 
-It should extends \MiniPaviFwk\Keywords, see /src/Keywords.php
-And provides 2 methods:
+@TODO
 
-->validationKeys() returns an array of function key name string (case insensitive)
-  these are the function keys handled with or without saisie parameter on the choix() method.
-  All keys should be provided to avoid them to be blocked by MinipaviCli.
-  example: ['Suite', 'ENVOI']
+## Fonctionnement
 
-->choix() returns a \MiniPaviFwk\actions\Action if choix is recognized, null elsewhere.
-  this is called by VideotexController->getSaisieAction() and take precedence over any local action.
+## Code d'exemple
+
+## Intégration dans un contrôleur
+

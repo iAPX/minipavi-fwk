@@ -9,14 +9,7 @@ class AccueilActionTest extends TestCase
 {
     public function testVideotexController()
     {
-        $action = new AccueilAction('\\Tests\\Mocks\\MockController', '', []);
+        $action = new AccueilAction([]);
         $this->assertInstanceOf(MockController::class, $action->getController());
-    }
-
-    public function testXmlController()
-    {
-        $action = new AccueilAction(false, \service\DEFAULT_XML_FILE, []);
-        $this->assertInstanceOf(XmlController::class, $action->getController());
-        $this->AssertFalse(empty($action->getOutput()));
     }
 }

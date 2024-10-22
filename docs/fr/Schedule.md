@@ -1,27 +1,24 @@
-# TODOs and versions
+# Plan de développement
 
-## v0.8 - mid October, 2024
-- [x] Adds more dynamism to Demochat
-- [x] Adds a tool to import XMLint online projects
-- [x] Pages through curl with Error Management, on EcranXml.php
-- [ ] Documentation
-- [ ] Less bad Unit Tests coverage
+## v0.8 - Novembre 2024
+- [x] Demochat plus dynamique (notifications)
+- [x] Importation de projets XMLint
+- [ ] Documentation minimale en Français
 
 
-## v1.0 - November, 2024
-- [ ] Better Unit Tests coverage
-- [ ] Support XML controlled email messages
+## v1.0 - Decembre 2024
+- [ ] Support WebMedia
+- [ ] Support messages emails en XML
+- [ ] Support envoi de code PIN
+- [ ] Documentation complète en Français, hors support XML
 
 
-## Futuribles (in no particular order)
+## Futuribles (sans ordre particulier)
 
-- MiniPavi WebMedia support
-- MiniPavi Form Command support
-- MiniPaviCli new functions support
-- FormController
-- Code examples referenced by the documentation
-- Stack Handling (being able to return to parents Controllers in their current state)
-- Helpers for dynamic content handling
-- Helpers for dynamic content display
-- Documentation for real-world server usage
-- Tool for Minitel Service switching
+- Support des Formulaires MiniPaviCli
+- FormController extensible
+- Gestion de pile pour le retour aux ancêtres en restaurant leur état
+- Démo MacBidouille dynamique
+- Helpers de gestion de contenus dynamiques
+- Helpers d'affichage de contenus dynamiques
+- Retrait progressif du support XML direct, pour simplifier le code et la documentation

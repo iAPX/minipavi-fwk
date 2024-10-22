@@ -33,8 +33,6 @@ Shortly, this (new) Controller will indicate where is the input area on-screen, 
 
 - SwitchServiceAction : switch to the homepage of another internal service by its name. service should exists and be allowed in the [services/global-config.php](../../services/global-config.php) through `const ALLOWED_SERVICES = [ ... ];`
 
-- UnicodeOutputAction : displays a Unicode message, converting it to Vidéotex, staying in the same controller.
-
 - VideotexOutputAction : displays a Vidéotex stream, staying in the same controller.
 
 Usage examples in [services/demo/controllers/DemoActionCodeController.php](../../services/demo/controllers/DemoActionCodeController.php)

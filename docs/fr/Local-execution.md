@@ -1,50 +1,40 @@
-# Local execution of MiniPaviFwk and its provided services and examples
+# Exécution locale de minipavi-fwk
 
-MiniPaviFwk is a PHP 8.1+ project to support minipavi for Minitel and emulators.
+Décris les quelques étapes permettant de faire tourner minipavi-fwk avec ses services de démonstration et/ou vos propres services.
 
-Standard is PSR12.
+## Requis
+PHP 8.1+
+Composer
 
 
-## Composer dependencies installation
-Install dependencies (minipavicli, phpUnit, etc.) through composer:
+## Composer : installation des dépendances
+Dans le terminal, à la racine du projet
 ```
 composer install
 ```
 
 > [!IMPORTANT]
-> When updating, don't forget to update composer and autoloaders
+> Quand vous mettez à jour, n'oubliez pas de mettre aussi à jour composer et les autoloaders.
 > ```
 > composer update
 > composer dump-autoload
 > ```
 
 
-## Launching locally on port 8000
-Local execution:
+## Exécution locale sur le port 8000
+Depuis le terminal
 ```
 php -S localhost:8000
 ```
 
-## Accessing your local PHP webserver
-You could open a port through your router and forward it to your computer.
-Then use the Public IP Address of your router and the port you opened and forwarded.
-
-This doesn't work if you don't control your router, and also it let your local port always available from The Internet when you use this router with the same local private IP Address. Worse, due to DHCP, another computer or device might be put on the same private IP Address another time.
-
-I recommend to use an Internet facing server, or at least one where you could forward public traffic, having an ssh account on it (key pair, not password!). And use ssh Remote Port Forwarding.
-
-ssh -R 8000:localhost:8000 -N -f {username}@{server}
-and then use http://{server}:8000
-
-That enable you to test locally through your browser, without opening any port on your dev computer nor on your router.
-Works anywhere, anytime.
-
-You should create an ssh user *WITHOUT* shell (nor bash nor zsh etc.) for the purpose of the Remote Port Forwarding.
-You stop the forwarding by killing the ssh process.
+## Accéder à votre serveur PHP local
+Vous pouvez ouvrir un port sur votre routeur et rerouter celui-ci vers votre ordinateur.
+Par exemple le port 8000.
+Pensez à vérifier que ce port est disponible sur votre ordinateur, et qu'il n'est pas filtré ou bloqué par votre firewall.
 
 
-## phpUnit tests, just in case
-Local phpUnit tests:
+## Lancer les tests phpUnit
+Dans le terminal:
 ```
 ./vendor/bin/phpunit tests
 ```

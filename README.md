@@ -16,7 +16,11 @@ Le Coding Standard est PSR-12.
 [Voir toute les docs dans le répertoire ./docs directory](./docs/fr/README.md)
 [Lisez la licence MIT](./LICENSE)  (en Anglais)
 
-## English documentation
+## English documentation (obsolete)
+
+As the main purpose is to create Minitel services, that existed mainly in France, documentation is being rewritten in French first
+and the partial English documentation might be updated later on (or not).
+The main documentation is in French.
 
 [XMLint importation guide](./docs/en/XMLint-transition.md)
 [Locally install and launch minipavi-fwk](./docs/en/Local-execution.md)

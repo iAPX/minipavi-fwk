@@ -16,9 +16,7 @@ Pas de permission à demander. Pas de question. Aucune obligation ou engagement.
 - [Documentation XMLint](https://raw.githubusercontent.com/ludosevilla/minipaviCli/master/XMLint/XMLint-doc.pdf)
 
 
-## Pour débuter dans tous les cas
-
-- [Mon plan de développement](./Schedule.md)
+## Pour continuer, dans tous les cas
 
 - [Comment exécuter minipavi-fwk localement et ses démos](./Local-execution.md)
 
@@ -44,7 +42,7 @@ Pas de permission à demander. Pas de question. Aucune obligation ou engagement.
 
 - [Commandes](./Cmds.md)
 
-- [Commande de serviuce de notification](./PushServiceMsg.md)
+- [Commande de service de notification](./PushServiceMsg.md)
 
 - [Gestionnaires](./Handlers.md)
 
@@ -69,6 +67,8 @@ Pas de permission à demander. Pas de question. Aucune obligation ou engagement.
 ## Finalement
 
 - [Ordre de démarrage](./Bootstrap.md)
+
+- [Mon plan de développement](./Schedule.md)
 
 
 ## External Minitel ressources

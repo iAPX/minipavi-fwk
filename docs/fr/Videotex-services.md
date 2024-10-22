@@ -1,1 +1,0 @@
-# Vidéotex Minitel Services

@@ -13,16 +13,16 @@ use MiniPavi\MiniPaviCli;
 
 class RedirectAction extends Action
 {
-    public function __construct(string $newUrl, string $output = "", int $waitSeconds = 0)
+    public function __construct(string $newUrl, string $videotexOutput = "", int $waitSeconds = 0)
     {
         trigger_error("Action: Redirect - " . $newUrl, E_USER_NOTICE);
         $this->controller = null;
         $this->output = "";
 
         // Wait time in seconds translated to \00 output!
-        $waitOutput = !empty($output) ? str_repeat("\00", $waitSeconds * 120) : '';
+        $waitOutput = !empty($videotexOutput) ? str_repeat("\00", $waitSeconds * 120) : '';
 
         // Act now and quit directly!
-        MiniPaviCli::send($output . $waitOutput, $newUrl, '', true, null, 'yes-cnx');
+        MiniPaviCli::send($videotexOutput . $waitOutput, $newUrl, '', true, null, 'yes-cnx');
     }
 }

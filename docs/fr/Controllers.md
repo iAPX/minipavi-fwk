@@ -1,11 +1,27 @@
-# Controllers
+# Contrôleurs
 
-Responsability: handling user interaction.
+Décris le cycle de vie des contrôleurs, les détails sont dans des pages séparées.
 
+Les contrôleurs gèrent les interactions utilisateur
 Source directory : [src/controllers/](../../src/controllers/)
 
 
-Controllers provide the Vidéotex output stream, generate the input area information or MiniPaviCli commands, give the validated keys, and handle user input returning [Actions](./Actions.md).
+## Cycle de vie typique d'un contrôleur
+1. Affichage de la page courante, via `ecran()`
+2. Indication à MiniPaviCli des touches de fonctions autorisées, via `getValidation()`
+3. Indication du champ de saisie à utiliser, via `getCmd()`
+
+Minipavi-fwk s'assure d'envoyer ces informations à MiniPaviCli, et de conserver le contexte du contrôleur.
+Lors de la requête suivante, typiquement une réponse de l'utilisateur, minipavi-fwk réinstance le contrôleur en lui fournissant le contexte sauvé, pour qu'il puisse traiter la réponse utilisateur.
+
+4. Le contrôleur identifie la réponse de l'utilisateur et renvoie une [Action](./Actions.md) en réponse, qui peut être une page Vidéotex, un message d'erreur en ligne 00, un changement de contrôleur/changement de page de l'arbo, etc.
+
+
+## En détail
+
+### ecran()
+
+
 
 
 ## Controller's `__construct( ... )`

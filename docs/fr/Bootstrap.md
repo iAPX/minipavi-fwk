@@ -1,33 +1,34 @@
-# Bootstrap
+# Ordre de démarrage (bootstrap)
 
-Responsability : setting up the environment for Minitel Service Controller execution
-
+Décris l'ordre de démarrage d'une requête minipavi-fwk.
 Source file : [index.php](../../index.php)
 
 
-## Query bootstrap order by default
+## Ordre par défaut
 1. services/global-config.php
 2. Class autoloaders
 3. MiniPavi\MiniPaviCli::start()
 4. \MiniPaviFwk\handlers\SessionHandler::startSession()
 5. \MiniPaviFwk\handlers\ServiceHandler::startService()
 6. services/{serviceName}/service-config.php
+7. \MiniPaviFwk\handlers\Queryhandler
 
-There's a chain of dependencies, needing to identify and validate the Service, for that having a Session, thus having access to MiniPaviCli queries results, this one needing autoloaders.
-
-
-## Session Handler
-The Default Session Handler could be changed by modifying /services/global-config.php, see [Session Handler](./Session-handler.md)
+Il y a une chaîne de dépendance forte, mais vous pouvez changer les Gestionnaires, soit globalement, soit par Service si ils n'interviennent pas dans la sélection de celui-ci.
 
 
-## Service Handler
-The Default Service Handler could be changed by modifying /services/global-config.php, see [Service Handler](./Service-handler.md)
+## Gestionnaire de Session
+Le Gestionnaire de Session par défaut peut être changé globalement dans /services/global-config.php, voir [Gestionnaire de Session](./Session-handler.md).
 
 
-## References
+## Gestionnaire de Service
+Le Gestionnaire de service peut être changé globalement dans /services/global-config.php, voir [Gestionnaire de Service](./Service-handler.md)
+
+
+## Gestionnire de Requête
+Le Gestionnaire de Requête peut être changé globalement ou individuellement pour chaque service, respectivement dans /services/global-config.php et /services/{servicename}/service-config.php, voir [Gestionnaire de Requête](./Query-handler.md)
+
+
+## Références
 
 [Configurations](./Configurations.md)
 
-[XML services](./XML-services.md)
-
-[Videotex services](./Videotex-services.md)

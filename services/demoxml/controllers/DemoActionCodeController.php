@@ -32,10 +32,8 @@ class DemoActionCodeController extends MiniPaviFwk\controllers\VideotexControlle
         ->position(17, 1)->inversionDebut()->ecritUnicode('6')->inversionFin()
         ->ecritUnicode(" Répète / RepetitionAction()")
         ->position(19, 1)->inversionDebut()->ecritUnicode('7')->inversionFin()
-        ->ecritUnicode(" Texte / UnicodeOutputAction()")
-        ->position(21, 1)->inversionDebut()->ecritUnicode('8')->inversionFin()
         ->ecritUnicode(" code vdt / VideotexOutputAction()")
-        ->position(22, 1)->inversionDebut()->ecritUnicode('9')->inversionFin()
+        ->position(21, 1)->inversionDebut()->ecritUnicode('8')->inversionFin()
         ->ecritUnicode(" switch service/SwitchServiceAction()")
 
 
@@ -47,13 +45,7 @@ class DemoActionCodeController extends MiniPaviFwk\controllers\VideotexControlle
 
     public function choix1Envoi(): ?MiniPaviFwk\actions\Action
     {
-        $default_controller = MiniPaviFwk\helpers\ConstantHelper::getConstValueByName('DEFAULT_CONTROLLER', false);
-        $default_xml_file = MiniPaviFwk\helpers\ConstantHelper::getConstValueByName('DEFAULT_XML_FILE', false);
-        return new \MiniPaviFwk\actions\AccueilAction(
-            $default_controller,
-            $default_xml_file,
-            $this->context
-        );
+        return new \MiniPaviFwk\actions\AccueilAction($this->context);
     }
 
     public function choix2Envoi(): ?MiniPaviFwk\actions\Action
@@ -86,15 +78,10 @@ class DemoActionCodeController extends MiniPaviFwk\controllers\VideotexControlle
 
     public function choix7Envoi(): ?MiniPaviFwk\actions\Action
     {
-        return new \MiniPaviFwk\actions\UnicodeOutputAction($this, " Texte unicode : çàèéwejfweoij ");
-    }
-
-    public function choix8Envoi(): ?MiniPaviFwk\actions\Action
-    {
         return new \MiniPaviFwk\actions\VideotexOutputAction($this, " \x1bETexte \x1bFvideotex               ");
     }
 
-    public function choix9Envoi(): ?MiniPaviFwk\actions\Action
+    public function choix8Envoi(): ?MiniPaviFwk\actions\Action
     {
         // Switch to MacBidouille, displaying a message and waiting 2 seconds.
         return new \MiniPaviFwk\actions\SwitchServiceAction(

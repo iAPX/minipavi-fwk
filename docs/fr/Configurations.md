@@ -2,6 +2,8 @@
 
 There are 2 levels of configuration, beside php.ini and your web server configuration.
 
+@TODO
+
 ## Global Configuration
 [Global configuration file](../../services/global-config.php)
 This file contains the first executed statements.
@@ -47,35 +49,13 @@ It is executed after Session is started and Service is identified and validated.
 
 ### Service Configuration mandatory entries
 
-You should either put one of these (or both)
-- `const DEFAULT_XML_FILE` : default XML filename (without extension) located in the services/{serviceName}/xml directory, or false if none should be used
+- `const DEFAULT_CONTROLLER` : might contain the full name of a Videotex or XML Controller, or false if none.
 
-- `const DEFAULT_CONTROLLER` : might contain the full name of a Videotex or XML Controller, or false if none. If false, AccueilAction fallback to the DEFAULT_XML_FILE xml file handled by the [default XmlController](../../src/controllers/XmlController.php).
 
-When both are present and not false, the Minitel Service starts on the specified DEFAULT_CONTROLLER, but for any XmlController the DEFAULT_XML_FILE is taken into account.
-
-### Service optional entries
-
-- `const XML_PAGES_URL` : when using a XmlController XML managed service or parts, contains the URL and start path for Vidéotex Pages. (see below)
+### Service Configuration optional entries
 
 - `const QUERY_HANDLER_CLASSNAME` : contains the class name of the service Query Handler as a string, override the same constant on the global configuration if present
 
-#### XML_PAGES_URL mechanism
-
-
-@TODO
-// The URL for XML local Videotex Pages, replaced by services/{serviceName}/vdt/{pagename} when interpreting XML
-// Elsewhere pages will be fetched through a http/https query to keep compatiblity with existing XML (TEST only)
-// const XML_PAGES_URL = "https://minitelbidouille.pvigier.com/pages/";
-const XML_PAGES_URL = false;  // Don't try to use pages from vdt folder when a http/https scheme is present
-
-// The default controller & Sommaire controller
-// For a service beginning with a VideotexController or XmlController, put it here
-const DEFAULT_CONTROLLER = false;  // If false, use xml/{DEFAULT_XML_FILE}
-
-
-
-### Service Configuration optional entry
 
 - `const SERVICE_ERROR_REPORTING` allow to change the `error_reporting()` mask, useful for development by enabling more traces for some sites while keeping stable sites more quiet.
 You will encounter that on the DemoChat Minitel service, through its [service-config.php](../../services/demochat/service-config.php)
@@ -94,8 +74,4 @@ I recommend to always use `\MiniPaviFwk\helpers\ConstantHelper::getConstValueByN
 
 [Bootstrap](./Bootstrap.md)
 
-[default XmlController](../../src/controllers/XmlController.php)
-
-[DemoChat service's service-config.php](../../services/demochat/service-config.php)
-
-[Service Handler](../../src/handlers/ServiceHandler.php)
+[myservice service-config.php](../../services/myservice/service-config.php)

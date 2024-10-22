@@ -1,5 +1,7 @@
 # Demo Minitel Service
 
+@TODO
+
 Responsability : demonstrate the main features of MiniPaviFwk, and have copy-pastable working code
 
 Source directory : [services/demo/](../../services/demo/)
