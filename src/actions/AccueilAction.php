@@ -8,13 +8,14 @@ namespace MiniPaviFwk\actions;
 
 use MiniPavi\MiniPaviCli;
 use MiniPaviFwk\controllers\XmlController;
+use MiniPaviFwk\helpers\ConstantHelper;
 
 class AccueilAction extends Action
 {
     public function __construct($context)
     {
-        $default_controller = MiniPaviFwk\helpers\ConstantHelper::getConstValueByName('DEFAULT_CONTROLLER', false);
-        $default_xml_file = MiniPaviFwk\helpers\ConstantHelper::getConstValueByName('DEFAULT_XML_FILE', false);
+        $default_controller = ConstantHelper::getConstValueByName('DEFAULT_CONTROLLER', false);
+        $default_xml_file = ConstantHelper::getConstValueByName('DEFAULT_XML_FILE', false);
 
         trigger_error("Action: Accueil", E_USER_NOTICE);
         if (empty($default_controller)) {
