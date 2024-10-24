@@ -5,7 +5,7 @@
 >
     <php>
         <const name="SERVICE_DIR" value="services/demo/"/>
-        <const name="service\DEFAULT_XML_FILE" value="demo.xml"/>
+        <const name="service\DEFAULT_CONTROLLER" value="Tests\Mocks\MockController"/>
         <const name="service\XML_PAGES_URL" value=""/>
     </php>
     <testsuites>
