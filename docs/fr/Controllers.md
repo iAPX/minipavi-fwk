@@ -5,6 +5,8 @@ Décris le cycle de vie des contrôleurs, les détails sont dans des pages sépa
 Les contrôleurs gèrent les interactions utilisateur
 Source directory : [src/controllers/](../../src/controllers/)
 
+Source du contrôleur VideotexController, parent de vos contrôleurs [src/controllers/VideotexController.php](../../src/controllers/VideotexController.php)
+
 
 ## Cycle de vie typique d'un contrôleur
 1. Affichage de la page courante, via `ecran()`
