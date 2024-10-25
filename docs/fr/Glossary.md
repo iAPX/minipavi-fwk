@@ -14,6 +14,7 @@ Terme | Définition (à la louche)
 3617 | "Pas assez cher mon fils!", faut exploser les tarifs pour certains services professionnels, merci FT.
 614 91 55 | Numéro à 7 chiffres qui deviendra 3614 ultérieurement.
 615 91 77 | Numéro à 7 chiffres qui deviendra 3615 ultérieurement.
+Alphamosaïque | Mode dans lequel des caractères semi-graphiques sont affichés, avec 6 "pixels" (pâtés!) par espace occupé à l'écran, 2 en largeur et 3 en hauteur, permettant des semigraphiques de 80x72 en dehors de la Ligne 00. Voir les [STUM 1b](https://www.minipavi.fr/stum1b.pdf) (PDF)
 Arbo | Cf. Arborescence ci-dessous.
 Arborescence | Manière de concevoir et de représenter un service Minitel, sous la forme d'un graphe.
 Connexion | Action d'établir la liaison et la communication avec le PAVI via le Modem V23.<br/>Se dit aussi quand on se "connecte" à un service par l'entremise du PAVI, qui met alors le Minitel et le serveur dudit service en communication.
@@ -28,6 +29,7 @@ Minitel | Terminal Vidéotex avec Modem V23 grand-public distribué gratuitement
 Modem | bzzz scrrrichhh srrooooorrr fwjhfoijw ...
 PAVI | Point d'Accès VIdéotex, service prenant les appels venus des Minitel (via leur Modem V23) et communicant avec les serveurs fournissant les différents services Minitel.
 Prise péri-informatique | Prise de communication série du Minitel permettant de communiquer avec une imprimante et d'autres périphériques ou ordinateurs via le protocole RS232C. Sa vitesse est de 1200 bauds symétrique par défaut, certains modèles de Minitel supportent 4800 bauds.
+Semi-graphique | Cf. Alphamosaïque
 STUM | Spécification Techniques d'Utilisation du Minitel.<br/>Voir les STUM 1b (PDF) [https://www.minipavi.fr/stum1b.pdf](https://www.minipavi.fr/stum1b.pdf)
 Télétel | Ensemble de services fournis par France Télécom et les serveurs privés, regroupés par différents paliers de tarifications, avec des règles léonines et des prix ébourrifants!
 Touches de fonction | Différentes touches sont prévus sur le Minitel pour déclencher des actions, servant à valider, corriger ou invalider une saisie, ou agissant aussi sans texte saisi: Correction, Annulation, Envoi, Suite, Retour, Répétition, Sommaire, Guide, etc.<br/>Leur encodage est indiqué dans les STUM.
