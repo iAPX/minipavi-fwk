@@ -42,5 +42,19 @@ EOF;
         }
     }
 
+    // Adds an error message in nonPropose();
+    $error_message = (string) $xml_choix['defaut'];
+    if (!empty($error_message)) {
+        $clean_error_message = str_replace(['"', '\\'], ['\"', '\\\\'], $error_message);
+        $code_choix .= <<<EOF
+\n
+    public function nonPropose(): ?\MiniPaviFwk\actions\Action
+    {
+        // Error message if choice is incorrect.
+        return new \MiniPaviFwk\actions\Ligne00Action(\$this, "$clean_error_message");
+    }
+EOF;
+    }
+
     $controller->createChoix($code_choix);
 }

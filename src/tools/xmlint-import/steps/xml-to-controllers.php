@@ -31,17 +31,14 @@ foreach ($xml_pages as $xml_page) {
     $controllers[$controller_name] = $controller;
 
     // 1-Ecran
-    //$xml_ecran = $xml_page->xpath('//ecran')[0];
     xml_ecran($controller, $xml_page->ecran[0], $pages_path);
 
     // 2-Validation
-    // $xml_entree = $xml_page->xpath('//entree')[0];
     xml_validation($controller, $xml_page->entree[0]);
 
     // 3-Cmd
     xml_cmd($controller, $xml_page->entree[0]);
 
     // 4-Choix
-    //$xml_choix = $xml_page->xpath('//action')[0];
     xml_choix($controller, $xml_page->action[0]);
 }
