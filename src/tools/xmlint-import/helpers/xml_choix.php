@@ -48,7 +48,7 @@ EOF;
         $clean_error_message = str_replace(['"', '\\'], ['\"', '\\\\'], $error_message);
         $code_choix .= <<<EOF
 \n
-    public function nonPropose(): ?\MiniPaviFwk\actions\Action
+    public function nonPropose(string \$touche, string \$saisie): ?\MiniPaviFwk\actions\Action
     {
         // Error message if choice is incorrect.
         return new \MiniPaviFwk\actions\Ligne00Action(\$this, "$clean_error_message");
