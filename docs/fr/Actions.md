@@ -8,7 +8,8 @@ Répertoire source : [src/actions/](../../src/actions/)
 
 ## Cycle de vie
 Les Actions sont renvoyées par les contrôleurs lors d'une interaction utilisateur, pour envoyer sur un autre contrôleur/une autre page de l'arborescence, afficher un messsage d'erreur, aller sur un autre service intégré, déconnecter l'utilisateur, etc.
-Dans le cycle de vie du contrôleur l'action est renvoyée à la fin.
+Dans le cycle de vie du contrôleur l'action est renvoyée à la fin, en même temps que la Commande.
+L'action est destinée à MiniPaviFwk pour savoir quelles actions réaliser, la commande est renvoyée à MiniPavi via MiniPaviCli.
 
 Les méthodes toucheXXX(), choixXXXXYYY(), choix() pour les saisie en-ligne et message() pour les messages multilignes renvoient toutes par une Action ou un null.
 Voir [la documentation des contrôleurs](./Controllers.md)

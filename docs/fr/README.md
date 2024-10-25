@@ -42,8 +42,6 @@ Pas de permission à demander. Pas de question. Aucune obligation ou engagement.
 
 - [Commandes](./Cmds.md)
 
-- [Commande de service de notification](./PushServiceMsg.md)
-
 - [Gestionnaires](./Handlers.md)
 
 - [Mots-clés](./Keywords.md)
