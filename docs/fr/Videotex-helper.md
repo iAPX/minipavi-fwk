@@ -246,6 +246,8 @@ public function afficheRectangleInverse(
 
 Affiche un rectangle, rempli en espaces alphanumériques en inversion vidéo de la $couleur demandée.
 Il commence à la ligne $ligne (1..24) et la colonne $col (1..40) et fait $largeur caractères de large et $hauteur lignes de hauteur.
+Les couleurs disponibles sont : noir, rouge, vert, jaune, bleu, magenta, cyan et blanc.
+Ces couleurs sont aussi disponibles via $videotex::NOIR à $videotex::BLANC, ou via la classe VideotexHelper::NOIR à VideotexHelper::BLANC.
 
 Cette méthode renvoie l'objet Videotexhelper courant pour permettre le chaînage des appels.
 
@@ -273,7 +275,7 @@ Cette méthode renvoie l'objet Videotexhelper courant pour permettre le chaînag
 
 Signature : `public function deconnexionModem(): VideotexHelper`
 
-Uniquement pour le plaisir, vous devez normalement utiliser DeconnexionCmd à la place.
+Uniquement pour le plaisir, vous devriez utiliser DeconnexionCmd à la place.
 Envoi <kbd> Esc 9g </kbd> au Minitel, qui s'il s'agit d'un modèle physique et non d'un émulateur, demaande alors à son modem de raccrocher la ligne, coupant la communication.
 Fut utilisé pour "jeter" des importuns...
 
