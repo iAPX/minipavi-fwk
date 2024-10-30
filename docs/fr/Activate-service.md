@@ -12,3 +12,7 @@ Assurez-vous d'y mettre le nom de votre service.
 ## Servez ce service par défaut
 
 Modifiez le nom du service par défaut DEFAULT_SERVICE dans le fichier [./services/global-config.php](../../services/global-config.php)
+
+
+## Référence
+[Documentation sur les configurations](./Configurations.md)

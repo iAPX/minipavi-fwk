@@ -1,32 +1,35 @@
-# Context
+# Contexte
 
-Responsability : store the current state of the current controller, as an array
+Stocke les informations permettant de réinstancier le contrôleur dans son état initial sur une interaction utilisateur.
+Le contexte est local au contrôleur `$this->context` et contient un array() d'informations.
+Entre deux requêtes, typiquement l'affichage d'une page et la réception de l'interaction utilisateur, le contexte est stocké dans la Session.
 
-@TODO
 
-## What is stored
+## Ce qui y est stocké
 
-- `context['controller']` : full class name of the controller to instantiate for the current query, and the next one
+- `context['controller']` : nom complet de la classe du contrôleur à réinstancier
 
-- `context['xml_filename']` : for XML Controllers, the current XML filename as a string
-
-- `context['xml_page']` : for XML Controllers, the current XML page name as a string
-
-- `context['params']` : The params array provided when initiallly instantiating the current controller, or an empty array
+- `context['params']` : les paramètres fournis lors de l'instanciation du contrôleur et permettant de le réinstancier
 
 - `context['stack']` : *RESERVED FOR FUTURE USE*
 
 
-## What you could store?
+## Que pouvez-vous y stocker?
 
-Whatever you want, as long as you avoid modifying or erasing the data expected by the current Controller
+Ce que vous voulez, par exemple le numéro de page courante quand un contrôleur affiche une liste paginée, un type de rechercher ou des paramètres de recherches.
+
+Exemple pour un contrôleur recherchant des articles par auteur 'toto' et en affichant une liste paginée:
+```
+$this->context['params']['search_type'] = "author";
+$this->context['params']['search_criteria'] = "toto";
+$this->context['page_num'] = 0;
+```
+
+Ou pour l'affichage d'un des articles, sans effacer les informations précédentes pour pouvoir revenir au premier sur sa page courante:
+```
+$this->context['params']['article_id'] = 123456;
+```
 
 
 ## References
 [Controllers](./Controllers.md)
-
-[XML Controllers](./XML-controllers.md)
-
-[Session](./Session.md)
-
-[Session Handler](./Session-handler.md)

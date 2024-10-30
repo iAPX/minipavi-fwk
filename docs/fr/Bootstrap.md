@@ -17,18 +17,12 @@ Il y a une chaîne de dépendance forte, mais vous pouvez changer les Gestionnai
 
 
 ## Gestionnaire de Session
-Le Gestionnaire de Session par défaut peut être changé globalement dans /services/global-config.php, voir [Gestionnaire de Session](./Session-handler.md).
+Le Gestionnaire de Session par défaut peut être changé globalement dans /services/global-config.php, voir la [Configuration](./Configurations.md)
 
 
 ## Gestionnaire de Service
-Le Gestionnaire de service peut être changé globalement dans /services/global-config.php, voir [Gestionnaire de Service](./Service-handler.md)
+Le Gestionnaire de service peut être changé globalement dans /services/global-config.php, voir la [Configuration](./Configurations.md)
 
 
 ## Gestionnire de Requête
-Le Gestionnaire de Requête peut être changé globalement ou individuellement pour chaque service, respectivement dans /services/global-config.php et /services/{servicename}/service-config.php, voir [Gestionnaire de Requête](./Query-handler.md)
-
-
-## Références
-
-[Configurations](./Configurations.md)
-
+Le Gestionnaire de Requête peut être changé globalement ou individuellement pour chaque service, respectivement dans /services/global-config.php et /services/{servicename}/service-config.php. Voir la [Configuration](./Configurations.md)

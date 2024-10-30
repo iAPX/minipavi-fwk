@@ -1,3 +1,0 @@
-# Gestionnaire de Service
-
-@TODO

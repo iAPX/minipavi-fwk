@@ -25,7 +25,6 @@ Pas de permission à demander. Pas de question. Aucune obligation ou engagement.
 - [Glossaire](./Glossary.md)
 
 
-
 ## Maintenant voilà les ressources 
 
 - [Organisation des fichiers](./Service-files-organization.md)
@@ -39,14 +38,6 @@ Pas de permission à demander. Pas de question. Aucune obligation ou engagement.
 - [Actions](./Actions.md)
 
 - [Commandes](./Cmds.md)
-
-- [Mots-clés](./Keywords.md)
-
-- [Gestionnaire de Requêtes](./Query-handler.md)
-
-- [Gestionnaire de Service](./Service-handler.md)
-
-- [Gestionnaire de session](./Session-handler.md)
 
 
 ## Et en option
