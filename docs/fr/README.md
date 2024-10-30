@@ -36,13 +36,9 @@ Pas de permission à demander. Pas de question. Aucune obligation ou engagement.
 
 - [Helper Vidéotex](./Videotex-helper.md)
 
-- [Validation](./Validation.md)
-
 - [Actions](./Actions.md)
 
 - [Commandes](./Cmds.md)
-
-- [Gestionnaires](./Handlers.md)
 
 - [Mots-clés](./Keywords.md)
 

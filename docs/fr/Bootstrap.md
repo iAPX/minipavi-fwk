@@ -13,7 +13,7 @@ Source file : [index.php](../../index.php)
 6. services/{serviceName}/service-config.php
 7. \MiniPaviFwk\handlers\Queryhandler
 
-Il y a une chaîne de dépendance forte, mais vous pouvez changer les Gestionnaires, soit globalement, soit par Service si ils n'interviennent pas dans la sélection de celui-ci.
+Il y a une chaîne de dépendance forte, mais vous pouvez changer les Gestionnaires, soit globalement, soit par Service si ils n'interviennent pas dans la sélection de celui-ci. Voir la [configuration](./Configurations.md)
 
 
 ## Gestionnaire de Session
