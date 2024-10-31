@@ -3,7 +3,7 @@
 ## v0.8 - Novembre 2024
 - [x] Demochat plus dynamique (notifications)
 - [x] Importation de projets XMLint
-- [ ] Documentation minimale en Français
+- [x] Documentation minimale en Français
 
 
 ## v1.0 - Decembre 2024
