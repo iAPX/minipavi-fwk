@@ -19,7 +19,7 @@ class AccueilController extends \MiniPaviFwk\controllers\VideotexController
     public function ecran(): string
     {
         $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
-        $vdt = $videotex->ecritVideotex(file_get_contents(SERVICE_DIR . "vdt/demochat-page.vdt"))
+        $vdt = $videotex->page("demochat-page")
 
         // Information about the pseudonyme
         ->position(20, 1)->ecritUnicode("Votre pseudonyme:")

@@ -28,7 +28,7 @@ class LireMessageController extends \MiniPaviFwk\controllers\VideotexController
     {
         $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
         $videotex->effaceLigne00();
-        $videotex->ecritVideotex(file_get_contents(SERVICE_DIR . "vdt/demochat-page.vdt"));
+        $videotex->page("demochat-page");
 
         if (empty($this->msg)) {
             $videotex
@@ -76,6 +76,13 @@ class LireMessageController extends \MiniPaviFwk\controllers\VideotexController
         return $videotex->getOutput();
     }
 
+    public function validation(): \MiniPaviFwk\Validation
+    {
+        $validation = parent::validation();
+        $validation->addValidKeys(['Sommaire', 'Envoi']);
+        return $validation;
+    }
+
     public function getCmd(): array
     {
         // Vary depending on conditions. If no response possible, only [SOMMAIRE] or [ANNULATION]
@@ -88,50 +95,50 @@ class LireMessageController extends \MiniPaviFwk\controllers\VideotexController
         return \MiniPaviFwk\cmd\ZoneMessageCmd::createMiniPaviCmd($this->validation(), 17, 4, true, '.', '-');
     }
 
-    public function messageToucheEnvoi(array $message): ?\MiniPaviFwk\actions\Action
+    public function message(string $touche, array $message): ?\MiniPaviFwk\actions\Action
     {
-        if (empty(implode('', $message))) {
-            return new \MiniPaviFwk\actions\Ligne00Action($this, "* [SOMMAIRE] pour ne pas répondre");
-        }
+        if ($touche === "SOMMAIRE") {
+            if (implode('', $message) === '*' && !empty($this->msg)) {
+                $this->chatHelper->deleteMessage($this->msg);
+                if ($this->chatHelper->getNbMessage() > 0) {
+                    return new \MiniPaviFwk\actions\ControllerAction(
+                        \service\controllers\LireMessageController::class,
+                        $this->context
+                    );
+                }
+            }
+            return new \MiniPaviFwk\actions\ControllerAction(\service\controllers\ListeController::class, $this->context);    
+        } elseif ($touche === "ENVOI") {
+            if (empty(implode('', $message))) {
+                return new \MiniPaviFwk\actions\Ligne00Action($this, "* [SOMMAIRE] pour ne pas répondre");
+            }
 
-        // Envoi du message
-        if (!empty($this->msg)) {
-            $this->chatHelper->sendMessage($this->msg['srcUniqueId'], $message, $this->msg['message']);
-            $this->chatHelper->deleteMessage($this->msg);
-        }
+            // Envoi du message
+            if (!empty($this->msg)) {
+                $this->chatHelper->sendMessage($this->msg['srcUniqueId'], $message, $this->msg['message']);
+                $this->chatHelper->deleteMessage($this->msg);
+            }
 
-        // Ligne 00 pour le destinataire
-        $connecte = $this->chatHelper->getCurrentConnecte();
-        $_SESSION["DIRECTCALL_CMD"] = \MiniPaviFwk\cmd\PushServiceMsgCmd::createMiniPaviCmd(
-            [$this->msg['srcUniqueId']],
-            [ \MiniPavi\MiniPaviCli::toG2("Message de " . $connecte['pseudonyme']) ]
-        );
-        trigger_error(
-            "LireController::nouveau message - DIRECTCALL_CMD : " . print_r($_SESSION["DIRECTCALL_CMD"], true)
-        );
-
-        // Send to Liste or LireMessage depending on existing incoming message
-        if ($this->chatHelper->getNbMessage() > 0) {
-            return new \MiniPaviFwk\actions\ControllerAction(
-                \service\controllers\LireMessageController::class,
-                $this->context
+            // Ligne 00 pour le destinataire
+            $connecte = $this->chatHelper->getCurrentConnecte();
+            $_SESSION["DIRECTCALL_CMD"] = \MiniPaviFwk\cmd\PushServiceMsgCmd::createMiniPaviCmd(
+                [$this->msg['srcUniqueId']],
+                [ \MiniPavi\MiniPaviCli::toG2("Message de " . $connecte['pseudonyme']) ]
             );
-        }
-        return new \MiniPaviFwk\actions\ControllerAction(\service\controllers\ListeController::class, $this->context);
-    }
+            trigger_error(
+                "LireController::nouveau message - DIRECTCALL_CMD : " . print_r($_SESSION["DIRECTCALL_CMD"], true)
+            );
 
-    public function messageToucheSommaire(array $message): ?\MiniPaviFwk\actions\Action
-    {
-        if (implode('', $message) === '*' && !empty($this->msg)) {
-            $this->chatHelper->deleteMessage($this->msg);
+            // Send to Liste or LireMessage depending on existing incoming message
             if ($this->chatHelper->getNbMessage() > 0) {
                 return new \MiniPaviFwk\actions\ControllerAction(
                     \service\controllers\LireMessageController::class,
                     $this->context
                 );
             }
+            return new \MiniPaviFwk\actions\ControllerAction(\service\controllers\ListeController::class, $this->context);
         }
-        return new \MiniPaviFwk\actions\ControllerAction(\service\controllers\ListeController::class, $this->context);
+        return null;
     }
 
     public function toucheSommaire(string $saisie): ?\MiniPaviFwk\actions\Action

@@ -64,7 +64,6 @@ class VideotexController
         return new RepetitionAction($this);
     }
 
-
     public function getSaisieAction(string $saisie, string $touche): ?Action
     {
         // Handle user input through keywordhandler, introspection and overridable methods
@@ -116,39 +115,10 @@ class VideotexController
 
     public function getMessageAction(array $message, string $touche): ?Action
     {
-        // Handle user Message through introspection and overridable methods
-        // Try all possibilities, in order
-        $saisie = $message[0];
-        $methods = [];
-        if (preg_match('/^[A-Za-z0-9*#]+$/u', $saisie) == 1 || $saisie === '') {
-            // Non-empty unicode string with AZaz09*# characters (specifically no ::, \\) to avoid security issues
-            // * becomes ETOILE, # becomes DIESE. French word for "star" or * used in Minitel culture.
-            $formatted_saisie = \MiniPaviFwk\helpers\mb_ucfirst(mb_strtolower($saisie));
-            $cleaned_saisie = str_replace(['*', '#'], ['ETOILE', 'DIESE'], $formatted_saisie);
-            $formatted_touche = \MiniPaviFwk\helpers\mb_ucfirst(mb_strtolower($touche));
-            $methods[] = ['messageChoix' . $cleaned_saisie . $formatted_touche, []];
-        }
-        $methods[] = ['messageTouche' . \MiniPaviFwk\helpers\mb_ucfirst(mb_strtolower($touche)), [$message]];
-        $methods[] = ['message', [$touche, $message]];
-        $methods[] = ['nonPropose', [$touche, $saisie]];
-
-        foreach ($methods as $method) {
-            trigger_error("getMessageAction - try method : " . $method[0] . "()", E_USER_NOTICE);
-            $method_name = $method[0];
-            if (method_exists($this, $method_name)) {
-                $method_params = $method[1];
-                trigger_error("getMessageAction-CHOIX : " . $this::class . " -> " . $method_name . "()", E_USER_NOTICE);
-                $action = $this->$method_name(...$method_params);
-                if (!is_null($action)) {
-                    // Found an action!
-                    break;
-                }
-            } else {
-                trigger_error("getMessageAction-NONE : " . $this::class . " -> " . $method_name . "()", E_USER_NOTICE);
-            }
-        }
+        // Handle user Message through message() method
+        $action = $this->message($touche, $message);
         if (is_null($action)) {
-            // Fallback : nonPropose(should always return an Action)
+            // Fallback
             trigger_error("Aucun choix n'a été trouvé", E_USER_WARNING);
             $action = new Ligne00Action($this, "Message non traité.");
         }
@@ -172,9 +142,7 @@ class VideotexController
 
     public function nonPropose(string $touche, string $saisie): ?Action
     {
-        // Overridable in sub-classes
-        trigger_error("VideotexController : nonPropose()", E_USER_NOTICE);
-        return new Ligne00Action($this, "Choix invalide.");
+        return null;
     }
 
     public function keywords(string $touche, string $saisie): ?Action

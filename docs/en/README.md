@@ -60,8 +60,6 @@ No permission to ask for. No question. None obligation. None copyright.
 
 - [Keywords](./Keywords.md)
 
-- [Query Handler](./Query-handler.md)
-
 - [Validation](./Validation.md)
 
 - [Service Handler](./Service-handler.md)

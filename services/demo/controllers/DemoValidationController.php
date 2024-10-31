@@ -6,7 +6,7 @@
 
 namespace service\controllers;
 
-class DemoValidationCodeController extends \MiniPaviFwk\controllers\VideotexController
+class DemoValidationController extends \MiniPaviFwk\controllers\VideotexController
 {
     public function ecran(): string
     {
@@ -40,9 +40,17 @@ class DemoValidationCodeController extends \MiniPaviFwk\controllers\VideotexCont
     public function choix(string $touche, string $saisie): ?\MiniPaviFwk\actions\Action
     {
         if ($touche == 'RETOUR') {
-            return new \MiniPaviFwk\actions\PageAction($this->context, "demoxml-validation-code", "demo");
+            // Handle [SOMMAIRE] to return to the Sommaire (service menu)
+            return new \MiniPaviFwk\actions\ControllerAction(
+                \service\controllers\DemoSommaireController::class,
+                $this->context
+            );            
         } elseif ($touche == 'SOMMAIRE') {
-            return new \MiniPaviFwk\actions\PageAction($this->context, "demoxml-sommaire", "demo");
+            // Handle [SOMMAIRE] to return to the Sommaire (service menu)
+            return new \MiniPaviFwk\actions\ControllerAction(
+                \service\controllers\DemoSommaireController::class,
+                $this->context
+            );
         }
         return null;
     }

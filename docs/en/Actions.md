@@ -69,5 +69,3 @@ Actions generally implement a `public function __construct(...)` that initialize
 [Controllers example in demo service](../../services/demo/controllers/)
 
 [Videotex documentation](./Videotex-helper.md)
-
-[Query Handler documentation](./Query-handler.md)

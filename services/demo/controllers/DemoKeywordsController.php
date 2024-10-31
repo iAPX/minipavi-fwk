@@ -6,7 +6,7 @@
 
 namespace service\controllers;
 
-class DemoKeywordsCodeController extends \MiniPaviFwk\controllers\VideotexController
+class DemoKeywordsController extends \MiniPaviFwk\controllers\VideotexController
 {
     public function __construct($context, $params = [])
     {

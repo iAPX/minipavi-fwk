@@ -21,12 +21,18 @@ namespace service\helpers;
 class ChatHelper
 {
     private array $connectes = [];
+    private string $chat_dir = "";
 
     public function __construct()
     {
+        $this->chat_dir = \MiniPaviFwk\helpers\ConstantHelper::getConstValueByName(
+            'CHAT_DIR',
+            '\\tmp\\demochat\\'
+        );
+
         // Autoinitialise the chat directory
-        if (!is_dir(\CHAT_DIR)) {
-            mkdir(\CHAT_DIR, 0755, true);
+        if (!is_dir($this->chat_dir)) {
+            mkdir($this->chat_dir, 0755, true);
         } else {
             $this->cleanMessages();
         }
@@ -117,7 +123,7 @@ class ChatHelper
     public function removeAllMessagesForCurrentUser(): void
     {
         $uniqueId = \MiniPavi\MiniPaviCli::$uniqueId;
-        $messageFilenames = glob(\CHAT_DIR . "msg-*-*-$uniqueId.json");
+        $messageFilenames = glob($this->chat_dir . "msg-*-*-$uniqueId.json");
         foreach ($messageFilenames as $messageFilename) {
             unlink($messageFilename);
         }
@@ -174,7 +180,7 @@ class ChatHelper
     public function getNbMessage(): int
     {
         $uniqueId = \MiniPavi\MiniPaviCli::$uniqueId;
-        return count(glob(\CHAT_DIR . "msg-*-*-$uniqueId.json"));
+        return count(glob($this->chat_dir. "msg-*-*-$uniqueId.json"));
     }
 
     public function getFirstMessageFilename(): ?string
@@ -190,7 +196,7 @@ class ChatHelper
 
     public function readMessage(string $filename): array
     {
-        return json_decode(file_get_contents(\CHAT_DIR . $filename));
+        return json_decode(file_get_contents($this->chat_dir . $filename));
     }
 
     public function sendMessage(string $destUniqueId, array $message, array $oldMessage = []): void
@@ -215,7 +221,7 @@ class ChatHelper
                 'timestamp' => $timestamp,
             ];
 
-            $filename = \CHAT_DIR . "msg-" . $timestamp . "-$srcUniqueId-$destUniqueId.json";
+            $filename = $this->chat_dir . "msg-" . $timestamp . "-$srcUniqueId-$destUniqueId.json";
             file_put_contents($filename, json_encode($msg));
         }
     }
@@ -223,7 +229,7 @@ class ChatHelper
     public function readFirstMessage(): array
     {
         $destUniqueId = \MiniPavi\MiniPaviCli::$uniqueId;
-        $messages = glob(\CHAT_DIR . "msg-*-*-$destUniqueId.json");
+        $messages = glob($this->chat_dir . "msg-*-*-$destUniqueId.json");
         if (count($messages) > 0) {
             $filename = $messages[0];
             $msg = json_decode(file_get_contents($filename), true);
@@ -237,7 +243,7 @@ class ChatHelper
         $timestamp = $msg['timestamp'];
         $srcUniqueId = $msg['srcUniqueId'];
         $destUniqueId = $msg['destUniqueId'];
-        $filename = \CHAT_DIR . "msg-$timestamp-$srcUniqueId-$destUniqueId.json";
+        $filename = $this->chat_dir . "msg-$timestamp-$srcUniqueId-$destUniqueId.json";
         if (file_exists($filename)) {
             unlink($filename);
         }
@@ -248,7 +254,7 @@ class ChatHelper
         $timestamp = $message['timestamp'];
         $destUniqueId = $message['destUniqueId'];
         $srcUniqueId = $message['srcUniqueId'];
-        $filename = \CHAT_DIR . "msg-$timestamp-$destUniqueId-$srcUniqueId.json";
+        $filename = $this->chat_dir . "msg-$timestamp-$destUniqueId-$srcUniqueId.json";
         if (file_exists($filename)) {
             unlink($filename);
         }
@@ -261,7 +267,7 @@ class ChatHelper
 
     public function cleanMessages(): void
     {
-        $messages = glob(\CHAT_DIR . "msg-*-*-*.json");
+        $messages = glob($this->chat_dir . "msg-*-*-*.json");
         foreach ($messages as $message) {
             preg_match('/msg-(\d+)-.*?\.json/', $message, $matches);
             $timestamp = $matches[1];
@@ -286,6 +292,6 @@ class ChatHelper
 
     protected function getConnectesFilename(): string
     {
-        return \CHAT_DIR . "connectes.json";
+        return $this->chat_dir . "connectes.json";
     }
 }

@@ -20,7 +20,7 @@ class ZoneSaisieCmd extends Cmd
         string $spaceChar = " ",
         string $replacementChar = '',
         string $prefill = ''
-    ) {
+    ): array {
         return MiniPaviCli::createInputTxtCmd(
             $col,
             $ligne,

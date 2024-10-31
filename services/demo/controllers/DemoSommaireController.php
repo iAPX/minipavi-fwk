@@ -6,14 +6,12 @@
 
 namespace service\controllers;
 
-class DemoxmlSommaireController extends \MiniPaviFwk\controllers\XmlController
+class DemoSommaireController extends \MiniPaviFwk\controllers\VideotexController
 {
     public function ecran(): string
     {
-        $vdt = parent::ecran();
-
         $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
-        $vdt .= $videotex
+        $vdt = $videotex
         ->position(18, 1)->inversionDebut()->ecritUnicode('8')->inversionFin()
         ->ecritUnicode(" Service démo de chat")
 

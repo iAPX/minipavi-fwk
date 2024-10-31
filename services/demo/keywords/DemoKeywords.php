@@ -22,12 +22,14 @@ class DemoKeywords extends \MiniPaviFwk\Keywords
         trigger_error("\service\keywords\DemoKeywords::choix(\"$touche\", \"$saisie\")");
         if ($touche === 'SOMMAIRE' && $saisie === '*') {
             trigger_error("\service\keywords\DemoKeywords::choix() : * [SOMMAIRE]");
-            $default_controller = MiniPaviFwk\helpers\ConstantHelper::getConstValueByName('DEFAULT_CONTROLLER', false);
-            $default_xml_file = MiniPaviFwk\helpers\ConstantHelper::getConstValueByName('DEFAULT_XML_FILE', false);
-            return new \MiniPaviFwk\actions\AccueilAction($context);
+            return new \MiniPaviFwk\actions\AccueilAction([]);
         } elseif ($touche === 'SOMMAIRE' && $saisie === '') {
             trigger_error("\service\keywords\DemoKeywords::choix() : [SOMMAIRE]");
-            return new \MiniPaviFwk\actions\PageAction([], "demoxml-sommaire", "demo");
+            // Handle [SOMMAIRE] to return to the Sommaire (service menu)
+            return new \MiniPaviFwk\actions\ControllerAction(
+                \service\controllers\DemoSommaireController::class,
+                $this->context
+            );
         }
         return null;
     }

@@ -6,13 +6,12 @@
 
 namespace service\controllers;
 
-class DemoEcranCodeController extends \MiniPaviFwk\controllers\VideotexController
+class DemoEcranController extends \MiniPaviFwk\controllers\VideotexController
 {
     public function ecran(): string
     {
         $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
 
-        // Redo the same demo as in demoxml-ecran page in demo.xml
         $vdt = $videotex
 
         // Simulate Videotex page loading as in <affiche><url>
@@ -57,13 +56,19 @@ class DemoEcranCodeController extends \MiniPaviFwk\controllers\VideotexControlle
         return $vdt;
     }
 
-    public function toucheSommaire(): ?\MiniPaviFwk\actions\Action
+    public function choixSommaire(): ?\MiniPaviFwk\actions\Action
     {
-        return new \MiniPaviFwk\actions\PageAction($this->context, "demoxml-sommaire", "demo");
+        return new \MiniPaviFwk\actions\ControllerAction(
+            \service\controllers\DemoSommaireController::class,
+            $this->context
+        );
     }
 
-    public function toucheRetour(): ?\MiniPaviFwk\actions\Action
+    public function choixRetour(): ?\MiniPaviFwk\actions\Action
     {
-        return new \MiniPaviFwk\actions\PageAction($this->context, "demoxml-ecran-code", "demo");
+        return new \MiniPaviFwk\actions\ControllerAction(
+            \service\controllers\DemoSommaireController::class,
+            $this->context
+        );
     }
 }

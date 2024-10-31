@@ -47,13 +47,6 @@ class Validation
                     trigger_error("Validation method touche : $touche - $method", E_USER_NOTICE);
                     $this->keyMask |= self::KEY_VALUES[$touche];
                 }
-            } elseif (mb_substr($method, 0, 13) === 'messageTouche') {
-                // touche{Touchname}() on an single line input area
-                $touche = mb_strtoupper(mb_substr($method, 13));
-                if (array_key_exists($touche, self::KEY_VALUES)) {
-                    trigger_error("Validation method messageTouche : $touche - $method", E_USER_NOTICE);
-                    $this->keyMask |= self::KEY_VALUES[$touche];
-                }
             } elseif (mb_substr($method, 0, 5) === 'choix') {
                 // choix{Saisie}{Touchname}()
                 $choix = mb_strtoupper($method);
@@ -64,6 +57,9 @@ class Validation
                         break;
                     }
                 }
+            } elseif ($method === 'message') {
+                // message() always support [Envoi]
+                $this->keyMask |= self::ENVOI;
             }
         }
 

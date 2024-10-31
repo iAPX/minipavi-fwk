@@ -42,8 +42,6 @@ Add a subdirectory cmd, and add your own extending [\minipavifwk\cmd\Cmd](../../
 
 [Controllers documentation](./Controllers.md)
 
-[Query Handler documentation](./Query-handler.md)
-
 [MiniPaviCli documentation](https://github.com/ludosevilla/minipaviCli/blob/main/MiniPaviCli-doc.pdf)
 
 [XMLint documentation](https://raw.githubusercontent.com/ludosevilla/minipaviCli/master/XMLint/XMLint-doc.pdf)

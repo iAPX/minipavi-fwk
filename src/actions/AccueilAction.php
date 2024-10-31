@@ -12,7 +12,7 @@ use MiniPaviFwk\helpers\ConstantHelper;
 
 class AccueilAction extends Action
 {
-    public function __construct($context)
+    public function __construct(array $context = [])
     {
         $default_controller = ConstantHelper::getConstValueByName('DEFAULT_CONTROLLER', false);
         $default_xml_file = ConstantHelper::getConstValueByName('DEFAULT_XML_FILE', false);

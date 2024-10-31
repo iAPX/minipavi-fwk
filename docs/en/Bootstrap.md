@@ -21,7 +21,7 @@ The Default Session Handler could be changed by modifying /services/global-confi
 
 
 ## Service Handler
-The Default Service Handler could be changed by modifying /services/global-config.php, see [Service Handler](./Service-handler.md)
+The Default Service Handler could be changed by modifying /services/global-config.php.
 
 
 ## References

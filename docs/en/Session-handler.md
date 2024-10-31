@@ -9,7 +9,7 @@ Source file : [src/handlers/SessionHandler.php](../../src/handlers/SessionHandle
 
 Used to auto-create Session, retrieve Sessions information, including current Controller Name and its Context, and eventually destroy Session on disconnection.
 
-It's used through [index.php](../../index.php) to initialize, retrieve Session informations, store them back and also by the [Query Handler](./Query-handler.md) on disconnection. Also used on the SwitchServiceAction
+It's used through [index.php](../../index.php) to initialize, retrieve Session informations and store them back. Also used on the SwitchServiceAction
 
 
 ## Your own session handler

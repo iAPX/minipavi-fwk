@@ -46,8 +46,6 @@ Simply add %3Fservice={serviceName} on the URL
 
 ## References
 
-[Query Handler](./Query-handler.md)
-
 [Bootstrap](./Bootstrap.md)
 
 [Configuration](./Configurations.md)

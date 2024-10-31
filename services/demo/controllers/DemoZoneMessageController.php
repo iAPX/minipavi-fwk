@@ -6,7 +6,7 @@
 
 namespace service\controllers;
 
-class DemoxmlMessageCodeController extends \MiniPaviFwk\controllers\XmlController
+class DemoZoneMessageCodeController extends \MiniPaviFwk\controllers\VideotexController
 {
     public function ecran(): string
     {

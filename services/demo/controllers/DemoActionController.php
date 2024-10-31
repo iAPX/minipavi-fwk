@@ -6,7 +6,7 @@
 
 namespace service\controllers;
 
-class DemoActionCodeController extends MiniPaviFwk\controllers\VideotexController
+class DemoActionController extends MiniPaviFwk\controllers\VideotexController
 {
     public function ecran(): string
     {
@@ -27,8 +27,6 @@ class DemoActionCodeController extends MiniPaviFwk\controllers\VideotexControlle
         ->ecritUnicode(" Dcx / DeconnexionAction()")
         ->position(13, 1)->inversionDebut()->ecritUnicode('4')->inversionFin()
         ->ecritUnicode(" Ligne 00 / Ligne00Action()")
-        ->position(15, 1)->inversionDebut()->ecritUnicode('5')->inversionFin()
-        ->ecritUnicode(" Sommaire XML / PageAction()")
         ->position(17, 1)->inversionDebut()->ecritUnicode('6')->inversionFin()
         ->ecritUnicode(" Répète / RepetitionAction()")
         ->position(19, 1)->inversionDebut()->ecritUnicode('7')->inversionFin()
@@ -66,11 +64,6 @@ class DemoActionCodeController extends MiniPaviFwk\controllers\VideotexControlle
         return new \MiniPaviFwk\actions\Ligne00Action($this, "Ligne 00 via Ligne00Action()");
     }
 
-    public function choix5Envoi(): ?MiniPaviFwk\actions\Action
-    {
-        return new \MiniPaviFwk\actions\PageAction($this->context, "demoxml-sommaire", "demo");
-    }
-
     public function choix6Envoi(): ?MiniPaviFwk\actions\Action
     {
         return new \MiniPaviFwk\actions\RepetitionAction($this);
@@ -93,6 +86,9 @@ class DemoActionCodeController extends MiniPaviFwk\controllers\VideotexControlle
 
     public function toucheSommaire(string $saisie): ?MiniPaviFwk\actions\Action
     {
-        return new \MiniPaviFwk\actions\PageAction($this->context, "demoxml-sommaire", "demo");
+        return new \MiniPaviFwk\actions\ControllerAction(
+            \service\controllers\DemoSommaireController::class,
+            $this->context
+        );
     }
 }

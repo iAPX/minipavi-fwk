@@ -24,7 +24,7 @@ class EcrireMessageController extends \MiniPaviFwk\controllers\VideotexControlle
     {
         $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
         $videotex->effaceLigne00();
-        $videotex->ecritVideotex(file_get_contents(SERVICE_DIR . "vdt/demochat-page.vdt"));
+        $videotex->page("demochat-page");
 
         $videotex
         ->position(4, 1)->inversionDebut()->ecritUnicode("Message pour : ");
@@ -49,6 +49,13 @@ class EcrireMessageController extends \MiniPaviFwk\controllers\VideotexControlle
         return $videotex->getOutput();
     }
 
+    public function validation(): \MiniPaviFwk\Validation
+    {
+        $validation = parent::validation();
+        $validation->addValidKeys(['Suite', 'RETOUR', 'Envoi']);
+        return $validation;
+    }
+
     public function getCmd(): array
     {
         if (empty($this->dest)) {
@@ -58,42 +65,43 @@ class EcrireMessageController extends \MiniPaviFwk\controllers\VideotexControlle
         return \MiniPaviFwk\cmd\ZoneMessageCmd::createMiniPaviCmd($this->validation(), 5, 4, true, '.', '-');
     }
 
-    public function messageToucheEnvoi(array $message): ?\MiniPaviFwk\actions\Action
+    public function message(string $touche, array $message): ?\MiniPaviFwk\actions\Action
     {
-        if (empty(implode('', $message))) {
-            return new \MiniPaviFwk\actions\Ligne00Action($this, "Message vide, [SOMMAIRE] pour quitter");
-        }
+        if ($touche === "SOMMAIRE") {
+            return new \MiniPaviFwk\actions\ControllerAction(\service\controllers\ListeController::class, $this->context);
+        } elseif ($touche === "ENVOI") {
+            if (empty(implode('', $message))) {
+                return new \MiniPaviFwk\actions\Ligne00Action($this, "Message vide, [SOMMAIRE] pour quitter");
+            }
 
-        // Envoi du message
-        $this->chatHelper->sendMessage($this->context['destUniqueId'], $message);
+            // Envoi du message
+            $this->chatHelper->sendMessage($this->context['destUniqueId'], $message);
 
-        // Ligne 00 pour le destinataire
-        $connecte = $this->chatHelper->getCurrentConnecte();
-        $_SESSION["DIRECTCALL_CMD"] = \MiniPaviFwk\cmd\PushServiceMsgCmd::createMiniPaviCmd(
-            [$this->context['destUniqueId']],
-            [\MiniPavi\MiniPaviCli::toG2("Message de " . $connecte['pseudonyme'])]
-        );
-        trigger_error(
-            "EcrireController::nouveau message - DIRECTCALL_CMD : " . print_r($_SESSION["DIRECTCALL_CMD"], true)
-        );
-
-        // Send to Liste or LireMessage depending on existing incoming message
-        if ($this->chatHelper->getNbMessage() > 0) {
-            return new \MiniPaviFwk\actions\ControllerAction(
-                \service\controllers\LireMessageController::class,
-                $this->context
+            // Ligne 00 pour le destinataire
+            $connecte = $this->chatHelper->getCurrentConnecte();
+            $_SESSION["DIRECTCALL_CMD"] = \MiniPaviFwk\cmd\PushServiceMsgCmd::createMiniPaviCmd(
+                [$this->context['destUniqueId']],
+                [\MiniPavi\MiniPaviCli::toG2("Message de " . $connecte['pseudonyme'])]
             );
+            trigger_error(
+                "EcrireController::nouveau message - DIRECTCALL_CMD : " . print_r($_SESSION["DIRECTCALL_CMD"], true)
+            );
+
+            // Send to Liste or LireMessage depending on existing incoming message
+            if ($this->chatHelper->getNbMessage() > 0) {
+                return new \MiniPaviFwk\actions\ControllerAction(
+                    \service\controllers\LireMessageController::class,
+                    $this->context
+                );
+            }
+            return new \MiniPaviFwk\actions\ControllerAction(\service\controllers\ListeController::class, $this->context);
         }
-        return new \MiniPaviFwk\actions\ControllerAction(\service\controllers\ListeController::class, $this->context);
+
+        // Fallback
+        return null;
     }
 
-
-    public function messageToucheSommaire(array $message): ?\MiniPaviFwk\actions\Action
-    {
-        return new \MiniPaviFwk\actions\ControllerAction(\service\controllers\ListeController::class, $this->context);
-    }
-
-    public function toucheSommaire(array $message): ?\MiniPaviFwk\actions\Action
+    public function toucheSommaire(string $saisie): ?\MiniPaviFwk\actions\Action
     {
         // Alternatively if user was disconnected when displaying or redisplaying this page
         return new \MiniPaviFwk\actions\ControllerAction(\service\controllers\ListeController::class, $this->context);

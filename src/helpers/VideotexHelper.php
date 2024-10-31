@@ -42,11 +42,14 @@ class VideotexHelper
         return $this->output;
     }
 
-    public function page($pagename): VideotexHelper
+    public function page(string $pagename): VideotexHelper
     {
-        $filename = SERVICE_DIR . "vdt/" . $pagename . ".vdt";
+        // Serve pages with explicit extension explicit or .vdt omitted
+        $filename = SERVICE_DIR . "vdt/" . $pagename;
         if (file_exists($filename)) {
             $this->output .= file_get_contents($filename);
+        } elseif (file_exists($filename . ".vdt")) {
+            $this->output .= file_get_contents($filename . ".vdt");
         }
         return $this;
     }
@@ -235,7 +238,7 @@ class VideotexHelper
 
     public function deconnexionModem(): VideotexHelper
     {
-        // The weel known ESc 9 g that aask the terminal to hang up!
+        // The well known ESc 9 g that ask the terminal to hang up!
         $this->output .= "\x1B9g";
         return $this;
     }

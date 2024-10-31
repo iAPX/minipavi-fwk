@@ -6,7 +6,7 @@
 
 namespace service\controllers;
 
-class DemoMessageCodeController extends \MiniPaviFwk\controllers\VideotexController
+class DemoMessageController extends \MiniPaviFwk\controllers\VideotexController
 {
     public function ecran(): string
     {
@@ -24,29 +24,37 @@ class DemoMessageCodeController extends \MiniPaviFwk\controllers\VideotexControl
         return $vdt;
     }
 
+    public function validation(): \MiniPaviFwk\Validation
+    {
+        // Allow [SOMMAIRE], [ENVOI] keys
+        $validation = parent::validation();
+        $validation->addValidKeys(['sommaire', 'envoi']);
+        return $validation;
+    }
+
     public function getCmd(): array
     {
         // Here we define the Message input area
         return \MiniPaviFwk\cmd\ZoneMessageCmd::createMiniPaviCmd($this->validation(), 5, 4, true, '.', '-');
     }
 
-    public function messageToucheSommaire(array $message): ?\MiniPaviFwk\actions\Action
+    public function message(string $touche, array $message): ?\MiniPaviFwk\actions\Action
     {
-        // Handle [SOMMAIRE] to return to the Sommaire (service menu)
-        // We could also process the multiline message received if needed,
-        // for example save it as a draft to display it again when back in this page (using prefill)
-        return new \MiniPaviFwk\actions\PageAction($this->context, "demoxml-sommaire", "demo");
-    }
-
-    public function messageToucheEnvoi(array $message): ?\MiniPaviFwk\actions\Action
-    {
-        if (empty(implode('', $message))) {
-            return new \MiniPaviFwk\actions\Ligne00Action($this, "Message vide");
+        if ($touche === 'ENVOI') {
+            if (empty(implode('', $message))) {
+                return new \MiniPaviFwk\actions\Ligne00Action($this, "Message vide");
+            }
+    
+            // Display the input message as preceding message.
+            $vdt = $this->displayPrecedentMessage($message);
+            return new \MiniPaviFwk\actions\VideotexOutputAction($this, $vdt);
+        } elseif ($touche === 'SOMMAIRE') {
+            // Handle [SOMMAIRE] to return to the Sommaire (service menu)
+            return new \MiniPaviFwk\actions\ControllerAction(
+                \service\controllers\DemoSommaireController::class,
+                $this->context
+            );
         }
-
-        // Display the input message as preceding message.
-        $vdt = $this->displayPrecedentMessage($message);
-        return new \MiniPaviFwk\actions\VideotexOutputAction($this, $vdt);
     }
 
     private function displayPrecedentMessage(array $message): string

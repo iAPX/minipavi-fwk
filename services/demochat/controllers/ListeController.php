@@ -24,8 +24,7 @@ class ListeController extends \MiniPaviFwk\controllers\VideotexController
         $this->context['connectes'] = $connectes;
 
         $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
-        $videotex
-        ->ecritVideotex(file_get_contents(SERVICE_DIR . "vdt/demochat-page.vdt"));
+        $videotex->page("demochat-page");
 
         $nbMessage = $this->chatHelper->getNbMessage();
         if ($nbMessage == 1) {

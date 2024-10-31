@@ -6,7 +6,7 @@
 
 namespace service\controllers;
 
-class DemoZonesaisieCodeController extends \MiniPaviFwk\controllers\VideotexController
+class DemoZonesaisieController extends \MiniPaviFwk\controllers\VideotexController
 {
     public function ecran(): string
     {
@@ -28,13 +28,21 @@ class DemoZonesaisieCodeController extends \MiniPaviFwk\controllers\VideotexCont
         return \MiniPaviFwk\cmd\ZoneSaisieCmd::createMiniPaviCmd($this->validation(), 8, 38, 1, true);
     }
 
-    public function toucheSommaire(): ?\MiniPaviFwk\actions\Action
+    public function choixSommaire(): ?\MiniPaviFwk\actions\Action
     {
-        return new \MiniPaviFwk\actions\PageAction($this->context, "demoxml-sommaire", "demo");
+        // Handle [SOMMAIRE] to return to the Sommaire (service menu)
+        return new \MiniPaviFwk\actions\ControllerAction(
+            \service\controllers\DemoSommaireController::class,
+            $this->context
+        );
     }
 
-    public function toucheRetour(): ?\MiniPaviFwk\actions\Action
+    public function choixRetour(): ?\MiniPaviFwk\actions\Action
     {
-        return new \MiniPaviFwk\actions\PageAction($this->context, "demoxml-zonesaisie-code", "demo");
+        // Handle [SOMMAIRE] to return to the Sommaire (service menu)
+        return new \MiniPaviFwk\actions\ControllerAction(
+            \service\controllers\DemoSommaireController::class,
+            $this->context
+        );
     }
 }
