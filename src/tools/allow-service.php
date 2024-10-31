@@ -2,7 +2,7 @@
 
 /**
  * Allow a service
- * 
+ *
  * - List all services existing
  * - Ask for service name
  * - Ensure it's on the allowed list

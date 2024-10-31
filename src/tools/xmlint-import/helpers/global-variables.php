@@ -23,3 +23,7 @@ $new_default_service = "";
 
 $default_controller_name = "";
 $controllers = [];
+
+$xml_ecran_conversion = [
+    "affiche" => ["page", ["url" => ""]],
+];

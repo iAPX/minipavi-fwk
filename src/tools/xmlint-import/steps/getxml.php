@@ -81,7 +81,7 @@ $unsupported_features = [
     ['WebMedia <webmedia />', "//webmedia"],
 ];
 $unsupported_messages = [];
-foreach($unsupported_features as $unsupported_feature) {
+foreach ($unsupported_features as $unsupported_feature) {
     $message = $unsupported_feature[0];
     $xpath = $unsupported_feature[1];
     if ($xml_element->xpath($xpath)) {
@@ -98,4 +98,3 @@ if (count($unsupported_messages) > 0) {
     echo "\n";
     YESno() || die("Aborted, no modification done.\n");
 }
-

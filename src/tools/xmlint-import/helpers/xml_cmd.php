@@ -7,7 +7,7 @@
 function xml_cmd(ControllerBuilder $controller, \SimpleXMLElement $xml_entree): void
 {
     // Get ZoneSaisies, process the first encountered
-    foreach($xml_entree->zonesaisie as $element) {
+    foreach ($xml_entree->zonesaisie as $element) {
         $ligne = (string) $element['ligne'];
         $col = (string) $element['col'];
         $longueur = (string) $element['longueur'];

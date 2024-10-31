@@ -7,7 +7,7 @@
 function xml_choix(ControllerBuilder $controller, \SimpleXMLElement $xml_choix): void
 {
     $code_choix = "";
-    foreach($xml_choix->saisie as $element) {
+    foreach ($xml_choix->saisie as $element) {
         $choix = (string) $element['choix'];
         $touche = (string) $element['touche'];
         $suivant = (string) $element['suivant'];

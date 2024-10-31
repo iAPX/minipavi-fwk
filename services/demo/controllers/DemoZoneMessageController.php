@@ -6,27 +6,56 @@
 
 namespace service\controllers;
 
-class DemoZoneMessageCodeController extends \MiniPaviFwk\controllers\VideotexController
+class DemoZoneMessageController extends \MiniPaviFwk\controllers\VideotexController
 {
     public function ecran(): string
     {
-        $vdt = parent::ecran();
         $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
-        $videotex->position(23, 1)->effaceFinDeLigne()->couleurFond("vert")->couleurTexte('noir')
+        $videotex
+        ->effaceLigne00()
+        ->page("demo-controller")
+        ->page("demo-choix-sommaire")
+
+        ->position(4, 1)->inversionDebut()->ecritUnicode("Message + [ENVOI] : ")->inversionFin()
+
+        ->position(12, 1)->inversionDebut()->ecritUnicode("Message précédent : ")->inversionFin()
+
+        ->position(23, 1)->effaceFinDeLigne()->couleurFond("vert")->couleurTexte('noir')
         ->ecritUnicode(" " . end(explode('\\', $this::class)));
-        $vdt .= $videotex->getOutput();
-        return $vdt;
+        return $videotex->getOutput();
     }
 
-    public function messageToucheEnvoi(array $message): ?\MiniPaviFwk\actions\Action
+    public function validation(): \MiniPaviFwk\Validation
     {
-        if (empty(implode('', $message))) {
-            return new \MiniPaviFwk\actions\Ligne00Action($this, "Message vide");
-        }
+        // Allow [SOMMAIRE], [ENVOI] keys
+        $validation = parent::validation();
+        $validation->addValidKeys(['sommaire', 'envoi']);
+        return $validation;
+    }
 
-        // Display the input message as preceding message.
-        $vdt = $this->displayPrecedentMessage($message);
-        return new \MiniPaviFwk\actions\VideotexOutputAction($this, $vdt);
+    public function getCmd(): array
+    {
+        // Here we define the Message input area
+        return \MiniPaviFwk\cmd\ZoneMessageCmd::createMiniPaviCmd($this->validation(), 5, 4, true, '.', '-');
+    }
+
+    public function message(string $touche, array $message): ?\MiniPaviFwk\actions\Action
+    {
+        if ($touche === 'ENVOI') {
+            if (empty(implode('', $message))) {
+                return new \MiniPaviFwk\actions\Ligne00Action($this, "Message vide");
+            }
+
+            // Display the input message as preceding message.
+            $vdt = $this->displayPrecedentMessage($message);
+            return new \MiniPaviFwk\actions\VideotexOutputAction($this, $vdt);
+        } elseif ($touche === 'SOMMAIRE') {
+            // Handle [SOMMAIRE] to return to the Sommaire (service menu)
+            return new \MiniPaviFwk\actions\ControllerAction(
+                \service\controllers\DemoSommaireController::class,
+                $this->context
+            );
+        }
     }
 
     private function displayPrecedentMessage(array $message): string

@@ -8,7 +8,7 @@ function xml_validation(ControllerBuilder $controller, \SimpleXMLElement $xml_en
 {
     // get Touches
     $touches = [];
-    foreach($xml_entree->validation as $element) {
+    foreach ($xml_entree->validation as $element) {
         $touches[] = (string) $element['touche'];
     }
     if (count($touches) == 0) {

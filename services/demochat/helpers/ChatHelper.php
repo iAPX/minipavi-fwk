@@ -180,7 +180,7 @@ class ChatHelper
     public function getNbMessage(): int
     {
         $uniqueId = \MiniPavi\MiniPaviCli::$uniqueId;
-        return count(glob($this->chat_dir. "msg-*-*-$uniqueId.json"));
+        return count(glob($this->chat_dir . "msg-*-*-$uniqueId.json"));
     }
 
     public function getFirstMessageFilename(): ?string

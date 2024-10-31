@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Demo keywords for DemoKeywordsCodeController
+ * Demo keywords for DemoKeywordsController
  *
  *  * [SOMMAIRE] : Accueil (homepage)
  *    [SOMMAIRE] : XML Demo Sommaire (main menu)
@@ -14,7 +14,7 @@ class DemoKeywords extends \MiniPaviFwk\Keywords
     public function validationKeys(): array
     {
         trigger_error("\service\keywords\DemoKeywords::validationKeys()");
-        return ['SOMMAIRE', 'ENVOI'];
+        return ['SOMMAIRE'];
     }
 
     public function choix(string $touche, string $saisie): ?\MiniPaviFwk\actions\Action
@@ -28,7 +28,7 @@ class DemoKeywords extends \MiniPaviFwk\Keywords
             // Handle [SOMMAIRE] to return to the Sommaire (service menu)
             return new \MiniPaviFwk\actions\ControllerAction(
                 \service\controllers\DemoSommaireController::class,
-                $this->context
+                []
             );
         }
         return null;

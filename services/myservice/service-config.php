@@ -8,4 +8,4 @@
 
 namespace service;
 
-const DEFAULT_XML_FILE = 'default.xml';
+const DEFAULT_CONTROLLER = \service\controllers\AccueilController::class;

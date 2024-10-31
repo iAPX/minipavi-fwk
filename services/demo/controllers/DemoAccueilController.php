@@ -2,18 +2,27 @@
 
 /**
  * Accueil of Demo : homepage and [Suite]
- * 
+ *
  * Minimalist controller.
  */
 
 namespace service\controllers;
 
-class AccueilController extends \MiniPaviFwk\controllers\VideotexController
+class DemoAccueilController extends \MiniPaviFwk\controllers\VideotexController
 {
     public function ecran(): string
     {
         $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
-        return $videotex->page("demo-controller")->getOutput();
+        $videotex
+        ->page("demo-controller")
+
+        ->position(4, 1)->ecritUnicode("Accueil de la démo des contrôleurs.")
+
+        ->position(23, 1)->effaceFinDeLigne()->couleurFond("vert")->couleurTexte('noir')
+        ->ecritUnicode(" " . end(explode('\\', $this::class)))
+        ->position(24, 34)->inversionDebut()->ecritUnicode(" SUITE ")->inversionFin();
+
+        return $videotex->getOutput();
     }
 
     public function getCmd(): array

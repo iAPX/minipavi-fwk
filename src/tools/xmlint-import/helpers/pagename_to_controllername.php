@@ -4,7 +4,8 @@
  * Transcode a XML Page name to a Controller name
  */
 
-function pagename_to_controllername(string $pagename): string {
+function pagename_to_controllername(string $pagename): string
+{
     $cleanControllerName = '';
     foreach (explode('-', $pagename) as $pagename_part) {
         $car = substr($pagename_part, 0, 1);

@@ -68,7 +68,10 @@ class EcrireMessageController extends \MiniPaviFwk\controllers\VideotexControlle
     public function message(string $touche, array $message): ?\MiniPaviFwk\actions\Action
     {
         if ($touche === "SOMMAIRE") {
-            return new \MiniPaviFwk\actions\ControllerAction(\service\controllers\ListeController::class, $this->context);
+            return new \MiniPaviFwk\actions\ControllerAction(
+                \service\controllers\ListeController::class,
+                $this->context
+            );
         } elseif ($touche === "ENVOI") {
             if (empty(implode('', $message))) {
                 return new \MiniPaviFwk\actions\Ligne00Action($this, "Message vide, [SOMMAIRE] pour quitter");
@@ -94,7 +97,10 @@ class EcrireMessageController extends \MiniPaviFwk\controllers\VideotexControlle
                     $this->context
                 );
             }
-            return new \MiniPaviFwk\actions\ControllerAction(\service\controllers\ListeController::class, $this->context);
+            return new \MiniPaviFwk\actions\ControllerAction(
+                \service\controllers\ListeController::class,
+                $this->context
+            );
         }
 
         // Fallback

@@ -4,9 +4,9 @@
  * Minimalistic homepage controller
  */
 
-namespace services\controllers;
+namespace service\controllers;
 
-class AccueilController extends \MinipaviFwk\controllers\VideotexController
+class AccueilController extends \MiniPaviFwk\controllers\VideotexController
 {
     public function ecran(): string
     {

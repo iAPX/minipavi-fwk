@@ -4,18 +4,14 @@
  * Import Ecran from XML
  */
 
-$xml_ecran_conversion = [
-    "affiche" => ["page", ["url" => ""]],
-];
-
 function xml_ecran(ControllerBuilder $controller, \SimpleXMLElement $ecran, string $pages_path): void
 {
     $inner_code = "";
-    foreach($ecran->children() as $element) {
+    foreach ($ecran->children() as $element) {
         // get element name and attributes
         $name = (string) $element->getName();
 
-        switch($name) {
+        switch ($name) {
             case "affiche":
                 $url = (string) $element['url'];
                 echo "url : ";

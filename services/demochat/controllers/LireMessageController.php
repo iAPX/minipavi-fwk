@@ -107,7 +107,10 @@ class LireMessageController extends \MiniPaviFwk\controllers\VideotexController
                     );
                 }
             }
-            return new \MiniPaviFwk\actions\ControllerAction(\service\controllers\ListeController::class, $this->context);    
+            return new \MiniPaviFwk\actions\ControllerAction(
+                \service\controllers\ListeController::class,
+                $this->context
+            );
         } elseif ($touche === "ENVOI") {
             if (empty(implode('', $message))) {
                 return new \MiniPaviFwk\actions\Ligne00Action($this, "* [SOMMAIRE] pour ne pas répondre");
@@ -136,7 +139,10 @@ class LireMessageController extends \MiniPaviFwk\controllers\VideotexController
                     $this->context
                 );
             }
-            return new \MiniPaviFwk\actions\ControllerAction(\service\controllers\ListeController::class, $this->context);
+            return new \MiniPaviFwk\actions\ControllerAction(
+                \service\controllers\ListeController::class,
+                $this->context
+            );
         }
         return null;
     }

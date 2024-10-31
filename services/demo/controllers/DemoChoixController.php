@@ -13,8 +13,7 @@ class DemoChoixController extends \MiniPaviFwk\controllers\VideotexController
         $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
         $vdt = $videotex
         ->effaceLigne00()
-        ->ecritVideotex(file_get_contents(SERVICE_DIR . "vdt/demo-controller-page.vdt"))
-        ->ecritVideotex(file_get_contents(SERVICE_DIR . "/vdt/demo-choix-code.vdt"))
+        ->page("demo-controller")
 
         ->position(5, 1)->ecritUnicode("[SOMMAIRE] : Sommaire / toucheSommaire()")
         ->position(6, 1)->ecritUnicode("[REPETITION] : répét./VideotexController")
@@ -25,8 +24,17 @@ class DemoChoixController extends \MiniPaviFwk\controllers\VideotexController
 
         ->position(23, 1)->effaceFinDeLigne()->couleurFond("vert")->couleurTexte('noir')
         ->ecritUnicode(" " . end(explode('\\', $this::class)))
+
+        ->position(24, 25)->ecritUnicode("Choix : .. ")
+        ->inversionDebut()->ecritUnicode("ENVOI")->inversionFin()
+
         ->getOutput();
         return $vdt;
+    }
+
+    public function getCmd(): array
+    {
+        return \MiniPaviFwk\cmd\ZoneSaisieCmd::createMiniPaviCmd($this->validation(), 24, 33, 2, true, '.');
     }
 
     public function choix1Envoi(): ?\MiniPaviFwk\actions\Action

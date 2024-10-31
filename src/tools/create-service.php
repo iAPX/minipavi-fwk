@@ -2,7 +2,7 @@
 
 /**
  * Creates a new service
- * 
+ *
  * - Checks it doesn't already exist
  * - Creates the service directories
  * - service-config.php file

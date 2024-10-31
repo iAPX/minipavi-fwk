@@ -34,7 +34,7 @@ class PageAction extends Action
             if ($car < 'a' || $car > 'z') {
                 // Not a letter, could not be ucfirsted, we change the dash '-' to underscore '_'
                 $cleanControllerName .= '_';
-            }    
+            }
             $cleanControllerName .= \MiniPaviFwk\helpers\mb_ucfirst(mb_strtolower($pagename_part));
         }
         $overriderControllerName = "\\service\\controllers\\" . $cleanControllerName . 'Controller';

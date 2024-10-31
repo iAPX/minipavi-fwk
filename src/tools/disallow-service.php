@@ -2,7 +2,7 @@
 
 /**
  * Disallow a service
- * 
+ *
  * - List all services existing
  * - Ask for service name
  * - if it's the default service, ask for the new default service

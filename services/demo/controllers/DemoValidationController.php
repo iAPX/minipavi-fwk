@@ -13,8 +13,7 @@ class DemoValidationController extends \MiniPaviFwk\controllers\VideotexControll
         $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
         $vdt = $videotex
         ->effaceLigne00()
-        ->ecritVideotex(file_get_contents(SERVICE_DIR . "vdt/demo-controller-page.vdt"))
-        ->ecritVideotex(file_get_contents(SERVICE_DIR . "vdt/demo-choix-code.vdt"))
+        ->page("demo-controller")
 
         ->position(7, 1)
         ->ecritUnicode("Le contrôleur autorise [SUITE] et [ENVOI] qui génèreront une erreur via nonPropose()")
@@ -22,6 +21,8 @@ class DemoValidationController extends \MiniPaviFwk\controllers\VideotexControll
 
         ->position(23, 1)->effaceFinDeLigne()->couleurFond("vert")->couleurTexte('noir')
         ->ecritUnicode(" " . end(explode('\\', $this::class)))
+
+        ->position(24, 30)->inversionDebut()->ecritUnicode(' SOMMAIRE ')->inversionFin()
 
         ->getOutput();
         return $vdt;
@@ -44,7 +45,7 @@ class DemoValidationController extends \MiniPaviFwk\controllers\VideotexControll
             return new \MiniPaviFwk\actions\ControllerAction(
                 \service\controllers\DemoSommaireController::class,
                 $this->context
-            );            
+            );
         } elseif ($touche == 'SOMMAIRE') {
             // Handle [SOMMAIRE] to return to the Sommaire (service menu)
             return new \MiniPaviFwk\actions\ControllerAction(
