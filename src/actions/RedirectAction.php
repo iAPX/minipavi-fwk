@@ -19,6 +19,15 @@ class RedirectAction extends Action
         $this->controller = null;
         $this->output = "";
 
+        // Reinit the Session, protect against data leakage, enable local Redirect too.
+        $session_handler = ConstantHelper::getConstValueByName(
+            'SESSION_HANDLER_CLASSNAME',
+            SessionHandler::class
+        );
+        $session_handler::destroySession();
+        $session_handler::startSession();
+        $_SESSION['context'] = [];
+        
         // Wait time in seconds translated to \00 output!
         $waitOutput = !empty($videotexOutput) ? str_repeat("\00", $waitSeconds * 120) : '';
 
