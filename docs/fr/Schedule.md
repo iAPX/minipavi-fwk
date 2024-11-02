@@ -6,19 +6,16 @@
 - [x] Documentation minimale en Français
 
 
-## v1.0 - Decembre 2024
-- [ ] Support WebMedia
-- [ ] Support messages emails en XML
-- [ ] Support envoi de code PIN
-- [ ] Documentation complète en Français, hors support XML
+## v0.9 - Décembre 2024
+- [ ] Importation XMLint complète
+- [ ] Support XML via XmlController enlevé (simplification)
+- [ ] Support des formulaires MiniPaviCli
+- [ ] Documentation étendue
 
 
 ## Futuribles (sans ordre particulier)
 
-- Support des Formulaires MiniPaviCli
-- FormController extensible
 - Gestion de pile pour le retour aux ancêtres en restaurant leur état
 - Démo MacBidouille dynamique
 - Helpers de gestion de contenus dynamiques
 - Helpers d'affichage de contenus dynamiques
-- Retrait progressif du support XML direct, pour simplifier le code et la documentation
