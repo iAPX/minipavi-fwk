@@ -88,10 +88,7 @@ class ListeController extends \MiniPaviFwk\controllers\VideotexController
         if ($nbMsg == 0) {
             return new \MiniPaviFwk\actions\Ligne00Action($this, "Aucun message en attente...");
         }
-        return new \MiniPaviFwk\actions\ControllerAction(
-            \service\controllers\LireMessageController::class,
-            $this->context
-        );
+        return new \MiniPaviFwk\actions\PageAction($this->context, 'lire-message');
     }
 
     public function toucheEnvoi(string $saisie): ?\MiniPaviFwk\actions\Action
@@ -118,10 +115,7 @@ class ListeController extends \MiniPaviFwk\controllers\VideotexController
             "EcrireController::Ecriture - DIRECTCALL_CMD : " . print_r($_SESSION["DIRECTCALL_CMD"], true)
         );
 
-        return new \MiniPaviFwk\actions\ControllerAction(
-            \service\controllers\EcrireMessageController::class,
-            $this->context
-        );
+        return new \MiniPaviFwk\actions\PageAction($this->context, 'ecrire-message');
     }
 
     public function toucheSuite(string $saisie): ?\MiniPaviFwk\actions\Action
@@ -146,9 +140,6 @@ class ListeController extends \MiniPaviFwk\controllers\VideotexController
             );
         }
 
-        return new \MiniPaviFwk\actions\ControllerAction(
-            \service\controllers\ListeController::class,
-            $this->context
-        );
+        return new \MiniPaviFwk\actions\PageAction($this->context, 'liste');
     }
 }

@@ -92,15 +92,9 @@ class EcrireMessageController extends \MiniPaviFwk\controllers\VideotexControlle
 
             // Send to Liste or LireMessage depending on existing incoming message
             if ($this->chatHelper->getNbMessage() > 0) {
-                return new \MiniPaviFwk\actions\ControllerAction(
-                    \service\controllers\LireMessageController::class,
-                    $this->context
-                );
+                return new \MiniPaviFwk\actions\PageAction($this->context, 'lire-message');
             }
-            return new \MiniPaviFwk\actions\ControllerAction(
-                \service\controllers\ListeController::class,
-                $this->context
-            );
+            return new \MiniPaviFwk\actions\PageAction($this->context, 'liste');
         }
 
         // Fallback
@@ -110,6 +104,6 @@ class EcrireMessageController extends \MiniPaviFwk\controllers\VideotexControlle
     public function toucheSommaire(string $saisie): ?\MiniPaviFwk\actions\Action
     {
         // Alternatively if user was disconnected when displaying or redisplaying this page
-        return new \MiniPaviFwk\actions\ControllerAction(\service\controllers\ListeController::class, $this->context);
+        return new \MiniPaviFwk\actions\PageAction($this->context, 'liste');
     }
 }

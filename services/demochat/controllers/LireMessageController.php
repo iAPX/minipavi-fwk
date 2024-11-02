@@ -101,10 +101,7 @@ class LireMessageController extends \MiniPaviFwk\controllers\VideotexController
             if (implode('', $message) === '*' && !empty($this->msg)) {
                 $this->chatHelper->deleteMessage($this->msg);
                 if ($this->chatHelper->getNbMessage() > 0) {
-                    return new \MiniPaviFwk\actions\ControllerAction(
-                        \service\controllers\LireMessageController::class,
-                        $this->context
-                    );
+                    return new \MiniPaviFwk\actions\PageAction($this->context, 'lire-message');
                 }
             }
             return new \MiniPaviFwk\actions\ControllerAction(
@@ -134,22 +131,16 @@ class LireMessageController extends \MiniPaviFwk\controllers\VideotexController
 
             // Send to Liste or LireMessage depending on existing incoming message
             if ($this->chatHelper->getNbMessage() > 0) {
-                return new \MiniPaviFwk\actions\ControllerAction(
-                    \service\controllers\LireMessageController::class,
-                    $this->context
-                );
+                return new \MiniPaviFwk\actions\PageAction($this->context, 'lire-message');
             }
-            return new \MiniPaviFwk\actions\ControllerAction(
-                \service\controllers\ListeController::class,
-                $this->context
-            );
+            return new \MiniPaviFwk\actions\PageAction($this->context, 'liste');
         }
         return null;
     }
 
     public function toucheSommaire(string $saisie): ?\MiniPaviFwk\actions\Action
     {
-        return new \MiniPaviFwk\actions\ControllerAction(\service\controllers\ListeController::class, $this->context);
+        return new \MiniPaviFwk\actions\PageAction($this->context, 'liste');
     }
 
     public function toucheSuite(string $saisie): ?\MiniPaviFwk\actions\Action
@@ -159,7 +150,6 @@ class LireMessageController extends \MiniPaviFwk\controllers\VideotexController
             // Delete message
             $this->chatHelper->deleteMessage($this->msg);
         }
-
-        return new \MiniPaviFwk\actions\ControllerAction(\service\controllers\ListeController::class, $this->context);
+        return new \MiniPaviFwk\actions\PageAction($this->context, 'liste');
     }
 }

@@ -73,6 +73,6 @@ class AccueilController extends \MiniPaviFwk\controllers\VideotexController
         }
 
         // This command will be executed after the DIRECTCALL_CMD!
-        return new \MiniPaviFwk\actions\ControllerAction(\service\controllers\ListeController::class, $this->context);
+        return new \MiniPaviFwk\actions\PageAction($this->context, 'liste');
     }
 }
