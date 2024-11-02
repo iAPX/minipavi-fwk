@@ -3,7 +3,6 @@
 Défini à la louche certains termes liés au Minitel en général, couvrant les PAVI, le Vidéotex, les terminaux et leurs environnements.
 Beaucoup de ces termes n'étant plus employés depuis fort longtemps, il peut être utile de s'y référer en cas de doute.
 
-@TODO
 
 Terme | Définition (à la louche)
 --- | ---
@@ -12,7 +11,8 @@ Terme | Définition (à la louche)
 3615 | Numéro abrégé d'accès à Télétel 3, là ça douille, avec différents paliers autour de 1FF/minute soit 22€/heure en 2024 (!!!). La plupart des services grand-publics étaient dans ces paliers.
 3616 | Numéro abrégé d'accès aux services professionnels, les services grand-public étant interdits. Et encore plus couteux.
 3617 | "Pas assez cher mon fils!", faut exploser les tarifs pour certains services professionnels, merci FT.
-614 91 55 | Numéro à 7 chiffres qui deviendra 3614 ultérieurement.
+613 91 55 | Numéro à 7 chiffres qui deviendra 3613 ultérieurement.
+614 91 66 | Numéro à 7 chiffres qui deviendra 3614 ultérieurement.
 615 91 77 | Numéro à 7 chiffres qui deviendra 3615 ultérieurement.
 Alphamosaïque | Mode dans lequel des caractères semi-graphiques sont affichés, avec 6 "pixels" (pâtés!) par espace occupé à l'écran, 2 en largeur et 3 en hauteur, permettant des semigraphiques de 80x72 en dehors de la Ligne 00. Voir les [STUM 1b](https://www.minipavi.fr/stum1b.pdf) (PDF)
 Arbo | Cf. Arborescence ci-dessous.
