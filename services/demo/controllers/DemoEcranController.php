@@ -59,17 +59,11 @@ class DemoEcranController extends \MiniPaviFwk\controllers\VideotexController
 
     public function choixSommaire(): ?\MiniPaviFwk\actions\Action
     {
-        return new \MiniPaviFwk\actions\ControllerAction(
-            \service\controllers\DemoSommaireController::class,
-            $this->context
-        );
+        return new \MiniPaviFwk\actions\PageAction($this->context, 'demo-sommaire');
     }
 
     public function choixRetour(): ?\MiniPaviFwk\actions\Action
     {
-        return new \MiniPaviFwk\actions\ControllerAction(
-            \service\controllers\DemoSommaireController::class,
-            $this->context
-        );
+        return new \MiniPaviFwk\actions\PageAction($this->context, 'demo-sommaire');
     }
 }

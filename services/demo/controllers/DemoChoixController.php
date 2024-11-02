@@ -39,38 +39,26 @@ class DemoChoixController extends \MiniPaviFwk\controllers\VideotexController
 
     public function choix1Envoi(): ?\MiniPaviFwk\actions\Action
     {
-        return new \MiniPaviFwk\actions\ControllerAction(
-            \service\controllers\DemoSommaireController::class,
-            $this->context
-        );
+        return new \MiniPaviFwk\actions\PageAction($this->context, 'demo-sommaire');
     }
 
     public function toucheEnvoi(string $saisie): ?\MiniPaviFwk\actions\Action
     {
         if ($saisie == '2') {
-            return new \MiniPaviFwk\actions\ControllerAction(
-                \service\controllers\DemoSommaireController::class,
-                $this->context
-            );
+            return new \MiniPaviFwk\actions\PageAction($this->context, 'demo-sommaire');
         }
         return null;
     }
 
     public function toucheSommaire(string $saisie): ?\MiniPaviFwk\actions\Action
     {
-        return new \MiniPaviFwk\actions\ControllerAction(
-            \service\controllers\DemoSommaireController::class,
-            $this->context
-        );
+        return new \MiniPaviFwk\actions\PageAction($this->context, 'demo-sommaire');
     }
 
     public function choix(string $touche, string $saisie): ?\MiniPaviFwk\actions\Action
     {
         if ($touche == 'ENVOI' and $saisie == "3") {
-            return new \MiniPaviFwk\actions\ControllerAction(
-                \service\controllers\DemoSommaireController::class,
-                $this->context
-            );
+            return new \MiniPaviFwk\actions\PageAction($this->context, 'demo-sommaire');
         }
         return null;
     }

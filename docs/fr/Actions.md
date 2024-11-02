@@ -36,6 +36,22 @@ Exemple de code, sur appui de 1 + [envoi], ramène à l'accueil du service:
 ```
 
 
+### PageAction : aller sur une autre page de l'arbo
+Signature : `new \MiniPaviFwk\actions\PageAction(array $context, string $pagename)`
+
+Source : [src/actions/PageAction.php](../../src/actions/PageAction.php)
+
+Lance le contrôleur correspondant au nom de la page.
+Le nom du contrôleur est dérivé du nom de la page, chaque partie séparée par un tiret '-' est converti via mb_ucfirst() pour obtenir un nom de contrôleur en CamelCase. On y ajoute "Controller" à la fin.
+Si une partie du nom ne commence pas par un caractère alphabétique [a .. z], un underscore est utilisé pour séparer les parties.
+
+"accueil" -> AcccueilController
+"sommaire-AUTEURS" -> SommaireAuteursController
+"accueil-2b" -> Accueil_2bController
+
+Exemple de code, pour aller sur la page d'accueil
+
+
 ### ControllerAction : activer un autre Contrôleur = aller sur une autre page de l'arbo
 Signature : `new \MiniPaviFwk\actions\ControllerAction(string $newControllerClassName, array $context, array $params = [])`
 

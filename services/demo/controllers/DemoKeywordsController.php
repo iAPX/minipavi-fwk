@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Demo for the Keywords handling, work the same on a VideotexController or XMLController
+ * Demo for the Keywords handling, work the same on a VideotexController
  */
 
 namespace service\controllers;
@@ -10,7 +10,7 @@ class DemoKeywordsController extends \MiniPaviFwk\controllers\VideotexController
 {
     public function __construct($context, $params = [])
     {
-        // This all you need to add Keyword handling to your VideotexController or XMLController
+        // This all you need to add Keyword handling to your VideotexController
         // Keywords are handled through a MiniPaviFwk\keywords\Keywords derived instantiated class.
         parent::__construct($context, $params);
         $this->keywordHandler = new \service\keywords\DemoKeywords();

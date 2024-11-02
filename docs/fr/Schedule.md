@@ -7,8 +7,10 @@
 
 
 ## v0.9 - Décembre 2024
-- [ ] Importation XMLint complète
 - [ ] Support XML via XmlController enlevé (simplification)
+- [ ] Simplification Validation, défaut toutes touches acceptées
+- [ ] BUGFIX: RedirectAction flush Session
+- [ ] Importation XMLint complète
 - [ ] Support des formulaires MiniPaviCli
 - [ ] Documentation étendue
 

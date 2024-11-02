@@ -32,9 +32,6 @@ class DemoAccueilController extends \MiniPaviFwk\controllers\VideotexController
 
     public function choixSuite(): ?\MiniPaviFwk\actions\Action
     {
-        return new \MiniPaviFwk\actions\ControllerAction(
-            \service\controllers\DemoSommaireController::class,
-            $this->context
-        );
+        return new \MiniPaviFwk\actions\PageAction($this->context, 'demo-sommaire');
     }
 }

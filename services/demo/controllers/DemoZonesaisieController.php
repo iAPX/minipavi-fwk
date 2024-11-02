@@ -33,18 +33,12 @@ class DemoZoneSaisieController extends \MiniPaviFwk\controllers\VideotexControll
     public function choixSommaire(): ?\MiniPaviFwk\actions\Action
     {
         // Handle [SOMMAIRE] to return to the Sommaire (service menu)
-        return new \MiniPaviFwk\actions\ControllerAction(
-            \service\controllers\DemoSommaireController::class,
-            $this->context
-        );
+        return new \MiniPaviFwk\actions\PageAction($this->context, 'demo-sommaire');
     }
 
     public function choixRetour(): ?\MiniPaviFwk\actions\Action
     {
-        // Handle [SOMMAIRE] to return to the Sommaire (service menu)
-        return new \MiniPaviFwk\actions\ControllerAction(
-            \service\controllers\DemoSommaireController::class,
-            $this->context
-        );
+        // Handle [RETOUR] to return to the Sommaire (service menu)
+        return new \MiniPaviFwk\actions\PageAction($this->context, 'demo-sommaire');
     }
 }

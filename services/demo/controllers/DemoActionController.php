@@ -16,21 +16,23 @@ class DemoActionController extends \MiniPaviFwk\controllers\VideotexController
         ->page("demo-controller")
 
         ->position(3, 1)
-        ->ecritUnicode("Démo des différentes Actions intégrablesdans les contrôleurs, qu'il soient XML ou Videotex.")
+        ->ecritUnicode("Démo des différentes Actions intégrablesdans les contrôleurs Vidéotex.")
 
-        ->position(7, 1)->inversionDebut()->ecritUnicode('1')->inversionFin()
+        ->position(6, 1)->inversionDebut()->ecritUnicode('1')->inversionFin()
         ->ecritUnicode(" Accueil / AccueilAction()")
-        ->position(9, 1)->inversionDebut()->ecritUnicode('2')->inversionFin()
+        ->position(8, 1)->inversionDebut()->ecritUnicode('2')->inversionFin()
         ->ecritUnicode(" Démo Choix Controller / ControllerAction()")
-        ->position(11, 1)->inversionDebut()->ecritUnicode('3')->inversionFin()
+        ->position(10, 1)->inversionDebut()->ecritUnicode('3')->inversionFin()
         ->ecritUnicode(" Dcx / DeconnexionAction()")
-        ->position(13, 1)->inversionDebut()->ecritUnicode('4')->inversionFin()
+        ->position(12, 1)->inversionDebut()->ecritUnicode('4')->inversionFin()
         ->ecritUnicode(" Ligne 00 / Ligne00Action()")
-        ->position(17, 1)->inversionDebut()->ecritUnicode('6')->inversionFin()
+        ->position(14, 1)->inversionDebut()->ecritUnicode('5')->inversionFin()
+        ->ecritUnicode(" Accueil / PageAction()")
+        ->position(16, 1)->inversionDebut()->ecritUnicode('6')->inversionFin()
         ->ecritUnicode(" Répète / RepetitionAction()")
-        ->position(19, 1)->inversionDebut()->ecritUnicode('7')->inversionFin()
+        ->position(18, 1)->inversionDebut()->ecritUnicode('7')->inversionFin()
         ->ecritUnicode(" code vdt / VideotexOutputAction()")
-        ->position(21, 1)->inversionDebut()->ecritUnicode('8')->inversionFin()
+        ->position(20, 1)->inversionDebut()->ecritUnicode('8')->inversionFin()
         ->ecritUnicode(" switch service/SwitchServiceAction()")
 
 
@@ -70,6 +72,11 @@ class DemoActionController extends \MiniPaviFwk\controllers\VideotexController
     public function choix4Envoi(): ?\MiniPaviFwk\actions\Action
     {
         return new \MiniPaviFwk\actions\Ligne00Action($this, "Ligne 00 via Ligne00Action()");
+    }
+
+    public function choix5Envoi(): ?\MiniPaviFwk\actions\Action
+    {
+        return new \MiniPaviFwk\actions\PageAction($this->context, 'demo-accueil');
     }
 
     public function choix6Envoi(): ?\MiniPaviFwk\actions\Action

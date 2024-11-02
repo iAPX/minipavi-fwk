@@ -72,58 +72,37 @@ class DemoSommaireController extends \MiniPaviFwk\controllers\VideotexController
 
     public function choix1Envoi(): ?\MiniPaviFwk\actions\Action
     {
-        return new \MiniPaviFwk\actions\ControllerAction(
-            \service\controllers\DemoEcranController::class,
-            $this->context
-        );
+        return new \MiniPaviFwk\actions\PageAction($this->context, 'demo-ecran');
     }
 
     public function choix2Envoi(): ?\MiniPaviFwk\actions\Action
     {
-        return new \MiniPaviFwk\actions\ControllerAction(
-            \service\controllers\DemoValidationController::class,
-            $this->context
-        );
+        return new \MiniPaviFwk\actions\PageAction($this->context, 'demo-validation');
     }
 
     public function choix3Envoi(): ?\MiniPaviFwk\actions\Action
     {
-        return new \MiniPaviFwk\actions\ControllerAction(
-            \service\controllers\DemoZoneSaisieController::class,
-            $this->context
-        );
+        return new \MiniPaviFwk\actions\PageAction($this->context, 'demo-zone-saisie');
     }
 
     public function choix4Envoi(): ?\MiniPaviFwk\actions\Action
     {
-        return new \MiniPaviFwk\actions\ControllerAction(
-            \service\controllers\DemoZoneMessageController::class,
-            $this->context
-        );
+        return new \MiniPaviFwk\actions\PageAction($this->context, 'demo-zone-message');
     }
 
     public function choix5Envoi(): ?\MiniPaviFwk\actions\Action
     {
-        return new \MiniPaviFwk\actions\ControllerAction(
-            \service\controllers\DemoKeywordsController::class,
-            $this->context
-        );
+        return new \MiniPaviFwk\actions\PageAction($this->context, 'demo-keywords');
     }
 
     public function choix6Envoi(): ?\MiniPaviFwk\actions\Action
     {
-        return new \MiniPaviFwk\actions\ControllerAction(
-            \service\controllers\DemoChoixController::class,
-            $this->context
-        );
+        return new \MiniPaviFwk\actions\PageAction($this->context, 'demo-choix');
     }
 
     public function choix7Envoi(): ?\MiniPaviFwk\actions\Action
     {
-        return new \MiniPaviFwk\actions\ControllerAction(
-            \service\controllers\DemoActionController::class,
-            $this->context
-        );
+        return new \MiniPaviFwk\actions\PageAction($this->context, 'demo-action');
     }
 
     public function choix(string $touche, string $saisie): ?\MiniPaviFwk\actions\Action

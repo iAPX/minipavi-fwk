@@ -51,10 +51,7 @@ class DemoZoneMessageController extends \MiniPaviFwk\controllers\VideotexControl
             return new \MiniPaviFwk\actions\VideotexOutputAction($this, $vdt);
         } elseif ($touche === 'SOMMAIRE') {
             // Handle [SOMMAIRE] to return to the Sommaire (service menu)
-            return new \MiniPaviFwk\actions\ControllerAction(
-                \service\controllers\DemoSommaireController::class,
-                $this->context
-            );
+            return new \MiniPaviFwk\actions\PageAction($this->context, 'demo-sommaire');
         }
     }
 
