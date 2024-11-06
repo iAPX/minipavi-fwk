@@ -244,7 +244,9 @@ class VideotexHelper
 
     public function webMedia(string $type, string $url): VideotexHelper
     {
-        $this->output .= "\x14#D" . $type . $url . "\x14#F";
+        // Workaround a little bug in the MiniPavi.
+        $webmedia_code = "\x14#D" . strtoupper($type) . ':' . $url . "\x14#F";
+        $this->output .= "\x1F\x40\x68" . $webmedia_code .  " \x0A";
         return $this;
     }
 

@@ -112,6 +112,11 @@ function xml_ecran(ControllerBuilder $controller, \SimpleXMLElement $ecran, stri
             case "pin":
                 $inner_code .= "        \$videotex->ecritPIN();\n";
                 break;
+            case "webmedia":
+                $type = strtoupper((string) $element['type']);
+                $url = (string) $element['infos'];
+                $inner_code .= "        \$videotex->webMedia(\"$type\", \"$url\");\n";
+                break;
             default:
                 $inner_code .= "        // Element $name unsupported.\n";
         }

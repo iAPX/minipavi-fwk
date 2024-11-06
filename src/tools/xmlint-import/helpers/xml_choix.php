@@ -19,7 +19,6 @@ function xml_choix(ControllerBuilder $controller, \SimpleXMLElement $xml_choix):
         $formatted_touche = ucfirst(mb_strtolower($touche));
 
         $method_name = 'choix' . $cleaned_saisie . $formatted_touche;
-        $controller_suivant = pagename_to_controllername($suivant);
 
         if ($email) {
             $code_choix .= <<<EOF
@@ -33,10 +32,7 @@ EOF;
     public function $method_name(): ?\MiniPaviFwk\actions\Action
     {
         // Handle '$choix' + [$formatted_touche]
-        return new \MiniPaviFwk\actions\ControllerAction(
-            \service\controllers\\{$controller_suivant}::class,
-            \$this->context
-        );
+        return new \MiniPaviFwk\actions\PageAction(\$this->context, "$suivant");
     }
 EOF;
         }

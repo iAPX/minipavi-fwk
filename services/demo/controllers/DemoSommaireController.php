@@ -23,26 +23,29 @@ class DemoSommaireController extends \MiniPaviFwk\controllers\VideotexController
 
         // Menu
         $videotex
-        ->position(3, 1)->inversionDebut()->ecritUnicode('1')->inversionFin()
+        ->position(4, 1)->inversionDebut()->ecritUnicode('1')->inversionFin()
         ->ecritUnicode(" Ecran / DemoEcranController")
 
         ->position(5, 1)->inversionDebut()->ecritUnicode('2')->inversionFin()
         ->ecritUnicode(" Validation / DemoValidationController")
 
-        ->position(7, 1)->inversionDebut()->ecritUnicode('3')->inversionFin()
+        ->position(6, 1)->inversionDebut()->ecritUnicode('3')->inversionFin()
         ->ecritUnicode(" ZoneSaisie / DemoZoneSaisieController")
 
-        ->position(9, 1)->inversionDebut()->ecritUnicode('4')->inversionFin()
+        ->position(7, 1)->inversionDebut()->ecritUnicode('4')->inversionFin()
         ->ecritUnicode(" ZoneMessage/DemoZoneMessageController")
 
-        ->position(11, 1)->inversionDebut()->ecritUnicode('5')->inversionFin()
+        ->position(8, 1)->inversionDebut()->ecritUnicode('5')->inversionFin()
         ->ecritUnicode(" Keywords / DemoKeywordsController")
 
-        ->position(13, 1)->inversionDebut()->ecritUnicode('6')->inversionFin()
+        ->position(9, 1)->inversionDebut()->ecritUnicode('6')->inversionFin()
         ->ecritUnicode(" Choix / DemoChoixController")
 
-        ->position(15, 1)->inversionDebut()->ecritUnicode('7')->inversionFin()
-        ->ecritUnicode(" Actions / DemoActionController");
+        ->position(10, 1)->inversionDebut()->ecritUnicode('7')->inversionFin()
+        ->ecritUnicode(" Actions / DemoActionController")
+
+        ->position(11, 1)->inversionDebut()->ecritUnicode('8')->inversionFin()
+        ->ecritUnicode(" WebMedias");
 
         // Dynamic Menu of allowed services
         $ligne = 17;
@@ -103,6 +106,13 @@ class DemoSommaireController extends \MiniPaviFwk\controllers\VideotexController
     public function choix7Envoi(): ?\MiniPaviFwk\actions\Action
     {
         return new \MiniPaviFwk\actions\PageAction($this->context, 'demo-action');
+    }
+
+    public function choix8Envoi(): ?\MiniPaviFwk\actions\Action
+    {
+        $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
+        $videotex->webMedia('YT', 's86K-p089R8');
+        return new \MiniPaviFwk\actions\VideotexOutputAction($this, $videotex->getOutput());
     }
 
     public function choix(string $touche, string $saisie): ?\MiniPaviFwk\actions\Action
