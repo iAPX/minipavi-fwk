@@ -4,15 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "313332300f723cc612f47ce810c04889",
+    "content-hash": "5db3ad082d61d68e81c9fba9b9f86256",
     "packages": [
         {
             "name": "ludosevilla/minipavicli",
-            "version": "1.0.3",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ludosevilla/minipaviCli.git",
-                "reference": "1.0.3"
+                "reference": "1.0.4"
             },
             "type": "library",
             "autoload": {
