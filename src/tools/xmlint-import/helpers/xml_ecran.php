@@ -109,6 +109,9 @@ function xml_ecran(ControllerBuilder $controller, \SimpleXMLElement $ecran, stri
                 $couleur = (string) $element['couleur'];
                 $inner_code .= "        \$videotex->afficheRectangleInverse($ligne, $col, $largeur, $hauteur, \"$couleur\");\n";
                 break;
+            case "pin":
+                $inner_code .= "        \$videotex->ecritPIN();\n";
+                break;
             default:
                 $inner_code .= "        // Element $name unsupported.\n";
         }

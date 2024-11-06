@@ -3,7 +3,7 @@
 /**
  * Videotex helpers to output Videotex
  *
- * Used both by EcranXml that output from XML and by VideotexControllers
+ * Used by VideotexControllers
  */
 
 namespace MiniPaviFwk\helpers;
@@ -233,6 +233,18 @@ class VideotexHelper
     public function ecritUnicodeLigne00(string $unicodeTexte): VideotexHelper
     {
         $this->output .= MiniPaviCli::writeLine0(MiniPaviCli::toG2($unicodeTexte));
+        return $this;
+    }
+
+    public function ecritPIN(): VideotexHelper
+    {
+        $this->output .= substr(MiniPaviCli::$uniqueId, -4);
+        return $this;
+    }
+
+    public function webMedia(string $type, string $url): VideotexHelper
+    {
+        $this->output .= "\x14#D" . $type . $url . "\x14#F";
         return $this;
     }
 

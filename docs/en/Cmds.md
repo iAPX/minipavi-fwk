@@ -36,7 +36,7 @@ Add a subdirectory cmd, and add your own extending [\minipavifwk\cmd\Cmd](../../
 
 [Provided commands](../../src/cmd/)
 
-[Validation and validated keys documentation](./Validation.md)
+[Validation and validated keys documentation](./Validation-helper.md)
 
 [XmlController.php](../../src/controllers/XmlController.php)
 

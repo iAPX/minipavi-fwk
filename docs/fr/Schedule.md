@@ -13,6 +13,7 @@
 - [ ] Importation XMLint complète
 - [ ] Support des formulaires MiniPaviCli
 - [ ] Documentation étendue
+- [ ] On jette la doc en Anglais
 
 
 ## Futuribles (sans ordre particulier)

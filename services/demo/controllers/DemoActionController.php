@@ -48,7 +48,7 @@ class DemoActionController extends \MiniPaviFwk\controllers\VideotexController
 
     public function getCmd(): array
     {
-        return \MiniPaviFwk\cmd\ZoneSaisieCmd::createMiniPaviCmd($this->validation(), 24, 33, 2, true, '.');
+        return \MiniPaviFwk\cmd\ZoneSaisieCmd::createMiniPaviCmd(null, 24, 33, 2, true, '.');
     }
 
     public function choix1Envoi(): ?\MiniPaviFwk\actions\Action

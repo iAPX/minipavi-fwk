@@ -76,23 +76,16 @@ class LireMessageController extends \MiniPaviFwk\controllers\VideotexController
         return $videotex->getOutput();
     }
 
-    public function validation(): \MiniPaviFwk\Validation
-    {
-        $validation = parent::validation();
-        $validation->addValidKeys(['Sommaire', 'Envoi']);
-        return $validation;
-    }
-
     public function getCmd(): array
     {
         // Vary depending on conditions. If no response possible, only [SOMMAIRE] or [ANNULATION]
         if (empty($this->dest) || !$this->chatHelper->uniqueIdExists($this->msg['srcUniqueId'])) {
             // Simple input for [SOMMAIRE]
-            return \MiniPaviFwk\cmd\ZoneSaisieCmd::createMiniPaviCmd($this->validation(), 24, 40, 1, true);
+            return \MiniPaviFwk\cmd\ZoneSaisieCmd::createMiniPaviCmd(null, 24, 40, 1, true);
         }
 
         // Here we define the Message input area
-        return \MiniPaviFwk\cmd\ZoneMessageCmd::createMiniPaviCmd($this->validation(), 17, 4, true, '.', '-');
+        return \MiniPaviFwk\cmd\ZoneMessageCmd::createMiniPaviCmd(null, 17, 4, true, '.', '-');
     }
 
     public function message(string $touche, array $message): ?\MiniPaviFwk\actions\Action

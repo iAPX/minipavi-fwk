@@ -41,8 +41,6 @@ It's provided by [VideotexController](../../../src/controllers/VideotexControlle
 
 ## Controller's Multiline User Input handling
 
-### messageTouche{Touchename}() methods
-
 ### messageChoix{Firstline}{Touchename} methods
 
 ### message() methods
@@ -89,8 +87,6 @@ A controller provides these basic services, by itself or through its parents:
 
 ->ecran() : returns the string to be displayed when entering the controller.
   Notice that by default [REPETITION] will also use ->ecran() output.
-  XmlController use EcranXml::ecran() to interpret XML service files
-  see /src/xml/EcranXml.php
 
 ->getCmd() : returns a new MiniPavi Command as an array
   this array contains the informations about the location of the input area,
@@ -106,8 +102,6 @@ A controller provides these basic services, by itself or through its parents:
   The input is silently discarded.
   see /src/Validation.php
   So better to be safe acccepting too many keys or all of them, that to have them blocked.
-  As often XmlController use ValidationXml to interpret XML service files
-  see /src/xml/ValidationXml.php
 
 ->getSaisieAction() : return an \MiniPaviFwk\actions\Action object when a non-message saisie is recveived.
   This object stores the information about the controller to be instantiated by the next user input.

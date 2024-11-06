@@ -16,6 +16,7 @@ class DemoEcranController extends \MiniPaviFwk\controllers\VideotexController
         ->effaceLigne00()
         ->page("demo-controller")
         ->page("demo-choix-sommaire")
+        ->ecritUnicodeLigne00("Ligne 00 ...")
 
         ->position(3, 1)->ecritUnicode("Affichage par ecran() et ecritUnicode()")
         ->position(4, 1)->curseurVisible()->ecritUnicode("curseurVisible() ")
@@ -52,6 +53,9 @@ class DemoEcranController extends \MiniPaviFwk\controllers\VideotexController
         // Name of the Controller
         ->position(23, 1)->effaceFinDeLigne()->couleurFond("vert")->couleurTexte('noir')
         ->ecritUnicode(" " . end(explode('\\', $this::class)))
+
+        // Code PIN for the WebMedia from another device
+        ->position(24, 1)->ecritUnicode("WebMedia PIN : ")->inversionDebut()->ecritPIN()->inversionFin()
 
         ->getOutput();
         return $vdt;

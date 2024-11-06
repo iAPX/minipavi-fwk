@@ -15,8 +15,6 @@
 
 namespace MiniPaviFwk\actions;
 
-use MiniPaviFwk\controllers\XmlController;
-
 class PageAction extends Action
 {
     public function __construct(array $context, string $pagename)

@@ -36,29 +36,16 @@ class VideotexController
     public function ecran(): string
     {
         // Overriden in sub-classes
-        return "*** Ecran absent. ***";
-    }
-
-    public function validation(): Validation
-    {
-        // Default, overridable in sub-classes
-        return new Validation($this);
+        return chr(12) . "*** Ecran() absent. ***";
     }
 
     public function getCmd(): array
     {
         // Default, overridable in sub-classes, to simplify code.
-        // validation willl be overriden
-        return ZoneSaisieCmd::createMiniPaviCmd($this->validation());
+        return ZoneSaisieCmd::createMiniPaviCmd();
     }
 
     public function toucheRepetition(string $saisie): ?Action
-    {
-        // Default overridable in sub-classes
-        return new RepetitionAction($this);
-    }
-
-    public function messageToucheRepetition(array $message): ?Action
     {
         // Default overridable in sub-classes
         return new RepetitionAction($this);

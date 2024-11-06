@@ -7,12 +7,12 @@
 namespace MiniPaviFwk\cmd;
 
 use MiniPavi\MiniPaviCli;
-use MiniPaviFwk\Validation;
+use MiniPaviFwk\helpers\ValidationHelper;
 
 class ZoneSaisieCmd extends Cmd
 {
     public static function createMiniPaviCmd(
-        Validation $validation,
+        ?int $validation = null,
         int $ligne = 24,
         int $col = 40,
         int $longueur = 1,
@@ -25,7 +25,7 @@ class ZoneSaisieCmd extends Cmd
             $col,
             $ligne,
             $longueur,
-            $validation->getKeyMask(),
+            is_null($validation) ? ValidationHelper::ALL : $validation,
             $curseur,
             $spaceChar,
             $replacementChar,

@@ -19,7 +19,13 @@ function xml_cmd(ControllerBuilder $controller, \SimpleXMLElement $xml_entree): 
 \n
     public function getCmd(): array
     {
-        return \MiniPaviFwk\cmd\ZoneSaisieCmd::createMiniPaviCmd(\$this->validation(), $ligne, $col, $longueur, $curseur_bool);
+        return \MiniPaviFwk\cmd\ZoneSaisieCmd::createMiniPaviCmd(
+            \$this->validation(),
+            $ligne,
+            $col,
+            $longueur,
+            $curseur_bool
+        );
     }
 EOF;
 

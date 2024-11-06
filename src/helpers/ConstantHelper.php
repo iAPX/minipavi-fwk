@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Helper staaticc methods to access constants hierarchically
+ * Helper static methods to access constants hierarchically
  */
 
 namespace MiniPaviFwk\helpers;

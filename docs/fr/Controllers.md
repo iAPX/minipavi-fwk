@@ -10,13 +10,12 @@ Source du contrôleur VideotexController, parent de vos contrôleurs [src/contro
 
 ## Cycle de vie typique d'un contrôleur
 1. Affichage de la page courante, via `ecran()`
-2. Indication à MiniPaviCli des touches de fonctions autorisées, via `validation()`
-3. Indication du champ de saisie à utiliser, via `getCmd()`
+2. Indication du champ de saisie à utiliser, et les touches de fonction autorisées via `getCmd()`
 
 Minipavi-fwk s'assure d'envoyer ces informations à MiniPaviCli, et de conserver le contexte du contrôleur.
 Lors de la requête suivante, typiquement une réponse de l'utilisateur, minipavi-fwk réinstance le contrôleur en lui fournissant le contexte sauvé, pour qu'il puisse traiter la réponse utilisateur.
 
-4. Le contrôleur identifie la réponse de l'utilisateur et renvoie une [Action](./Actions.md) en réponse, qui peut être une page Vidéotex, un message d'erreur en ligne 00, un changement de contrôleur/changement de page de l'arbo, etc.
+3. Le contrôleur identifie la réponse de l'utilisateur et renvoie une [Action](./Actions.md) en réponse, qui peut être une page Vidéotex, un message d'erreur en ligne 00, un changement de contrôleur/changement de page de l'arbo, etc.
 
 
 ## En détail
@@ -60,40 +59,27 @@ Un exemple ici pour afficher la page du fichier vdt/accueil.vdt:
 Vous pouvez aussi utiliser le Helper Vidéotex pour construire votre affichage, voir sa documentation [ici](./Videotex-helper.md).
 Un grand nombre de fonctionnalités sont supportées, mais vous pouvez aussi envoyer du Vidéotex à la main: ` return chr(12) . "Page d'accueil";`
 
-### validation()
-Signature : `public function validation(): Validation`
-
-La méthode validation() retourne un objet validation qui gère et expose les différentes touches de fonctions (Envoi, Suite, Retour, etc.) qui devront être acceptées par MiniPavi. Les touches de fonctions non-présente ne déclencheront aucune action de MiniPavi et ne seront donc pas remontées à votre service.
-
-VideotexController fournissant des services de découverte des touches de fonction à supporter, hors usage des méthodes choix() et messageChoix(), dans une arborescence classique vous pourrez probablement vous en passer.
-Et inverement, vous pouvez accepter toutes les touches de fonctions, et si elles ne sont pas identifiées, cela amènera un message d'erreur soit prédéfini dans VideotexController soit surcharge dans votre méthode nonPropose().
-
-Un exemple pemettant d'accepter les touches Suite et Retour, en sus de ce que VideotexController identifiera pour vous:
-```
-    public function validation(): \MiniPaviFwk\Validation
-    {
-        // Allow [SUITE], [RETOUR] keys
-        $validation = parent::validation();
-        $validation->addValidKeys(['Suite', 'RETOUR']);
-        return $validation;
-    }
-```
-
-Les noms des touches de fonction sont insensibles à la casse. Majuscules, minuscules, etc.
 
 ### getCmd()
 Signature : `public function getCmd(): array`
 
 Cette méthode retourne un array() créé par la [commande MiniPaviCli](./Cmds.md) choisie.
+Certaines prennent un paramêtre `?int $validation` où vous pouvez utiliser le [Helper Validation](./Validation-helper.md)
 
 Les deux principales commandes sont \MiniPaviFwk\cmd\ZoneSaisieCmd::createMiniPaviCmd et \MiniPaviFwk\cmd\ZoneMessageCmd::createMiniPaviCmd, permettant respectivement de créer une Zone de Saisie sur une seule ligne, ou un message multi-ligne.
 Au sein d'un service arborescent simple, seule la première sera généralement utilisée.
 
-Un exemple simple avec une zone de saisie:
+Un exemple simple avec une zone de saisie, acceptant toutes les touches de fonction du Minitel:
 ```
     public function getCmd(): array
     {
-        return \MiniPaviFwk\cmd\ZoneSaisieCmd::createMiniPaviCmd($this->validation(), 24, 40, 1, true);
+        return \MiniPaviFwk\cmd\ZoneSaisieCmd::createMiniPaviCmd(
+            \MiniPaviFwk\helpers\ValidationHelper::ALL,
+            24,
+            40,
+            1,
+            true
+        );
     }
 ```
 Cela créé une zone de saisie en ligne 24 et colonne 40, d'un seul caractère, avec le curseur visible.
@@ -102,7 +88,8 @@ Cela créé une zone de saisie en ligne 24 et colonne 40, d'un seul caractère, 
 ### Interlude
 À ce moment les données à sortir, les touches de fonction autorisées et la commande pour la saisie (zonesaisie, zonemessage, etc.) sont envoyées à MiniPavi via MiniPaviCli.
 
-L'utilisateur va saisir des informations ou faire un choix, puis utiliser une des touches de fonctions que vous avez autorisé avec validation().
+L'utilisateur va saisir des informations ou faire un choix, puis utiliser une des touches de fonctions que vous avez autorisé.
+Les autres touches de fonction seront inactives.
 
 La prochaine étape est le traitement de cette saisie.
 Entre-temps la requête http a été achevée, et l'état du contrôleur stocké. Il sera donc réinstancié et populé avec son contexte pour finir de traiter la page de l'arbo.

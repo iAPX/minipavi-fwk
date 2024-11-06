@@ -17,15 +17,13 @@ Shortly, this (new) Controller will indicate where is the input area on-screen, 
 
 
 ## Which Actions are provided by MiniPaviFwk
-- AccueilAction : startup Action for new user and also when switching service (see SwitchServiceAction), could also serve to switch from a VideotexController to XML managed by XMLController or a derivative, or to come back to the homepage.
+- AccueilAction : startup Action for new user and also when switching service (see SwitchServiceAction)
 
 - ControllerAction : transfer control to a new Controller by it's full name, outputting what its `public function ecran(): string` returns.
 
 - DeconnexionAction : throw out the user, displaying an optional service message on line 00 of the Minitel.
 
 - Ligne00Action : displays a service message on the line 00 of the Minitel. Main usage is to display an error message
-
-- PageAction : switch to another <page> on XmlController managed service, and enable changing the XML file used, could also be used to transfer control from a VideotexController managed service to a XmlController XML managed service,
 
 - RedirectAction : redirect to another MiniPavi Minitel service by its URL. Internal switch done by SwitchServiceAction.
 

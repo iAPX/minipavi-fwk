@@ -15,7 +15,7 @@ Par exemple:
 ```
     public function getCmd(): array
     {
-        return \MiniPaviFwk\cmd\ZoneSaisieCmd::createMiniPaviCmd($this->validation(), 24, 18, 16, true, '.');
+        return \MiniPaviFwk\cmd\ZoneSaisieCmd::createMiniPaviCmd(null, 24, 18, 16, true, '.');
     }
 ```
 
@@ -26,7 +26,7 @@ Par exemple:
 Signature :
 ```
 public static function createMiniPaviCmd(
-        Validation $validation,
+        ?int $validation,
         int $ligne = 24,
         int $col = 40,
         int $longueur = 1,
@@ -39,7 +39,7 @@ public static function createMiniPaviCmd(
 
 Source : [src/cmd/ZoneSaisieCmd.php](../../src/cmd/ZoneSaisieCmd.php)
 
-$validation doit être rempli en appelant $this->validation(). Mais vous pouvez tricher, 255 autorise toutes les touches de fonctions.
+$validation contient null si vous souhaitez accepter toutes les touches de fonction du Minitel, et sinon un masque binaire que vous pouvez générer à l'aide du [ValidationHelper](../../src/helpers/ValidationHelper.php).
 $ligne la ligne de la zone de saisie
 $col la colonne où commence la zone de saisie
 $longueur la longueur de saisie autorisée, MiniPavi refusera tout caractère au-delà
@@ -48,9 +48,16 @@ $spaceChar caractère à utiliser pour afficher le champ de saisie, et remplaça
 Laissez les autres paramêtres tels-que par défaut, ou consultez la doc de MiniPavi pour ce-faire.
 
 
-Exemple d'une zone de saisie de 16 caractères, remplie de points '.', débutant en ligne 24 et colonne 18:
+Exemple d'une zone de saisie de 16 caractères, remplie de points '.', débutant en ligne 24 et colonne 18 et acceptant ENVOI et SOMMAIRE:
 ```
-        \MiniPaviFwk\cmd\ZoneSaisieCmd::createMiniPaviCmd($this->validation(), 24, 18, 16, true, '.');
+        \MiniPaviFwk\cmd\ZoneSaisieCmd::createMiniPaviCmd(
+            \MiniPaviFwk\helpers\ValidationHelper::ENVOI | \MiniPaviFwk\helpers\ValidationHelper::SOMMAIRE,
+            24,
+            18,
+            16,
+            true,
+            '.'
+        );
 ```
 
 
@@ -58,7 +65,7 @@ Exemple d'une zone de saisie de 16 caractères, remplie de points '.', débutant
 Signature : 
 ```
 public static function createMiniPaviCmd(
-        Validation $validation,
+        ?int $validation,
         int $ligne = 24,
         int $hauteur = 1,
         bool $curseur = true,
@@ -71,7 +78,7 @@ public static function createMiniPaviCmd(
 
 Source : [src/cmd/ZoneMessageCmd.php](../../src/cmd/ZoneMessageCmd.php)
 
-$validation doit être rempli en appelant $this->validation(). Mais vous pouvez tricher, 255 autorise toutes les touches de fonctions.
+$validation contient null si vous souhaitez accepter toutes les touches de fonction du Minitel, et sinon un masque binaire que vous pouvez générer à l'aide du [ValidationHelper](../../src/helpers/ValidationHelper.php), voir [la documentation du helper Validation](./Validation-helper.md)
 $ligne la ligne de début de la zone de saisie multiligne
 $hauteur le nombre de lignes
 $curseur booléen indiquant si on veut que le curseur soit visible. true = curseur visible, false = curseur invisible
@@ -79,9 +86,15 @@ $spaceChar caractère à utiliser pour afficher le champ de saisie, et remplaça
 Laissez les autres paramêtres tels-que par défaut, ou consultez la doc de MiniPavi pour ce-faire.
 
 
-Exemple d'une zone de saisie de message multiligne, débutant en ligne 5, de 4 lignes de hauteur, et remplie de points '.' :
+Exemple d'une zone de saisie de message multiligne, débutant en ligne 5, de 4 lignes de hauteur, et remplie de points '.' et n'acceptant que la touche ENVOI:
 ```
-        \MiniPaviFwk\cmd\ZoneMessageCmd::createMiniPaviCmd($this->validation(), 5, 4, true, '.');
+        \MiniPaviFwk\cmd\ZoneMessageCmd::createMiniPaviCmd(
+            \MiniPaviFwk\helpers\ValidationHelper::ENVOI,
+            5,
+            4,
+            true,
+            '.'
+        );
 ```
 
 

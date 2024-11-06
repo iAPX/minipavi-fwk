@@ -25,18 +25,10 @@ class DemoZoneMessageController extends \MiniPaviFwk\controllers\VideotexControl
         return $videotex->getOutput();
     }
 
-    public function validation(): \MiniPaviFwk\Validation
-    {
-        // Allow [SOMMAIRE], [ENVOI] keys
-        $validation = parent::validation();
-        $validation->addValidKeys(['sommaire', 'envoi']);
-        return $validation;
-    }
-
     public function getCmd(): array
     {
         // Here we define the Message input area
-        return \MiniPaviFwk\cmd\ZoneMessageCmd::createMiniPaviCmd($this->validation(), 5, 4, true, '.', '-');
+        return \MiniPaviFwk\cmd\ZoneMessageCmd::createMiniPaviCmd(null, 5, 4, true, '.', '-');
     }
 
     public function message(string $touche, array $message): ?\MiniPaviFwk\actions\Action

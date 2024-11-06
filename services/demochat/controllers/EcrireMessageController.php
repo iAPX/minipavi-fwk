@@ -49,20 +49,13 @@ class EcrireMessageController extends \MiniPaviFwk\controllers\VideotexControlle
         return $videotex->getOutput();
     }
 
-    public function validation(): \MiniPaviFwk\Validation
-    {
-        $validation = parent::validation();
-        $validation->addValidKeys(['Suite', 'RETOUR', 'Envoi']);
-        return $validation;
-    }
-
     public function getCmd(): array
     {
         if (empty($this->dest)) {
-            return \MiniPaviFwk\cmd\ZoneSaisieCmd::createMiniPaviCmd($this->validation(), 24, 31, 1, true);
+            return \MiniPaviFwk\cmd\ZoneSaisieCmd::createMiniPaviCmd(null, 24, 31, 1, true);
         }
         // Here we define the Message input area
-        return \MiniPaviFwk\cmd\ZoneMessageCmd::createMiniPaviCmd($this->validation(), 5, 4, true, '.', '-');
+        return \MiniPaviFwk\cmd\ZoneMessageCmd::createMiniPaviCmd(null, 5, 4, true, '.', '-');
     }
 
     public function message(string $touche, array $message): ?\MiniPaviFwk\actions\Action

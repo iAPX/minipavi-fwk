@@ -9,26 +9,22 @@ function xml_validation(ControllerBuilder $controller, \SimpleXMLElement $xml_en
     // get Touches
     $touches = [];
     foreach ($xml_entree->validation as $element) {
-        $touches[] = (string) $element['touche'];
-    }
-    if (count($touches) == 0) {
-        // No touche, no code
-        return;
+        $touches[strtoupper((string) $element['touche'])] = (string) $element['touche'];
     }
 
     // Convert to Code
-    $touches_array = "'" . implode("', '", $touches) . "'";
-    $touches_text = "[" . implode("], [", $touches) . "]";
+    $validation_helper = "\\MiniPaviFwk\\helpers\\ValidationHelper::";
+    if (count($touches) === 0) {
+        $touches_code = $validation_helper . "ALL";
+    } else {
+        $touches_code = $validation_helper . implode(" | $validation_helper", array_keys($touches));
+    }
+
     $code = <<<EOF
 \n
-    public function validation(): \MiniPaviFwk\Validation
+    public function validation(): int
     {
-        // Allow $touches_text keys
-        // Others could be added by VideotexController through introspection,
-        // such as discovering touche*() or choix**() methods
-        \$validation = parent::validation();
-        \$validation->addValidKeys([$touches_array]);
-        return \$validation;
+        return $touches_code;
     }
 EOF;
 

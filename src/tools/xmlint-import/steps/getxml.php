@@ -77,7 +77,6 @@ if (in_array($pages_path, $schemes)) {
 $unsupported_features = [
     ['Zone Message <zone message />', "//zonemessage"],
     ['Email sent from ZoneMessage through <saisie email="xxx" />', "//saisie[@email]"],
-    ['PIN code display <pin />', "//pin"],
     ['WebMedia <webmedia />', "//webmedia"],
 ];
 $unsupported_messages = [];

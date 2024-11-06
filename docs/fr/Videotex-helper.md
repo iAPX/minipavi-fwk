@@ -271,6 +271,26 @@ Efface la Ligne 00 et y écrit le texte Unicode envoyé, le curseur d'écriture 
 Cette méthode renvoie l'objet Videotexhelper courant pour permettre le chaînage des appels.
 
 
+### ecritPIN() : Affiche le PIN de 4 chiffres pour les WebMedias
+
+Signature : `public function ecritPIN(): VideotexHelper`
+
+Affiche le PIN à 4 chiffres nécessaire pour regarder les WebMedias depuis un autre dispositif lorsqu'on est sur un Minitel physique.
+
+Cette méthode renvoie l'objet Videotexhelper courant pour permettre le chaînage des appels.
+
+
+### webMedia() : Affiche un média Web ou un lien
+
+Signature : `public function webMedia(string $type, string $url): VideotexHelper`
+
+Fait afficher le média ou un lien suivant le type, chacun indiqué par $url, sauf pour YouTube.
+- $type "YT" : affichage d'une vidéo YouTube, $url contient l'identifiant de la vidéo, par exemple "s86K-p089R8" pour afficher la vidéo à l'URL "h􏰁ps://www.youtube.com/watch?v=s86K-p089R8".
+- $type "VID" : affiche une vidéo par son URL
+- $type "SND" : joue un fichier sonore par son URL
+- $type "IMG" : affiche une image par son URL
+- $type "URL" : affiche un lien sur l'URL
+
 ### deconnexionModem() : envoi <kbd> Esc 9g </kbd> au Minitel pour qu'il fasse raccrocher son modem
 
 Signature : `public function deconnexionModem(): VideotexHelper`

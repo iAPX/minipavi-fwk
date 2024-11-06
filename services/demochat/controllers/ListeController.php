@@ -73,7 +73,7 @@ class ListeController extends \MiniPaviFwk\controllers\VideotexController
         $humeurMaxLength = 35 - mb_strlen($connecte['pseudonyme']);
 
         return \MiniPaviFwk\cmd\ZoneSaisieCmd::createMiniPaviCmd(
-            $this->validation(),
+            null,
             24,
             35 - $humeurMaxLength,
             $humeurMaxLength,

@@ -45,7 +45,7 @@ class AccueilController extends \MiniPaviFwk\controllers\VideotexController
                 "AccueilController::getCmd - DIRECTCALL_CMD : " . print_r($_SESSION["DIRECTCALL_CMD"], true)
             );
         }
-        return \MiniPaviFwk\cmd\ZoneSaisieCmd::createMiniPaviCmd($this->validation(), 24, 18, 16, true, '.');
+        return \MiniPaviFwk\cmd\ZoneSaisieCmd::createMiniPaviCmd(null, 24, 18, 16, true, '.');
     }
 
     public function toucheEnvoi(string $saisie): ?\MiniPaviFwk\actions\Action

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Demo for validation() of function keys in a Videotex Controller
+ * Demo for validation of function keys in a Videotex Controller
  */
 
 namespace service\controllers;
@@ -28,14 +28,11 @@ class DemoValidationController extends \MiniPaviFwk\controllers\VideotexControll
         return $vdt;
     }
 
-    public function validation(): \MiniPaviFwk\Validation
+    public function getCmd(): array
     {
-        // Allow [SUITE], [RETOUR], [SOMMAIRE], [ENVOI] keys
-        // Others could be added by VideotexController through introspection,
-        // such as discovering touche*() or choix**() methods
-        $validation = parent::validation();
-        $validation->addValidKeys(['suite', 'retour', 'sommaire', 'envoi']);
-        return $validation;
+        // On autorise SUITE, ENVOI, RETOUR et SOMMAIRE
+        $validation = \MiniPaviFwk\helpers\ValidationHelper::SUITE | \MiniPaviFwk\helpers\ValidationHelper::ENVOI | \MiniPaviFwk\helpers\ValidationHelper::RETOUR | \MiniPaviFwk\helpers\ValidationHelper::SOMMAIRE;
+        return ZoneSaisieCmd::createMiniPaviCmd($validation);
     }
 
     public function choix(string $touche, string $saisie): ?\MiniPaviFwk\actions\Action
