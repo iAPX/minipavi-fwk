@@ -18,6 +18,10 @@ class InputFormCmd extends Cmd
         bool $curseur = true,
         string $spaceChar = " ",
     ): array {
+        if (count($fields) < 2) {
+            trigger_error("At least 2 fields are required for InputFormCmd", E_USER_ERROR);
+        }
+
         $lignes = $cols = $longueurs = $prefills = [];
         foreach ($fields as $field) {
             $lignes[] = $field->ligne;

@@ -5,6 +5,7 @@ Ces commandes servent à définir ce qui peut être saisi ou à réaliser une ac
 
 Sources : [src/cmd/](../../src/cmd/)
 
+
 ## Cycle de vie
 Les Commandes sont renvoyées par les contrôleurs lors d'une interaction utilisateur, pour indiquer à MiniPavi sa prochaine action, comme un champ de saisie, une saisie multiligne ou une déconnexion.
 L'action est destinée à MiniPaviFwk pour savoir quelles actions réaliser, la commande est renvoyée à MiniPavi via MiniPaviCli.
@@ -79,12 +80,15 @@ public static function createMiniPaviCmd(
 Source : [src/cmd/ZoneMessageCmd.php](../../src/cmd/ZoneMessageCmd.php)
 
 $validation contient null si vous souhaitez accepter toutes les touches de fonction du Minitel, et sinon un masque binaire que vous pouvez générer à l'aide du [ValidationHelper](../../src/helpers/ValidationHelper.php), voir [la documentation du helper Validation](./Validation-helper.md)
-$ligne la ligne de début de la zone de saisie multiligne
-$hauteur le nombre de lignes
+$ligne la ligne de début de la zone de saisie multiligne.
+$hauteur le nombre de lignes, 2 au minimum.
 $curseur booléen indiquant si on veut que le curseur soit visible. true = curseur visible, false = curseur invisible
 $spaceChar caractère à utiliser pour afficher le champ de saisie, et remplaçant aussi tout caractère effacé via la touche [Correction].
 Laissez les autres paramêtres tels-que par défaut, ou consultez la doc de MiniPavi pour ce-faire.
 
+> [!IMPORTANT]
+> MiniPaviFwk ne gère pas les messages avec une seule ligne.
+> Dans ce cas vous devez utiliser ZoneSaisieCmd.
 
 Exemple d'une zone de saisie de message multiligne, débutant en ligne 5, de 4 lignes de hauteur, et remplie de points '.' et n'acceptant que la touche ENVOI:
 ```
@@ -96,6 +100,77 @@ Exemple d'une zone de saisie de message multiligne, débutant en ligne 5, de 4 l
             '.'
         );
 ```
+
+
+### InputFormCmd : saisie de formulaire
+Signature :
+```
+public static function createMiniPaviCmd(
+        ?int $validation = null,
+        array $fields,
+        bool $curseur = true,
+        string $spaceChar = " ",
+    ): array
+```
+
+Source : [src/cmd/InputFormCmd.php](../../src/cmd/InputFormCmd.php)
+
+$validation contient null si vous souhaitez accepter toutes les touches de fonction acceptables pour les formulaires (SOMMAIRE | REPETITION | GUIDE | ENVOI) , et sinon un masque binaire que vous pouvez générer à l'aide du [ValidationHelper](../../src/helpers/ValidationHelper.php), voir [la documentation du helper Validation](./Validation-helper.md)
+
+$fields contient un array de \MiniPaviFwk\helpers\FormField chacun décrivant un des champs de saisie du formulaire, 2 au minimum.
+$curseur est un booléen indiquant si le curseur doit être affiché
+$spaceChar est le caractère utilisé pour visualiser l'espace de saisie, souvent le point "."
+
+> [!IMPORTANT]
+> MiniPaviFwk ne gère pas les formulaires avec un seul champ.
+> Dans ce cas vous devez utiliser ZoneSaisieCmd.
+
+FormField Signature : `public function __construct(int $ligne, int $col, int $longueur, string $prefill = '')`
+Source [src/helpers/FormField.php](../../src/helpers/FormField.php)
+
+$ligne numéro de ligne de ce champ, de 1 à 24
+$col colonne de début du champ, de 1 à 40
+$longueur longueur du champ
+$prefill contenu servant à prépopuler le champ, affiché à l'utilisateur et éditable (pratique pour les modifications de données!)
+
+
+Au retour de la réponse utilisateur, la méthode `message(string $touche, array $message)` sera appelée.
+$touche contiendra la touche de fonction utilisée en majuscules, par exemple "ENVOI"
+$message contiendra un array() avec pour chaque entrée la valeur du champ correspondant après édition/saisie
+
+
+Exemple:
+```
+    public function getCmd(): array
+    {
+        // We define the fields
+        $fields = [
+            new \MiniPaviFwk\helpers\FormField(4, 7, 34),
+            new \MiniPaviFwk\helpers\FormField(5, 10, 31),
+            new \MiniPaviFwk\helpers\FormField(6, 15, 5),
+        ];
+        return \MiniPaviFwk\cmd\InputFormCmd::createMiniPaviCmd(null, $fields, true, ".");
+    }
+
+    public function message(string $touche, array $message): ?\MiniPaviFwk\actions\Action
+    {
+        if ($touche === 'ENVOI') {
+            if (empty(implode('', $message))) {
+                return new \MiniPaviFwk\actions\Ligne00Action($this, "Formulaire vide");
+            }
+
+            $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
+            $videotex
+            ->effaceLigne00()
+            ->position(13, 1)
+            ->effaceFinDeLigne()
+            ->ecritUnicode($message[1] . ' ' . $message[0] . ' (' . $message[2] . ')');
+
+            return new \MiniPaviFwk\actions\VideotexOutputAction($this, $videotex->getOutput());
+        }
+    }
+```
+
 
 
 ## Autres commandes

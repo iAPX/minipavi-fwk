@@ -14,13 +14,17 @@ class ZoneMessageCmd extends Cmd
     public static function createMiniPaviCmd(
         ?int $validation,
         int $ligne = 24,
-        int $hauteur = 1,
+        int $hauteur = 2,
         bool $curseur = true,
         string $spaceChar = " ",
         string $prefill = '',
         int $col = 1,
         int $longueur = 40
     ): array {
+        if ($hauteur < 2) {
+            trigger_error("At least 2 message lines are required for ZoneMessageCmd", E_USER_ERROR);
+        }
+
         return MiniPaviCli::createInputMsgCmd(
             $col,
             $ligne,

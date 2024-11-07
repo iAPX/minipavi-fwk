@@ -39,7 +39,7 @@ class DemoFormController extends \MiniPaviFwk\controllers\VideotexController
             new \MiniPaviFwk\helpers\FormField(5, 10, 31),
             new \MiniPaviFwk\helpers\FormField(6, 15, 5),
         ];
-        return \MiniPaviFwk\cmd\InputFormCmd::createMiniPaviCmd(null, $fields, true);
+        return \MiniPaviFwk\cmd\InputFormCmd::createMiniPaviCmd(null, $fields, true, ".");
     }
 
     public function message(string $touche, array $message): ?\MiniPaviFwk\actions\Action
