@@ -13,7 +13,7 @@ class FormField
     public int $longueur;
     public string $prefill;
 
-    public function __construct(int $ligne, int $col, int $longueur, string $prefill = ' ') {
+    public function __construct(int $ligne, int $col, int $longueur, string $prefill = '') {
         $this->ligne = $ligne;
         $this->col = $col;
         $this->longueur = $longueur;

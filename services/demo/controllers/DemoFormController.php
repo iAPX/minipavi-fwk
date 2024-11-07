@@ -21,8 +21,8 @@ class DemoFormController extends \MiniPaviFwk\controllers\VideotexController
         ->position(4, 1)->ecritUnicode("Nom : ")
         ->position(5, 1)->ecritUnicode("Prénom : ")
         ->position(6, 1)->ecritUnicode("Code Postal : ")
-        ->position(7, 30)->ecritUnicode("Remplir chaque champ puis [SUITE]")
-        ->position(8, 1)->ecritUnicode("Finir avec [ENVOI]")
+        ->position(7, 8)->ecritUnicode("Remplir chaque champ puis [SUITE]")
+        ->position(8, 23)->ecritUnicode("Finir avec [ENVOI]")
 
         ->position(12, 1)->ecritUnicode("Formulaire précédent : ")
 
@@ -35,28 +35,15 @@ class DemoFormController extends \MiniPaviFwk\controllers\VideotexController
     {
         // We define the fields
         $fields = [
-            new \MiniPaviFwk\helpers\FormField(4, 7, 34, '.'),
-            new \MiniPaviFwk\helpers\FormField(5, 10, 31, '.'),
-            new \MiniPaviFwk\helpers\FormField(6, 15, 5, ' '),
+            new \MiniPaviFwk\helpers\FormField(4, 7, 34),
+            new \MiniPaviFwk\helpers\FormField(5, 10, 31),
+            new \MiniPaviFwk\helpers\FormField(6, 15, 5),
         ];
-
-        $cmd = \MiniPaviFwk\cmd\InputFormCmd::createMiniPaviCmd(null, $fields, true);
-        trigger_error("getCmd : " . print_r($cmd, true), E_USER_ERROR);
-
         return \MiniPaviFwk\cmd\InputFormCmd::createMiniPaviCmd(null, $fields, true);
-    }
-
-    public function choix(string $touche, string $saisie): ?\MiniPaviFwk\actions\Action
-    {
-        trigger_error("choix : $touche - $saisie", E_USER_ERROR);
-        return null;
     }
 
     public function message(string $touche, array $message): ?\MiniPaviFwk\actions\Action
     {
-        trigger_error("message : $touche", E_USER_ERROR);
-        trigger_error(print_r($message, true), E_USER_ERROR);
-
         if ($touche === 'ENVOI') {
             if (empty(implode('', $message))) {
                 return new \MiniPaviFwk\actions\Ligne00Action($this, "Formulaire vide");
@@ -68,6 +55,9 @@ class DemoFormController extends \MiniPaviFwk\controllers\VideotexController
         } elseif ($touche === 'SOMMAIRE') {
             // Handle [SOMMAIRE] to return to the Sommaire (service menu)
             return new \MiniPaviFwk\actions\PageAction($this->context, 'demo-sommaire');
+        } elseif ($touche === 'REPETITION') {
+            // Display again
+            return new \MiniPaviFwk\actions\RepetitionAction($this);
         }
     }
 
@@ -77,6 +67,7 @@ class DemoFormController extends \MiniPaviFwk\controllers\VideotexController
         $videotex
         ->effaceLigne00()
         ->position(13, 1)
+        ->effaceFinDeLigne()
         ->ecritUnicode($message[1] . ' ' . $message[0] . ' (' . $message[2] . ')');
         return $videotex->getOutput();
     }
