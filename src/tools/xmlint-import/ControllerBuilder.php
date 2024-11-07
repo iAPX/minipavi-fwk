@@ -20,9 +20,9 @@ class ControllerBuilder
         $this->xml_page = $xml_page;
     }
 
-    public function createEcran(string $ecran): void
+    public function createEcran(string $ecran_code): void
     {
-        $this->ecran = $ecran;
+        $this->ecran = $ecran_code;
     }
 
     public function createValidation(string $validation_code): void

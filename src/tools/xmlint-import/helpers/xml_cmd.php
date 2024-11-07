@@ -6,8 +6,9 @@
 
 function xml_cmd(ControllerBuilder $controller, \SimpleXMLElement $xml_entree): void
 {
-    // Get ZoneSaisies, process the first encountered
-    foreach ($xml_entree->zonesaisie as $element) {
+    if ($xml_entree->zonesaisie) {
+        // Get ZoneSaisies, process the first encountered
+        $element = $xml_entree->zonesaisie[0];
         $ligne = (string) $element['ligne'];
         $col = (string) $element['col'];
         $longueur = (string) $element['longueur'];
@@ -28,9 +29,29 @@ function xml_cmd(ControllerBuilder $controller, \SimpleXMLElement $xml_entree): 
         );
     }
 EOF;
+    } else {
+        // Get ZoneMessages, process the first encountered
+        $element = $xml_entree->zonemessage[0];
+        $ligne = (string) $element['ligne'];
+        $hauteur = (string) $element['hauteur'];
+        $curseur = ((string) $element['curseur']) === 'visible';
 
-        // Store into the controllerBuilder, and stop there!
-        $controller->createCmd($code);
-        return;
+        // Convert to Code
+        $curseur_bool = $curseur ? 'true' : 'false';
+        $code = <<<EOF
+\n
+    public function getCmd(): array
+    {
+        return \MiniPaviFwk\cmd\ZoneMessageCmd::createMiniPaviCmd(
+            \$this->validation(),
+            $ligne,
+            $hauteur,
+            $curseur_bool
+        );
     }
+EOF;
+    }
+
+    // Store into the controllerBuilder, and stop there!
+    $controller->createCmd($code);
 }
