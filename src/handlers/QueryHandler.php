@@ -65,8 +65,10 @@ class QueryHandler
 
         $controller = static::getController($action);
         $cmd = static::getCmd($controller);
+        trigger_error("QueryLogic cmd" . print_r($cmd, true), E_USER_ERROR);
         $context = static::getControllerContext($controller);
         $output = static::getActionOutput($action);
+        trigger_error("QueryLogic output" . print_r($output, true), E_USER_ERROR);
         $nextPage = static::getNextPageUrl();
 
         return [$action, $controller, $cmd, $context, $output, $nextPage];

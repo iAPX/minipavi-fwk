@@ -16,5 +16,8 @@ class ValidationHelper
     public const CORRECTION = 0b00100000;
     public const SUITE = 0b01000000;
     public const ENVOI = 0b10000000;
+
     public const ALL = 0b11111111;
+
+    public const FORM_ALL = 0b10011001;     // SOMMAIRE | REPETITION | GUIDE | ENVOI
 }

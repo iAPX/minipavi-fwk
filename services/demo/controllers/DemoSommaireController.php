@@ -45,7 +45,10 @@ class DemoSommaireController extends \MiniPaviFwk\controllers\VideotexController
         ->ecritUnicode(" Actions / DemoActionController")
 
         ->position(11, 1)->inversionDebut()->ecritUnicode('8')->inversionFin()
-        ->ecritUnicode(" WebMedias");
+        ->ecritUnicode(" WebMedias")
+
+        ->position(12, 1)->inversionDebut()->ecritUnicode('9')->inversionFin()
+        ->ecritUnicode(" Formulaire");
 
         // Dynamic Menu of allowed services
         $ligne = 17;
@@ -113,6 +116,11 @@ class DemoSommaireController extends \MiniPaviFwk\controllers\VideotexController
         $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
         $videotex->webMedia('YT', 's86K-p089R8');
         return new \MiniPaviFwk\actions\VideotexOutputAction($this, $videotex->getOutput());
+    }
+
+    public function choix9Envoi(): ?\MiniPaviFwk\actions\Action
+    {
+        return new \MiniPaviFwk\actions\PageAction($this->context, 'demo-form');
     }
 
     public function choix(string $touche, string $saisie): ?\MiniPaviFwk\actions\Action
