@@ -107,7 +107,8 @@ function xml_ecran(ControllerBuilder $controller, \SimpleXMLElement $ecran, stri
                 $largeur = (string) $element['largeur'];
                 $hauteur = (string) $element['hauteur'];
                 $couleur = (string) $element['couleur'];
-                $inner_code .= "        \$videotex->afficheRectangleInverse($ligne, $col, $largeur, $hauteur, \"$couleur\");\n";
+                $inner_code .=
+                    "        \$videotex->afficheRectangleInverse($ligne, $col, $largeur, $hauteur, \"$couleur\");\n";
                 break;
             case "pin":
                 $inner_code .= "        \$videotex->ecritPIN();\n";

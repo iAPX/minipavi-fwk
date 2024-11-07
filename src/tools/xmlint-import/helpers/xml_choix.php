@@ -8,7 +8,7 @@ function xml_choix(ControllerBuilder $controller, \SimpleXMLElement $xml_choix):
 {
     // CCheck the saisies
     $is_zonesaisie = true;
-    foreach($xml_choix->saisie as $element) {
+    foreach ($xml_choix->saisie as $element) {
         if (isset($element['email'])) {
             $is_zonesaisie = false;
             break;
@@ -53,7 +53,7 @@ EOF;
             // Convert to partial code
             $clean_choix = str_replace(['"', '\\'], ['\"', '\\\\'], $choix);
             if (! $email) {
-            $code_choix .= <<<EOF
+                $code_choix .= <<<EOF
 \n
         if (\$touche === "$touche") {
             // Handle [$touche]
@@ -91,7 +91,7 @@ EOF;
         }
 
     // Wrap the code into a message() function
-    $code_choix = <<<EOF
+        $code_choix = <<<EOF
 \n
     public function message(string \$touche, array \$message): ?\\MiniPaviFwk\\actions\\Action
     {

@@ -31,7 +31,11 @@ class DemoValidationController extends \MiniPaviFwk\controllers\VideotexControll
     public function getCmd(): array
     {
         // On autorise SUITE, ENVOI, RETOUR et SOMMAIRE
-        $validation = \MiniPaviFwk\helpers\ValidationHelper::SUITE | \MiniPaviFwk\helpers\ValidationHelper::ENVOI | \MiniPaviFwk\helpers\ValidationHelper::RETOUR | \MiniPaviFwk\helpers\ValidationHelper::SOMMAIRE;
+        $validation =
+            \MiniPaviFwk\helpers\ValidationHelper::SUITE
+            | \MiniPaviFwk\helpers\ValidationHelper::ENVOI
+            | \MiniPaviFwk\helpers\ValidationHelper::RETOUR
+            | \MiniPaviFwk\helpers\ValidationHelper::SOMMAIRE;
         return ZoneSaisieCmd::createMiniPaviCmd($validation);
     }
 

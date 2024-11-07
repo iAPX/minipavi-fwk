@@ -29,7 +29,7 @@ class RedirectAction extends Action
         $session_handler::destroySession();
         $session_handler::startSession();
         $_SESSION['context'] = [];
-        
+
         // Wait time in seconds translated to \00 output!
         $waitOutput = !empty($videotexOutput) ? str_repeat("\00", $waitSeconds * 120) : '';
 
