@@ -48,11 +48,14 @@ class DemoSommaireController extends \MiniPaviFwk\controllers\VideotexController
         ->ecritUnicode(" WebMedias")
 
         ->position(12, 1)->inversionDebut()->ecritUnicode('9')->inversionFin()
-        ->ecritUnicode(" Formulaire");
+        ->ecritUnicode(" Formulaire")
+
+        ->position(14, 1)->inversionDebut()->ecritUnicode('10')->inversionFin()
+        ->ecritUnicode(" Démo articles dynamique");
 
         // Dynamic Menu of allowed services
-        $ligne = 17;
-        $choix = 10;
+        $ligne = 16;
+        $choix = 11;
         foreach (\ALLOWED_SERVICES as $service) {
             if ($service !== 'demo') {
                 $videotex
@@ -123,9 +126,14 @@ class DemoSommaireController extends \MiniPaviFwk\controllers\VideotexController
         return new \MiniPaviFwk\actions\PageAction($this->context, 'demo-form');
     }
 
+    public function choix10Envoi(): ?\MiniPaviFwk\actions\Action
+    {
+        return new \MiniPaviFwk\actions\PageAction($this->context, 'articles-menu');
+    }
+
     public function choix(string $touche, string $saisie): ?\MiniPaviFwk\actions\Action
     {
-        $choix = 10;
+        $choix = 11;
         foreach (\ALLOWED_SERVICES as $service) {
             if ($service !== 'demo') {
                 if ($saisie == $choix) {

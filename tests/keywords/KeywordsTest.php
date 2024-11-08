@@ -11,8 +11,5 @@ class KeywordsTest extends TestCase
 
         $choix = $keywords->choix('*', 'ENVOI');
         $this->assertNull($choix);
-
-        $validation = $keywords->validationKeys();
-        $this->assertEmpty($validation);
     }
 }

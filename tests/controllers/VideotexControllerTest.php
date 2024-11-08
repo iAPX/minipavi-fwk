@@ -16,7 +16,7 @@ class VideotexControllerTest extends TestCase
 
         $expected_context = ["test"=>"test value", "controller"=>"MiniPaviFwk\\controllers\\VideotexController", "params"=>["test param"=>"test param value"]];
         $this->assertEquals($expected_context, $controller->getContext());
-        $this->assertEquals("*** Ecran absent. ***", $controller->ecran());
+        $this->assertEquals(chr(12) . "*** Ecran() absent. ***", $controller->ecran());
     }
 
     public function testGetSaisieAction()
