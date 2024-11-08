@@ -98,19 +98,27 @@ C'est une différence fondamentale avec les contrôleur de requêtes pour le Web
 
 ### Identification et traitement de la réponse utilisateur
 
-Seules deux commandes attendent une réponse utilisateur, ZoneSaisieCmd et ZoneMessageCmd.
-La première utilise de l'introspection pour rendre le code plus lisible, appelant hiérarchiquement différentes méthodes pour faciliter la gestion des menus et des arborescence, la seconde appelle uniquement message().
+Trois commandes attendent une réponse utilisateur, ZoneMessageCmd, InputFormCmd et ZoneSaisieCmd.
+La dernière utilise de l'introspection pour rendre le code plus lisible, appelant hiérarchiquement différentes méthodes pour faciliter la gestion des menus et des arborescence, la seconde appelle uniquement message().
 
 Ces méthodes peuvent renvoyer une [Action](./Actions.md) ou null ssi un traitement a pu être effectué ou pour indiquer une erreur.
 Si aucune méthode n'a été trouvée, la méthode nonPropose() sera alors appelé, qui par défaut affiche un message d'erreur en Ligne 00.
+
+Voir la [documentation sur les commandes](./Cmds.md).
 
 
 #### ZoneMessageCmd, saisie multiligne : message()
 Signature: `public function message(string $touche, array $message): ?\MiniPaviFwk\actions\Action`
 
 Reçoit la touche de fonction utilisée dans $touche (en MAJUSCULES) et le message dans un array comportant une entrée par ligne.
-Le comportement de MiniPavi et MiniPaviCli est de fournir une ligne (même vide) par ligne de la zone de saisie du message: si le message fait 4 lignes, $message contiendra 4 entrées, chacune contenant une chaîne éventuellement vide "".
+Le comportement de MiniPavi et MiniPaviCli est de fournir une ligne (même vide) par ligne de la zone de saisie du message: si le message fait 4 lignes, $message contiendra 4 entrées, chacune contenant une chaîne éventuellement vide "". [documentation sur les commandes](./Cmds.md)
 
+
+### InputFormCmd, saisie de formulaire multichamps : message()
+Signature: `public function message(string $touche, array $message): ?\MiniPaviFwk\actions\Action`
+
+Reçoit la touche de fonction utilisée dans $touche (en MAJUSCULES) et les différents champs dans un array comportant une entrée par champ, dans l'ordre de définition via InputFormCmd.
+Le comportement de MiniPavi et MiniPaviCli est de fournir une entrée (même vide) par champ du formulaire: si le formulaire comporte 4 champs, $message contiendra 4 entrées, chacune contenant une chaîne éventuellement vide "". [documentation sur les commandes](./Cmds.md)
 
 
 #### ZoneSaisiecmd, choix simplifié : choix{Saisie}{Touche}()
@@ -135,7 +143,7 @@ Par exemple :
 ```
 
 
-#### ZoneSaisieCmd, touche quelquesoit la saisie : touche{Touche}()
+#### ZoneSaisieCmd, touche quelque soit la saisie : touche{Touche}()
 Signature : `public function touche{Touche}(string $saisie): ?\MiniPaviFwk\actions\Action`
 
 Cette méthode est testée après la méthode choix{Saisie}{Touche}() si elle a renvoyé null ou si elle est absente.
