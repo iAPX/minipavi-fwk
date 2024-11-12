@@ -19,7 +19,7 @@ class MultipageController extends VideotexController
 
         // Context should be set for this to work!
         $this->multipage_page_num = $page_num;
-        $this->multipage_nb_pages = $nb_pages;
+        $this->multipage_nb_pages = $nb_pages < 1 ? 1 : $nb_pages;
 
         // Ensure page number is valid
         if ($this->multipage_page_num > $this->multipage_nb_pages) {

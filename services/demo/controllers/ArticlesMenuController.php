@@ -66,7 +66,16 @@ class ArticlesMenuController extends \MiniPaviFwk\controllers\MenuController
 
     public function getCmd(): array
     {
-        return \MiniPaviFwk\cmd\ZoneSaisieCmd::createMiniPaviCmd(null, 24, 28, 3, true, '.');
+        return \MiniPaviFwk\cmd\ZoneSaisieCmd::createMiniPaviCmd(
+            \MiniPaviFwk\helpers\ValidationHelper::ENVOI
+            | \MiniPaviFwk\helpers\ValidationHelper::SOMMAIRE
+            | \MiniPaviFwk\helpers\ValidationHelper::REPETITION,
+            24,
+            28,
+            3,
+            true,
+            '.'
+        );
     }
 
     public function menuSelectionAction(int|string $item_key, mixed $item_value): ?\MiniPaviFwk\actions\Action

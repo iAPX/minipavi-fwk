@@ -7,7 +7,8 @@ Source directory : [src/controllers/](../../src/controllers/)
 
 Source du contrôleur VideotexController, parent de vos contrôleurs [src/controllers/VideotexController.php](../../src/controllers/VideotexController.php)
 
-Vous pouvez aussi créer des menus plus facilement avec le Contrôleur de Menu [source ici](../../src/controllers/MenuController.php) et la [documentation du MenuController ici](./Menucontroller.md)
+Vous pouvez aussi créer des menus plus facilement avec le Contrôleur de Menu [source ici](../../src/controllers/MenuController.php) et la [documentation du MenuController ici](./Menucontroller.md), ainsi que des affichages de contenus multipages avec le Contrôleur Multipage [source ici](../../src/controllers/MultipageController.php) et la [ ici](./Multipagecontroller.md)documentation du MultipageController ici](./Multipagecontroller.md).
+
 
 ## Cycle de vie typique d'un contrôleur
 1. Affichage de la page courante, via `ecran()`

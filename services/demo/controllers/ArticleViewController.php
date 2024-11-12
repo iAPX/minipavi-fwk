@@ -10,15 +10,14 @@ class ArticleViewController extends \MiniPaviFwk\controllers\MultipageController
 {
     private const CODEPOINTS_PER_PAGE = 400;
     private array $article = [];
-    private int $nb_pages = 1;
 
     public function __construct(array $context, array $params = [])
     {
         $article_id = $context['articles']['view_id'];
         $this->article = \service\helpers\DataHelper::getArticleById($article_id);
-        $this->nb_pages = intdiv(mb_strlen($this->article['content']) - 1, self::CODEPOINTS_PER_PAGE) + 1;
+        $nb_pages = intdiv(mb_strlen($this->article['content']) - 1, self::CODEPOINTS_PER_PAGE) + 1;
 
-        parent::__construct($context['articles']['view_page'], $this->nb_pages, $context, $params);
+        parent::__construct($context['articles']['view_page'], $nb_pages, $context, $params);
     }
 
     public function multipageSavePageNumber(int $page_num): void
@@ -49,7 +48,7 @@ class ArticleViewController extends \MiniPaviFwk\controllers\MultipageController
         // Display the pagination, [ SUITE | RETOUR ] and the current page of the article
         $videotex
         ->position(3, 31)
-        ->ecritUnicode("Page " . $this->context['articles']['view_page'] . "/" . $this->nb_pages);
+        ->ecritUnicode("Page " . $this->multipage_page_num . "/" . $this->multipage_nb_pages);
 
         $videotex
         ->position(22, 27)
@@ -59,7 +58,7 @@ class ArticleViewController extends \MiniPaviFwk\controllers\MultipageController
         ->position(9, 1)->couleurTexte('magenta')
         ->ecritUnicode(mb_substr(
             $this->article['content'],
-            self::CODEPOINTS_PER_PAGE * ($this->context['articles']['view_page'] - 1),
+            self::CODEPOINTS_PER_PAGE * ($this->multipage_page_num - 1),
             self::CODEPOINTS_PER_PAGE
         ));
 
@@ -68,7 +67,17 @@ class ArticleViewController extends \MiniPaviFwk\controllers\MultipageController
 
     public function getCmd(): array
     {
-        return \MiniPaviFwk\cmd\ZoneSaisieCmd::createMiniPaviCmd(null, 24, 20, 1, false, ' ');
+        // We only accept [SUITE] + [RETOUR] for pagination, [SOMMAIRE] for the menu, and [REPETITION] to redraw.
+        return \MiniPaviFwk\cmd\ZoneSaisieCmd::createMiniPaviCmd(
+            \MiniPaviFwk\helpers\ValidationHelper::SUITE
+            | \MiniPaviFwk\helpers\ValidationHelper::RETOUR
+            | \MiniPaviFwk\helpers\ValidationHelper::SOMMAIRE
+            | \MiniPaviFwk\helpers\ValidationHelper::REPETITION,
+            24,
+            20,
+            1,
+            false
+        );
     }
 
     public function choixSommaire(): ?\MiniPaviFwk\actions\Action
