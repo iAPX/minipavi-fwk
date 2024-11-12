@@ -196,6 +196,7 @@ Exemple:
 
 ### Messages d'erreurs customs: errorFirstPage() et errorLastPage()
 Vous pouvez créer des messages d'erreurs personnalisés, qui seront affichés en Ligne00, respectivement si vous faites [Retour] depuis la première page, ou [Suite] sur la dernière page.
+Notez que MenuController par défaut n'affiche pas de message d'erreur si vous avez setté le $item_per_page à null (pas de pagination), mais ces méthodes seront quand-même appelées par MultipageController.
 
 Signatures : `protected function errorFirstPage(): string` et `protected function errorLastPage(): string`
 

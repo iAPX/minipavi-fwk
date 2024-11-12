@@ -50,9 +50,9 @@ class DemoEcranController extends \MiniPaviFwk\controllers\VideotexController
         ->position(19, 1)->ecritUnicode("repeteCaractere()")->repeteCaractere(".", 63)->repeteCaractere("", 63)
         ->position(19, 21)->ecritUnicode("rectangle() : ")->afficheRectangleInverse(20, 21, 16, 3, "magenta")
 
-        // Name of the Controller
-        ->position(23, 1)->effaceFinDeLigne()->couleurFond("vert")->couleurTexte('noir')
-        ->ecritUnicode(" " . end(explode('\\', $this::class)))
+        // Name of the Controller, demo or ecritUnicodeCentre()
+        ->position(23, 1)->effaceFinDeLigne()->couleurFond("vert")->ecritUnicode(" ")
+        ->ecritUnicodeCentre(23, end(explode('\\', $this::class)), "\x1B\x40")
 
         // Code PIN for the WebMedia from another device
         ->position(24, 1)->ecritUnicode("WebMedia PIN : ")->inversionDebut()->ecritPIN()->inversionFin()

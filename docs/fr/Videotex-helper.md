@@ -245,6 +245,16 @@ $nombre est limité à 64.
 Cette méthode renvoie l'objet Videotexhelper courant pour permettre le chaînage des appels.
 
 
+### ecritUnicodeCentre() : affiche une chaîne unicode centrée sur une ligne d'écran
+
+Signature : `public function ecritUnicodeCentre(int $ligne, string $unicodeTexte, string $videotexAttributs = ''): VideotexHelper`
+
+Affichage la chaîne $unicodeTexte sur la ligne $ligne, de manière centrée.
+$videotexAttributs peut contenir une chaîne vidéotex à insérer entre le positionnement du curseur pour l'affichage et l'affichage de la chaîne elle-même.
+
+Cette méthode renvoie l'objet Videotexhelper courant pour permettre le chaînage des appels.
+
+
 ### afficheRectangleInverse() : affiche un rectangle en vidéo inverse
 
 Signature :

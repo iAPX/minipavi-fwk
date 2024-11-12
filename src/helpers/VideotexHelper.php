@@ -219,6 +219,12 @@ class VideotexHelper
         return $this;
     }
 
+    public function ecritUnicodeCentre(int $ligne, string $unicodeTexte, string $videotexAttributs = ''): VideotexHelper
+    {
+        $this->output .= MiniPaviCli::writeCentered($ligne, $unicodeTexte, $videotexAttributs);
+        return $this;
+    }
+
     public function afficheRectangleInverse(
         int $ligne,
         int $col,
