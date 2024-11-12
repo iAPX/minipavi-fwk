@@ -3,27 +3,45 @@
 /**
  * Demo Articles Menu
  *
- * Display choice of articles search by Author, Date, or all articles
+ * Display choice of articles search by Author, Date, or all articles.
+ * Example of a very simple MenuController, implementing complex behaviour through $items array.
  */
 
 namespace service\controllers;
 
-class ArticlesMenuController extends \MiniPaviFwk\controllers\VideotexController
+class ArticlesMenuController extends \MiniPaviFwk\controllers\MenuController
 {
+    private const ITEMS_PER_PAGE = 10;
+
     public function __construct($context, $params = [])
     {
-        parent::__construct($context, $params);
+        $items = [
+            1 => ["Tous les articles", 'all', [], \service\helpers\DataHelper::getAllArticlesIds(), 'articles-list'],
+            2 => [
+                "Articles par auteur", 'author',
+                \service\helpers\DataHelper::getCriterias('author'), [], 'articles-search'
+            ],
+            3 => [
+                "Articles par date", 'date',
+                \service\helpers\DataHelper::getCriterias('date'), [], 'articles-search'
+            ],
+            4 => ["Aucun critère", 'xxx', [], [], 'articles-search'],
+            5 => ["Aucun article", 'all', [], [], 'articles-list'],
+        ];
 
         // We initialize our context for articles, to avoid repeating it on multiple places
-        $this->context['articles'] = [
+        $context['articles'] = [
             'search_type' => 'all',
             'search_criteria' => '',
-            'search_page' => 0,
+            'search_page' => 1,
             'search_results' => [],
-            'list_page' => 0,
+            'list_page' => 1,
             'list_results' => [],
             'view_id' => 0,
+            'view_page' => 1,
         ];
+
+        parent::__construct(1, self::ITEMS_PER_PAGE, $items, $context, $params);
     }
 
     public function ecran(): string
@@ -32,17 +50,31 @@ class ArticlesMenuController extends \MiniPaviFwk\controllers\VideotexController
         $videotex
         ->effaceLigne00()
         ->page("articles")
-        ->position(4, 1)->inversionDebut()->ecritUnicode(' 1 ')->inversionFin()->ecritUnicode(" Tous les articles")
-        ->position(6, 1)->inversionDebut()->ecritUnicode(' 2 ')->inversionFin()->ecritUnicode(" Articles par auteur")
-        ->position(8, 1)->inversionDebut()->ecritUnicode(' 3 ')->inversionFin()->ecritUnicode(" Articles par date")
-        ->position(10, 1)->inversionDebut()->ecritUnicode(' 4 ')->inversionFin()->ecritUnicode(" Aucun critère")
-        ->position(12, 1)->inversionDebut()->ecritUnicode(' 5 ')->inversionFin()->ecritUnicode(" Aucun article");
+        ->ecritVideotex($this->menuDisplayItemList());
+        return $videotex->getoutput();
+    }
+
+    public function menuDisplayItem(int $choice_number, int $rank, int|string $item_key, mixed $item_value): string
+    {
+        $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
+        $videotex
+        ->position(4 + $rank * 2, 1)
+        ->inversionDebut()->ecritUnicode(" $choice_number ")->inversionFin()
+        ->ecritUnicode(' ' . $item_value[0]);
         return $videotex->getoutput();
     }
 
     public function getCmd(): array
     {
         return \MiniPaviFwk\cmd\ZoneSaisieCmd::createMiniPaviCmd(null, 24, 28, 3, true, '.');
+    }
+
+    public function menuSelectionAction(int|string $item_key, mixed $item_value): ?\MiniPaviFwk\actions\Action
+    {
+        $this->context['articles']['search_type'] = $item_value[1];
+        $this->context['articles']['search_results'] = $item_value[2];
+        $this->context['articles']['list_results'] = $item_value[3];
+        return new \MiniPaviFwk\actions\PageAction($this->context, $item_value[4]);
     }
 
     public function choixSommaire(): ?\MiniPaviFwk\actions\Action
@@ -53,43 +85,5 @@ class ArticlesMenuController extends \MiniPaviFwk\controllers\VideotexController
     public function choixETOILESommaire(): ?\MiniPaviFwk\actions\Action
     {
         return new \MiniPaviFwk\actions\PageAction($this->context, 'demo-sommaire');
-    }
-
-    public function choix1Envoi(): ?\MiniPaviFwk\actions\Action
-    {
-        // Get all articles ID and go!
-        $this->context['articles']['list_results'] = \service\helpers\DataHelper::getAllArticlesIds();
-        return new \MiniPaviFwk\actions\PageAction($this->context, 'articles-list');
-    }
-
-    public function choix2Envoi(): ?\MiniPaviFwk\actions\Action
-    {
-        // Search articles by Author
-        $this->context['articles']['search_type'] = 'author';
-        $this->context['articles']['search_results'] = \service\helpers\DataHelper::getCriterias('author');
-        return new \MiniPaviFwk\actions\PageAction($this->context, 'articles-search');
-    }
-
-    public function choix3Envoi(): ?\MiniPaviFwk\actions\Action
-    {
-        // Search articles by Author
-        $this->context['articles']['search_type'] = 'date';
-        $this->context['articles']['search_results'] = \service\helpers\DataHelper::getCriterias('date');
-        return new \MiniPaviFwk\actions\PageAction($this->context, 'articles-search');
-    }
-
-    public function choix4Envoi(): ?\MiniPaviFwk\actions\Action
-    {
-        // Search articles by Author
-        $this->context['articles']['search_type'] = 'xxx';
-        $this->context['articles']['search_results'] = [];
-        return new \MiniPaviFwk\actions\PageAction($this->context, 'articles-search');
-    }
-
-    public function choix5Envoi(): ?\MiniPaviFwk\actions\Action
-    {
-        // Get all articles ID and go!
-        $this->context['articles']['list_results'] = [];
-        return new \MiniPaviFwk\actions\PageAction($this->context, 'articles-list');
     }
 }

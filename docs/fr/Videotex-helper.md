@@ -169,7 +169,21 @@ Signature : `public function effaceFinDeLigne(): VideotexHelper`
 Efface la fin de la ligne à partir de la position courante du curseur d'écriture.
 Agit en posant des espaces, l'inversion n'est pas prise en compte, la couleur de fond choisie apparaît donc jusqu'à la fin de la ligne.
 
+> [!IMPORTANT]
+> Il y a un effet de bord à noter avec les attributs de couleur de fond et de souligné.
+> Vous pouvez utiliser effaceZone() pour effacer toute une ligne sans effet de bord.
+
+
 Cette méthode renvoie l'objet Videotexhelper courant pour permettre le chaînage des appels.
+
+
+### effaceZone() : efface une zone de l'écran, plusieurs lignes consécutives
+
+Signature : `public function effaceZone(int $ligne, int $hauteur): VideotexHelper`
+
+Efface $hauteur lignes (1..n) consécutives débutants par la ligne $ligne.
+Agit en posant des caractères semi-graphique/alphamosaïques espaces ' ' (\x20) pour servir de bloqueurs d'attributs de zone (couleur de fond, souligné)
+Vous pouvez donc utiliser cette zone après effacement sans effet-de-bord, contrairement à effaceFinDeLigne().
 
 
 ### modeGraphique() : passe en Alphamosaïque

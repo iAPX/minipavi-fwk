@@ -4,6 +4,7 @@
  * Controller Builder class
  */
 
+// phpcs:ignore
 class ControllerBuilder
 {
     public string $classname = '';

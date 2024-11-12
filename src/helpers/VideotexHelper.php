@@ -163,6 +163,24 @@ class VideotexHelper
         return $this;
     }
 
+    public function effaceZone(int $ligne, int $hauteur): VideotexHelper
+    {
+        $this->position($ligne, 1);
+        $this->modeGraphique();
+
+        // Now use semigraphique spaces to clear without side-effect
+        $nb_cars = ($hauteur * 40) - 1;
+        $this->output .= ' ';
+        while ($nb_cars > 0) {
+            $repetitions = ($nb_cars > 63) ? 63 : $nb_cars;
+            $this->output .= VDT_REP . chr(64 + $repetitions);
+            $nb_cars -= $repetitions;
+        }
+
+        $this->position($ligne, 1);
+        return $this;
+    }
+
     public function modeGraphique(): VideotexHelper
     {
         $this->output .= VDT_G1;

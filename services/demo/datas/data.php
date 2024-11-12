@@ -20,8 +20,45 @@ const DEMO_DATA = [
         2 => [
             "author_id" => 2,
             "date" => "2020-01-01",
-            "title" => "Deuxième article",
-            "content" => "Deuxième article blah blah blah",
+            "title" => "2ème article, Lorem Ipsum multipage, blah blah blah...",
+            "content" => <<<EOT
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+Phasellus eu neque varius tellus varius egestas vitae nec enim.
+Mauris consequat nunc et enim luctus finibus.
+Vivamus id interdum mi.
+Aenean sit amet libero scelerisque, sagittis elit vel, imperdiet nisl.
+Nunc maximus enim sit amet elit ullamcorper, id posuere arcu aliquam.
+Suspendisse enim ante, varius vitae dui id, ornare rutrum erat.
+Aenean dui orci, laoreet in lorem non, finibus ultricies augue.
+In hac habitasse platea dictumst.
+Vivamus auctor condimentum suscipit.
+Etiam vulputate porttitor risus, at maximus odio blandit bibendum.
+
+Quisque dictum elit justo, vitae bibendum lectus luctus eu.
+In nec convallis diam. Vestibulum suscipit, erat sed finibus tincidunt,
+lorem mauris ultricies est, non blandit magna risus eget elit.
+Sed ante odio, posuere ut mauris quis, elementum pellentesque nisl.
+Fusce mattis turpis non urna lobortis tempor.
+Quisque nunc justo, mattis nec tempus eget, viverra sit amet lorem.
+Curabitur at porttitor mi. Donec elementum lectus at fermentum tincidunt.
+Nunc mattis nisl euismod congue mollis.
+Praesent lectus felis, auctor vel vehicula vitae, viverra eu enim.
+
+Morbi commodo tempus enim, vulputate pretium purus ornare at.
+Duis eget magna vitae nibh vehicula commodo.
+Cras congue turpis laoreet efficitur imperdiet.
+Proin quis rutrum elit.
+Praesent laoreet lacus ante, a aliquam enim eleifend vel.
+Donec rutrum faucibus purus, eget euismod eros suscipit ut.
+Nulla semper eros quis erat aliquet gravida.
+Aliquam enim nisi, congue eget auctor eu, bibendum nec urna.
+Aenean risus arcu, placerat a lobortis quis, condimentum ut dui.
+Nunc tincidunt posuere massa a mollis.
+Phasellus convallis, urna et volutpat posuere, urna lorem suscipit augue, et ullamcorper felis enim feugiat mauris.
+Proin porttitor, orci at faucibus euismod, erat dui tincidunt sem, nec vestibulum erat lacus at lacus.
+In lectus quam, facilisis nec tortor id, porttitor malesuada nisi.
+Proin purus lectus, sodales id consectetur eget, suscipit vitae purus.
+EOT
         ],
         3 => [
             "author_id" => 3,

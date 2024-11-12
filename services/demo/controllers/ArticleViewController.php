@@ -6,8 +6,26 @@
 
 namespace service\controllers;
 
-class ArticleViewController extends \MiniPaviFwk\controllers\VideotexController
+class ArticleViewController extends \MiniPaviFwk\controllers\MultipageController
 {
+    private const CODEPOINTS_PER_PAGE = 400;
+    private array $article = [];
+    private int $nb_pages = 1;
+
+    public function __construct(array $context, array $params = [])
+    {
+        $article_id = $context['articles']['view_id'];
+        $this->article = \service\helpers\DataHelper::getArticleById($article_id);
+        $this->nb_pages = intdiv(mb_strlen($this->article['content']) - 1, self::CODEPOINTS_PER_PAGE) + 1;
+
+        parent::__construct($context['articles']['view_page'], $this->nb_pages, $context, $params);
+    }
+
+    public function multipageSavePageNumber(int $page_num): void
+    {
+        $this->context['articles']['view_page'] = $page_num;
+    }
+
     public function ecran(): string
     {
         $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
@@ -16,21 +34,34 @@ class ArticleViewController extends \MiniPaviFwk\controllers\VideotexController
         ->page("article");
 
         // Display the Article
-        $article_id = $this->context['articles']['view_id'];
-        $article = \service\helpers\DataHelper::getArticleById($article_id);
         $author_name = \MiniPaviFwk\helpers\mb_ucfirst(
-            \service\helpers\DataHelper::getAuthorNameById($article['author_id'])
+            \service\helpers\DataHelper::getAuthorNameById($this->article['author_id'])
         );
-        $french_date = \service\helpers\DataHelper::dateToFrench($article['date']);
+        $french_date = \service\helpers\DataHelper::dateToFrench($this->article['date']);
 
         $videotex
-        ->position(3, 1)->ecritUnicode("Article #" . $article_id)
-        ->position(5, 1)->ecritUnicode($article['title'])
+        ->position(3, 1)->ecritUnicode("Article #" . $this->context['articles']['view_id'])
+        ->position(5, 1)->ecritUnicode($this->article['title'])
         ->position(7, 1)->effaceFinDeLigne()->couleurFond('bleu')
         ->ecritUnicode(' Par @' . \MiniPaviFwk\helpers\mb_ucfirst($author_name) . ', le ')
-        ->ecritUnicode($french_date)
+        ->ecritUnicode($french_date);
+
+        // Display the pagination, [ SUITE | RETOUR ] and the current page of the article
+        $videotex
+        ->position(3, 31)
+        ->ecritUnicode("Page " . $this->context['articles']['view_page'] . "/" . $this->nb_pages);
+
+        $videotex
+        ->position(22, 27)
+        ->inversionDebut()->ecritUnicode(" SUITE|RETOUR ")->inversionFin();
+
+        $videotex
         ->position(9, 1)->couleurTexte('magenta')
-        ->ecritUnicode($article['content']);
+        ->ecritUnicode(mb_substr(
+            $this->article['content'],
+            self::CODEPOINTS_PER_PAGE * ($this->context['articles']['view_page'] - 1),
+            self::CODEPOINTS_PER_PAGE
+        ));
 
         return $videotex->getoutput();
     }

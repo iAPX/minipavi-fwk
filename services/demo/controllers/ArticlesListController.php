@@ -2,13 +2,33 @@
 
 /**
  * List found articles
+ *
+ * Example of a MenuController, with pagination when needed (more than 1 page)
+ * and clean effaceZone() instead full redrawing of the page when using [SUITE] or [RETOUR]
  */
 
 namespace service\controllers;
 
-class ArticlesListController extends \MiniPaviFwk\controllers\VideotexController
+class ArticlesListController extends \MiniPaviFwk\controllers\MenuController
 {
     private const ARTICLES_PER_PAGE = 5;
+
+    public function __construct(array $context, array $params = [])
+    {
+        // Initialize our Menu!
+        parent::__construct(
+            $context['articles']['list_page'],
+            self::ARTICLES_PER_PAGE,
+            $context['articles']['list_results'],
+            $context,
+            $params
+        );
+    }
+
+    public function multipageSavePageNumber(int $page_num): void
+    {
+        $this->context['articles']['list_page'] = $page_num;
+    }
 
     public function ecran(): string
     {
@@ -35,8 +55,8 @@ class ArticlesListController extends \MiniPaviFwk\controllers\VideotexController
                 break;
         }
 
-        // Display the article list, separated for a better UX when scrolling list
-        $videotex->ecritVideotex($this->displayArticleList());
+        // Display the article list, separated for a better UX when scrolling list, through MenuController
+        $videotex->ecritVideotex($this->menuDisplayItemList());
 
         return $videotex->getoutput();
     }
@@ -44,6 +64,13 @@ class ArticlesListController extends \MiniPaviFwk\controllers\VideotexController
     public function getCmd(): array
     {
         return \MiniPaviFwk\cmd\ZoneSaisieCmd::createMiniPaviCmd(null, 24, 28, 3, true, '.');
+    }
+
+    public function menuSelectionAction(int|string $item_key, mixed $item_value): ?\MiniPaviFwk\actions\Action
+    {
+        $this->context['articles']['view_id'] = $item_value;
+        $this->context['articles']['view_page'] = 1;
+        return new \MiniPaviFwk\actions\PageAction($this->context, 'article-view');
     }
 
     public function choixSommaire(): ?\MiniPaviFwk\actions\Action
@@ -59,69 +86,40 @@ class ArticlesListController extends \MiniPaviFwk\controllers\VideotexController
         return new \MiniPaviFwk\actions\PageAction($this->context, 'demo-sommaire');
     }
 
-    public function toucheEnvoi(string $saisie): ?\MiniPaviFwk\actions\Action
+    protected function multipageRefreshEcran(): string
     {
-        $article_num = (int) $saisie;
-        if ($article_num > 0) {
-            $article_id = $this->context['articles']['list_results'][$article_num - 1];
-            if ($article_id) {
-                $this->context['articles']['view_id'] = $article_id;
-                return new \MiniPaviFwk\actions\PageAction($this->context, 'article-view');
-            }
-        }
-        return new \MiniPaviFwk\actions\Ligne00Action($this, 'Article introuvable!');
+        // Override default full screen redrawing when scrolling on the list
+        $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
+        return $videotex->effaceLigne00()->effaceZone(4, 19)->ecritVideotex($this->menuDisplayItemList())->getoutput();
     }
 
-    public function choixSuite(): ?\MiniPaviFwk\actions\Action
+    public function menuDisplayItem(int $choice_number, int $rank, int|string $item_key, mixed $item_value): string
     {
-        $articles = $this->context['articles']['list_results'];
-        $nb_pages = floor((count($articles) - 1) / self::ARTICLES_PER_PAGE) + 1;
-        if ($nb_pages <= 1) {
-            // No pagination!
-            return $this->nonPropose();
-        }
+        $article = \service\helpers\DataHelper::getArticleById($item_value);
+        $author_id = $article['author_id'];
+        $author_name = \service\helpers\DataHelper::getAuthorNameById($author_id);
 
-        if ($this->context['articles']['list_page'] >= $nb_pages - 1) {
-            // End
-            return new \MiniPaviFwk\actions\Ligne00Action($this, 'Dernière page!');
-        }
-        $this->context['articles']['list_page']++;
-        $output = $this->displayArticleList();
-        return new \MiniPaviFwk\actions\VideotexOutputAction($this, $output);
+        $ligne = 5 + $rank * 3;
+
+        $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
+        $videotex
+        ->position($ligne, 1)
+        ->inversionDebut()->ecritUnicode(" " . substr(" " . ($choice_number), -2) . " ")->inversionFin()
+        ->ecritUnicode(' ' . mb_substr($article['title'], 0, 35))
+
+        ->position($ligne + 1, 6)
+        ->ecritUnicode('@' . \MiniPaviFwk\helpers\mb_ucfirst($author_name) . ', le ')
+        ->ecritUnicode(\service\helpers\DataHelper::dateToFrench($article['date']));
+
+        return $videotex->getoutput();
     }
 
-    public function choixRetour(): ?\MiniPaviFwk\actions\Action
-    {
-        $articles = $this->context['articles']['list_results'];
-        $nb_pages = floor((count($articles) - 1) / self::ARTICLES_PER_PAGE) + 1;
-        if ($nb_pages <= 1) {
-            // No pagination!
-            return $this->nonPropose();
-        }
-
-        if ($this->context['articles']['list_page'] == 0) {
-            // First page
-            return new \MiniPaviFwk\actions\Ligne00Action($this, 'Première page!');
-        }
-
-        $this->context['articles']['list_page']--;
-        $output = $this->displayArticleList();
-        return new \MiniPaviFwk\actions\VideotexOutputAction($this, $output);
-    }
-
-    private function displayArticleList(): string
+    public function menuDisplayPagination(int $page_num, int $nb_pages): string
     {
         $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
 
-        // Clear the list and the ligne00
-        $videotex->effaceLigne00();
-        for ($ligne = 4; $ligne <= 22; $ligne++) {
-            $videotex->position($ligne, 1)->effaceFinDeLigne();
-        }
-
-        // No articles?!?
-        $articles = $this->context['articles']['list_results'];
-        if (count($articles) === 0) {
+        // None article
+        if ($nb_pages === 0) {
             $videotex
             ->position(12, 1)->doubleTaille()->ecritUnicode("Aucun article!!!")
             ->position(24, 1)->effaceFinDeLigne()
@@ -129,53 +127,30 @@ class ArticlesListController extends \MiniPaviFwk\controllers\VideotexController
             return $videotex->getoutput();
         }
 
-        // Don't go after the last page, or before the first one, sanity check
-        $nb_pages = floor((count($articles) - 1) / self::ARTICLES_PER_PAGE) + 1;
-        $current_page = $this->context['articles']['list_page'];
-        if ($current_page >= $nb_pages) {
-            $current_page = $nb_pages - 1;
-        } elseif ($current_page < 0) {
-            $current_page = 0;
-        }
-
-        // Display the pagination
+        // Only display pagination if needed
         if ($nb_pages > 1) {
-            $videotex->position(4, 31)->ecritUnicode("Page " . ($current_page + 1) . "/" . $nb_pages);
-            if ($current_page == 0) {
+            $videotex->position(4, 31)->ecritUnicode("Page $page_num/$nb_pages");
+            if ($page_num == 1) {
                 $videotex->position(22, 34)->inversionDebut()->ecritUnicode(" SUITE ")->inversionFin();
-            } elseif ($current_page < $nb_pages - 1) {
+            } elseif ($page_num < $nb_pages) {
                 $videotex->position(22, 27)->inversionDebut()->ecritUnicode(" SUITE|RETOUR ")->inversionFin();
             } else {
                 $videotex->position(22, 33)->inversionDebut()->ecritUnicode(" RETOUR ")->inversionFin();
             }
         }
 
-        // Display the articles title, author and data
-        $base = $current_page * self::ARTICLES_PER_PAGE;
-        $ligne = 5;
-        for ($dep = 0; $dep < self::ARTICLES_PER_PAGE; $dep++) {
-            if (! isset($this->context['articles']['list_results'][$base + $dep])) {
-                // End of list
-                break;
-            }
+        return $videotex->getoutput();
+    }
 
-            $article_id = $this->context['articles']['list_results'][$base + $dep];
-            $article = \service\helpers\DataHelper::getArticleById($article_id);
-            $author_id = $article['author_id'];
-            $author_name = \service\helpers\DataHelper::getAuthorNameById($author_id);
+    protected function errorFirstPage(): string
+    {
+        // Overridable to change the error message
+        return 'Première page!';
+    }
 
-            $videotex
-            ->position($ligne, 1)
-            ->inversionDebut()->ecritUnicode(" " . substr(" " . ($base + $dep + 1), -2) . " ")->inversionFin()
-            ->ecritUnicode(' ' . mb_substr($article['title'], 0, 35))
-
-            ->position($ligne + 1, 6)
-            ->ecritUnicode('@' . \MiniPaviFwk\helpers\mb_ucfirst($author_name) . ', le ')
-            ->ecritUnicode(\service\helpers\DataHelper::dateToFrench($article['date']));
-
-            $ligne += 3;
-        }
-
-        return $videotex->getOutput();
+    protected function errorlastPage(): string
+    {
+        // Overridable to change the error message
+        return 'Dernière page!';
     }
 }
