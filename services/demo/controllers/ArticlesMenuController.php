@@ -11,8 +11,6 @@ namespace service\controllers;
 
 class ArticlesMenuController extends \MiniPaviFwk\controllers\MenuController
 {
-    private const ITEMS_PER_PAGE = 10;
-
     public function __construct($context, $params = [])
     {
         $items = [
@@ -33,7 +31,7 @@ class ArticlesMenuController extends \MiniPaviFwk\controllers\MenuController
         $context['articles'] = [
             'search_type' => 'all',
             'search_criteria' => '',
-            'search_page' => 1,
+            'search_page' => 0,
             'search_results' => [],
             'list_page' => 1,
             'list_results' => [],
@@ -41,7 +39,7 @@ class ArticlesMenuController extends \MiniPaviFwk\controllers\MenuController
             'view_page' => 1,
         ];
 
-        parent::__construct(1, self::ITEMS_PER_PAGE, $items, $context, $params);
+        parent::__construct(1, null, $items, $context, $params);
     }
 
     public function ecran(): string

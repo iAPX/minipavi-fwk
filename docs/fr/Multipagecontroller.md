@@ -3,12 +3,12 @@
 Permet de gérer des contenus multipages, dérive de VideotexController et est utilisé par [MenuController](./Menucontroller.md) pour les menus multipages.
 Il gère la pagination, les touches [SUITE] et [RETOUR], mais vous devez gérer l'affichage soit complet soit partiel pour chaque page.
 
-Sources : [src/controllers/MultipageController](../../src/controllers/MultipageController.php)
+Sources : [src/controllers/MultipageController.php](../../src/controllers/MultipageController.php)
 
 Exemple d'usage : [Affichage d'un article dans le service Démo](../../services/demo/controllers/ArticleViewController.php)
 
 
-## Comment implémenter votre contôleur dérivant de MultipageContrôleur
+## Comment implémenter votre contôleur dérivant de MultipageController
 Il est très important de noter que la page courante doit absolument être stockée dans $this->context, afin de garder le contexte entre les requêtes envoyées par MiniPavi.
 Le constructeur, est appelé au chargement initial de la page, lors du traitement de la réponse utilisateur, pour changer de page, et ainsi de suite.
 
@@ -17,9 +17,9 @@ le array() $params optionnel est aussi utilisable pour cela, il est automatiquem
 
 
 ### Variables $this->multipage_page_num et $this->multipage_nb_pages
-Ces variables sont fournies par le constructeur de votre contrôleur à MultipageController qui en garde une copie que vous pouvez accéder.
+Ces variables sont fournies par le constructeur de votre contrôleur à celui de MultipageController qui en garde une copie à laquelle vous pouvez accéder.
 
-À chaque modification par MultipageController de $this->multipage_page_num, la méthode `multipageSavePageNumber()` que vous devez implémenter sera appelée pour vous permettre de mettre à jour l'entrée correspondante du array() `$this->context` ou `$this->context['params']`
+À chaque modification par MultipageController de $this->multipage_page_num, la méthode `multipageSavePageNumber()` que vous devez implémenter sera appelée pour vous permettre de mettre à jour l'entrée correspondante du array() `$this->context` ou `$this->context['params']`.
 
 
 ### __construct()
@@ -118,9 +118,11 @@ Par exemple, rajoutez la touche [Répétition] aux touches de fonction autorisé
 Mais il y a mieux...
 
 
-### Affichage optionnel de la pagination et des touches de fonctions [SUITE] et/ou [RETOUR]
+### Gestion optionnel de la pagination et des touches de fonctions [SUITE] et/ou [RETOUR]
 Si votre contenu peut être monopage, n'hésitez pas à ne pas afficher de pagination (numéro de page et touches ce fonctions) afin de simplifier l'interface.
 Vous pouvez dans ce cas faire aussi un test dans getCmd() pour ne pas activer les touches [Suite] et [Retour].
+
+Signature : `public function getCmd(): array`
 
 Exemple dans getCmd() :
 ```
@@ -128,6 +130,7 @@ Exemple dans getCmd() :
     {
         // We only accept [SUITE] + [RETOUR] for pagination if needed, [SOMMAIRE] for the menu, and [REPETITION] to redraw.
         $validation = \MiniPaviFwk\helpers\ValidationHelper::SOMMAIRE;
+        $validation |= \MiniPaviFwk\helpers\ValidationHelper::REPETITION;
         if ($this->multipage_nb_pages > 1) {
             $validation |= \MiniPaviFwk\helpers\ValidationHelper::SUITE;
             $validation |= \MiniPaviFwk\helpers\ValidationHelper::RETOUR;
@@ -159,11 +162,11 @@ Exemple:
     {
         $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
 
-        // Clear the displlay zone
+        // Clear the display zone
         $videotex->effaceZone(4, 19);
 
         // Display the content of the current page
-        $videotex->ecritVideotex($this->menuDisplayItemList());
+        $videotex->ecritVideotex($this->displayMyContentForThisPage());
         return $videotex->getOutput;
     }
 ```

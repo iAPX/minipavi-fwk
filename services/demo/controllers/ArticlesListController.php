@@ -145,7 +145,7 @@ class ArticlesListController extends \MiniPaviFwk\controllers\MenuController
     protected function errorFirstPage(): string
     {
         // Overridable to change the error message
-        return 'Première page!';
+        return  'Première page!';
     }
 
     protected function errorlastPage(): string

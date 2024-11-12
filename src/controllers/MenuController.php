@@ -11,14 +11,18 @@ namespace MiniPaviFwk\Controllers;
 
 class MenuController extends MultipageController
 {
-    private int $menu_items_per_page = 1;
+    private ?int $menu_items_per_page = null;
     private array $menu_items = [];
 
-    public function __construct(int $page_num, int $items_per_page, array $items, array $context, array $params = [])
+    public function __construct(int $page_num, ?int $items_per_page, array $items, array $context, array $params = [])
     {
         $this->menu_items_per_page = $items_per_page;
         $this->menu_items = $items;
-        $nb_pages = intdiv(count($items) - 1, $items_per_page) + 1;
+        if ($items_per_page) {
+            $nb_pages = intdiv(count($items) - 1, $this->menu_items_per_page) + 1;
+        } else {
+            $nb_pages = 1;
+        }
         parent::__construct($page_num, $nb_pages, $context, $params);
     }
 
@@ -44,8 +48,16 @@ class MenuController extends MultipageController
         if (count($this->menu_items) > 0) {
             // Ensure display of each item of the current page
             $item_keys = array_keys($this->menu_items);
-            $first_item = ($this->multipage_page_num - 1) * $this->menu_items_per_page;
-            for ($i = 0; $i < $this->menu_items_per_page; $i++) {
+
+            if ($this->menu_items_per_page) {
+                $first_item = ($this->multipage_page_num - 1) * $this->menu_items_per_page;
+                $nb_items = $this->menu_items_per_page;
+            } else {
+                $first_item = 0;
+                $nb_items = count($this->menu_items) + 1;
+            }
+
+            for ($i = 0; $i < $nb_items; $i++) {
                 $item_index = $first_item + $i;
                 if (isset($item_keys[$item_index])) {
                     $item_key = $item_keys[$item_index];
@@ -79,12 +91,12 @@ class MenuController extends MultipageController
     protected function errorFirstPage(): string
     {
         // Overridable to change the error message
-        return 'Première page du menu!';
+        return $this->menu_items_per_page ? 'Première page du menu!' : '';
     }
 
     protected function errorLastPage(): string
     {
         // Overridable to change the error message
-        return 'Dernière page du menu!';
+        return $this->menu_items_per_page ? 'Dernière page du menu!' : '';
     }
 }
