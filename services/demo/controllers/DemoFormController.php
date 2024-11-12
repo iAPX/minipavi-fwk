@@ -10,6 +10,10 @@ use MiniPaviFwk\helpers\FormField;
 
 class DemoFormController extends \MiniPaviFwk\controllers\VideotexController
 {
+    private string $nom = '';
+    private string $prenom = '';
+    private string $cp = '';
+
     public function ecran(): string
     {
         $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
@@ -18,8 +22,8 @@ class DemoFormController extends \MiniPaviFwk\controllers\VideotexController
         ->page("demo-controller")
         ->page("demo-choix-sommaire")
 
-        ->position(4, 1)->ecritUnicode("Nom : ")
-        ->position(5, 1)->ecritUnicode("Prénom : ")
+        ->position(4, 1)->ecritUnicode("Nom*: ")
+        ->position(5, 1)->ecritUnicode("Prénom*: ")
         ->position(6, 1)->ecritUnicode("Code Postal : ")
         ->position(7, 8)->ecritUnicode("Remplir chaque champ puis [SUITE]")
         ->position(8, 23)->ecritUnicode("Finir avec [ENVOI]")
@@ -35,40 +39,43 @@ class DemoFormController extends \MiniPaviFwk\controllers\VideotexController
     {
         // We define the fields
         $fields = [
-            new \MiniPaviFwk\helpers\FormField(4, 7, 34),
-            new \MiniPaviFwk\helpers\FormField(5, 10, 31),
-            new \MiniPaviFwk\helpers\FormField(6, 15, 5),
+            new \MiniPaviFwk\helpers\FormField(4, 7, 34, $this->nom),
+            new \MiniPaviFwk\helpers\FormField(5, 10, 31, $this->prenom),
+            new \MiniPaviFwk\helpers\FormField(6, 15, 5, $this->cp),
         ];
         return \MiniPaviFwk\cmd\InputFormCmd::createMiniPaviCmd(null, $fields, true, ".");
     }
 
-    public function message(string $touche, array $message): ?\MiniPaviFwk\actions\Action
+    public function formulaire(string $touche, string $nom, string $prenom, string $cp): ?\MiniPaviFwk\actions\Action
     {
         if ($touche === 'ENVOI') {
-            if (empty(implode('', $message))) {
-                return new \MiniPaviFwk\actions\Ligne00Action($this, "Formulaire vide");
+            // Nom and Prénom are mandatory (*)
+            if ($nom === '' || $prenom === '') {
+                // Prefill for modification
+                $this->nom = $nom;
+                $this->prenom = $prenom;
+                $this->cp = $cp;
+                return new \MiniPaviFwk\actions\Ligne00Action($this, "Nom et prénom obligatoires");
             }
 
-            // Display the input message as preceding message.
-            $vdt = $this->displayPrecedentForm($message);
+            // Display the form content
+            $vdt = $this->displayPrecedentForm($nom, $prenom, $cp);
             return new \MiniPaviFwk\actions\VideotexOutputAction($this, $vdt);
         } elseif ($touche === 'SOMMAIRE') {
             // Handle [SOMMAIRE] to return to the Sommaire (service menu)
             return new \MiniPaviFwk\actions\PageAction($this->context, 'demo-sommaire');
-        } elseif ($touche === 'REPETITION') {
-            // Display again
-            return new \MiniPaviFwk\actions\RepetitionAction($this);
         }
+        return null;
     }
 
-    private function displayPrecedentForm(array $message): string
+    private function displayPrecedentForm(string $nom, string $prenom, string $cp): string
     {
         $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
         $videotex
         ->effaceLigne00()
         ->position(13, 1)
         ->effaceFinDeLigne()
-        ->ecritUnicode($message[1] . ' ' . $message[0] . ' (' . $message[2] . ')');
+        ->ecritUnicode($prenom . ' ' . $nom . ' (' . $cp . ')');
         return $videotex->getOutput();
     }
 }

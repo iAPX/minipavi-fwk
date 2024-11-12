@@ -134,9 +134,9 @@ $longueur longueur du champ
 $prefill contenu servant à prépopuler le champ, affiché à l'utilisateur et éditable (pratique pour les modifications de données!)
 
 
-Au retour de la réponse utilisateur, la méthode `message(string $touche, array $message)` sera appelée.
+Au retour de la réponse utilisateur, la méthode `formulaire(string $touche, ...)` sera appelée.
 $touche contiendra la touche de fonction utilisée en majuscules, par exemple "ENVOI"
-$message contiendra un array() avec pour chaque entrée la valeur du champ correspondant après édition/saisie
+Les autres paramètres seront alors chacun de type string, un par champ du formulaire.
 
 
 Exemple:
@@ -152,22 +152,15 @@ Exemple:
         return \MiniPaviFwk\cmd\InputFormCmd::createMiniPaviCmd(null, $fields, true, ".");
     }
 
-    public function message(string $touche, array $message): ?\MiniPaviFwk\actions\Action
+    public function formulaire(string $touche, string $nom, string $prenom, string $cp): ?\MiniPaviFwk\actions\Action
     {
         if ($touche === 'ENVOI') {
-            if (empty(implode('', $message))) {
-                return new \MiniPaviFwk\actions\Ligne00Action($this, "Formulaire vide");
-            }
-
-            $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
-            $videotex
-            ->effaceLigne00()
-            ->position(13, 1)
-            ->effaceFinDeLigne()
-            ->ecritUnicode($message[1] . ' ' . $message[0] . ' (' . $message[2] . ')');
-
-            return new \MiniPaviFwk\actions\VideotexOutputAction($this, $videotex->getOutput());
+            $vdt = $this->displayPrecedentForm($nom, $prenom, $cp);
+            return new \MiniPaviFwk\actions\VideotexOutputAction($this, $vdt);
+        } elseif ($touche === 'SOMMAIRE') {
+            return new \MiniPaviFwk\actions\PageAction($this->context, 'demo-sommaire');
         }
+        return null;
     }
 ```
 

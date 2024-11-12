@@ -102,8 +102,13 @@ class VideotexController
 
     public function getMessageAction(array $message, string $touche): ?Action
     {
-        // Handle user Message through message() method
-        $action = $this->message($touche, $message);
+        if (method_exists($this, 'formulaire')) {
+            // if formulaire() is present, use it instead
+            $action = $this->formulaire($touche, ...$message);
+        } else {
+            // Handle user Message through message() method
+            $action = $this->message($touche, $message);
+        }
         if (is_null($action)) {
             // Fallback
             trigger_error("Aucun choix n'a été trouvé", E_USER_WARNING);

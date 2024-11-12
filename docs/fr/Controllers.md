@@ -116,12 +116,33 @@ Reçoit la touche de fonction utilisée dans $touche (en MAJUSCULES) et le messa
 Le comportement de MiniPavi et MiniPaviCli est de fournir une ligne (même vide) par ligne de la zone de saisie du message: si le message fait 4 lignes, $message contiendra 4 entrées, chacune contenant une chaîne éventuellement vide "". [documentation sur les commandes](./Cmds.md)
 
 
-### InputFormCmd, saisie de formulaire multichamps : message()
-Signature: `public function message(string $touche, array $message): ?\MiniPaviFwk\actions\Action`
+### InputFormCmd, saisie de formulaire multichamps : formulaire()
+Signature: `public function message(string $touche, ...): ?\MiniPaviFwk\actions\Action`
 
-Reçoit la touche de fonction utilisée dans $touche (en MAJUSCULES) et les différents champs dans un array comportant une entrée par champ, dans l'ordre de définition via InputFormCmd.
-Le comportement de MiniPavi et MiniPaviCli est de fournir une entrée (même vide) par champ du formulaire: si le formulaire comporte 4 champs, $message contiendra 4 entrées, chacune contenant une chaîne éventuellement vide "". [documentation sur les commandes](./Cmds.md)
+Reçoit la touche de fonction utilisée dans $touche (en MAJUSCULES) et les différents champs chacun dans un paramètre nommé, dans l'ordre de définition via InputFormCmd.
+Le comportement de MiniPavi et MiniPaviCli est de fournir une entrée (même vide) par champ du formulaire. [documentation sur les commandes](./Cmds.md)
 
+
+Exemple pour une saisie de nom, prénom et code_postal:
+```
+    public function formulaire(string $touche, string $nom, string $prenom, string $cp): ?\MiniPaviFwk\actions\Action
+    {
+        if ($touche === 'ENVOI') {
+            // Nom and Prénom are mandatory (*)
+            if ($nom === '' || $prenom === '') {
+                return new \MiniPaviFwk\actions\Ligne00Action($this, "Nom et prénom obligatoires");
+            }
+
+            // Display the form content
+            $vdt = $this->displayPrecedentForm($nom, $prenom, $cp);
+            return new \MiniPaviFwk\actions\VideotexOutputAction($this, $vdt);
+        } elseif ($touche === 'SOMMAIRE') {
+            // Handle [SOMMAIRE] to return to the Sommaire (service menu)
+            return new \MiniPaviFwk\actions\PageAction($this->context, 'demo-sommaire');
+        }
+        return null;
+    }
+```
 
 #### ZoneSaisiecmd, choix simplifié : choix{Saisie}{Touche}()
 Signature : `public function choix{Saisie}{Touche}(): ?\MiniPaviFwk\actions\Action`
