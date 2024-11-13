@@ -81,6 +81,8 @@ class DemoFormatHelperController extends \MiniPaviFwk\controllers\MultipageContr
             )
         );
 
+        $videotex
+        ->position(9, 1)->inversionDebut()->ecritUnicode(" X ")->inversionFin();
         $videotex->ecritVideotex(
             \MiniPaviFwk\helpers\FormatHelper::formatTitle(
                 "Titre sur trois lignes, aligné à gauche, retrait de 4 puis 2 cars et"
