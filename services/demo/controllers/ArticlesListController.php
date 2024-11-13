@@ -107,24 +107,23 @@ class ArticlesListController extends \MiniPaviFwk\controllers\MenuController
         ->inversionDebut()->ecritUnicode(" " . substr(" " . ($choice_number), -2) . " ")->inversionFin();
 
         // If long title, display it in 2 lines, else use second line to display the author
-        if (mb_strlen($article['title']) > 35) {
-            $videotex->ecritVideotex(
-                \MiniPaviFwk\helpers\FormatHelper::formatTitle(
-                    $article['title'],
-                    $ligne,
-                    2,
-                    5,
-                    0,
-                    "magenta"
-                )
-            );
-        } else {
+        // Trick : use substr_count to count the number of lines displayed!
+        $videotex_title = \MiniPaviFwk\helpers\FormatHelper::formatTitle(
+            $article['title'],
+            $ligne,
+            2,
+            5,
+            0,
+            "magenta"
+        );
+        $videotex->ecritVideotex($videotex_title);
+
+        if (substr_count($videotex_title, "\x1F") == 1) {
+            // Title use only 1 line, we could display the author and date on the next line
             $videotex
-            ->couleurTexte('magenta')
-            ->ecritUnicode(' ' . $article['title'])
             ->position($ligne + 1, 6)
             ->ecritUnicode('@' . \MiniPaviFwk\helpers\mb_ucfirst($author_name) . ', le ')
-            ->ecritUnicode(\service\helpers\DataHelper::dateToFrench($article['date']));
+            ->ecritUnicode(\service\helpers\DataHelper::dateToFrench($article['date']));                    
         }
 
         return $videotex->getoutput();

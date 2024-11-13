@@ -3,6 +3,7 @@
 Fourni des services de formatage des données
 [Sources](../../src/helpers/FormatHelper.php)
 
+
 ## Formatage de titres : formatTitle
 Signature :
 ```
@@ -70,3 +71,29 @@ Exemple d'usage dans ecran():
 ```
 
 Voir aussi la démo dur format helper [DemoFormatHelperController](../../services/demo/controllers/DemoFormatHelperController.php)
+
+> [!TIP]
+> Une astuce, vous pouvez connaître à posteriori le nombre de lignes affichées en comptant le nombre de caractères ASCII "\x1F" qui permet le positionnement dans le stream via la fonction PHP substr_count()
+> Le compte indique le nombre de lignes de texte affichées exactement.
+> Notez qu'en Double Hauteur ou Double Taille cela double le nombre de lignes occupées à l'écran du Minitel.
+
+Exemple:
+```
+        $videotex_title = \MiniPaviFwk\helpers\FormatHelper::formatTitle(
+            $article['title'],
+            $ligne,
+            2,
+            5,
+            0,
+            "magenta"
+        );
+        $videotex->ecritVideotex($videotex_title);
+
+        if (substr_count($videotex_title, "\x1F") == 1) {
+            // Title use only 1 line, we could display the author and date on the next line
+            $videotex
+            ->position($ligne + 1, 6)
+            ->ecritUnicode('@' . \MiniPaviFwk\helpers\mb_ucfirst($author_name) . ', le ')
+            ->ecritUnicode(\service\helpers\DataHelper::dateToFrench($article['date']));                    
+        }
+```
