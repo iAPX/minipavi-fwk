@@ -20,7 +20,7 @@ const DEMO_DATA = [
         2 => [
             "author_id" => 2,
             "date" => "2020-01-01",
-            "title" => "2ème article, Lorem Ipsum multipage, blah blah blah...",
+            "title" => "2ème article, Lorem Ipsum multipage, with a long title displayed on  multiple lines.",
             "content" => <<<EOT
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
 Phasellus eu neque varius tellus varius egestas vitae nec enim.

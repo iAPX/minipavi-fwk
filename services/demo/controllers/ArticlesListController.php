@@ -104,12 +104,28 @@ class ArticlesListController extends \MiniPaviFwk\controllers\MenuController
         $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
         $videotex
         ->position($ligne, 1)
-        ->inversionDebut()->ecritUnicode(" " . substr(" " . ($choice_number), -2) . " ")->inversionFin()
-        ->ecritUnicode(' ' . mb_substr($article['title'], 0, 35))
+        ->inversionDebut()->ecritUnicode(" " . substr(" " . ($choice_number), -2) . " ")->inversionFin();
 
-        ->position($ligne + 1, 6)
-        ->ecritUnicode('@' . \MiniPaviFwk\helpers\mb_ucfirst($author_name) . ', le ')
-        ->ecritUnicode(\service\helpers\DataHelper::dateToFrench($article['date']));
+        // If long title, display it in 2 lines, else use second line to display the author
+        if (mb_strlen($article['title']) > 35) {
+            $videotex->ecritVideotex(
+                \MiniPaviFwk\helpers\FormatHelper::formatTitle(
+                    $article['title'],
+                    $ligne,
+                    2,
+                    5,
+                    0,
+                    "magenta"
+                )
+            );
+        } else {
+            $videotex
+            ->couleurTexte('magenta')
+            ->ecritUnicode(' ' . $article['title'])
+            ->position($ligne + 1, 6)
+            ->ecritUnicode('@' . \MiniPaviFwk\helpers\mb_ucfirst($author_name) . ', le ')
+            ->ecritUnicode(\service\helpers\DataHelper::dateToFrench($article['date']));
+        }
 
         return $videotex->getoutput();
     }
