@@ -8,14 +8,19 @@ namespace service\controllers;
 
 class ArticleViewController extends \MiniPaviFwk\controllers\MultipageController
 {
-    private const CODEPOINTS_PER_PAGE = 400;
+    private const LINES_PER_PAGE = 12;
     private array $article = [];
+    private array $formatted_pages = [];
 
     public function __construct(array $context, array $params = [])
     {
         $article_id = $context['articles']['view_id'];
         $this->article = \service\helpers\DataHelper::getArticleById($article_id);
-        $nb_pages = intdiv(mb_strlen($this->article['content']) - 1, self::CODEPOINTS_PER_PAGE) + 1;
+        $this->formatted_pages = \MiniPaviFwk\helpers\FormatHelper::formatMultipageRawText(
+            $this->article['content'],
+            self::LINES_PER_PAGE
+        );
+        $nb_pages = count($this->formatted_pages);
 
         parent::__construct($context['articles']['view_page'], $nb_pages, $context, $params);
     }
@@ -40,7 +45,14 @@ class ArticleViewController extends \MiniPaviFwk\controllers\MultipageController
 
         $videotex
         ->position(3, 1)->ecritUnicode("Article #" . $this->context['articles']['view_id'])
-        ->position(5, 1)->ecritUnicode($this->article['title'])
+        ->ecritVideotex(
+            \MiniPaviFwk\helpers\FormatHelper::formatTitle(
+                $this->article['title'],
+                5,
+                2
+            )
+        )
+
         ->position(7, 1)->effaceFinDeLigne()->couleurFond('bleu')
         ->ecritUnicode(' Par @' . \MiniPaviFwk\helpers\mb_ucfirst($author_name) . ', le ')
         ->ecritUnicode($french_date);
@@ -56,11 +68,14 @@ class ArticleViewController extends \MiniPaviFwk\controllers\MultipageController
 
         $videotex
         ->position(9, 1)->couleurTexte('magenta')
+        ->ecritVideotex($this->formatted_pages[$this->multipage_page_num - 1]);
+        /*
         ->ecritUnicode(mb_substr(
             $this->article['content'],
             self::CODEPOINTS_PER_PAGE * ($this->multipage_page_num - 1),
             self::CODEPOINTS_PER_PAGE
         ));
+        */
 
         return $videotex->getoutput();
     }

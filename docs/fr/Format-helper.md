@@ -3,6 +3,8 @@
 Fourni des services de formatage des données
 [Sources](../../src/helpers/FormatHelper.php)
 
+Les services offerts sont le formatage d'un titre et le formatage d'un texte multipage.
+
 
 ## Formatage de titres : formatTitle
 Signature :
@@ -96,4 +98,48 @@ Exemple:
             ->ecritUnicode('@' . \MiniPaviFwk\helpers\mb_ucfirst($author_name) . ', le ')
             ->ecritUnicode(\service\helpers\DataHelper::dateToFrench($article['date']));                    
         }
+```
+
+
+## Formatage de textes multipages : formatMultipageRawText()
+Signature : `public static function formatMultipageRawText(string $unicodeText, int $hauteur): array`
+
+$unicodeText est le texte Unicode à afficher, LF (\x0A) servant à séparer les lignes désirées, et les paragraphes séparéés par une ligne vide (\x0A\x0A).
+$hauteur est le nombre de ligne à afficher par page
+
+Le retour contient une pleine page de texte en Vidéotex par entrée, autant d'entrées que nécessaire.
+L'affichage n'inclut pas de positionnement ou de couleur, vous devez les préciser avant via `videotex->position()` et `videotex->couleurTexte()`.
+
+Pour afficher une page, utilisez `videotex->ecritVideotex()` car chacune est un flux Vidéotex. 
+
+Exemple utilisant le MultiPageController pour paginer:
+```
+class ArticleViewController extends \MiniPaviFwk\controllers\MultipageController
+{
+    private const LINES_PER_PAGE = 12;
+    private array $article = [];
+    private array $formatted_pages = [];
+
+    public function __construct(array $context, array $params = [])
+    {
+        $article_id = $context['articles']['view_id'];
+        $this->article = \service\helpers\DataHelper::getArticleById(2);
+        $this->formatted_pages = \MiniPaviFwk\helpers\FormatHelper::formatMultipageRawText(
+            $this->article['content'],
+            self::LINES_PER_PAGE
+        );
+        $nb_pages = count($this->formatted_pages);
+
+        parent::__construct($context['articles']['view_page'], $nb_pages, $context, $params);
+    }
+
+    public function ecran(): string
+    {
+        $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
+        $videotex
+        ->page("demo-controller")
+        ->position(5, 1)
+        ->ecritVideotex($this->formatted_pages[$this->multipage_page_num - 1]);
+        return $videotex->getOutput();
+    }
 ```

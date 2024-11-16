@@ -12,7 +12,7 @@ class DemoFormatHelperController extends \MiniPaviFwk\controllers\MultipageContr
 {
     public function __construct(array $context, array $params = [])
     {
-        parent::__construct($context['format_page'], 6, $context, $params);
+        parent::__construct($context['format_page'], 4, $context, $params);
     }
 
     public function multipageSavePageNumber(int $page_num): void
@@ -34,11 +34,8 @@ class DemoFormatHelperController extends \MiniPaviFwk\controllers\MultipageContr
                 break;
             case 2:
             case 3:
-                $videotex->ecritVideotex($this->formatMultipageRawTextExample($this->context['format_page'] - 1));
-                break;
             case 4:
-            case 5:
-                $videotex->ecritVideotex($this->formatHtmlExample($this->context['format_page'] - 3));
+                $videotex->ecritVideotex($this->formatMultipageRawTextExample($this->context['format_page'] - 1));
                 break;
             default:
                 $videotex->position(12, 7)->doubleHauteur()->ecritUnicode("Page intentionnellement vide!");
@@ -138,16 +135,16 @@ class DemoFormatHelperController extends \MiniPaviFwk\controllers\MultipageContr
         $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
         $videotex
         ->position(3, 1)
-        ->ecritUnicode("formatMultipageRawText() $numpage/2");
-        return $videotex->getOutput();
-    }
+        ->ecritUnicode("formatMultipageRawText() $numpage/3");
 
-    private function formatHtmlExample(int $numpage): string
-    {
-        $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
+        $article = \service\helpers\DataHelper::getArticleById(2);
+        $formatted_pages = \MiniPaviFwk\helpers\FormatHelper::formatMultipageRawText($article['content'], 18);
+
         $videotex
-        ->position(3, 1)
-        ->ecritUnicode("formatHtml() $numpage/2");
+        ->position(5, 1)
+        ->couleurTexte("magenta")
+        ->ecritVideotex($formatted_pages[$numpage - 1]);
+
         return $videotex->getOutput();
     }
 }

@@ -123,7 +123,7 @@ class ArticlesListController extends \MiniPaviFwk\controllers\MenuController
             $videotex
             ->position($ligne + 1, 6)
             ->ecritUnicode('@' . \MiniPaviFwk\helpers\mb_ucfirst($author_name) . ', le ')
-            ->ecritUnicode(\service\helpers\DataHelper::dateToFrench($article['date']));                    
+            ->ecritUnicode(\service\helpers\DataHelper::dateToFrench($article['date']));
         }
 
         return $videotex->getoutput();

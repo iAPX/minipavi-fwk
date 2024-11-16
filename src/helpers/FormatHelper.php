@@ -10,6 +10,8 @@
 
 namespace MiniPaviFwk\helpers;
 
+use MiniPavi\MiniPaviCli;
+
 class FormatHelper
 {
     // Text alignment
@@ -46,13 +48,12 @@ class FormatHelper
                 break;
             }
 
-            // Compute the aavailable space
+            // Compute the available space
             $ligne_retrait = !is_null($retraitPremiereLigne) && $ligne_number == 0 ? $retraitPremiereLigne : $retrait;
             $nb_ligne_cars = intdiv(
                 40 - $ligne_retrait - $margeDroite,
                 $attributes & self::ATTRIBUTE_DOUBLE_LARGEUR ? 2 : 1
             );
-            //// $videotex->ecritUnicode($nb_ligne_cars);
 
             $current_ligne = array_shift($words);
             $display_continuation = false;
@@ -60,7 +61,7 @@ class FormatHelper
                 // Try adding a new word
                 $next_word = reset($words);
 
-                if (strlen($current_ligne . ' ' . $next_word) > $nb_ligne_cars) {
+                if (mb_strlen($current_ligne . ' ' . $next_word) > $nb_ligne_cars) {
                     // If we are on the last line, ensure $continuation could be added
                     if ($ligne_number == $nb_texte_lignes - 1 && $continuation !== '') {
                         $current_ligne = mb_substr($current_ligne, 0, $nb_ligne_cars - mb_strlen($continuation));
@@ -116,15 +117,84 @@ class FormatHelper
         return $videotex->getOutput();
     }
 
-    public static function formatMultipageRawText(
-        string $texte,
-        int $ligne,
-        int $hauteur,
-        string $couleur = 'blanc',
-        int $retrait = 0,
-        int $margeDroite = 0,
-        int $alignement = self::ALIGN_LEFT,
-        bool $firstParagraphLetterDoubleTaille = false,
-    ): array {
+    public static function fillTextLines(string $texte, int $largeur = 40): array
+    {
+        // Just in case!
+        if (trim($texte) === '') {
+            return [];
+        }
+
+        // From text to words into lines.
+        $words = explode(' ', trim($texte));
+        $lignes = [];
+        $current_ligne = array_shift($words);
+        foreach ($words as $word) {
+            if (mb_strlen($current_ligne . ' ' . $word) > $largeur) {
+                $lignes[] = $current_ligne;
+                $current_ligne = $word;
+            } else {
+                $current_ligne .= ' ' . $word;
+            }
+        }
+        if ($current_ligne !== '') {
+            $lignes[] = $current_ligne;
+        }
+
+        return $lignes;
+    }
+
+    public static function formatMultipageRawText(string $unicodeText, int $hauteur): array
+    {
+        $paragraphs = explode("\n\n", $unicodeText);
+        $pages = [];
+        $page = [];
+        foreach ($paragraphs as $paragraph) {
+            // Transform the paragraph into a list of lines, respecting LF
+            $output_lines = [];
+            $lines = explode("\n", $paragraph);
+            foreach ($lines as $line) {
+                $output_lines = array_merge($output_lines, self::fillTextLines($line));
+            }
+
+            // Reposition the cursor and make these lines Vidéotex lines
+            foreach ($output_lines as $key => $line) {
+                $line_length = mb_strlen($line);
+                $videotex_line = MiniPaviCli::toG2($line);
+                if ($line_length === 0) {
+                    $output_lines[$key] = chr(10);
+                } elseif ($line_length == 39) {
+                    // PAD is faster
+                    $output_lines[$key] = $videotex_line . ' ';
+                } elseif ($line_length < 40) {
+                    // CRLF to start the next line!
+                    $output_lines[$key] = $videotex_line . chr(13) . chr(10);
+                }
+            }
+
+            // Page skip?
+            if (count($page) > 0 && count($page) + 1 + count($output_lines) > $hauteur) {
+                // Start on next page!
+                $pages[] = implode('', $page);
+                $page = [];
+            } elseif (count($page) > 0) {
+                // Paragraph Separator: Line Feed!
+                $page[] = chr(10);
+            }
+
+            // Adds the lines on one or multiple pages
+            foreach ($output_lines as $output_line) {
+                $page[] = $output_line;
+                if (count($page) >= $hauteur) {
+                    // Next page when filled up
+                    $pages[] = implode('', $page);
+                    $page = [];
+                }
+            }
+        }
+        if (count($page) > 0) {
+            $pages[] = implode('', $page);
+        }
+
+        return $pages;
     }
 }
