@@ -6,6 +6,8 @@
 
 namespace service\controllers;
 
+use MiniPaviFwk\controllers\VideotexController;
+
 class DemoValidationController extends \MiniPaviFwk\controllers\VideotexController
 {
     public function ecran(): string
@@ -36,7 +38,7 @@ class DemoValidationController extends \MiniPaviFwk\controllers\VideotexControll
             | \MiniPaviFwk\helpers\ValidationHelper::ENVOI
             | \MiniPaviFwk\helpers\ValidationHelper::RETOUR
             | \MiniPaviFwk\helpers\ValidationHelper::SOMMAIRE;
-        return ZoneSaisieCmd::createMiniPaviCmd($validation);
+        return \MiniPaviFwk\cmd\ZoneSaisieCmd::createMiniPaviCmd($validation);
     }
 
     public function choix(string $touche, string $saisie): ?\MiniPaviFwk\actions\Action
