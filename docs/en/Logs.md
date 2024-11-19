@@ -1,3 +1,0 @@
-# Logs
-
-Responsability : provides logs
