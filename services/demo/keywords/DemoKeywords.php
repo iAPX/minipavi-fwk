@@ -11,12 +11,6 @@ namespace service\keywords;
 
 class DemoKeywords extends \MiniPaviFwk\Keywords
 {
-    public function validationKeys(): array
-    {
-        trigger_error("\service\keywords\DemoKeywords::validationKeys()");
-        return ['SOMMAIRE'];
-    }
-
     public function choix(string $touche, string $saisie): ?\MiniPaviFwk\actions\Action
     {
         trigger_error("\service\keywords\DemoKeywords::choix(\"$touche\", \"$saisie\")");

@@ -18,17 +18,20 @@
 - [X] MenuController pour gérer les menus, simple page ou multipages
 
 
-## v1.0 - Décembre 2024
-- [ ] phpUnit étendu
+## v1.0 - Novembre 2024
+- [X] phpUnit étendu
+
+
+## v1.1
+- [ ] Revoir VideotexController: séparer ses responsabilités dans une hiérarchie de classes
+- [ ] Helper pour la génération d'images Alphamosaïques
 
 
 ## Futuribles (sans ordre particulier)
 - Gestion de pile pour le retour aux ancêtres en restaurant leur état
-- Helper pour la génération d'images Alphamosaïques
 - Helper pour la génération d'images DRCS
 - Gestion de contenu multi-format (texte + images + ...) et multipages
 - Déploiement Docker
 - Exceptions
 - Minitel logs (façon anciens services)
 - Functional Tests
-- Revoir VideotexController: séparer ses responsabilités dans une hiérarchie de classes

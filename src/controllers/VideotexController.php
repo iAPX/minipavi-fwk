@@ -142,10 +142,4 @@ class VideotexController
         // Overridable in sub-classes
         return $this->keywordHandler->choix($touche, $saisie);
     }
-
-    public function keywordsValidationKeys(): array
-    {
-        // Overridable in sub-classes
-        return $this->keywordHandler->validationKeys();
-    }
 }
