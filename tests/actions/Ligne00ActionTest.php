@@ -1,6 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use MiniPavi\MiniPaviCli;
 use MiniPaviFwk\actions\Ligne00Action;
 use Tests\Mocks\MockController;
 
@@ -14,6 +15,6 @@ class Ligne00ActionTest extends TestCase
         $action = new Ligne00Action($mockController, 'Accentué');
 
         $this->assertEquals($mockController, $action->getController());
-        $this->assertEquals(\MiniPavi\MiniPaviCli::writeLine0('Accentué'), $action->getOutput());
+        $this->assertEquals(MiniPaviCli::writeLine0('Accentué'), $action->getOutput());
     }
 }

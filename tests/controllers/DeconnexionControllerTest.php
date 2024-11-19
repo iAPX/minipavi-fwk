@@ -11,5 +11,8 @@ class DeconnexionControllerTest extends TestCase
         $controller = new DeconnexionController([]);
 
         $this->assertEquals(chr(12) . "*** Ecran() absent. ***", $controller->ecran());
+
+        $cmd = $controller->getCmd();
+        $this->assertEquals('libCnx', $cmd['COMMAND']['name']);
     }
 }

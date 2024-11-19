@@ -1,5 +1,4 @@
 <?php
-require_once "src/helpers/mb_ucfirst.php";
 
 use PHPUnit\Framework\TestCase;
 use MiniPaviFwk\strings;

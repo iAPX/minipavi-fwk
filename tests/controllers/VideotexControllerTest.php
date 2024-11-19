@@ -2,9 +2,8 @@
 
 use PHPUnit\Framework\TestCase;
 use MiniPaviFwk\controllers\VideotexController;
-use MiniPaviFwk\actions\Ligne00Action;
-use MiniPaviFwk\actions\RepetitionAction;
-use Tests\Mocks\MockController;
+use MiniPaviFwk\actions\Ligne00Action, MiniPaviFwk\actions\RepetitionAction;
+use Tests\Mocks\MockController, Tests\Mocks\MockFormController;
 
 class VideotexControllerTest extends TestCase
 {
@@ -14,24 +13,53 @@ class VideotexControllerTest extends TestCase
         $params = ['test param'=>'test param value'];
         $controller = new VideotexController($context, $params);
 
-        $expected_context = ["test"=>"test value", "controller"=>"MiniPaviFwk\\controllers\\VideotexController", "params"=>["test param"=>"test param value"]];
-        $this->assertEquals($expected_context, $controller->getContext());
+        $context = $controller->getContext();
+        $this->assertEquals('test value', $context['test']);
+        $this->assertEquals('test param value', $context['params']['test param']);
+
         $this->assertEquals(chr(12) . "*** Ecran() absent. ***", $controller->ecran());
     }
 
     public function testGetSaisieAction()
     {
-        // Isolated tests as getSaisieAction() is complex and not easily testable
-        $controller = new VideotexController([]);
+        // Repetition; * Repetition; Envoi; 1 Envoi; Suite; * Suite; Sommaire; test + Envoi
+        $controller = new MockController([]);
+
         $action = $controller->getSaisieAction("", "REPETITION");
-        $this->assertEquals(RepetitionAction::class, get_class($action));
+        $this->assertEquals('choixRepetition()', $action->mock_id);
+
+        $action = $controller->getSaisieAction("1", "ENVOI");
+        $this->assertEquals('choix1Envoi()', $action->mock_id);
+
+        $action = $controller->getSaisieAction("*", "SUITE");
+        $this->assertEquals('toucheSuite("*")', $action->mock_id);
+
+        $action = $controller->getSaisieAction("*", "SOMMAIRE");
+        $this->assertEquals('choix("SOMMAIRE", "*")', $action->mock_id);
+
+        $action = $controller->getSaisieAction("*", "RETOUR");
+        $this->assertEquals('nonPropose("RETOUR", "*")', $action->mock_id);
     }
 
     public function testGetMessageAction()
     {
-        // Isolated tests as getSaisieAction() is complex and not easily testable
+        $controller = new MockController([]);
+        $action = $controller->getMessageAction(["l1", "l2", "l3"], "ENVOI");
+        $this->assertEquals('message("ENVOI")', $action->mock_id);
+        $this->assertEquals(["l1", "l2", "l3"], $controller->test_message);
+    }
+
+    public function testFormulaireAction()
+    {
+        $controller = new MockFormController([]);
+        $action = $controller->getMessageAction(["field1", "field2", "field3"], "ENVOI");
+        $this->assertEquals('formulaire("ENVOI")', $action->mock_id);
+    }
+
+    public function testGetCmd()
+    {
         $controller = new VideotexController([]);
-        $action = $controller->getMessageAction([""], "REPETITION");
-        $this->assertEquals(Ligne00Action::class, get_class($action));
+        $cmd = $controller->getCmd();
+        $this->assertEquals('InputTxt', $cmd['COMMAND']['name']);
     }
 }

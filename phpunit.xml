@@ -6,6 +6,9 @@
     <php>
         <const name="SERVICE_DIR" value="services/demo/"/>
         <const name="service\DEFAULT_CONTROLLER" value="Tests\Mocks\MockController"/>
+        <const name="MOCK_SERVICE_CONSTANT" value="mock_service_constant_error"/>
+        <const name="service\MOCK_SERVICE_CONSTANT" value="mock_service_constant_ok"/>
+        <const name="MOCK_GLOBAL_CONSTANT" value="mock_global_constant_ok"/>
     </php>
     <testsuites>
         <testsuite name="Regular tests">

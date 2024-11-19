@@ -9,11 +9,11 @@ class RepetitionActionTest extends TestCase
     public function test()
     {
         $mockController = new MockController([]);
-        $mockController->setEcranTest('Test ecran');
+        $mockController->setEcranTest('Test écran');
 
         $action = new RepetitionAction($mockController);
 
         $this->assertInstanceOf(MockController::class, $action->getController());
-        $this->assertEquals('Test ecran', $action->getOutput());
+        $this->assertEquals('Test écran', $action->getOutput());
     }
 }

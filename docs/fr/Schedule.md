@@ -6,19 +6,29 @@
 - [x] Documentation minimale en Français
 
 
-## v0.9 - Décembre 2024
-- [ ] Support XML via XmlController enlevé (simplification)
-- [ ] Simplification Validation, défaut toutes touches acceptées
-- [ ] BUGFIX: RedirectAction flush Session
-- [ ] Importation XMLint complète
-- [ ] Support des formulaires MiniPaviCli
-- [ ] Documentation étendue
-- [ ] On jette la doc en Anglais
+## v0.9.x - Novembre 2024
+- [X] Support XML via XmlController enlevé (simplification)
+- [X] Simplification Validation, défaut toutes touches acceptées
+- [X] BUGFIX: RedirectAction flush Session
+- [X] Importation XMLint complète
+- [X] Support des formulaires MiniPaviCli
+- [X] Documentation étendue
+- [X] FormatHelper pour le formatage de titres et de textes
+- [X] MultipageController pour gérer les contenus multipage
+- [X] MenuController pour gérer les menus, simple page ou multipages
+
+
+## v1.0 - Décembre 2024
+- [ ] phpUnit étendu
 
 
 ## Futuribles (sans ordre particulier)
-
 - Gestion de pile pour le retour aux ancêtres en restaurant leur état
-- Démo MacBidouille dynamique
-- Helpers de gestion de contenus dynamiques
-- Helpers d'affichage de contenus dynamiques
+- Helper pour la génération d'images Alphamosaïques
+- Helper pour la génération d'images DRCS
+- Gestion de contenu multi-format (texte + images + ...) et multipages
+- Déploiement Docker
+- Exceptions
+- Minitel logs (façon anciens services)
+- Functional Tests
+- Revoir VideotexController: séparer ses responsabilités dans une hiérarchie de classes
