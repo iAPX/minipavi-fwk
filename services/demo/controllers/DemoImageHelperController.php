@@ -26,14 +26,20 @@ class DemoImageHelperController extends \MiniPaviFwk\controllers\MultipageContro
         $videotex
         ->page("demo-controller")
         ->position(3, 31)
-        ->ecritUnicode("Page " . $this->multipage_page_num . "/" . $this->multipage_nb_pages)
-        ->position(4, 1);
+        ->ecritUnicode("Page " . $this->multipage_page_num . "/" . $this->multipage_nb_pages);
 
-        // Output the image
+        // Create the image
         $gdImage = imagecreatefromjpeg(\SERVICE_DIR . '/datas/example' . $this->context['image_page'] . '.jpg');
-        list($videotex_image, $lignes, $colonnes) =
+        list($videotex_image, $lignes, $cols) =
             \MiniPaviFwk\helpers\ImageHelper::imageToAlphamosaic($gdImage, 20, 40);
-        $videotex->ecritVideotex($videotex_image);
+        $videotex->position(3, 1)->ecritUnicode("$lignes lignes x $cols cols");
+
+        // Center the image for output!
+        $ligne = 4 + floor((20 - $lignes) / 2.0);
+        $col = 1 + floor((40 - $cols) / 2.0);
+        $videotex
+        ->position($ligne, $col)
+        ->ecritVideotex($videotex_image);
 
         $videotex->position(24, 8)->inversionDebut()->ecritUnicode(" SUITE | RETOUR | SOMMAIRE ")->inversionFin();
         return $videotex->getOutput();

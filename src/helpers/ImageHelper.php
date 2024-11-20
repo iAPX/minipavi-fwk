@@ -13,8 +13,14 @@ use MiniPaviFwk\helpers\VideotexHelper;
 
 class ImageHelper
 {
-    public static function imageToAlphamosaic(\GDImage $image, int $lignes, int $cols): array
-    {
+    public static function imageToAlphamosaic(
+        \GDImage $image,
+        int $lignes,
+        int $cols,
+        bool $relative = true,
+        ?int $startLigne = null,
+        ?int $startCol = null
+    ): array {
         $width = imagesx($image);
         $height = imagesy($image);
         $videotex = new VideotexHelper();
@@ -24,41 +30,89 @@ class ImageHelper
         imagefilter($image, IMG_FILTER_GRAYSCALE);
 
         // Scale it
-        $newHeight = $lignes * 3;
-        $newWidth = $cols * 2;
+        $imageRatio = $width / $height;
+        $targetHeight = $lignes * 3;
+        $targetWidth = $cols * 2;
+        $targetRatio = $targetWidth / $targetHeight;
+        if ($targetRatio > $imageRatio) {
+            $newHeight = $targetHeight;
+            $newWidth = ceil($targetHeight * $imageRatio);
+        } else {
+            $newWidth = $targetWidth;
+            $newHeight = ceil($targetWidth / $imageRatio);
+        }
+
+        // return [$imageRatio . "/" . $targetRatio . "/" . $newWidth . "x" . $newHeight, 0, 0];
         $resizedImage = imagecreatetruecolor($newWidth, $newHeight);
         imagecopyresampled($resizedImage, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
 
-        $output = self::imageToVideotex($resizedImage);
+        $output = self::imageToVideotex($resizedImage, $relative, $startLigne, $startCol);
 
         // Free memory
         imagedestroy($image);
         imagedestroy($resizedImage);
-        
-        return [$output, $lignes, $cols];
+
+        // On évite les doublons, généralement 0 ou 63 (vide ou plein).
+        $output = self::repeatCars($output);
+
+        return [$output, ceil($newHeight / 3.0), ceil($newWidth / 2.0)];
     }
 
-    private static function imageToVideotex(\GDImage $image): string
-    {
+    private static function imageToVideotex(
+        \GDImage $image,
+        bool $relative = true,
+        ?int $startLigne = null,
+        ?int $startCol = null
+    ): string {
         $output = VDT_G1;
+        //// $output = "";
         $width = ceil(imagesx($image) / 2);
         $height = ceil(imagesy($image) / 3);
 
         $textColour = 7;
         $backgroundColour = 0;
 
-        for($ligne = 0; $ligne < $height; $ligne++) {
-            for($col = 0; $col < $width; $col++) {
-                list($car, $textColour, $backgroundColour)= self::imagePartToMosaic($image, $col * 2, $ligne *3, $textColour, $backgroundColour);
+        for ($ligne = 0; $ligne < $height; $ligne++) {
+            if (!$relative) {
+                // We position and reset our colours
+                $output .= MiniPaviCli::setPos($startCol, $startLigne + $ligne);
+                $textColour = 7;
+                $backgroundColour = 0;
+            }
+            for ($col = 0; $col < $width; $col++) {
+                list($car, $textColour, $backgroundColour) = self::imagePartToMosaic(
+                    $image,
+                    $col * 2,
+                    $ligne * 3,
+                    $textColour,
+                    $backgroundColour
+                );
                 $output .= $car;
+            }
+            if ($relative && $width < 40 && $ligne < $height - 1) {
+                // Fill up to 40 cars, with BLACK alphamosaic spaces, except for last line
+                if ($backgroundColour == 0) {
+                    $output .= str_repeat("\x20", 40 - $width);
+                } elseif ($textColour == 0) {
+                    $output .= str_repeat("\x5F", 40 - $width);
+                } else {
+                    // Set the background colour and go
+                    $output .= "\x1b\x50" . str_repeat(" ", 40 - $width);
+                    $backgroundColour = 0;
+                }
             }
         }
 
         return $output;
     }
 
-    private static function imagePartToMosaic(\GDImage $image, int $x, int $y, int $oldTextColour, int $oldBackgroundColour) : array
-    {
+    private static function imagePartToMosaic(
+        \GDImage $image,
+        int $x,
+        int $y,
+        int $oldTextColour,
+        int $oldBackgroundColour
+    ): array {
         // To transport the colour informations
         $setTextColour = $oldTextColour;
         $setBackgroundColour = $oldBackgroundColour;
@@ -71,8 +125,7 @@ class ImageHelper
             }
         }
 
-        // 2-Median of the values
-        // @TODO need to regroup values first, through array_keys ceil($values[]) ;) and use of a true median 4, 4, 4, 4, 4, 0 : median is not 4, it's 2!
+        // 2-Median of the values, @TODO better it by creating 2 groups
         sort($values, SORT_NUMERIC);
         $median = ($values[2] + $values[3]) / 2.0;
 
@@ -94,41 +147,125 @@ class ImageHelper
         }
 
         // 4-Set text and background colours, optimized!
-        // $colours = "\x1B" . chr(64 + self::gammaCorrection($high_value)) . "\x1B" . chr(80 + self::gammaCorrection($low_value));
         $newTextColour = self::gammaCorrection($high_value);
         $newBackgroundColour = self::gammaCorrection($low_value);
-        if ($newTextColour === $oldBackgroundColour || $newBackgroundColour === $OldTextColour) {
-            // At least one colour we won't set!
-            $tmp = $newTextColour;
-            $newTextColour = $newBackgroundColour;
-            $newBackgroundColour = $tmp;
-            $character = $character ^ 63;  // We invert it ;)
-        }
+
+        list($coloredChar,$setTextColour, $setBackgroundColour) = self::optimizedColourChar(
+            $character,
+            $newTextColour,
+            $newBackgroundColour,
+            $oldTextColour,
+            $oldBackgroundColour
+        );
+
+        return [$coloredChar, $setTextColour, $setBackgroundColour];
+    }
+
+    private static function optimizedColourChar(
+        int $value,
+        int $newTextColour,
+        int $newBackgroundColour,
+        int $oldTextColour,
+        int $oldBackgroundColour
+    ): array {
         $colours = '';
 
-        if ($newTextColour !== $oldTextColour && $value !== 0) {
-            $colours .= "\x1B" . chr(64 + $newTextColour);
-            $setTextColour = $newTextColour;
+        $setTextColour = false;
+        $setBackgroundColour = false;
+
+
+        if ($newTextColour === $newBackgroundColour) {
+            if ($newTextColour === $oldTextColour) {
+                // Use old text colour if correct
+                $value = 63;
+            } else {
+                // Use background colour and later optimizations on value 0.
+                $value = 0;
+            }
+        }
+        if ($value === 0) {
+            // All background colour
+            if ($newBackgroundColour === $OldTextColour) {
+                $value === 63;
+            } elseif ($newBackgroundColour !== $oldBackgroundColour) {
+                $colours = "\x1B" . chr(80 + $newBackgroundColour);
+                $setBackgroundColour = $newBackgroundColour;
+            }
+        } elseif ($value === 63) {
+            // All text (foreground) colour
+            if ($newTextColour === $OldBackgroundColour) {
+                $value === 0;
+            } elseif ($newTextColour !== $oldTextColour) {
+                $colours = "\x1B" . chr(64 + $newTextColour);
+                $setTextColour = $newTextColour;
+            }
+        } else {
+            // A mix of both background and text colours
+            if ($newTextColour === $oldBackgroundColour || $newBackgroundColour === $OldTextColour) {
+                // At least one colour we won't set!
+                $tmp = $newTextColour;
+                $newTextColour = $newBackgroundColour;
+                $newBackgroundColour = $tmp;
+                $value = $value ^ 63;  // We invert it ;)
+            }
+            if ($newTextColour !== $oldTextColour && $value !== 0) {
+                $colours .= "\x1B" . chr(64 + $newTextColour);
+                $setTextColour = $newTextColour;
+            }
+
+            if ($newBackgroundColour !== $oldBackgroundColour && $value !== 63) {
+                $colours .= "\x1B" . chr(80 + $newBackgroundColour);
+                $setBackgroundColour = $newBackgroundColour;
+            }
         }
 
-        if ($newBackgroundColour !== $oldBackgroundColour && $value !== 63) {
-            $colours .= "\x1B" . chr(80 + $newBackgroundColour);
-            $setBackgroundColour = $newBackgroundColour;
-        }
-
-        return [$colours . chr(32 + $character), $setTextColour, $setBackgroundColour];
+        return [
+            $colours . chr(32 + $value),
+            $setTextColour !== false ? $setTextColour : $oldTextColour,
+            $setBackgroundColour !== false ? $setBackgroundColour : $oldBackgroundColour
+        ];
     }
 
     private static function gammaCorrection(float $luminance): int
     {
-        // This is the real trick, you have to do a brutal gamma correction! That will do the job!
+        // This is the real trick, you have to do a violent gamma correction! That will do the job!
         $key_values = [6.18, 6.70, 7.10, 7.40, 7.62, 7.78, 7.90, 8.0];
         foreach ($key_values as $key => $value) {
             if ($luminance <= $value) {
                 return $key;
             }
         }
+        // Fallback
         return 7;
     }
 
+    private static function repeatCars(string $output): string
+    {
+        $cars = ["\x20", "\x5F"];
+        foreach ($cars as $car) {
+            while (($p = strpos($output, $car . $car . $car . $car)) !== false) {
+                // take the length of the pattern
+                $length = 0;
+                while (substr($output, $p + $length, 1) === $car) {
+                    $length++;
+                }
+
+                // First character
+                $repeated = $car;
+                $repetitions = $length - 1;
+
+                while ($repetitions >= 63) {
+                    $repeated .= VDT_REP . chr(64 + 63);
+                    $repetitions -= 63;
+                }
+                if ($repetitions > 1) {
+                    $repeated .= VDT_REP . chr(64 + $repetitions);
+                } elseif ($repetitions === 1) {
+                    $repeated .= $car;
+                }
+                $output = substr($output, 0, $p) . $repeated . substr($output, $p + $length);
+            }
+        }
+        return $output;
+    }
 }
