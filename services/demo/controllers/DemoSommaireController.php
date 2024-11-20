@@ -54,10 +54,13 @@ class DemoSommaireController extends \MiniPaviFwk\controllers\VideotexController
         ->ecritUnicode(" Démo articles dynamique")
 
         ->position(14, 1)->inversionDebut()->ecritUnicode('11')->inversionFin()
-        ->ecritUnicode(" Démo FormatHelper");
+        ->ecritUnicode(" Démo FormatHelper")
+
+        ->position(15, 1)->inversionDebut()->ecritUnicode('12')->inversionFin()
+        ->ecritUnicode(" Démo ImageHelper alphamosaïque");
 
         // Dynamic Menu of allowed services
-        $ligne = 16;
+        $ligne = 17;
         $choix = 21;
         foreach (\ALLOWED_SERVICES as $service) {
             if ($service !== 'demo') {
@@ -138,6 +141,12 @@ class DemoSommaireController extends \MiniPaviFwk\controllers\VideotexController
     {
         $this->context['format_page'] = 1;
         return new \MiniPaviFwk\actions\PageAction($this->context, 'demo-format-helper');
+    }
+
+    public function choix12Envoi(): ?\MiniPaviFwk\actions\Action
+    {
+        $this->context['image_page'] = 1;
+        return new \MiniPaviFwk\actions\PageAction($this->context, 'demo-image-helper');
     }
 
     public function choix(string $touche, string $saisie): ?\MiniPaviFwk\actions\Action

@@ -23,8 +23,8 @@
 
 
 ## v1.1
-- [ ] Revoir VideotexController: séparer ses responsabilités dans une hiérarchie de classes
-- [ ] Helper pour la génération d'images Alphamosaïques
+- [X] Revoir VideotexController: séparer ses responsabilités dans une hiérarchie de classes
+- [X] Helper pour la génération d'images Alphamosaïques
 
 
 ## Futuribles (sans ordre particulier)
