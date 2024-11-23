@@ -48,7 +48,7 @@ Signature : `public function ecran(): string`
 La méthode ecran() renvoie du texte encodé en Vidéotex à l'entrée sur une nouvelle page de l'arbo.
 Je recommande d'utiliser le [Helper Vidéotex](./Videotex-helper.md) pour construire la sortie.
 
-Vous pouvez aussi profiter des capacités de formatage du [Helper Formatage](./Format-helper.md).
+Vous pouvez aussi profiter des capacités de formatage du [Helper Formatage](./Format-helper.md), ainsi que du Helper de conversion d'images JPEG ou PNG [Helper Image](./Image-helper.md)
 
 L'usage le plus courant sera d'afficher une [Page Vidéotex](./Videotex-files.md) que vous aurez mis dans le sous-répertoire vdt, voir [l'organisation des fichiers](./Service-files-organization.md).
 Un exemple ici pour afficher la page du fichier vdt/accueil.vdt:

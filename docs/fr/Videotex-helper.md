@@ -8,7 +8,8 @@ Source : [src/helpers/VideotexHelper.php](../../src/helpers/VideotexHelper.php)
 Je recommande chaudement la lecture des [STUM 1b, documentation de développement pour le Minitel](https://www.minipavi.fr/stum1b.pdf) (PDF) pour dépasser le stade d'affichage du texte, aborder l'alphamosaïque, mais aussi comprendre le fonctionnement du souligné et de la couleur de fond en mode texte.
 Vous aurez quelques informations pour vous aider dans cette page, mais qui ne remplacent en rien la lecture assidue de ce pavé de référence.
 
-Vous pouvez aussi profiter des capacités de formatage du [Helper Formatage](./Format-helper.md) en liaison avec `\MiniPaviFwk\helpers\VideotexController->ecritVideotex()`.
+Vous pouvez aussi profiter des capacités de formatage de texte [Helper Formatage](./Format-helper.md) en liaison avec `\MiniPaviFwk\helpers\VideotexController->ecritVideotex()`.
+Il existe aussi un helper pour les images [Helper Images](./Image-helper.md) assurant la conversion de JPEG ou PNG en semi-graphique Alphamosaïque.
 
 ## Usage
 

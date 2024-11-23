@@ -1,30 +1,31 @@
 # Plan de développement
 
-## v0.8 - Novembre 2024
-- [x] Demochat plus dynamique (notifications)
-- [x] Importation de projets XMLint
-- [x] Documentation minimale en Français
 
-
-## v0.9.x - Novembre 2024
-- [X] Support XML via XmlController enlevé (simplification)
-- [X] Simplification Validation, défaut toutes touches acceptées
-- [X] BUGFIX: RedirectAction flush Session
-- [X] Importation XMLint complète
-- [X] Support des formulaires MiniPaviCli
-- [X] Documentation étendue
-- [X] FormatHelper pour le formatage de titres et de textes
-- [X] MultipageController pour gérer les contenus multipage
-- [X] MenuController pour gérer les menus, simple page ou multipages
+## v1.1 - Décembre 2024
+- [X] Revoir VideotexController: séparer ses responsabilités dans une hiérarchie de classes [sources](../../src/controllers/hierarchy/)
+- [ ] Helper pour la génération d'images en Alphamosaïques [Image Helper](./Image-helper.md)
 
 
 ## v1.0 - Novembre 2024
-- [X] phpUnit étendu
+- [X] phpUnit étendu [sources](../../tests/)
 
 
-## v1.1
-- [X] Revoir VideotexController: séparer ses responsabilités dans une hiérarchie de classes
-- [X] Helper pour la génération d'images Alphamosaïques
+## v0.9 - Novembre 2024
+- [X] Support XML via XmlController enlevé (simplification)
+- [X] Simplification Validation, défaut toutes touches acceptées [validations](./Validation-helper.md) et [Contrôleurs](./Controllers.md)
+- [X] BUGFIX: RedirectAction flush Session [source](../../src/actions/RedirectAction.php)
+- [X] Importation XMLint complète [XMLint Import](./XMLint-transition.md)
+- [X] Support des formulaires MiniPaviCli via formulaire() [Contrôleurs](./Controllers.md)
+- [X] Documentation étendue [Documentation](./README.md)
+- [X] FormatHelper pour le formatage de titres et de textes [Format Helper](./Format-helper.md)
+- [X] MultipageController pour gérer les contenus multipage [Multipage Controller](./Multipagecontroller.md)
+- [X] MenuController pour gérer les menus, simple page ou multipages [Menu Controller](./Menucontroller.md)
+
+
+## v0.8 - Novembre 2024
+- [x] Demochat plus dynamique (notifications) [sources](../../services/demochat/controllers/)
+- [x] Importation de projets XMLint [XMLint Import](./XMLint-transition.md)
+- [x] Documentation minimale en Français [documentation](./README.md)
 
 
 ## Futuribles (sans ordre particulier)
@@ -35,3 +36,4 @@
 - Exceptions
 - Minitel logs (façon anciens services)
 - Functional Tests
+- Animations de texte
