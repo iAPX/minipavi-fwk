@@ -69,14 +69,14 @@ class ImageHelper
         $width = ceil(imagesx($image) / 2);
         $height = ceil(imagesy($image) / 3);
 
-        // @TODO Set values correctly (-1)
+        // We don't know the actual colour attributes
         $textColour = -1;
         $backgroundColour = -1;
 
         for ($ligne = 0; $ligne < $height; $ligne++) {
             if (!$relative) {
                 // We position and reset our colours
-                $output .= MiniPaviCli::setPos($startCol, $startLigne + $ligne);
+                $output .= MiniPaviCli::setPos($startCol, $startLigne + $ligne) . VDT_G1;
                 $textColour = 7;
                 $backgroundColour = 0;
             }
