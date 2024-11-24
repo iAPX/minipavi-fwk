@@ -69,8 +69,9 @@ class ImageHelper
         $width = ceil(imagesx($image) / 2);
         $height = ceil(imagesy($image) / 3);
 
-        $textColour = 7;
-        $backgroundColour = 0;
+        // @TODO Set values correctly (-1)
+        $textColour = -1;
+        $backgroundColour = -1;
 
         for ($ligne = 0; $ligne < $height; $ligne++) {
             if (!$relative) {
@@ -91,15 +92,12 @@ class ImageHelper
             }
             if ($relative && $width < 40 && $ligne < $height - 1) {
                 // Fill up to 40 cars, with BLACK alphamosaic spaces, except for last line
-                if ($backgroundColour == 0) {
-                    $output .= str_repeat("\x20", 40 - $width);
-                } elseif ($textColour == 0) {
-                    $output .= str_repeat("\x5F", 40 - $width);
-                } else {
-                    // Set the background colour and go
-                    $output .= "\x1b\x50" . str_repeat(" ", 40 - $width);
+                if ($backgroundColour !== 0) {
+                    // Background should always be 0 for the space to be exploitable in text mode
+                    $output .= "\x1b\x50";
                     $backgroundColour = 0;
                 }
+                $output .= str_repeat(" ", 40 - $width);
             }
         }
 
@@ -173,7 +171,6 @@ class ImageHelper
         $setTextColour = false;
         $setBackgroundColour = false;
 
-
         if ($newTextColour === $newBackgroundColour) {
             if ($newTextColour === $oldTextColour) {
                 // Use old text colour if correct
@@ -228,11 +225,14 @@ class ImageHelper
 
     private static function gammaCorrection(float $luminance): int
     {
+        // Because luminances are not linearly represented by colours 0 .. 7
+        $luminances = [0, 4, 1 , 5, 2, 6, 3, 7];
+
         // This is the real trick, you have to do a violent gamma correction! That will do the job!
         $key_values = [6.18, 6.70, 7.10, 7.40, 7.62, 7.78, 7.90, 8.0];
         foreach ($key_values as $key => $value) {
             if ($luminance <= $value) {
-                return $key;
+                return $luminances[$key];
             }
         }
         // Fallback

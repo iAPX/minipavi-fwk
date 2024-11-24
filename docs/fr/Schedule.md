@@ -31,7 +31,7 @@
 ## Futuribles (sans ordre particulier)
 - Gestion de pile pour le retour aux ancêtres en restaurant leur état
 - Helper pour la génération d'images DRCS
-- Gestion de contenu multi-format (texte + images + ...) et multipages
+- Gestion de contenus multi-formats (texte + images + ...) et multipages
 - Déploiement Docker
 - Exceptions
 - Minitel logs (façon anciens services)
