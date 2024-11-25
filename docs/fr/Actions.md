@@ -7,14 +7,14 @@ Répertoire source : [src/actions/](../../src/actions/)
 
 
 ## Cycle de vie
-Les Actions sont renvoyées par les contrôleurs lors d'une interaction utilisateur, pour envoyer sur un autre contrôleur/une autre page de l'arborescence, afficher un messsage d'erreur, aller sur un autre service intégré, déconnecter l'utilisateur, etc.
-Dans le cycle de vie du contrôleur l'action est renvoyée à la fin, en même temps que la Commande.
+Les Actions sont renvoyées par les contrôleurs lors d'une interaction utilisateur, pour envoyer sur un autre contrôleur/une autre page de l'arborescence, afficher un messsage d'erreur, aller sur un autre service intégré, déconnecter l'utilisateur, etc.<br/>
+Dans le cycle de vie du contrôleur l'action est renvoyée à la fin, en même temps que la Commande.<br/>
 L'action est destinée à MiniPaviFwk pour savoir quelles actions réaliser, la commande est renvoyée à MiniPavi via MiniPaviCli.
 
-Les méthodes toucheXXX(), choixXXXXYYY(), choix() pour les saisie en-ligne et message() pour les messages multilignes renvoient toutes par une Action ou un null.
+Les méthodes toucheXXX(), choixXXXXYYY(), choix() pour les saisie en-ligne et message() pour les messages multilignes renvoient toutes par une Action ou un null.<br/>
 Voir [la documentation des contrôleurs](./Controllers.md)
 
-Lorsque aucune Action n'a été retournée par le ou les méthodes correspondant à la saisie de l'utilisateur, la méthode nonPropose() est alors appelée, et dans le cas de VideotexController elle renvoie un message d'erreur en ligne 00.
+Lorsque aucune Action n'a été retournée par le ou les méthodes correspondant à la saisie de l'utilisateur, la méthode nonPropose() est alors appelée, et dans le cas de VideotexController elle renvoie un message d'erreur en ligne 00.<br/>
 Vous pouvez aussi surcharger cette méthode dans votre contrôleur pour afficher un autre messsage d'erreur.
 
 
@@ -45,12 +45,12 @@ Lance le contrôleur correspondant: soit via le nom du contrôleur lui-même, so
 
 Vous pouvez directement utiliser le nom du contrôleur, par exemple `"DemoAccueil"` pour le contrôleur DemoAccueilController.
 
-Vous pouvez alternativement utiliser un nom de page, chaque partie séparée par un tiret '-' est converti via mb_ucfirst() pour obtenir un nom de contrôleur en CamelCase. On y ajoute "Controller" à la fin. `"demo-accueil"` sera alors là aussi traduit en DemoAccueilController.
+Vous pouvez alternativement utiliser un nom de page, chaque partie séparée par un tiret '-' est converti via mb_ucfirst() pour obtenir un nom de contrôleur en CamelCase. On y ajoute "Controller" à la fin. `"demo-accueil"` sera alors là aussi traduit en DemoAccueilController.<br/>
 Si une partie du nom ne commence pas par un caractère alphabétique [a .. z], un underscore est utilisé pour séparer les parties.
 
-"accueil" -> AcccueilController
-"sommaire-AUTEURS" -> SommaireAuteursController
-"accueil-2b" -> Accueil_2bController
+"accueil" -> AcccueilController<br/>
+"sommaire-AUTEURS" -> SommaireAuteursController<br/>
+"accueil-2b" -> Accueil_2bController<br/>
 
 Exemple de code, pour aller sur le contrôleur DemoSommaireController:
 ```
@@ -66,12 +66,10 @@ Signature : `new \MiniPaviFwk\actions\ControllerAction(string $newControllerClas
 
 Source : [src/actions/ControllerAction.php](../../src/actions/ControllerAction.php)
 
-$newControllerClassName est le nom du contrôleur que l'on veut voir s'exécuter en réponse à une interaction utilisateur.
-On l'exprime souvent sous la forme `\service\controllers\{controller}::class` pour éviter une constante "magique".
-
-$context est le contexte courant, soit $this->context depuis le contrôleur qui l'instancie.
-
-$params sont des paramètres optionnels envoyés au constructeur du nouveau contrôleur.
+$newControllerClassName est le nom du contrôleur que l'on veut voir s'exécuter en réponse à une interaction utilisateur.<br/>
+On l'exprime souvent sous la forme `\service\controllers\{controller}::class` pour éviter une constante "magique".<br/>
+$context est le contexte courant, soit $this->context depuis le contrôleur qui l'instancie.<br/>
+$params sont des paramètres optionnels envoyés au constructeur du nouveau contrôleur.<br/>
 
 Exemple de code, sur appui sur [Sommaire], quelque-soit la saisie, envoie sur ListeControlller:
 ```
@@ -87,8 +85,7 @@ Signature : `\MiniPaviFwk\actions\Ligne00Action($this, string $texte)`
 
 Source : [src/actions/Ligne00Action.php](../../src/actions/Ligne00Action.php)
 
-$texte le texte unicode à afficher.
-
+$texte le texte unicode à afficher.<br/>
 Affiche le texte Unicode en ligne 00, et reste sur ce contrôleur. Sauf si vous êtes joueur ;)
 
 Exemple de code, affiche un message d'erreur en ligne00 si aucun choix n'a été trouvé:
@@ -107,7 +104,7 @@ Signature : `new \MiniPaviFwk\actions\RepetitionAction($this)`
 
 Source : [src/actions/RepetitionAction](../../src/actions/RepetitionAction.php)
 
-Réaffiche la page courante en restant sur le même contrôleur. Sauf si vous êtes joueurs ;)
+Réaffiche la page courante en restant sur le même contrôleur. Sauf si vous êtes joueurs ;)<br/>
 Notez que par défaut VidéotexController supporte l'appui sur la touche de fonction [Répétition] pour assurer ce réaffichage en utilisant cette même action.
 
 Exemple de code, répétant la page courante sur appui sur la touche [Répétition]:
@@ -142,7 +139,7 @@ Source : [src/actions/SwitchServiceAction](../../src/actions/SwitchServiceAction
 
 $newServiceName doit contenir le nom d'un service local qui est autorisé dans [services/global-config.php](../../services/global-config.php), voir à ce sujet la [documentation sur la configuration](./Configurations.md).
 
-$videotexOutput contient optionnellement un text encodé en Vidéotex qui sera affiché avant la bascule sur le nouveau service.
+$videotexOutput contient optionnellement un text encodé en Vidéotex qui sera affiché avant la bascule sur le nouveau service.<br/>
 $waitSeconds permet d'ajouter une attente (en secondes) entre l'affichage du texte et la bascule vers le nouveau service, il n'est utilisé que si $output n'est pas vide. Vous avez le droit de tricher.
 
 Exemple de code, envoi l'usager sur le service interne MacBidouille sur appui de 8 + [Envoi], avec affichage d'un message et 2 secondes d'attente:
@@ -182,7 +179,7 @@ Similaire à SwitchServiceAction qui redirige sur un service interne, celui-ci r
 
 $url contient l'URL du services vers lequel l'usager sera redirigé. Cela ne peut être l'URL d'un service interne.
 
-$videotexOutput contient optionnellement un text encodé en Vidéotex qui sera affiché avant la bascule sur le nouveau service.
+$videotexOutput contient optionnellement un text encodé en Vidéotex qui sera affiché avant la bascule sur le nouveau service.<br/>
 $waitSeconds permet d'ajouter une attente (en secondes) entre l'affichage du texte et la bascule vers le nouveau service, il n'est utilisé que si $output n'est pas vide. Vous avez le droit de tricher.
 
 Exemple de code, envoi l'usager sur le service Minitel https://minitel.example.com sur appui de 8 + [Envoi], avec affichage d'un message et 2 secondes d'attente:

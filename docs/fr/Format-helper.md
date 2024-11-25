@@ -1,6 +1,6 @@
 # Helper de formatage
 
-Fourni des services de formatage des données
+Fourni des services de formatage des données.<br/>
 [Sources](../../src/helpers/FormatHelper.php)
 
 Les services offerts sont le formatage d'un titre et le formatage d'un texte multipage.
@@ -39,18 +39,18 @@ Constantes:
     public const ATTRIBUTE_INVERSION = 4;
 ```
 
-Renvoie un chaîne contenant un flux Vidéotex utilisable dans `$videotex->ecritVideotex()`.
-$titre votre titre
-$ligne la première ligne d'affichagge du texte. Attention, si votre texte est en Double Hauteur ou Double Taille, cette ligne doit être celle de la base de la première ligne du texte, le haut des caractères étant affichés sur la ligne précédente!
-$nb_texte_lignes nombre de lignes de textes autorisées, différent du nombre de lignes à l'écran si vous utilisez Double Hauteur ou Double Taille, alors le double.
-$retrait nombre de caractères de retrait à gauche, 0 par défaut
-$margeDroite nombre de caractères de marge à droite, 0 par défaut
-$couleur la couleur du texte, 'blanc' par défaut
-$continuation chaîne de continuation lorsque le texte est trop long, est affiché alors sur la dernière ligne du titre à la fin de celui-ci.
-$couleurContinuation couleur de la chaîne de continuation, 'blanc' par défaut
-$alignment une des constantes, alignement à gauche (au retrait), alignement à droite (à la marge droite) ou centrée entre ces deux limites
-$attributes un mask définissant la taille, comme \MiniPaviFwk\helpers\FormatHelper::ATTRIBUTE_DOUBLE_TAILLE, et l'inversion vidéo
-$retraitPremiereLigne permet de créer un retrait à gauche différent pour la première ligne, par exemple pour afficher un numéro d'option dans un menu
+Renvoie un chaîne contenant un flux Vidéotex utilisable dans `$videotex->ecritVideotex()`.<br/>
+$titre votre titre.<br/>
+$ligne la première ligne d'affichagge du texte. Attention, si votre texte est en Double Hauteur ou Double Taille, cette ligne doit être celle de la base de la première ligne du texte, le haut des caractères étant affichés sur la ligne précédente!<br/>
+$nb_texte_lignes nombre de lignes de textes autorisées, différent du nombre de lignes à l'écran si vous utilisez Double Hauteur ou Double Taille, alors le double.<br/>
+$retrait nombre de caractères de retrait à gauche, 0 par défaut.<br/>
+$margeDroite nombre de caractères de marge à droite, 0 par défaut.<br/>
+$couleur la couleur du texte, 'blanc' par défaut.<br/>
+$continuation chaîne de continuation lorsque le texte est trop long, est affiché alors sur la dernière ligne du titre à la fin de celui-ci.<br/>
+$couleurContinuation couleur de la chaîne de continuation, 'blanc' par défaut.<br/>
+$alignment une des constantes, alignement à gauche (au retrait), alignement à droite (à la marge droite) ou centrée entre ces deux limites.<br/>
+$attributes un mask définissant la taille, comme \MiniPaviFwk\helpers\FormatHelper::ATTRIBUTE_DOUBLE_TAILLE, et l'inversion vidéo.<br/>
+$retraitPremiereLigne permet de créer un retrait à gauche différent pour la première ligne, par exemple pour afficher un numéro d'option dans un menu.<br/>
 
 
 Exemple d'usage dans ecran():
@@ -75,8 +75,8 @@ Exemple d'usage dans ecran():
 Voir aussi la démo dur format helper [DemoFormatHelperController](../../services/demo/controllers/DemoFormatHelperController.php)
 
 > [!TIP]
-> Une astuce, vous pouvez connaître à posteriori le nombre de lignes affichées en comptant le nombre de caractères ASCII "\x1F" qui permet le positionnement dans le stream via la fonction PHP substr_count()
-> Le compte indique le nombre de lignes de texte affichées exactement.
+> Une astuce, vous pouvez connaître à posteriori le nombre de lignes affichées en comptant le nombre de caractères ASCII "\x1F" qui permet le positionnement dans le stream via la fonction PHP substr_count().<br/>
+> Le compte indique le nombre de lignes de texte affichées exactement.<br/>
 > Notez qu'en Double Hauteur ou Double Taille cela double le nombre de lignes occupées à l'écran du Minitel.
 
 Exemple:
@@ -107,7 +107,7 @@ Signature : `public static function formatMultipageRawText(string $unicodeText, 
 $unicodeText est le texte Unicode à afficher, LF (\x0A) servant à séparer les lignes désirées, et les paragraphes séparéés par une ligne vide (\x0A\x0A).
 $hauteur est le nombre de ligne à afficher par page
 
-Le retour contient une pleine page de texte en Vidéotex par entrée, autant d'entrées que nécessaire.
+Le retour contient une pleine page de texte en Vidéotex par entrée, autant d'entrées que nécessaire.<br/>
 L'affichage n'inclut pas de positionnement ou de couleur, vous devez les préciser avant via `videotex->position()` et `videotex->couleurTexte()`.
 
 Pour afficher une page, utilisez `videotex->ecritVideotex()` car chacune est un flux Vidéotex. 

@@ -1,7 +1,7 @@
 # Glossaire
 
-Défini à la louche certains termes liés au Minitel en général, couvrant les PAVI, le Vidéotex, les terminaux et leurs environnements.
-Beaucoup de ces termes n'étant plus employés depuis fort longtemps, il peut être utile de s'y référer en cas de doute.
+Défini à la louche certains termes liés au Minitel en général, couvrant les PAVI, le Vidéotex, les terminaux et leurs environnements.<br/>
+Beaucoup de ces termes n'étant plus employés depuis fort longtemps, il peut être utile de s'y référer en cas de doute.<br/>
 
 
 Terme | Définition (à la louche)

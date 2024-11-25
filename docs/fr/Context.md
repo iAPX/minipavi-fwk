@@ -1,7 +1,7 @@
 # Contexte
 
-Stocke les informations permettant de réinstancier le contrôleur dans son état initial sur une interaction utilisateur.
-Le contexte est local au contrôleur `$this->context` et contient un array() d'informations.
+Stocke les informations permettant de réinstancier le contrôleur dans son état initial sur une interaction utilisateur.<br/>
+Le contexte est local au contrôleur `$this->context` et contient un array() d'informations.<br/>
 Entre deux requêtes, typiquement l'affichage d'une page et la réception de l'interaction utilisateur, le contexte est stocké dans la Session.
 
 

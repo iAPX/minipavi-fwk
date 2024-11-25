@@ -1,11 +1,11 @@
 # Contrôleur de Menu (MenuController)
 
-Le contrôleur de Menu MenuController dérive du MultipageController qui dérive lui-même VideotexController et supporte toutes leurs fonctionnalités.
+Le contrôleur de Menu MenuController dérive du MultipageController qui dérive lui-même VideotexController et supporte toutes leurs fonctionnalités.<br/>
 Il fourni un service permettant d'afficher simplement des items de menu, ainsi qu'une pagination optionnelle.
 
 Sources : [src/controllers/MenuController.php](../../src/controllers/MenuController.php)
 
-Exemple simple et monopage : [services/demo/controllers/ArticlesMenuController.php](../../services/demo/controllers/ArticlesMenuController.php)
+Exemple simple et monopage : [services/demo/controllers/ArticlesMenuController.php](../../services/demo/controllers/ArticlesMenuController.php)<br/>
 Exemple complexe et multipage : [services/demo/controllers/ArticlesListController.php](../../services/demo/controllers/ArticlesListController.php)
 
 Je recommande de lire [la documentation de MultipageController](./Multipagecontroller.md) sur lequel s'appuie MenuController.
@@ -24,13 +24,13 @@ Ces variables sont fournies par le constructeur de MenuController à celui de Mu
 ### Votre constucteur __construct()
 Signature : `public function __construct(array $context, array $params = [])`
 
-Votre contrôleur doit appeler le contrôleur parent `parent::__construct()` en lui fournissant une liste d'entrée de menu.
+Votre contrôleur doit appeler le contrôleur parent `parent::__construct()` en lui fournissant une liste d'entrée de menu.<br/>
 Cette liste doit être sous la forme d'un array associatif $items [clé => valeur], où clé est soit un entier (int) soit une chaîne (str), la valeur peut être de n'importe quel type, y-compris un array ou un objet.
 
 Signature : `public function __construct(int $page_num, ?int $items_per_page, array $items, array $context, array $params = [])`
 
-Vous devez lui fournir $page_num le numéro de page courante (1..n), $items_per_page le nombre d'entrées affichées par page, $items, et comme d'habitude le $context et des paramètres optionnels.
-Si $items_per_page est nul, c'est que vous ne voulez pas de pagination du menu.
+Vous devez lui fournir $page_num le numéro de page courante (1..n), $items_per_page le nombre d'entrées affichées par page, $items, et comme d'habitude le $context et des paramètres optionnels.<br/>
+Si $items_per_page est nul, c'est que vous ne voulez pas de pagination du menu.<br/>
 MenuController calculera le nombre de pages nécessaires et enverra cette information à MultipageController.
 
 Exemple:
@@ -54,7 +54,7 @@ Exemple:
 ### Affichage de la page : ecran()
 Signature : `public function ecran(): string`
 
-Vous devrez ajouter à votre écran, un appel à `$this->menuDisplayItemList()` pour afficher la pagination et la liste des entrées de menu de la page courante.
+Vous devrez ajouter à votre écran, un appel à `$this->menuDisplayItemList()` pour afficher la pagination et la liste des entrées de menu de la page courante.<br/>
 Utilisez de préférence ecritVideotex() comme cela : `$videotex->ecritVideotex($this->menuDisplayItemList());` car menuDisplayItem retourne un flux Vidéotex.
 
 Exemple:
@@ -95,11 +95,11 @@ Exemple:
 ### Affichage d'une entrée de menu : menuDisplayItem() 
 Signature : `public function menuDisplayItem(int $choice_number, int $rank, int|string $item_key, mixed $item_value): string`
 
-Cette méthode de votre contrôleur est appelée pour chaque entrée de menu à afficher.
-$choice_number est le numéro d'entrée à afficher par exemple 1 ou 23, qui devra être tapé par l'utilisateur pour sélectionner cette entrée.
-$rank est le rang de l'entrée dans la page courante, de 0 à n.
-$item_key est la clé (entier ou chaîne) de l'entrée dans le tableau associatif $items fourni au constructeur de MenuController
-$item_value est la valeur associée à la clé dans $items.
+Cette méthode de votre contrôleur est appelée pour chaque entrée de menu à afficher.<br/>
+$choice_number est le numéro d'entrée à afficher par exemple 1 ou 23, qui devra être tapé par l'utilisateur pour sélectionner cette entrée.<br/>
+$rank est le rang de l'entrée dans la page courante, de 0 à n.<br/>
+$item_key est la clé (entier ou chaîne) de l'entrée dans le tableau associatif $items fourni au constructeur de MenuController.<br/>
+$item_value est la valeur associée à la clé dans $items.<br/>
 
 Positionnez votre curseur suivant $rank, afficher le numéro $choice_number puis affichez le texte correspondant à cette entrée.
 
@@ -120,7 +120,7 @@ Exemple:
 ### Sélection d'une entrée de menu : menuSelectionAction()
 Signature : `public function menuSelectionAction(int|string $item_key, mixed $item_value): ?\MiniPaviFwk\actions\Action`
 
-Cette méthode que vous devez intégrer sera appelé par MenuController lorsqu'un usager aura sélectionné une entrée dans le menu.
+Cette méthode que vous devez intégrer sera appelé par MenuController lorsqu'un usager aura sélectionné une entrée dans le menu.<br/>
 $item_key est la clé (entier ou chaîne) de l'entrée dans le tableau associatif $items fourni au constructeur de MenuController
 $item_value est la valeur associée à la clé dans $items.
 
@@ -141,7 +141,7 @@ Vous pouvez bien sûr customiser pour améliorer l'expérience utilisateur.
 
 
 ### Gestion optionnel de la pagination et des touches de fonctions [SUITE] et/ou [RETOUR]
-Si votre contenu peut être monopage, n'hésitez pas à ne pas afficher de pagination (numéro de page et touches ce fonctions) afin de simplifier l'interface.
+Si votre contenu peut être monopage, n'hésitez pas à ne pas afficher de pagination (numéro de page et touches ce fonctions) afin de simplifier l'interface.<br/>
 Vous pouvez dans ce cas faire aussi un test dans getCmd() pour ne pas activer les touches [Suite] et [Retour].
 
 Signature : `public function getCmd(): array`
@@ -174,7 +174,7 @@ Si vous implémentez `multipageRefreshEcran()`, cette méthode sera appelée à 
 
 Signature : `protected function multipageRefreshEcran(): string`
 
-Vous aurez à effacer la portion d'écran contenant votre contenu, par exemple avec `VideotexHelper->effaceZone()` [Voir doc ici](./Videotex-helper.md).
+Vous aurez à effacer la portion d'écran contenant votre contenu, par exemple avec `VideotexHelper->effaceZone()` [Voir doc ici](./Videotex-helper.md).<br/>
 Puis réafficher la pagination et le contenu correspondant à la page sélectionnée, toujours accessible via `$this->multipage_page_num`, en retournant le flux Vidéotex.
 
 
@@ -195,7 +195,7 @@ Exemple:
 
 
 ### Messages d'erreurs customs: errorFirstPage() et errorLastPage()
-Vous pouvez créer des messages d'erreurs personnalisés, qui seront affichés en Ligne00, respectivement si vous faites [Retour] depuis la première page, ou [Suite] sur la dernière page.
+Vous pouvez créer des messages d'erreurs personnalisés, qui seront affichés en Ligne00, respectivement si vous faites [Retour] depuis la première page, ou [Suite] sur la dernière page.<br/>
 Notez que MenuController par défaut n'affiche pas de message d'erreur si vous avez setté le $item_per_page à null (pas de pagination), mais ces méthodes seront quand-même appelées par MultipageController.
 
 Signatures : `protected function errorFirstPage(): string` et `protected function errorLastPage(): string`

@@ -3,7 +3,7 @@
 
 ## Licence
 
-C'est une licence MIT, mais je la décrirais par "balek!": c'est du Logiciel Libre.
+C'est une licence MIT, mais je la décrirais par "balek!": c'est du Logiciel Libre.<br/>
 Pas de permission à demander. Pas de question. Aucune obligation ou engagement. Aucun copyright.
 
 [Lisez la licence ici](../../LICENSE) (en Anglais)

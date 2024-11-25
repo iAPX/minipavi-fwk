@@ -1,6 +1,6 @@
 # Contrôleur Multipage (MultipageController)
 
-Permet de gérer des contenus multipages, dérive de VideotexController et est utilisé par [MenuController](./Menucontroller.md) pour les menus multipages.
+Permet de gérer des contenus multipages, dérive de VideotexController et est utilisé par [MenuController](./Menucontroller.md) pour les menus multipages.<br/>
 Il gère la pagination, les touches [SUITE] et [RETOUR], mais vous devez gérer l'affichage soit complet soit partiel pour chaque page.
 
 Sources : [src/controllers/MultipageController.php](../../src/controllers/MultipageController.php)
@@ -9,10 +9,10 @@ Exemple d'usage : [Affichage d'un article dans le service Démo](../../services/
 
 
 ## Comment implémenter votre contôleur dérivant de MultipageController
-Il est très important de noter que la page courante doit absolument être stockée dans $this->context, afin de garder le contexte entre les requêtes envoyées par MiniPavi.
+Il est très important de noter que la page courante doit absolument être stockée dans $this->context, afin de garder le contexte entre les requêtes envoyées par MiniPavi.<br/>
 Le constructeur, est appelé au chargement initial de la page, lors du traitement de la réponse utilisateur, pour changer de page, et ainsi de suite.
 
-Vous devez initialiser cette information dans $this->context ou la variable passée en paramètre $context avant l'instanciation du contrôleur, vous trouverez un exemple dans [ActiclesListController::menuSelectionAction()](../../services/demo/controllers/ArticlesListController.php).
+Vous devez initialiser cette information dans $this->context ou la variable passée en paramètre $context avant l'instanciation du contrôleur, vous trouverez un exemple dans [ActiclesListController::menuSelectionAction()](../../services/demo/controllers/ArticlesListController.php).<br/>
 le array() $params optionnel est aussi utilisable pour cela, il est automatiquement disponible via `$this->context['params]`.
 
 
@@ -25,10 +25,10 @@ Ces variables sont fournies par le constructeur de votre contrôleur à celui de
 ### __construct()
 Signature : `public function __construct(array $context, array $params = [])`
 
-Dans votre constructeur, vous devez appeler son parent, le constructeur de MultipageController.
+Dans votre constructeur, vous devez appeler son parent, le constructeur de MultipageController.<br/>
 Signature : `public function __construct(int $page_num, int $nb_pages, array $context, array $params = [])`
 
-Vous devez lui fournir $page_num le numéro de page courante (1..n), $nb_pages le nombre de pages à afficher calculé par vos soins (1..n), et comme d'habitude le $context et des paramètres optionnels.
+Vous devez lui fournir $page_num le numéro de page courante (1..n), $nb_pages le nombre de pages à afficher calculé par vos soins (1..n), et comme d'habitude le $context et des paramètres optionnels.<br/>
 Usuellement vous chargerez le contenu multipage à afficher avant d'appeler le constructeur parent, afin de calculer le nombre de page courante.
 
 Notez que si votre contenu est dynamique, et change en temps-réel, que ça soit sur un réaffichage par [Répétition] ou un changement de page, le nombre de pages doit être recalculé et MultipageController ajustera le numéro de page courante pour rester dans les limites, en appelant `multipageSavePageNumber()` si nécessaire.
@@ -47,7 +47,7 @@ Exemple:
 
 > [!IMPORTANT]
 > Si votre contenu est vide, que vous envoyiez 0 pages,
-> le nombre de pages sera forcé à 1, pour correspondre à la première page.
+> le nombre de pages sera forcé à 1, pour correspondre à la première page.<br/>
 > Page 1/0 n'est pas une option!
 
 
@@ -113,13 +113,13 @@ Exemple:
 
 
 ## Aller plus loin
-Vous êtes invités à aller plus loin, pour fournir une meilleure expérience.
-Par exemple, rajoutez la touche [Répétition] aux touches de fonction autorisées, et VideotexController la gèrera automatiquement!
+Vous êtes invités à aller plus loin, pour fournir une meilleure expérience.<br/>
+Par exemple, rajoutez la touche [Répétition] aux touches de fonction autorisées, et VideotexController la gèrera automatiquement!<br/>
 Mais il y a mieux...
 
 
 ### Gestion optionnel de la pagination et des touches de fonctions [SUITE] et/ou [RETOUR]
-Si votre contenu peut être monopage, n'hésitez pas à ne pas afficher de pagination (numéro de page et touches ce fonctions) afin de simplifier l'interface.
+Si votre contenu peut être monopage, n'hésitez pas à ne pas afficher de pagination (numéro de page et touches ce fonctions) afin de simplifier l'interface.<br/>
 Vous pouvez dans ce cas faire aussi un test dans getCmd() pour ne pas activer les touches [Suite] et [Retour].
 
 Signature : `public function getCmd(): array`
@@ -147,12 +147,12 @@ Exemple dans getCmd() :
 
 
 ### Rafraîchissement de votre contenu sans réafficher toute la page : multipageRefreshEcran()
-Si vous implémentez `multipageRefreshEcran()`, cette méthode sera appelée à la place de ecran() lors des changements de pages par [Suite] et [Retour].
+Si vous implémentez `multipageRefreshEcran()`, cette méthode sera appelée à la place de ecran() lors des changements de pages par [Suite] et [Retour].<br/>
 [Répétition] gardera son comportement et réaffichera bien toute la page.
 
 Signature : `protected function multipageRefreshEcran(): string`
 
-Vous aurez à effacer la portion d'écran contenant votre contenu, par exemple avec `VideotexHelper->effaceZone()` [Voir doc ici](./Videotex-helper.md).
+Vous aurez à effacer la portion d'écran contenant votre contenu, par exemple avec `VideotexHelper->effaceZone()` [Voir doc ici](./Videotex-helper.md).<br/>
 Puis réafficher la pagination et le contenu correspondant à la page sélectionnée, toujours accessible via `$this->multipage_page_num`, en retournant le flux Vidéotex.
 
 

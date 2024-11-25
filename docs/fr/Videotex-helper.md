@@ -1,14 +1,14 @@
 # Helper Vidéotex
 
-Décris le Helper Vidéotex conseillé pour générer les sorties en Vidéotex.
+Décris le Helper Vidéotex conseillé pour générer les sorties en Vidéotex.<br/>
 Il peut être utilisé pour l'affichage d'une page de l'arborescence dans ecran(), tout comme pour générer des messages Vidéotex dans tous les autres cas de figure.
 
 Source : [src/helpers/VideotexHelper.php](../../src/helpers/VideotexHelper.php)
 
-Je recommande chaudement la lecture des [STUM 1b, documentation de développement pour le Minitel](https://www.minipavi.fr/stum1b.pdf) (PDF) pour dépasser le stade d'affichage du texte, aborder l'alphamosaïque, mais aussi comprendre le fonctionnement du souligné et de la couleur de fond en mode texte.
+Je recommande chaudement la lecture des [STUM 1b, documentation de développement pour le Minitel](https://www.minipavi.fr/stum1b.pdf) (PDF) pour dépasser le stade d'affichage du texte, aborder l'alphamosaïque, mais aussi comprendre le fonctionnement du souligné et de la couleur de fond en mode texte.<br/>
 Vous aurez quelques informations pour vous aider dans cette page, mais qui ne remplacent en rien la lecture assidue de ce pavé de référence.
 
-Vous pouvez aussi profiter des capacités de formatage de texte [Helper Formatage](./Format-helper.md) en liaison avec `\MiniPaviFwk\helpers\VideotexController->ecritVideotex()`.
+Vous pouvez aussi profiter des capacités de formatage de texte [Helper Formatage](./Format-helper.md) en liaison avec `\MiniPaviFwk\helpers\VideotexController->ecritVideotex()`.<br/>
 Il existe aussi un helper pour les images [Helper Images](./Image-helper.md) assurant la conversion de JPEG ou PNG en semi-graphique Alphamosaïque.
 
 ## Usage
@@ -39,7 +39,7 @@ toutes les autres méthodes renvoient l'objet VideotexHelper courant, permettant
 
 Signature: `public function getOutput(): string`
 
-Renvoie le flux Vidéotex tel-que comme une chaîne de caractère. Ce n'est ni de l'Ascii ni de l'Unicode mais du Vidéotex.
+Renvoie le flux Vidéotex tel-que comme une chaîne de caractère. Ce n'est ni de l'Ascii ni de l'Unicode mais du Vidéotex.<br/>
 Notez que l'objet VideotexHelper n'est pas réinitialisé, tout appel ultérieur à une méthode y ajoutant du contenu sera concaténé.
 
 
@@ -47,7 +47,7 @@ Notez que l'objet VideotexHelper n'est pas réinitialisé, tout appel ultérieur
 
 Signature : `public function page(string $pagename): VideotexHelper`
 
-Permet d'afficher la page nommée $pagename, le comportement officiel est d'utiliser ce nom avec l'extension .vdt pour charger le fichier de même nom dans le sous-répertoire vdt/.
+Permet d'afficher la page nommée $pagename, le comportement officiel est d'utiliser ce nom avec l'extension .vdt pour charger le fichier de même nom dans le sous-répertoire vdt/.<br/>
 Vous pouvez utiliser des sous-répertoires, en créant par exemple vdt/demo/toto.vdt et en demandant l'affichage de "demo/toto".
 
 Cette méthode renvoie l'objet Videotexhelper courant pour permettre le chaînage des appels.
@@ -62,7 +62,7 @@ Positionne le curseur d'écriture à l'écran, entre la ligne 0 et la ligne 24, 
 Cette méthode renvoie l'objet Videotexhelper courant pour permettre le chaînage des appels.
 
 > [!IMPORTANT]
-> La ligne 00 est traitée différemment et il est déconseillé d'utiliser position() pour y écrire.
+> La ligne 00 est traitée différemment et il est déconseillé d'utiliser position() pour y écrire.<br/>
 > Utilisez la méthode ligne00() à la place!
 
 
@@ -70,7 +70,7 @@ Cette méthode renvoie l'objet Videotexhelper courant pour permettre le chaînag
 
 Signatures : `public function curseurVisible(): VideotexHelper` et `public function curseurInvisible(): VideotexHelper`
 
-Fait apparaître ou disparaître le curseur en forme de bloc solide.
+Fait apparaître ou disparaître le curseur en forme de bloc solide.<br/>
 Usuellement on n'affiche le curseur que lors des saisies utilisateurs et non lors de l'affichage d'une page, ce qui est le comportement par défaut de MiniPavi.
 
 Ces méthodes renvoient l'objet Videotexhelper courant pour permettre le chaînage des appels.
@@ -89,7 +89,7 @@ Ces méthodes renvoient l'objet Videotexhelper courant pour permettre le chaîna
 
 Signatures : `public function souligneDebut(): VideotexHelper` et `public function souligneFin(): VideotexHelper`
 
-En mode alphanumérique, fait souligner les caractères qui suivent le prochain espace ' ' affiché, ou s'assure de ne plus souligner à partir du prochain espace ' ' affiché, respectivement.
+En mode alphanumérique, fait souligner les caractères qui suivent le prochain espace ' ' affiché, ou s'assure de ne plus souligner à partir du prochain espace ' ' affiché, respectivement.<br/>
 En mode alphamosaïque permet de séparer d'une ligne chaque "pixel", ou d'enlever cette séparation.
 
 Ces méthodes renvoient l'objet Videotexhelper courant pour permettre le chaînage des appels.
@@ -99,9 +99,9 @@ Exemple:
    $videotex->souligneDebut()->ecritUnicode("souligneDebut() ici");
    $videotex->souligneFin()->ecritUnicode("...fin là!");
 ```
-Le souligné débutera sous le mot ici, après le premier espace affiché donc après "souligneDebut()".
-Le souligné s'arrêtera avant l'espace entre "...fin" et "là!", "...fin" sera souligné, et l'espace ainsi que "là!" ne seront pas soulignés.
-Le résultat sera donc: "souligneDebut() <ins>ici...fin</ins> là"
+Le souligné débutera sous le mot ici, après le premier espace affiché donc après "souligneDebut()".<br/>
+Le souligné s'arrêtera avant l'espace entre "...fin" et "là!", "...fin" sera souligné, et l'espace ainsi que "là!" ne seront pas soulignés.<br/>
+Le résultat sera donc: "souligneDebut() <ins>ici...fin</ins> là".<br/>
 C'est un comportement à connaître: le début et la fin de souligné en alphanumérique ne sont effectifs qu'avec un espace, respectivement après lui et à son niveau.
 
 
@@ -109,7 +109,7 @@ C'est un comportement à connaître: le début et la fin de souligné en alphanu
 
 Signatures : `public function inversionDebut(): VideotexHelper` et `public function inversionFin(): VideotexHelper`
 
-Inverse les couleurs de fond et de caractères affichés pour les caractères suivant.
+Inverse les couleurs de fond et de caractères affichés pour les caractères suivant.<br/>
 Blanc sur fond noir, le défaut, devient noir sur fond blanc. Souvent utilisé pour indiquer les touches de fonctions.
 
 Ces méthodes renvoient l'objet Videotexhelper courant pour permettre le chaînage des appels.
@@ -137,8 +137,8 @@ Cette méthode renvoie l'objet Videotexhelper courant pour permettre le chaînag
 
 Signature : `public function couleurTexte(string $couleur): VideotexHelper`
 
-Change la couleur du texte pour la couleur sélectionnée.
-Les couleurs disponibles sont : noir, rouge, vert, jaune, bleu, magenta, cyan et blanc.
+Change la couleur du texte pour la couleur sélectionnée.<br/>
+Les couleurs disponibles sont : noir, rouge, vert, jaune, bleu, magenta, cyan et blanc.<br/>
 Ces couleurs sont aussi disponibles via $videotex::NOIR à $videotex::BLANC, ou via la classe VideotexHelper::NOIR à VideotexHelper::BLANC.
 
 Cette méthode renvoie l'objet Videotexhelper courant pour permettre le chaînage des appels.
@@ -148,8 +148,8 @@ Cette méthode renvoie l'objet Videotexhelper courant pour permettre le chaînag
 
 Signature : `public function couleurFond(string $couleur): VideotexHelper`
 
-Change la couleur du fond pour la couleur sélectionnée, avec effet à partir du prochain espace ' ' affiché en mode alphanumérique.
-Les couleurs disponibles sont : noir, rouge, vert, jaune, bleu, magenta, cyan et blanc.
+Change la couleur du fond pour la couleur sélectionnée, avec effet à partir du prochain espace ' ' affiché en mode alphanumérique.<br/>
+Les couleurs disponibles sont : noir, rouge, vert, jaune, bleu, magenta, cyan et blanc.<br/>
 Ces couleurs sont aussi disponibles via $videotex::NOIR à $videotex::BLANC, ou via la classe VideotexHelper::NOIR à VideotexHelper::BLANC.
 
 Cette méthode renvoie l'objet Videotexhelper courant pour permettre le chaînage des appels.
@@ -168,11 +168,11 @@ Ces méthodes renvoient l'objet Videotexhelper courant pour permettre le chaîna
 
 Signature : `public function effaceFinDeLigne(): VideotexHelper`
 
-Efface la fin de la ligne à partir de la position courante du curseur d'écriture.
+Efface la fin de la ligne à partir de la position courante du curseur d'écriture.<br/>
 Agit en posant des espaces, l'inversion n'est pas prise en compte, la couleur de fond choisie apparaît donc jusqu'à la fin de la ligne.
 
 > [!IMPORTANT]
-> Il y a un effet de bord à noter avec les attributs de couleur de fond et de souligné.
+> Il y a un effet de bord à noter avec les attributs de couleur de fond et de souligné.<br/>
 > Vous pouvez utiliser effaceZone() pour effacer toute une ligne sans effet de bord.
 
 
@@ -183,8 +183,8 @@ Cette méthode renvoie l'objet Videotexhelper courant pour permettre le chaînag
 
 Signature : `public function effaceZone(int $ligne, int $hauteur): VideotexHelper`
 
-Efface $hauteur lignes (1..n) consécutives débutants par la ligne $ligne.
-Agit en posant des caractères semi-graphique/alphamosaïques espaces ' ' (\x20) pour servir de bloqueurs d'attributs de zone (couleur de fond, souligné)
+Efface $hauteur lignes (1..n) consécutives débutants par la ligne $ligne.<br/>
+Agit en posant des caractères semi-graphique/alphamosaïques espaces ' ' (\x20) pour servir de bloqueurs d'attributs de zone (couleur de fond, souligné).<br/>
 Vous pouvez donc utiliser cette zone après effacement sans effet-de-bord, contrairement à effaceFinDeLigne().
 
 
@@ -210,8 +210,8 @@ Cette méthode renvoie l'objet Videotexhelper courant pour permettre le chaînag
 
 Signature : `public function effaceEcran(): VideotexHelper`
 
-Efface complètement l'écran, techniquement en le remplissant de caractères alphamosaïques qui apparaissent noirs.
-Le curseur est placé en Ligne 1 et en première colonne.
+Efface complètement l'écran, techniquement en le remplissant de caractères alphamosaïques qui apparaissent noirs.<br/>
+Le curseur est placé en Ligne 1 et en première colonne.<br/>
 La ligne 00 n'est pas modifiée, voir effaceLigne00() pour effacer celle-ci.
 
 Cette méthode renvoie l'objet Videotexhelper courant pour permettre le chaînage des appels.
@@ -221,8 +221,8 @@ Cette méthode renvoie l'objet Videotexhelper courant pour permettre le chaînag
 
 Signature : `public function modeRouleau(): VideotexHelper`
 
-Passe le terminal en mode scrolling, s'il est un Minitel 1b, 10b ou ultérieur, ainsi que l'émulateur Minitel.
-Si on descend d'une ligne depuis la ligne 24 (\x0A ou débordement en fin de ligne), tout le contenu de l'écran monte d'une ligne pour libérer une ligne vierge en bas.
+Passe le terminal en mode scrolling, s'il est un Minitel 1b, 10b ou ultérieur, ainsi que l'émulateur Minitel.<br/>
+Si on descend d'une ligne depuis la ligne 24 (\x0A ou débordement en fin de ligne), tout le contenu de l'écran monte d'une ligne pour libérer une ligne vierge en bas.<br/>
 Si depuis la ligne 1 (non la ligne 00!) on remonte d'une ligne (\x0B), tout le contenu de l'écran descend d'une ligne pour libérer une ligne vierge en haut.
 
 
@@ -230,8 +230,8 @@ Si depuis la ligne 1 (non la ligne 00!) on remonte d'une ligne (\x0B), tout le c
 
 Signature : `public function modeStatique(): VideotexHelper`
 
-Arrête le mode rouleau et donc les possibilité de scrolling. C'est le mode par défaut du Minitel.
-Quand on est en ligne 24 et qu'on aille à la suivaante, l'affichage se poursuit en ligne 1 (non en ligne 00!).
+Arrête le mode rouleau et donc les possibilité de scrolling. C'est le mode par défaut du Minitel.<br/>
+Quand on est en ligne 24 et qu'on aille à la suivaante, l'affichage se poursuit en ligne 1 (non en ligne 00!).<br/>
 Quand on est en ligne 1 (non ligne 00!) et qu'on remonte, l'affichage se poursuit en ligne 24.
 
 
@@ -239,7 +239,7 @@ Quand on est en ligne 1 (non ligne 00!) et qu'on remonte, l'affichage se poursui
 
 Signature : `public function afficheDateParis(): VideotexHelper`
 
-Affiche la date actuelle à Paris (timezone Europe/Paris) sous la forme "jj-mm-aaaaa". Par exemple "25-10-2024" au moment où j'écris ces lignes.
+Affiche la date actuelle à Paris (timezone Europe/Paris) sous la forme "jj-mm-aaaaa". Par exemple "25-10-2024" au moment où j'écris ces lignes.<br/>
 Le choix de la timezone de Paris est lié à l'historique Franco-Français du Minitel, et au fait que je suis souvent dans une autre TimeZone que des personnes qui pourraient utiliser mes services.
 
 Cette méthode renvoie l'objet Videotexhelper courant pour permettre le chaînage des appels.
@@ -249,7 +249,7 @@ Cette méthode renvoie l'objet Videotexhelper courant pour permettre le chaînag
 
 Signature : `public function afficheHeureParis(): VideotexHelper`
 
-Affiche l'heure actuelle à Paris (timezone Europe/Paris) sous la forme "hh:mn". Par exemple "22:08" au moment où j'écris ces lignes.
+Affiche l'heure actuelle à Paris (timezone Europe/Paris) sous la forme "hh:mn". Par exemple "22:08" au moment où j'écris ces lignes.<br/>
 Le choix de la timezone de Paris est lié à l'historique Franco-Français du Minitel, et au fait que je suis souvent dans une autre TimeZone que des personnes qui pourraient utiliser mes services.
 
 Cette méthode renvoie l'objet Videotexhelper courant pour permettre le chaînage des appels.
@@ -259,7 +259,7 @@ Cette méthode renvoie l'objet Videotexhelper courant pour permettre le chaînag
 
 Signature : `public function repeteCaractere(string $caractere, int $nombre): VideotexHelper`
 
-Affiche le caractère demandé, puis encode sa répétition de (nombre-1) fois.
+Affiche le caractère demandé, puis encode sa répétition de (nombre-1) fois.<br/>
 $nombre est limité à 64.
 
 Cette méthode renvoie l'objet Videotexhelper courant pour permettre le chaînage des appels.
@@ -269,7 +269,7 @@ Cette méthode renvoie l'objet Videotexhelper courant pour permettre le chaînag
 
 Signature : `public function ecritUnicodeCentre(int $ligne, string $unicodeTexte, string $videotexAttributs = ''): VideotexHelper`
 
-Affichage la chaîne $unicodeTexte sur la ligne $ligne, de manière centrée.
+Affichage la chaîne $unicodeTexte sur la ligne $ligne, de manière centrée.<br/>
 $videotexAttributs peut contenir une chaîne vidéotex à insérer entre le positionnement du curseur pour l'affichage et l'affichage de la chaîne elle-même.
 
 Cette méthode renvoie l'objet Videotexhelper courant pour permettre le chaînage des appels.
@@ -288,9 +288,9 @@ public function afficheRectangleInverse(
     ): VideotexHelper
 ```
 
-Affiche un rectangle, rempli en espaces alphanumériques en inversion vidéo de la $couleur demandée.
-Il commence à la ligne $ligne (1..24) et la colonne $col (1..40) et fait $largeur caractères de large et $hauteur lignes de hauteur.
-Les couleurs disponibles sont : noir, rouge, vert, jaune, bleu, magenta, cyan et blanc.
+Affiche un rectangle, rempli en espaces alphanumériques en inversion vidéo de la $couleur demandée.<br/>
+Il commence à la ligne $ligne (1..24) et la colonne $col (1..40) et fait $largeur caractères de large et $hauteur lignes de hauteur.<br/>
+Les couleurs disponibles sont : noir, rouge, vert, jaune, bleu, magenta, cyan et blanc.<br/>
 Ces couleurs sont aussi disponibles via $videotex::NOIR à $videotex::BLANC, ou via la classe VideotexHelper::NOIR à VideotexHelper::BLANC.
 
 Cette méthode renvoie l'objet Videotexhelper courant pour permettre le chaînage des appels.
@@ -328,7 +328,7 @@ Cette méthode renvoie l'objet Videotexhelper courant pour permettre le chaînag
 
 Signature : `public function webMedia(string $type, string $url): VideotexHelper`
 
-Fait afficher le média ou un lien suivant le type, chacun indiqué par $url, sauf pour YouTube.
+Fait afficher le média ou un lien suivant le type, chacun indiqué par $url, sauf pour YouTube.<br/>
 - $type "YT" : affichage d'une vidéo YouTube, $url contient l'identifiant de la vidéo, par exemple "s86K-p089R8" pour afficher la vidéo à l'URL "h􏰁ps://www.youtube.com/watch?v=s86K-p089R8".
 - $type "VID" : affiche une vidéo par son URL
 - $type "SND" : joue un fichier sonore par son URL
@@ -339,8 +339,8 @@ Fait afficher le média ou un lien suivant le type, chacun indiqué par $url, sa
 
 Signature : `public function deconnexionModem(): VideotexHelper`
 
-Uniquement pour le plaisir, vous devriez utiliser DeconnexionCmd à la place.
-Envoi <kbd> Esc 9g </kbd> au Minitel, qui s'il s'agit d'un modèle physique et non d'un émulateur, demaande alors à son modem de raccrocher la ligne, coupant la communication.
+Uniquement pour le plaisir, vous devriez utiliser DeconnexionCmd à la place.<br/>
+Envoi <kbd> Esc 9g </kbd> au Minitel, qui s'il s'agit d'un modèle physique et non d'un émulateur, demaande alors à son modem de raccrocher la ligne, coupant la communication.<br/>
 Fut utilisé pour "jeter" des importuns...
 
 Cette méthode renvoie l'objet Videotexhelper courant pour permettre le chaînage des appels.

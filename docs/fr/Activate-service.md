@@ -5,13 +5,13 @@ Décris les deux étapes permettant d'autoriser (activer) un service Minitel, ai
 
 ## Autoriser le service
 
-Modifiez la liste des services ALLOWED_SERVICES dans le fichier [./services/global-config.php](../../services/global-config.php)
+Modifiez la liste des services ALLOWED_SERVICES dans le fichier [./services/global-config.php](../../services/global-config.php).<br/>
 Assurez-vous d'y mettre le nom de votre service.
 
 
 ## Servez ce service par défaut
 
-Modifiez le nom du service par défaut DEFAULT_SERVICE dans le fichier [./services/global-config.php](../../services/global-config.php)
+Modifiez le nom du service par défaut DEFAULT_SERVICE dans le fichier [./services/global-config.php](../../services/global-config.php).
 
 
 ## Référence

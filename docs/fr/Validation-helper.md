@@ -16,6 +16,6 @@ Contentez-vous de mettre un `null` dans ce paramètre, fin de l'histoire!
 ## N'autoriser que certaines touches
 Créez un masque binaire en faisant un "ou" logique (logical or) pour regrouper la liste des touches de fonctions à accepter.
 
-Par exemple, accepter ENVOI et SOMMAIRE:
+Par exemple, accepter ENVOI et SOMMAIRE:<br/>
 `\MiniPaviFwk\helpers\ValidationHelper::ENVOI | \MiniPaviFwk\helpers\ValidationHelper::SOMMAIRE`
 

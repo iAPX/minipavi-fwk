@@ -1,6 +1,6 @@
 # Configurations
 
-Il y a deux niveaux de configuration, globalement et au niveau de chaque service.
+Il y a deux niveaux de configuration, globalement et au niveau de chaque service.<br/>
 Toutes les configurations faites au niveau du service peuvent être effectuées globalement, et surchargées dans chaque service si vous utilisez le ConstantHelper.
 
 
@@ -41,7 +41,7 @@ Exemple:
 
 
 ## Configuration par service
-La configuration par services est placé dans le fichier `service-config.php` dans le répertoire services/{serviceName}.
+La configuration par services est placé dans le fichier `service-config.php` dans le répertoire services/{serviceName}.<br/>
 Il est exécuté après que la Session ai démarrée et que le Service ai été identifié et validé.
 
 

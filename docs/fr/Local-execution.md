@@ -14,7 +14,7 @@ composer install
 ```
 
 > [!IMPORTANT]
-> Quand vous mettez à jour, n'oubliez pas de mettre aussi à jour composer et les autoloaders.
+> Quand vous mettez à jour, n'oubliez pas de mettre aussi à jour composer et les autoloaders.<br/>
 > ```
 > composer update
 > composer dump-autoload
@@ -28,8 +28,8 @@ php -S localhost:8000
 ```
 
 ## Accéder à votre serveur PHP local
-Vous pouvez ouvrir un port sur votre routeur et rerouter celui-ci vers votre ordinateur.
-Par exemple le port 8000.
+Vous pouvez ouvrir un port sur votre routeur et rerouter celui-ci vers votre ordinateur.<br/>
+Par exemple le port 8000.<br/>
 Pensez à vérifier que ce port est disponible sur votre ordinateur, et qu'il n'est pas filtré ou bloqué par votre firewall.
 
 

@@ -8,7 +8,7 @@ Depuis le répertoire racine de minipavi-fwk, vous pouvez utiliser le [script d'
 
 Tapez cette commande : `php ./src/tools/xmlint-import.php`
 
-Vous aurez besoin de l'URL publique ou privée de votre fichier XML.
+Vous aurez besoin de l'URL publique ou privée de votre fichier XML.<br/>
 Si les pages ne peuvent être importées, vous pourrez les copier manuellement après, lors de vos tests les pages manquantes seront indiquées comme des erreurs dans les logs ou sur votre écran en exécution locale via le terminal.
 
 
@@ -17,7 +17,7 @@ Profitez!
 
 
 ## Exemple
-Vous pouvez utiliser le XML disponible à cette URL : [https://minitelbidouille.pvigier.com/macbidouille.xml](https://minitelbidouille.pvigier.com/macbidouille.xml)
+Vous pouvez utiliser le XML disponible à cette URL : [https://minitelbidouille.pvigier.com/macbidouille.xml](https://minitelbidouille.pvigier.com/macbidouille.xml).<br/>
 Il s'agit du service MacBidouille, réalisé en utilisant XMLint, et [consultable via minipavi et l'émulateur ici](https://www.minipavi.fr/emulminitel/index.php?url=https://minitelbidouille.pvigier.com/macbidouille.xml&color=false).
 
 
