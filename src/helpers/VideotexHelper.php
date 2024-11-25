@@ -199,6 +199,18 @@ class VideotexHelper
         return $this;
     }
 
+    public function modeRouleau(): VideotexHelper
+    {
+        $this->output .= PRO_ROULEAU_ON;
+        return $this;
+    }
+
+    public function modeStatique(): VideotexHelper
+    {
+        $this->output .= PRO_ROULEAU_OFF;
+        return $this;
+    }
+
     public function afficheDateParis(): VideotexHelper
     {
         $parisTime = new \DateTime('now', new \DateTimeZone('Europe/Paris'));

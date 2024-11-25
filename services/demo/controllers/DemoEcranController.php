@@ -12,12 +12,27 @@ class DemoEcranController extends \MiniPaviFwk\controllers\VideotexController
     {
         $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
 
-        $vdt = $videotex
+        $videotex
         ->effaceLigne00()
         ->page("demo-controller")
         ->page("demo-choix-sommaire")
-        ->ecritUnicodeLigne00("Ligne 00 ...")
+        ->ecritUnicodeLigne00("Ligne 00 ...");
 
+        // Démo mode rouleau et retour en mode statique
+        $videotex
+        ->position(3, 1)->ecritUnicode("Mode rouleau ")
+        ->position(1, 1)->modeRouleau();
+        for ($i = 0; $i <= 20; $i++) {
+            $videotex->ecritVideotex(chr(11) . str_repeat(chr(0), 4));
+        }
+        $videotex->position(24, 1)->effaceFinDeLigne()->ecritUnicode("Mode statique");
+        for ($i = 0; $i <= 20; $i++) {
+            $videotex->ecritVideotex(chr(10) . str_repeat(chr(0), 4));
+        }
+        $videotex->modeStatique();
+        //// return $videotex->getOutput();
+
+        $videotex
         ->position(3, 1)->ecritUnicode("Affichage par ecran() et ecritUnicode()")
         ->position(4, 1)->curseurVisible()->ecritUnicode("curseurVisible() ")
         ->position(5, 1)->souligneDebut()->ecritUnicode(" souligneDebut()")
@@ -58,7 +73,7 @@ class DemoEcranController extends \MiniPaviFwk\controllers\VideotexController
         ->position(24, 1)->ecritUnicode("WebMedia PIN : ")->inversionDebut()->ecritPIN()->inversionFin()
 
         ->getOutput();
-        return $vdt;
+        return $videotex->getOutput();
     }
 
     public function choixSommaire(): ?\MiniPaviFwk\actions\Action

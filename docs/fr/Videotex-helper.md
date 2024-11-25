@@ -217,6 +217,24 @@ La ligne 00 n'est pas modifiée, voir effaceLigne00() pour effacer celle-ci.
 Cette méthode renvoie l'objet Videotexhelper courant pour permettre le chaînage des appels.
 
 
+### modeRouleau() : passe les Minitels 1b et suivant en mode rouleau (scrolling)
+
+Signature : `public function modeRouleau(): VideotexHelper`
+
+Passe le terminal en mode scrolling, s'il est un Minitel 1b, 10b ou ultérieur, ainsi que l'émulateur Minitel.
+Si on descend d'une ligne depuis la ligne 24 (\x0A ou débordement en fin de ligne), tout le contenu de l'écran monte d'une ligne pour libérer une ligne vierge en bas.
+Si depuis la ligne 1 (non la ligne 00!) on remonte d'une ligne (\x0B), tout le contenu de l'écran descend d'une ligne pour libérer une ligne vierge en haut.
+
+
+### modeStatique() : arrête le mode rouleau
+
+Signature : `public function modeStatique(): VideotexHelper`
+
+Arrête le mode rouleau et donc les possibilité de scrolling. C'est le mode par défaut du Minitel.
+Quand on est en ligne 24 et qu'on aille à la suivaante, l'affichage se poursuit en ligne 1 (non en ligne 00!).
+Quand on est en ligne 1 (non ligne 00!) et qu'on remonte, l'affichage se poursuit en ligne 24.
+
+
 ### afficheDateParis() : affiche la date courante à Paris
 
 Signature : `public function afficheDateParis(): VideotexHelper`
