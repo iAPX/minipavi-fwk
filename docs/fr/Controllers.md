@@ -55,8 +55,7 @@ Un exemple ici pour afficher la page du fichier vdt/accueil.vdt:
 ```
     public function ecran(): string
     {
-        $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
-        return $videotex->page("accueil")->getOutput();
+        return (new \MiniPaviFwk\helpers\VideotexHelper())->page("accueil")->getOutput();
     }
 ```
 

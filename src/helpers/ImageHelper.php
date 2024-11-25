@@ -25,8 +25,6 @@ class ImageHelper
         $height = imagesy($image);
         $videotex = new VideotexHelper();
 
-        // Decontrasté, put in greyscale
-        imagefilter($image, IMG_FILTER_CONTRAST, -50);
         imagefilter($image, IMG_FILTER_GRAYSCALE);
 
         // Scale it
@@ -65,7 +63,6 @@ class ImageHelper
         ?int $startCol = null
     ): string {
         $output = VDT_G1;
-        //// $output = "";
         $width = ceil(imagesx($image) / 2);
         $height = ceil(imagesy($image) / 3);
 
@@ -182,7 +179,7 @@ class ImageHelper
         }
         if ($value === 0) {
             // All background colour
-            if ($newBackgroundColour === $OldTextColour) {
+            if ($newBackgroundColour === $oldTextColour) {
                 $value === 63;
             } elseif ($newBackgroundColour !== $oldBackgroundColour) {
                 $colours = "\x1B" . chr(80 + $newBackgroundColour);
@@ -190,7 +187,7 @@ class ImageHelper
             }
         } elseif ($value === 63) {
             // All text (foreground) colour
-            if ($newTextColour === $OldBackgroundColour) {
+            if ($newTextColour === $oldBackgroundColour) {
                 $value === 0;
             } elseif ($newTextColour !== $oldTextColour) {
                 $colours = "\x1B" . chr(64 + $newTextColour);
@@ -198,7 +195,7 @@ class ImageHelper
             }
         } else {
             // A mix of both background and text colours
-            if ($newTextColour === $oldBackgroundColour || $newBackgroundColour === $OldTextColour) {
+            if ($newTextColour === $oldBackgroundColour || $newBackgroundColour === $oldTextColour) {
                 // At least one colour we won't set!
                 $tmp = $newTextColour;
                 $newTextColour = $newBackgroundColour;

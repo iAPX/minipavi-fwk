@@ -41,15 +41,24 @@ Signature : `new \MiniPaviFwk\actions\PageAction(array $context, string $pagenam
 
 Source : [src/actions/PageAction.php](../../src/actions/PageAction.php)
 
-Lance le contrôleur correspondant au nom de la page.
-Le nom du contrôleur est dérivé du nom de la page, chaque partie séparée par un tiret '-' est converti via mb_ucfirst() pour obtenir un nom de contrôleur en CamelCase. On y ajoute "Controller" à la fin.
+Lance le contrôleur correspondant: soit via le nom du contrôleur lui-même, soit pas un nom dérivé d'une page importée, cf. [XMLint importation](./XMLint-transition.md)
+
+Vous pouvez directement utiliser le nom du contrôleur, par exemple `"DemoAccueil"` pour le contrôleur DemoAccueilController.
+
+Vous pouvez alternativement utiliser un nom de page, chaque partie séparée par un tiret '-' est converti via mb_ucfirst() pour obtenir un nom de contrôleur en CamelCase. On y ajoute "Controller" à la fin. `"demo-accueil"` sera alors là aussi traduit en DemoAccueilController.
 Si une partie du nom ne commence pas par un caractère alphabétique [a .. z], un underscore est utilisé pour séparer les parties.
 
 "accueil" -> AcccueilController
 "sommaire-AUTEURS" -> SommaireAuteursController
 "accueil-2b" -> Accueil_2bController
 
-Exemple de code, pour aller sur la page d'accueil
+Exemple de code, pour aller sur le contrôleur DemoSommaireController:
+```
+    public function toucheSommaire(string $saisie): ?\MiniPaviFwk\actions\Action
+    {
+        return new \MiniPaviFwk\actions\PageAction($this->context, "DemoSommaire");
+    }
+```
 
 
 ### ControllerAction : activer un autre Contrôleur = aller sur une autre page de l'arbo
@@ -68,7 +77,6 @@ Exemple de code, sur appui sur [Sommaire], quelque-soit la saisie, envoie sur Li
 ```
     public function toucheSommaire(string $saisie): ?\MiniPaviFwk\actions\Action
     {
-        // Alternatively if user was disconnected when displaying or redisplaying this page
         return new \MiniPaviFwk\actions\ControllerAction(\service\controllers\ListeController::class, $this->context);
     }
 ```

@@ -3,15 +3,17 @@
 
 ## v1.1 - Décembre 2024
 - [X] Revoir VideotexController: séparer ses responsabilités dans une hiérarchie de classes [sources](../../src/controllers/hierarchy/)
-- [ ] Helper pour la génération d'images en Alphamosaïques [Image Helper](./Image-helper.md)
+- [X] PageAction peut aussi accepter directement un nom de contrôleur [Actions](./Actions.md)
+- [X] Helper pour la conversion d'images en semi-graphique Alphamosaïque [Image Helper](./Image-helper.md)
+- [X] Outil en ligne de commande pour la conversion d'images en semi-graphique Alphamosaïque [Image Helper](./Image-helper.md)
 
 
 ## v1.0 - Novembre 2024
-- [X] phpUnit étendu [sources](../../tests/)
+- [X] phpUnit étendu [sources](../../tests/) et [documentation](./Local-execution.md)
 
 
 ## v0.9 - Novembre 2024
-- [X] Support XML via XmlController enlevé (simplification)
+- [X] Support XML via XmlController enlevé (choc de simplification!)
 - [X] Simplification Validation, défaut toutes touches acceptées [validations](./Validation-helper.md) et [Contrôleurs](./Controllers.md)
 - [X] BUGFIX: RedirectAction flush Session [source](../../src/actions/RedirectAction.php)
 - [X] Importation XMLint complète [XMLint Import](./XMLint-transition.md)
@@ -37,3 +39,4 @@
 - Minitel logs (façon anciens services)
 - Functional Tests
 - Animations de texte
+- Meilleure conversion d'image en semi-graphique Alphamosaïque

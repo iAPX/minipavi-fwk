@@ -15,11 +15,24 @@
 
 namespace MiniPaviFwk\actions;
 
+use MiniPaviFwk\helpers\mb_ucfirst;
+
 class PageAction extends Action
 {
     public function __construct(array $context, string $pagename)
     {
         trigger_error("Action: Changement de page - " . $pagename, E_USER_NOTICE);
+
+        // Also accept Controller Name as Page Name
+        if (strpos($pagename, '-') === false) {
+            $fullControllerName = "\\service\\controllers\\" . $pagename . 'Controller';
+            if (class_exists($fullControllerName)) {
+                $this->setControllerAndOutput($fullControllerName, $context);
+                return;
+            }
+        }
+
+        // Derive Page name to controller name, as a fallback
         $cleanControllerName = '';
         foreach (explode('-', $pagename) as $pagename_part) {
             $car = substr($pagename_part, 0, 1);
@@ -27,12 +40,17 @@ class PageAction extends Action
                 // Not a letter, could not be ucfirsted, we change the dash '-' to underscore '_'
                 $cleanControllerName .= '_' . mb_strtolower($pagename_part);
             } else {
-                $cleanControllerName .= \MiniPaviFwk\helpers\mb_ucfirst(mb_strtolower($pagename_part));
+                $cleanControllerName .= mb_ucfirst(mb_strtolower($pagename_part));
             }
         }
         $fullControllerName = "\\service\\controllers\\" . $cleanControllerName . 'Controller';
+        $this->setControllerAndOutput($fullControllerName, $context);
+    }
+
+    private function setControllerAndOutput(string $newControllerName, array $context): void
+    {
         trigger_error("Action: Controleur - " . $fullControllerName, E_USER_NOTICE);
-        $this->controller = new $fullControllerName($context);
+        $this->controller = new $newControllerName($context);
         $this->output = $this->controller->ecran();
     }
 }
