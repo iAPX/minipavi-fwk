@@ -7,6 +7,7 @@
 
 namespace MiniPaviFwk\handlers;
 
+use MiniPavi\MiniPaviCli;
 use MiniPaviFwk\handlers\QueryHandler;
 use MiniPaviFwk\helpers\ConstantHelper;
 
@@ -30,11 +31,7 @@ class ServiceHandler
     public static function getServiceName(): string
     {
         if (!isset($_SESSION['service'])) {
-            // @TODO Cleanup this mess! Checks for service={service_name}[& ... ] in $_SERVER['PATH_INFO']
-            $parameter = substr($_SERVER['PATH_INFO'], 10);
-            trigger_error("Service Parameter : " . $parameter, E_USER_NOTICE);
-
-            $service_name = empty($parameter) ? \DEFAULT_SERVICE : $parameter;
+            $service_name = isset(MiniPaviCli::$urlParams->service) ? MiniPaviCli::$urlParams->service : \DEFAULT_SERVICE ;
             trigger_error("Service name : " . $service_name, E_USER_NOTICE);
 
             static::setServiceName($service_name);

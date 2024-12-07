@@ -38,3 +38,7 @@ Dans le terminal:
 ```
 ./vendor/bin/phpunit tests
 ```
+
+## Accéder à votre ou vos services
+Utilisez directement l'URL de votre service, vous pouvez aussi rajouter un paramètre comme ?service={nom-de-service} pour en sélectionner un.
+Notez qu'une fois connecté sur un service, vous ne pouvez en changer sans vous déconnecter préalablement.
