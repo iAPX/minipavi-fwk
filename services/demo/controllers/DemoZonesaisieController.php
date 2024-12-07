@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Demo the Zonesaisie through getCmd handling for a VideotexController
+ * Demo the ZoneSaisie through getCmd handling for a VideotexController
  */
 
 namespace service\controllers;

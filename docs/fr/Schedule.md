@@ -1,6 +1,10 @@
 # Plan de développement
 
 
+## v1.1.1
+- [X] Bugfix with help of @ludosevilla - ugly quick fix for PHP 8.2
+
+
 ## v1.1 - Décembre 2024
 - [X] Revoir VideotexController: séparer ses responsabilités dans une hiérarchie de classes [sources](../../src/controllers/hierarchy/)
 - [X] PageAction peut aussi accepter directement un nom de contrôleur [Actions](./Actions.md)

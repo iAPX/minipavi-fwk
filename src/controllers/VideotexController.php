@@ -4,7 +4,7 @@
  * Full Videotex controller providing default behaviours
  */
 
-namespace MiniPaviFwk\controllers;
+namespace MiniPaviFwk\Controllers;
 
 use MiniPaviFwk\actions\Action;
 use MiniPaviFwk\actions\RepetitionAction;

@@ -15,8 +15,6 @@
 
 namespace MiniPaviFwk\actions;
 
-use MiniPaviFwk\helpers\mb_ucfirst;
-
 class PageAction extends Action
 {
     public function __construct(array $context, string $pagename)
@@ -40,7 +38,7 @@ class PageAction extends Action
                 // Not a letter, could not be ucfirsted, we change the dash '-' to underscore '_'
                 $cleanControllerName .= '_' . mb_strtolower($pagename_part);
             } else {
-                $cleanControllerName .= mb_ucfirst(mb_strtolower($pagename_part));
+                $cleanControllerName .= \MiniPaviFwk\helpers\mb_ucfirst(mb_strtolower($pagename_part));
             }
         }
         $fullControllerName = "\\service\\controllers\\" . $cleanControllerName . 'Controller';
