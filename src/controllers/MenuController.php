@@ -9,6 +9,11 @@
 
 namespace MiniPaviFwk\Controllers;
 
+
+// BUGFIX v1.1.1 for php 8.2 w/ help from @ludosevilla - temporary ugly fix until I figure out a better solution!
+require_once "src/controllers/MultipageController.php";
+
+
 class MenuController extends MultipageController
 {
     private ?int $menu_items_per_page = null;

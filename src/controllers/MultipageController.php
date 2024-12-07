@@ -8,6 +8,11 @@
 
 namespace MiniPaviFwk\Controllers;
 
+
+// BUGFIX v1.1.1 for php 8.2 w/ help from @ludosevilla - temporary ugly fix until I figure out a better solution!
+require_once "src/controllers/VideotexController.php";
+
+
 class MultipageController extends VideotexController
 {
     public int $multipage_page_num = 1;
