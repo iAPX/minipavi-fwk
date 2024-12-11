@@ -35,12 +35,13 @@ Exemple d'usage, effacement d'écran et affichage de la page vidéotex "accueil"
 Hors getOutput() qui renvoie une chaîne et est censée être utilisée en fin de cycle de vie de l'objet VideotexHelper, 
 toutes les autres méthodes renvoient l'objet VideotexHelper courant, permettant de chaîner les appels pour une meilleure lisibilité. Voir l'exemple ci-dessus.
 
-### getOutput() : renvoie le stream Vidéotex
+
+### getOutput() : renvoie le stream Vidéotex et efface le buffer Vidéotex
 
 Signature: `public function getOutput(): string`
 
 Renvoie le flux Vidéotex tel-que comme une chaîne de caractère. Ce n'est ni de l'Ascii ni de l'Unicode mais du Vidéotex.<br/>
-Notez que l'objet VideotexHelper n'est pas réinitialisé, tout appel ultérieur à une méthode y ajoutant du contenu sera concaténé.
+Notez que le buffer de l'objet VideotexHelper *EST* réinitialisé.
 
 
 ### page() : ajoute le contenu d'une page Vidéotex stockée dans vdt/

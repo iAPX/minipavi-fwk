@@ -32,7 +32,7 @@ class ArticlesSearchController extends \MiniPaviFwk\controllers\VideotexControll
         // Display the article list, separated for a better UX when scrolling list
         $videotex->ecritVideotex($this->displayCriteriaList());
 
-        return $videotex->getoutput();
+        return $videotex->getOutput();
     }
 
     public function getCmd(): array
@@ -126,7 +126,7 @@ class ArticlesSearchController extends \MiniPaviFwk\controllers\VideotexControll
             ->position(12, 1)->doubleTaille()->ecritUnicode("Aucun critère!!!")
             ->position(24, 1)->effaceFinDeLigne()
             ->position(24, 31)->inversionDebut()->ecritUnicode(" SOMMAIRE ")->inversionFin();
-            return $videotex->getoutput();
+            return $videotex->getOutput();
         }
 
         // Don't go after the last page, or before the first one, sanity check

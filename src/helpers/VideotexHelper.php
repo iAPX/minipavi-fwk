@@ -39,7 +39,9 @@ class VideotexHelper
 
     public function getOutput(): string
     {
-        return $this->output;
+        $output = $this->output;
+        $this->output = '';
+        return $output;
     }
 
     public function page(string $pagename): VideotexHelper

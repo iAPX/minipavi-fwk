@@ -69,15 +69,8 @@ class ArticleViewController extends \MiniPaviFwk\controllers\MultipageController
         $videotex
         ->position(9, 1)->couleurTexte('magenta')
         ->ecritVideotex($this->formatted_pages[$this->multipage_page_num - 1]);
-        /*
-        ->ecritUnicode(mb_substr(
-            $this->article['content'],
-            self::CODEPOINTS_PER_PAGE * ($this->multipage_page_num - 1),
-            self::CODEPOINTS_PER_PAGE
-        ));
-        */
 
-        return $videotex->getoutput();
+        return $videotex->getOutput();
     }
 
     public function getCmd(): array

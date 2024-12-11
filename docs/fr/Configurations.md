@@ -33,11 +33,16 @@ Exemple:
 
 - `error_reporting( ... )` : rapport d'erreur par défaut pour tous les services
 
-- `const SESSION_HANDLER_CLASSNAME` : nom complet de la classe de gestion des sessions, \MiniPaviFwk\handlers\SessionHandler si absent
+- `const SESSION_HANDLER_CLASSNAME` : nom complet de la classe de gestion des sessions, \MiniPaviFwk\handlers\SessionHandler si absent.
+  Notez que le handler MiniPaviSessionHandler peut être utilisé au cas où vous auriez des problèmes de session:
+  les données de vos utilisateurs seront alors stockées dans MiniPavi.
+  Pour cela modifiez [global-config.php](../../services/global-config.php) en décommentant `const SESSION_HANDLER_CLASSNAME = \MiniPaviFwk\handlers\MiniPaviSessionHandler::class;` .
 
 - `const SERVICE_HANDLER_CLASSNAME` : nom complet de la classe de gestion des services, \MiniPaviFwk\handlers\ServiceHandler si absent
 
 - `const QUERY_HANDLER_CLASSNAME` : nom complet de la classe de gestion des requêtes qui peut être surchargé dans la configuration de chaque service, \MiniPaviFwk\handlers\QueryHandler si absent
+
+- `const NON_PROPOSE_LIGNE00` : texte à afficher en Ligne 00 lorsqu'un choix n'est pas proposé/pas géré pour tous les services, sauf si surchargé dans un service-config.php
 
 
 ## Configuration par service
@@ -59,8 +64,9 @@ Il est exécuté après que la Session ai démarrée et que le Service ai été 
 
 - `const QUERY_HANDLER_CLASSNAME` : peut contenir le nom complet de la classe d'un gestionnaire de requête pour ce service.
 
-
 - `const SERVICE_ERROR_REPORTING` : permet de changer le masque de `error_reporting()` permettant de logger plus d'informations pour certains sites, notamment lors du cycle de développement.
+
+- `const NON_PROPOSE_LIGNE00` : texte à afficher en Ligne 00 lorsqu'un choix n'est pas proposé/pas géré pour ce service.
 
 - Vous pouvez aussi y ajouter ce que vous voulez pour les besoins de votre service
 

@@ -49,7 +49,7 @@ class ArticlesMenuController extends \MiniPaviFwk\controllers\MenuController
         ->effaceLigne00()
         ->page("articles")
         ->ecritVideotex($this->menuDisplayItemList());
-        return $videotex->getoutput();
+        return $videotex->getOutput();
     }
 
     public function menuDisplayItem(int $choice_number, int $rank, int|string $item_key, mixed $item_value): string
@@ -59,7 +59,7 @@ class ArticlesMenuController extends \MiniPaviFwk\controllers\MenuController
         ->position(4 + $rank * 2, 1)
         ->inversionDebut()->ecritUnicode(" $choice_number ")->inversionFin()
         ->ecritUnicode(' ' . $item_value[0]);
-        return $videotex->getoutput();
+        return $videotex->getOutput();
     }
 
     public function getCmd(): array

@@ -13,6 +13,6 @@ class ZoneSaisieCmdTest extends TestCase
         $this->assertEquals(24, $cmd['COMMAND']['param']['y']);
         $this->assertEquals(40, $cmd['COMMAND']['param']['x']);
         $this->assertEquals(1, $cmd['COMMAND']['param']['l']);
-        $this->assertEquals('on' , $cmd['COMMAND']['param']['cursor']);
+        $this->assertEquals('off' , $cmd['COMMAND']['param']['cursor']);
     }
 }

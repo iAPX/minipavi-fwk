@@ -58,7 +58,7 @@ class ArticlesListController extends \MiniPaviFwk\controllers\MenuController
         // Display the article list, separated for a better UX when scrolling list, through MenuController
         $videotex->ecritVideotex($this->menuDisplayItemList());
 
-        return $videotex->getoutput();
+        return $videotex->getOutput();
     }
 
     public function getCmd(): array
@@ -90,7 +90,7 @@ class ArticlesListController extends \MiniPaviFwk\controllers\MenuController
     {
         // Override default full screen redrawing when scrolling on the list
         $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
-        return $videotex->effaceLigne00()->effaceZone(4, 19)->ecritVideotex($this->menuDisplayItemList())->getoutput();
+        return $videotex->effaceLigne00()->effaceZone(4, 19)->ecritVideotex($this->menuDisplayItemList())->getOutput();
     }
 
     public function menuDisplayItem(int $choice_number, int $rank, int|string $item_key, mixed $item_value): string
@@ -126,7 +126,7 @@ class ArticlesListController extends \MiniPaviFwk\controllers\MenuController
             ->ecritUnicode(\service\helpers\DataHelper::dateToFrench($article['date']));
         }
 
-        return $videotex->getoutput();
+        return $videotex->getOutput();
     }
 
     public function menuDisplayPagination(int $page_num, int $nb_pages): string
@@ -139,7 +139,7 @@ class ArticlesListController extends \MiniPaviFwk\controllers\MenuController
             ->position(12, 1)->doubleTaille()->ecritUnicode("Aucun article!!!")
             ->position(24, 1)->effaceFinDeLigne()
             ->position(24, 31)->inversionDebut()->ecritUnicode(" SOMMAIRE ")->inversionFin();
-            return $videotex->getoutput();
+            return $videotex->getOutput();
         }
 
         // Only display pagination if needed
@@ -154,7 +154,7 @@ class ArticlesListController extends \MiniPaviFwk\controllers\MenuController
             }
         }
 
-        return $videotex->getoutput();
+        return $videotex->getOutput();
     }
 
     protected function errorFirstPage(): string

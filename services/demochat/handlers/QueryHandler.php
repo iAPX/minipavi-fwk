@@ -28,7 +28,13 @@ class QueryHandler extends \MiniPaviFwk\handlers\QueryHandler
         if (count($uniqueIds) > 0) {
             trigger_error("queryDcx overloading for DemoChat - message pour " . print_r($uniqueIds, true));
             $cmd = \MiniPaviFwk\cmd\PushServiceMsgCmd::createMiniPaviCmd($uniqueIds, $messages);
-            \MiniPavi\MiniPaviCli::send("", "", "", true, $cmd, false);
+
+            $session_handler = ConstantHelper::getConstValueByName(
+                'SESSION_HANDLER_CLASSNAME',
+                SessionHandler::class
+            );
+
+            \MiniPavi\MiniPaviCli::send("", "", $session_handler::getMiniPaviContext(), true, $cmd, false);
         }
 
         trigger_error("queryDcx overloading for DemoChat - end");

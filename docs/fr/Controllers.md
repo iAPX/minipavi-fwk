@@ -81,11 +81,11 @@ Un exemple simple avec une zone de saisie, acceptant toutes les touches de fonct
             24,
             40,
             1,
-            true
+            false
         );
     }
 ```
-Cela créé une zone de saisie en ligne 24 et colonne 40, d'un seul caractère, avec le curseur visible.
+Cela créé une zone de saisie en ligne 24 et colonne 40, d'un seul caractère, avec le curseur invisible.
 
 
 ### Interlude
@@ -216,3 +216,4 @@ Par exemple :
 Signature : `public function nonPropose(string $touche, string $saisie): ?\MiniPaviFwk\actions\Action`
 
 Cette méthode est appelée en dernier si aucune autre n'a renvoyé d'Action à effectué, et par défaut dans le VideotexController affiche un message d'erreur en Ligne 00.
+Ce message peut être défini via la `const NON_PROPOSE_LIGNE00` globalement ou au niveau de chaque service, voir [les configurations](./Configurations.md).

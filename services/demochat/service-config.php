@@ -9,13 +9,15 @@ namespace service;
 // Homepage controller
 const DEFAULT_CONTROLLER = \service\controllers\AccueilController::class;
 
-
 // Service specific error reporting
 const SERVICE_ERROR_REPORTING = E_ALL;
 
 // Service specific Query Handler
 const QUERY_HANDLER_CLASSNAME = \service\handlers\QueryHandler::class;
 
+
+// Service specific Ligne00 message when a choice is not offered
+const NON_PROPOSE_LIGNE00 = "C'est votre dernier mot jean-Pierre?";
 
 /**
  * Directory for temporary chat files, using system temp directory, write intensive.

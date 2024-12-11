@@ -48,7 +48,7 @@ try {
 
     // Ends saving session and returning command
     $session_handler::setContext($context);
-    MiniPaviCli::send($output, $nextPage, "", true, $cmd, $directCall);
+    MiniPaviCli::send($output, $nextPage, $session_handler::getMiniPaviContext(), true, $cmd, $directCall);
 } catch (Exception $e) {
     throw new Exception('Erreur MiniPavi ' . $e->getMessage());
 }

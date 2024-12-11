@@ -31,7 +31,8 @@ class ServiceHandler
     public static function getServiceName(): string
     {
         if (!isset($_SESSION['service'])) {
-            $service_name = isset(MiniPaviCli::$urlParams->service) ? MiniPaviCli::$urlParams->service : \DEFAULT_SERVICE ;
+            $service_name = isset(MiniPaviCli::$urlParams->service) ?
+                MiniPaviCli::$urlParams->service : \DEFAULT_SERVICE ;
             trigger_error("Service name : " . $service_name, E_USER_NOTICE);
 
             static::setServiceName($service_name);

@@ -66,7 +66,7 @@ Exemple:
         ->effaceLigne00()
         ->page("articles")
         ->ecritVideotex($this->menuDisplayItemList());  // Mandatory
-        return $videotex->getoutput();
+        return $videotex->getOutput();
 ```
 
 
@@ -87,7 +87,7 @@ Exemple:
     {
         $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
         videotex->position(4, 31)->ecritUnicode("Page $page_num/$nb_pages");
-        return $videotex->getoutput();
+        return $videotex->getOutput();
     }
 ```
 
@@ -112,7 +112,7 @@ Exemple:
         ->position(4 + $rank * 2, 1)
         ->inversionDebut()->ecritUnicode(" $choice_number ")->inversionFin()
         ->ecritUnicode(' ' . $item_value[0]);
-        return $videotex->getoutput();
+        return $videotex->getOutput();
     }
 ```
 

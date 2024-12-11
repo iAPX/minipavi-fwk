@@ -47,7 +47,14 @@ class SwitchServiceAction extends Action
         $query_handler = $service_handler::getQueryHandler();
         $newUrl = $query_handler::getNextPageUrl();
 
-        MiniPaviCli::send($videotexOutput . $waitOutput, $newUrl, '', true, null, 'yes-cnx');
+        MiniPaviCli::send(
+            $videotexOutput . $waitOutput,
+            $newUrl,
+            $session_handler::getMiniPaviContext(),
+            true,
+            null,
+            'yes-cnx'
+        );
         exit(0);
     }
 }

@@ -16,7 +16,7 @@ class ZoneSaisieCmd extends Cmd
         int $ligne = 24,
         int $col = 40,
         int $longueur = 1,
-        bool $curseur = true,
+        bool $curseur = false,
         string $spaceChar = " ",
         string $replacementChar = '',
         string $prefill = ''

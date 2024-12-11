@@ -57,7 +57,13 @@ class QueryHandler
         } elseif (MiniPaviCli::$fctn == 'DIRECT') {
             $cmd = static::queryDirect();
             $nextPage = static::getNextPageUrl();
-            MiniPaviCli::send("", $nextPage, "", true, $cmd, false);
+
+            $session_handler = ConstantHelper::getConstValueByName(
+                'SESSION_HANDLER_CLASSNAME',
+                SessionHandler::class
+            );
+
+            MiniPaviCli::send("", $nextPage, $session_handler::getMiniPaviContext(), true, $cmd, false);
             exit;
         } else {
             $action = static::queryInput();
@@ -128,8 +134,20 @@ class QueryHandler
         if (!empty($_SESSION['DIRECTCALL_RELAY'])) {
             $relay = $_SESSION['DIRECTCALL_RELAY'];
             unset($_SESSION['DIRECTCALL_RELAY']);
+
+            $session_handler = ConstantHelper::getConstValueByName(
+                'SESSION_HANDLER_CLASSNAME',
+                SessionHandler::class
+            );
+
             trigger_error("fctn : DIRECT - Relay : " . print_r($relay, true), E_USER_NOTICE);
-            MiniPaviCli::send($relay['output'], $relay['nextPage'], "", true, $relay['cmd']);
+            MiniPaviCli::send(
+                $relay['output'],
+                $relay['nextPage'],
+                $session_handler::getMiniPaviContext(),
+                true,
+                $relay['cmd']
+            );
         }
         exit(0);
     }

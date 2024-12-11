@@ -12,13 +12,13 @@ class SessionHandler
 {
     public static function startSession(): void
     {
-        // Disable session cookies, session is identified through minipavi's uniqueId
-        ini_set('session.use_cookies', '0');
-        ini_set('session.use_only_cookies', '0');
-
         trigger_error("Session - Start Session", E_USER_NOTICE);
         session_id(MiniPaviCli::$uniqueId);
-        session_start();
+        session_start([
+            'use_cookies' => 0,
+            'use_only_cookies' => 0,
+            'use_trans_sid' => 1,
+        ]);
 
         // Initalize Session missing or default data, @TODO should be elsewhere
         if (!isset($_SESSION['is_drcs'])) {
@@ -41,5 +41,11 @@ class SessionHandler
     {
         trigger_error("Session - Save context : " . print_r($context, true), E_USER_NOTICE);
         $_SESSION['context'] = $context;
+    }
+
+    public static function getMiniPaviContext(): string
+    {
+        trigger_error("Session - return empty MiniPavi context : ", E_USER_NOTICE);
+        return '';
     }
 }
