@@ -22,9 +22,16 @@ class InputVideotex extends DisplayVideotex
         $this->keywordHandler = new Keywords();
     }
 
+    public function preReponse()
+    {
+        // Hook for processing taking place before processing user response.
+        trigger_error("InputVideotex::preReponse()", E_USER_NOTICE);
+    }
+
     public function getSaisieAction(string $saisie, string $touche): ?Action
     {
         // Handle user input through keywordhandler, introspection and overridable methods
+        $this->preReponse();
 
         // Keywords are prioritary, if present
         trigger_error("get-Action : appel keywordHanlder->choix()", E_USER_NOTICE);
@@ -59,7 +66,7 @@ class InputVideotex extends DisplayVideotex
                     break;
                 }
             } else {
-                trigger_error("getSaisieAction - NONE : " . $this::class . " -> " . $method_name . "()", E_USER_NOTICE);
+                trigger_error("getSaisieAction - NONE : " . $this::class . " -> " . $method[0] . "()", E_USER_NOTICE);
             }
         }
         if (is_null($action)) {
@@ -73,6 +80,8 @@ class InputVideotex extends DisplayVideotex
 
     public function getMessageAction(array $message, string $touche): ?Action
     {
+        $this->preReponse();
+
         if (method_exists($this, 'formulaire')) {
             // if formulaire() is present, use it instead
             $action = $this->formulaire($touche, ...$message);

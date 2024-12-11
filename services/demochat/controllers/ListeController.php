@@ -17,12 +17,15 @@ class ListeController extends \MiniPaviFwk\controllers\VideotexController
         $this->chatHelper->watchdog();
     }
 
+    public function preAffichage(): void
+    {
+        // Store the connected users to be able to reuse them as displayed!
+        trigger_error("DemoChat ListController::preAffichage()", E_USER_NOTICE);
+        $this->context['connectes'] = $this->chatHelper->getConnectes();
+    }
+
     public function ecran(): string
     {
-        // Store the connectes to be able to reuse them as displayed!
-        $connectes = $this->chatHelper->getConnectes();
-        $this->context['connectes'] = $connectes;
-
         $videotex = new \MiniPaviFwk\helpers\VideotexHelper();
         $videotex->page("demochat-page");
 
@@ -36,7 +39,7 @@ class ListeController extends \MiniPaviFwk\controllers\VideotexController
         }
 
         $num = 1;
-        foreach ($connectes as $connecte) {
+        foreach ($this->context['connectes'] as $connecte) {
             // Pseudonyme colour depending on timestamp
             $deltatime = time() - $connecte['timestamp'];
             $pseudonymeCouleur = 'blanc';

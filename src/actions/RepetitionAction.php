@@ -15,6 +15,7 @@ class RepetitionAction extends Action
     {
         trigger_error("Action: Repetition", E_USER_NOTICE);
         $this->controller = $thisController;
+        $thisController->preAffichage();
         $this->output = $thisController->ecran();
     }
 }

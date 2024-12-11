@@ -49,6 +49,8 @@ class PageAction extends Action
     {
         trigger_error("Action: Controleur - " . $fullControllerName, E_USER_NOTICE);
         $this->controller = new $newControllerName($context);
+        $this->controller->entree();
+        $this->controller->preAffichage();
         $this->output = $this->controller->ecran();
     }
 }

@@ -12,6 +12,8 @@ class ControllerAction extends Action
     {
         trigger_error("Action: Nouveau controleur - " . $newControllerName, E_USER_NOTICE);
         $this->controller = new ($newControllerName)($context, $params);
+        $this->controller->entree();
+        $this->controller->preAffichage();
         $this->output = $this->controller->ecran();
     }
 }

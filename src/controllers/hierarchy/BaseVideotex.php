@@ -23,4 +23,11 @@ class BaseVideotex
     {
         return $this->context;
     }
+
+    public function entree(): void
+    {
+        // Hook called when entering this controller for the first time
+        // called by PageAction(), ControllerAction(), AccueilAction()
+        trigger_error("BaseVideotex::entree()", E_USER_NOTICE);
+    }
 }
