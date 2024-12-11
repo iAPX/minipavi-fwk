@@ -1,6 +1,13 @@
 # Plan de développement
 
 
+## v1.2
+ - [X] getCmd() n'affiche plus de cureur par défaut, voir [code source](../../src/cmd/ZoneSaisieCmd.php)
+ - [X] VideotexHelper efface son buffer après getOutput(), faciliant la rééutilisation, [doc ici](./Videotex-helper.md)
+ - [X] nonPropose() implémentation par défaut utilise un nouveau `const NON_PROPOSE_LIGNE00` dans [global-config.php](../../services/global-config.php) et/ou [service-config.php](../../services/demochat/service-config.php) pour les messages d'erreur par défaut en ligne 00
+ - [X] [MiniPaviSessionHandler](../../src/handlers/MiniPaviSessionHandler.php) a été ajouté, voir la [doc de configuration](./Configurations.md)
+
+
 ## v1.1.1
 - [X] Bugfix with help of @ludosevilla - ugly quick fix for PHP 8.2
 
