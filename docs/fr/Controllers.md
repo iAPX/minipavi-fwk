@@ -16,13 +16,14 @@ Vous pouvez aussi créer des menus plus facilement avec le Contrôleur de Menu [
 3. Pré-affichage hook `preAffichage()`, permettant des pré-traitements avant affichage ou réaffichage
 4. Affichage de la page courante, via `ecran()`
 5. Indication du champ de saisie à utiliser, et les touches de fonction autorisées via `getCmd()`
+6. Le contexte du contrôleur est sauvé via sa méthode `getContext()`
 
 Minipavi-fwk s'assure d'envoyer ces informations à MiniPaviCli, et de conserver le contexte du contrôleur.<br/>
 Lors de la requête suivante, typiquement une réponse de l'utilisateur, minipavi-fwk réinstance le contrôleur en lui fournissant le contexte sauvé, pour qu'il puisse traiter la réponse utilisateur.
 
-6. `__construct()` est rappelé, avec son ancien contexte sauvegardé (pas de paramètres optionnels)
-7. Pré-réponse hook `preReponse()`, permettant des pré-traitements avant de gérer la réponse utilisateur
-8. Le contrôleur identifie la réponse de l'utilisateur et renvoie une [Action](./Actions.md) en réponse, qui peut être une page Vidéotex, un message d'erreur en ligne 00, un changement de contrôleur/changement de page de l'arbo (retour au point 1 avec un contrôleur instancié), etc.
+7. `__construct()` est rappelé, avec son ancien contexte lu via getContext() (pas de paramètres optionnels)
+8. Pré-réponse hook `preReponse()`, permettant des pré-traitements avant de gérer la réponse utilisateur
+9. Le contrôleur identifie la réponse de l'utilisateur et renvoie une [Action](./Actions.md) en réponse, qui peut être une page Vidéotex, un message d'erreur en ligne 00, un changement de contrôleur/changement de page de l'arbo (retour au point 1 avec un contrôleur instancié), etc.
 
 
 ## En détail
