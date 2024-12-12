@@ -270,7 +270,8 @@ class VideotexHelper
 
     public function ecritUnicodeLigne00(string $unicodeTexte): VideotexHelper
     {
-        $this->output .= MiniPaviCli::writeLine0(MiniPaviCli::toG2($unicodeTexte));
+        // Note: MiniPaviCli::writeLine0 expect Unicode text
+        $this->output .= MiniPaviCli::writeLine0($unicodeTexte);
         return $this;
     }
 
