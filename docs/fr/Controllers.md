@@ -223,3 +223,6 @@ Signature : `public function nonPropose(string $touche, string $saisie): ?\MiniP
 
 Cette méthode est appelée en dernier si aucune autre n'a renvoyé d'Action à effectué, et par défaut dans le VideotexController affiche un message d'erreur en Ligne 00.
 Ce message peut être défini via la `const NON_PROPOSE_LIGNE00` globalement ou au niveau de chaque service, voir [les configurations](./Configurations.md).
+
+$touche est la touche de fonction en MAJUSCULES.<br/>
+$saisie est ce qui a été saisi par l'utilisateur, ou une chaîne vide "" sur appui direct de la touche de fonction.

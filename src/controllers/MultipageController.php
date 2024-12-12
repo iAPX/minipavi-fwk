@@ -66,7 +66,7 @@ class MultipageController extends VideotexController
 
     protected function multipageRefreshPage(): ?\MiniPaviFwk\actions\Action
     {
-        $this->controller->preAffichage();
+        $this->preAffichage();
 
         // Use multipaqgeRefreshEcran() if implemented, else fallback to ecran()
         if (method_exists($this, 'multipageRefreshEcran')) {

@@ -76,7 +76,7 @@ class ArticlesSearchController extends \MiniPaviFwk\controllers\VideotexControll
         $nb_pages = floor((count($criterias) - 1) / self::CRITERIA_PER_PAGE) + 1;
         if ($nb_pages <= 1) {
             // No pagination!
-            return $this->nonPropose();
+            return $this->nonPropose("SUITE", '');
         }
 
         if ($this->context['articles']['search_page'] >= $nb_pages - 1) {
@@ -95,7 +95,7 @@ class ArticlesSearchController extends \MiniPaviFwk\controllers\VideotexControll
         $nb_pages = floor((count($criterias) - 1) / self::CRITERIA_PER_PAGE) + 1;
         if ($nb_pages <= 1) {
             // No pagination!
-            return $this->nonPropose();
+            return $this->nonPropose("RETOUR", '');
         }
 
         if ($this->context['articles']['search_page'] == 0) {

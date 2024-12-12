@@ -70,9 +70,8 @@ class DemoEcranController extends \MiniPaviFwk\controllers\VideotexController
         ->ecritUnicodeCentre(23, end(explode('\\', $this::class)), "\x1B\x40")
 
         // Code PIN for the WebMedia from another device
-        ->position(24, 1)->ecritUnicode("WebMedia PIN : ")->inversionDebut()->ecritPIN()->inversionFin()
+        ->position(24, 1)->ecritUnicode("WebMedia PIN : ")->inversionDebut()->ecritPIN()->inversionFin();
 
-        ->getOutput();
         return $videotex->getOutput();
     }
 

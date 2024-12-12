@@ -10,7 +10,7 @@
 // You might change it globally or by service in their services/{serviceName}/service-config.php
 error_reporting(E_ERROR | E_USER_WARNING | E_PARSE);
 
-// Don't remove, or NOTICE, WARNINGS and ERRORS will be displlayed on the Minitel screen!
+// Don't remove, or NOTICE, WARNINGS and ERRORS will be displayed on the Minitel screen!
 ini_set('display_errors', 0);
 
 // Sets the allowed services.
