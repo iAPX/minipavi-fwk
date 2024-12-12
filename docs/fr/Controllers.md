@@ -19,11 +19,14 @@ Vous pouvez aussi créer des menus plus facilement avec le Contrôleur de Menu [
 6. Le contexte du contrôleur est sauvé via sa méthode `getContext()`
 
 Minipavi-fwk s'assure d'envoyer ces informations à MiniPaviCli, et de conserver le contexte du contrôleur.<br/>
-Lors de la requête suivante, typiquement une réponse de l'utilisateur, minipavi-fwk réinstance le contrôleur en lui fournissant le contexte sauvé, pour qu'il puisse traiter la réponse utilisateur.
+Lors de la requête suivante, typiquement une réponse de l'utilisateur, minipavi-fwk réinstance le contrôleur en lui fournissant le contexte sauvé, pour qu'il puisse traiter la réponse utilisateur.<br/>
 
 7. `__construct()` est rappelé, avec son ancien contexte lu via getContext() (pas de paramètres optionnels)
 8. Pré-réponse hook `preReponse()`, permettant des pré-traitements avant de gérer la réponse utilisateur
 9. Le contrôleur identifie la réponse de l'utilisateur et renvoie une [Action](./Actions.md) en réponse, qui peut être une page Vidéotex, un message d'erreur en ligne 00, un changement de contrôleur/changement de page de l'arbo (retour au point 1 avec un contrôleur instancié), etc.
+
+
+Pour mieux comprendre le cycle de vie d'un contrôleur, consultez [la documentation du cycle de vie](./Controller-lifecycle.md), qui présente celle-ci avec plus de détails et notamment les interactions avec les différentes Actions prédéfinies, l'ordre d'appel des méthodes les unes par rapport aux autres, mais aussi l'ordre d'appel pour chaque Action, ainsi que l'indication d'instanciation d'un nouveau contrôleur ou de conservation du contrôleur courant.<br/>
 
 
 ## En détail
