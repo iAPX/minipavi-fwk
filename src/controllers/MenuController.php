@@ -95,12 +95,12 @@ class MenuController extends MultipageController
     protected function errorFirstPage(): string
     {
         // Overridable to change the error message
-        return $this->menu_items_per_page ? 'Première page du menu!' : '';
+        return $this->menu_items_per_page ? 'Première page du menu!' : 'Choix non supporté';
     }
 
     protected function errorLastPage(): string
     {
         // Overridable to change the error message
-        return $this->menu_items_per_page ? 'Dernière page du menu!' : '';
+        return $this->menu_items_per_page ? 'Dernière page du menu!' : 'Choix non supporté';
     }
 }

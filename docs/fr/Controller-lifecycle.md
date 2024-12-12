@@ -22,6 +22,11 @@ Lors de la requête suivante, typiquement une réponse de l'utilisateur, minipav
 9. Le contrôleur identifie la réponse de l'utilisateur et renvoie une [Action](./Actions.md) en réponse, qui peut être une page Vidéotex, un message d'erreur en ligne 00, un changement de contrôleur/changement de page de l'arbo (retour au point 1 avec un contrôleur instancié), etc.
 
 
+> [!IMPORTANT]
+> MultipageController et MenuController peuvent appeler `multipageRefreshEcran()` au lieu de `ecran()`,<br/>
+> lors du changement de page par [SUITE] ou [RETOUR].<br/>
+> Dans ces deux cas `preAffichage()` est appelé avant `ecran()` ou `multipageRefreshEcran()`.
+
 ## Les différentes méthodes
 
 - `__construct()` est appelé à l'entrée sur le contrôleur, mais aussi une seconde fois pour traiter la réponse utilisateur
